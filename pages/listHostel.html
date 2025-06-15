@@ -6,12 +6,20 @@
   <title>For Hostel Owners – Koodaram</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
-      background: #121212;
-      color: #eee;
+      background: linear-gradient(to bottom right, #1a1a2e, #16213e);
+      color: #f0f0f0;
       font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 2rem;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     header, footer {
@@ -20,72 +28,124 @@
     }
 
     .content {
-      max-width: 800px;
-      margin: auto;
-      background: #1e1e2f;
-      padding: 2rem;
-      border-radius: 12px;
-      box-shadow: 0 0 12px rgba(128, 0, 128, 0.1);
+      backdrop-filter: blur(12px);
+      background: rgba(30, 30, 48, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 2.5rem;
+      max-width: 760px;
+      width: 100%;
+      box-shadow: 0 0 20px rgba(186, 85, 211, 0.1);
     }
 
-    h1, h2 {
+    h1 {
+      font-size: 2.2rem;
       color: #dab6ff;
+      margin-bottom: 0.3rem;
+    }
+
+    h2 {
+      margin-top: 2rem;
+      color: #d5b3ff;
+      font-size: 1.3rem;
     }
 
     p {
-      line-height: 1.6;
+      line-height: 1.7;
       margin-bottom: 1.2rem;
+      font-size: 1rem;
+      color: #ccc;
+    }
+
+    ul {
+      margin-left: 1.2rem;
+      margin-bottom: 1.5rem;
+      color: #c2aaff;
     }
 
     .whatsapp-button {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       background-color: #25D366;
       color: white;
-      padding: 0.8rem 1.6rem;
-      font-weight: bold;
-      border-radius: 8px;
+      padding: 0.85rem 1.8rem;
+      font-weight: 600;
+      font-size: 1rem;
+      border-radius: 10px;
       text-decoration: none;
       margin-top: 1.5rem;
-      box-shadow: 0 0 10px rgba(37, 211, 102, 0.4);
-      transition: background 0.3s ease, box-shadow 0.3s ease;
+      transition: all 0.3s ease;
+      box-shadow: 0 0 16px rgba(37, 211, 102, 0.3);
     }
 
     .whatsapp-button:hover {
-      background-color: #1ebe5d;
-      box-shadow: 0 0 18px rgba(37, 211, 102, 0.6);
+      background-color: #20c35a;
+      box-shadow: 0 0 24px rgba(37, 211, 102, 0.5);
+      transform: translateY(-2px);
+    }
+
+    footer {
+      font-size: 0.9rem;
+      color: #888;
+      margin-top: 3rem;
+    }
+
+    footer a {
+      color: #dab6ff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .content {
+        padding: 1.5rem;
+      }
+
+      h1 {
+        font-size: 1.7rem;
+      }
+
+      h2 {
+        font-size: 1.1rem;
+      }
     }
   </style>
 </head>
 <body>
 
   <header>
-    <h1>For Hostel Owners</h1>
-    <p>List your hostel on Koodaram and reach thousands of students across Kerala.</p>
+    <h1>Partner with Koodaram</h1>
+    <p>Reach Kerala students directly. Hassle-free hostel listing for owners.</p>
   </header>
 
   <section class="content">
-    <h2>Why List on Koodaram?</h2>
-    <p>Koodaram is Kerala’s growing hostel discovery platform built specifically for students. We're focusing on trust, transparency, and discoverability—no clutter, no spam.</p>
+    <h2>Why List with Us?</h2>
+    <p>Koodaram is a student-first hostel discovery platform tailored for Kerala's college-goers. We're building trust and visibility through a clean, spam-free experience.</p>
 
-    <h2>How It Works</h2>
-    <p>Currently, listing your hostel is 100% free. You can provide your details, and we’ll take care of making it look beautiful and searchable. No tech skills needed.</p>
+    <h2>What You Get</h2>
+    <p>Right now, listing your hostel is <strong>100% free</strong>. We handle everything – from uploading images to creating an attractive profile.</p>
 
-    <p>We also plan to introduce <strong>premium placement</strong> options like:</p>
+    <p>Soon, we’ll offer <strong>Premium Placement</strong> options like:</p>
     <ul>
-      <li>Top spot visibility near your college</li>
-      <li>Verified badge</li>
-      <li>Better photo & detail showcases</li>
+      <li>Top listing near your college</li>
+      <li>Verified badge for trust</li>
+      <li>Enhanced visual cards</li>
     </ul>
-    <p>for a small monthly fee. This fee would go directly towards the development of this platform and also towards my college fees.</p>
 
-    <h2>Ready to List?</h2>
-    <p>Just send us a message on WhatsApp. We’ll guide you through everything—simple and fast.</p>
+    <p>These upgrades will be available for a small fee – helping support this platform and my own college journey ❤️</p>
 
-    <a href="https://wa.me/918089990317" target="_blank" class="whatsapp-button">📲 Message Us on WhatsApp</a>
+    <h2>Let's Get Started</h2>
+    <p>Just send a message on WhatsApp. No forms, no friction. I’ll help you get listed personally.</p>
+
+    <a href="https://wa.me/918089990317" target="_blank" class="whatsapp-button">📲 Message on WhatsApp</a>
   </section>
 
   <footer>
-    © 2025 Koodaram. <a href="index.html">← Back to Home</a>
+    © 2025 Koodaram. <a href="https://koodaram.netlify.app/">← Back to Home</a>
   </footer>
 
 </body>
