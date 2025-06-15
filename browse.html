@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Browse Hostels – Koodaram</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background: #121212;
+      color: #eee;
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 2rem;
+    }
+
+    header, footer {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .filters {
+      background: #1e1e2f;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 2rem;
+      max-width: 1000px;
+      margin-inline: auto;
+
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      align-items: flex-end;
+    }
+
+    .filter-group {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .filters label {
+      color: #ccc;
+      font-size: 0.85rem;
+      margin-bottom: 0.3rem;
+      display: block;
+    }
+
+    .filters input,
+    .filters select {
+      width: 100%;
+      padding: 0.4rem;
+      background: #2b2b3d;
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-size: 0.95rem;
+    }
+
+    .cta-button {
+      background: rebeccapurple;
+      color: white;
+      border: none;
+      padding: 0.7rem 1.2rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease;
+      white-space: nowrap;
+    }
+
+    .cta-button:hover {
+      background: #6d3bb6;
+      box-shadow: 0 0 12px rgba(186, 85, 211, 0.4);
+    }
+
+    .hostel-grid {
+      display: grid;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .hostel-card {
+      background: #1e1e2f;
+      color: #eee;
+      padding: 1.5rem;
+      border-radius: 12px;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 0 12px rgba(128, 0, 128, 0.1);
+    }
+
+    .hostel-card:hover {
+      box-shadow: 0 0 20px rgba(186, 85, 211, 0.5);
+      transform: translateY(-4px);
+    }
+
+    .hostel-card h3 {
+      color: #dab6ff;
+      margin: 0.8rem 0 0.5rem;
+    }
+
+    .hostel-card img {
+      width: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+      max-height: 220px;
+    }
+
+    .hostel-card a.view-button {
+      display: inline-block;
+      margin-top: 0.7rem;
+      background: #2d1b47;
+      color: white;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .hostel-card a.view-button:hover {
+      background: #512d8b;
+      box-shadow: 0 0 10px rgba(186, 85, 211, 0.5);
+    }
+
+    footer {
+      margin-top: 4rem;
+      font-size: 0.9rem;
+      color: #aaa;
+    }
+
+    footer a {
+      color: #dab6ff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Browse Hostels</h1>
+    <p>Filter and explore hostels near your college in Kerala.</p>
+  </header>
+
+  <section class="filters">
+    <div class="filter-group">
+      <label for="location">📍 Location</label>
+      <input type="text" id="location" placeholder="Enter college or city" />
+    </div>
+
+    <div class="filter-group">
+      <label for="room-type">🛏️ Room Type</label>
+      <select id="room-type">
+        <option value="">Any</option>
+        <option value="single">Single</option>
+        <option value="double">Double</option>
+        <option value="triple">Triple</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="amenities">🧩 Amenities</label>
+      <select id="amenities">
+        <option value="">All</option>
+        <option value="wifi">Wi-Fi</option>
+        <option value="food">Food Included</option>
+        <option value="laundry">Laundry</option>
+      </select>
+    </div>
+
+    <div class="filter-group">
+      <label for="price">💸 Max Price</label>
+      <input type="number" id="price" placeholder="e.g. 5000" />
+    </div>
+
+    <button class="cta-button" onclick="applyFilters()">Apply</button>
+  </section>
+
+  <section class="hostel-grid" id="hostel-grid">
+    <!-- Hostel cards will be loaded here -->
+  </section>
+
+  <footer>
+    © 2025 Koodaram. <a href="index.html">← Back to Home</a>
+  </footer>
+
+  <script>
+    const GITHUB_USER = "rohankishore";
+    const REPO = "Koodaram";
+    const API_BASE = `https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/hostels`;
+    const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
+
+    let hostelDataCache = [];
+
+    async function loadHostels() {
+      const res = await fetch(API_BASE);
+      const folders = await res.json();
+
+      const grid = document.getElementById("hostel-grid");
+      grid.innerHTML = "";
+
+      for (const folder of folders) {
+        const jsonURL = `${RAW_BASE}/${folder.name}/data.json`;
+        try {
+          const res = await fetch(jsonURL);
+          const data = await res.json();
+          data.id = folder.name;
+          hostelDataCache.push(data);
+
+          const imageURL = `${RAW_BASE}/${folder.name}/${data.images?.[0] || "1.jpg"}`;
+
+          grid.innerHTML += `
+            <div class="hostel-card" data-room="${data.roomType.toLowerCase()}" data-location="${data.location.toLowerCase()}" data-amenities="${data.amenities.join(",").toLowerCase()}" data-price="${data.price}">
+              <img src="${imageURL}" alt="${data.name}" />
+              <h3>${data.name}</h3>
+              <p>📍 ${data.location}</p>
+              <p>🛏️ ${data.roomType} • ₹${data.price}/month</p>
+              <p>✅ ${data.amenities.join(", ")}</p>
+              <a href="hostel.html?name=${folder.name}" class="view-button">View Hostel</a>
+            </div>
+          `;
+        } catch (err) {
+          console.warn("Could not load:", folder.name);
+        }
+      }
+    }
+
+    function applyFilters() {
+      const loc = document.getElementById("location").value.toLowerCase();
+      const type = document.getElementById("room-type").value.toLowerCase();
+      const amenity = document.getElementById("amenities").value.toLowerCase();
+      const price = parseInt(document.getElementById("price").value);
+
+      const cards = document.querySelectorAll(".hostel-card");
+      cards.forEach(card => {
+        const matchesLocation = !loc || card.dataset.location.includes(loc);
+        const matchesType = !type || card.dataset.room === type;
+        const matchesAmenity = !amenity || card.dataset.amenities.includes(amenity);
+        const matchesPrice = !price || parseInt(card.dataset.price) <= price;
+
+        card.style.display = (matchesLocation && matchesType && matchesAmenity && matchesPrice) ? "block" : "none";
+      });
+    }
+
+    window.onload = loadHostels;
+  </script>
+
+</body>
+</html>

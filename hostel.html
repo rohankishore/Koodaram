@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Hostel Details – Koodaram</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      background: #121212;
+      color: #eee;
+      padding: 2rem;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 860px;
+      margin: auto;
+      background: #1e1e2f;
+      padding: 2rem;
+      border-radius: 14px;
+      box-shadow: 0 0 20px rgba(128, 0, 128, 0.2);
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .info p {
+      margin: 0.3rem 0;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .gallery img {
+      width: 100%;
+      border-radius: 10px;
+      height: 180px;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+      box-shadow: 0 0 10px rgba(128, 0, 128, 0.15);
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+      box-shadow: 0 0 16px rgba(186, 85, 211, 0.5);
+    }
+
+    .contact-buttons {
+      margin-top: 1.5rem;
+    }
+
+    .contact-buttons a {
+      display: inline-block;
+      margin-right: 1rem;
+      margin-top: 0.5rem;
+      padding: 0.6rem 1.2rem;
+      border-radius: 6px;
+      background: #2c2c3a;
+      color: white;
+      text-decoration: none;
+      font-weight: 600;
+      transition: 0.2s ease;
+    }
+
+    .contact-buttons a:hover {
+      background: #6d3bb6;
+      box-shadow: 0 0 10px rgba(186, 85, 211, 0.6);
+    }
+
+    footer {
+      margin-top: 4rem;
+      font-size: 0.9rem;
+      color: #aaa;
+      text-align: center;
+    }
+
+    a {
+      color: #caaaff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 500px) {
+      body {
+        padding: 1rem;
+      }
+
+      .container {
+        padding: 1.2rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container" id="hostel-view">
+    <p>Loading...</p>
+  </div>
+
+  <footer>
+    <p>© 2025 Koodaram. <a href="browse.html">← Back to Listings</a></p>
+  </footer>
+
+  <script>
+    const GITHUB_USER = "rohankishore";
+    const REPO = "Koodaram";
+    const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
+
+    async function loadHostelData() {
+      const params = new URLSearchParams(window.location.search);
+      const hostelName = params.get("name");
+
+      if (!hostelName) {
+        document.getElementById("hostel-view").innerHTML = "<p>⚠️ Hostel not specified.</p>";
+        return;
+      }
+
+      try {
+        const dataRes = await fetch(`${RAW_BASE}/${hostelName}/data.json`);
+        const data = await dataRes.json();
+
+        const imagesHTML = (data.images || []).map(img =>
+          `<img src="${RAW_BASE}/${hostelName}/${img}" alt="${data.name} image">`
+        ).join("");
+
+        const view = `
+          <h1>${data.name}</h1>
+          <div class="info">
+            <p><strong>📍 Location:</strong> ${data.location}</p>
+            <p><strong>🛏️ Room Type:</strong> ${data.roomType}</p>
+            <p><strong>💰 Price:</strong> ₹${data.price}/month</p>
+            <p><strong>🧩 Amenities:</strong> ${data.amenities?.join(", ")}</p>
+            <p><strong>📏 Distance:</strong> ${data.distance}</p>
+          </div>
+
+          <div class="gallery">${imagesHTML}</div>
+
+          <div class="contact-buttons">
+            <a href="tel:${data.contact?.phone}">📞 Call</a>
+            <a href="https://wa.me/${data.contact?.whatsapp}">💬 WhatsApp</a>
+          </div>
+        `;
+
+        document.getElementById("hostel-view").innerHTML = view;
+
+      } catch (err) {
+        document.getElementById("hostel-view").innerHTML = "<p>⚠️ Failed to load hostel details.</p>";
+        console.error("Error loading hostel:", err);
+      }
+    }
+
+    loadHostelData();
+  </script>
+</body>
+</html>
