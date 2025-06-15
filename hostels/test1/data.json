@@ -9,5 +9,6 @@
     "phone": "+919876543210",
     "whatsapp": "919876543210"
   },
-  "images": ["1.jpg", "2.jpg", "3.jpg"]
+  "images": ["1.jpg", "2.jpg", "3.jpg"],
+  "gender": "male"
 }
