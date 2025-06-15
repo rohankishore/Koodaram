@@ -5,7 +5,121 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Koodaram</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/css/style.css" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #121212;
+      color: #eee;
+      padding: 2rem;
+      line-height: 1.6;
+    }
+
+    header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    header h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+      color: #dab6ff;
+    }
+
+    header p {
+      font-size: 1.1rem;
+      max-width: 720px;
+      margin: auto;
+      color: #ccc;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      max-width: 900px;
+      margin: auto;
+    }
+
+    section {
+      background: #1e1e2f;
+      border-radius: 16px;
+      padding: 2rem;
+      box-shadow: 0 0 12px rgba(128, 0, 128, 0.1);
+    }
+
+    section h2 {
+      font-size: 1.7rem;
+      color: #dab6ff;
+      margin-bottom: 1rem;
+    }
+
+    section ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    section ul li {
+      margin-bottom: 0.8rem;
+      padding-left: 1.5rem;
+      position: relative;
+    }
+
+    section ul li::before {
+      content: '✔️';
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+
+    .cta-button {
+      display: inline-block;
+      margin-top: 1.5rem;
+      background-color: #7f5af0;
+      color: white;
+      padding: 0.75rem 1.5rem;
+      text-decoration: none;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 1rem;
+      transition: background 0.3s ease, transform 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-button:hover {
+      background-color: #674dc6;
+      transform: translateY(-2px);
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 4rem;
+      font-size: 0.9rem;
+      color: #999;
+    }
+
+    footer a {
+      color: #dab6ff;
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      header h1 {
+        font-size: 2rem;
+      }
+
+      section h2 {
+        font-size: 1.4rem;
+      }
+    }
+  </style>
 </head>
 <body>
 
@@ -14,39 +128,39 @@
     <p>
       Starting college? Koodaram helps you discover trusted hostels near your campus, compare facilities with ease, and contact owners directly — no hassle, no middlemen.
     </p>
-    <a href="/pages/browse.html" class="cta-button">🔍 Browse Hostels</a>
+
+          <a href="/pages/browse.html" class="cta-button">🔍 Search Hostels</a>
+
   </header>
 
-  <main class="advantages">
-    <div class="adv-container">
+  <main>
 
-      <div class="adv-block">
-        <h2>🎓 For Students</h2>
-        <ul>
-          <li>Find hostels near your college with ease</li>
-          <li>View photos of rooms, bathrooms and surroundings</li>
-          <li>Compare food, Wi-Fi, pricing, and sharing options</li>
-          <li>No agents, no commission — direct contact only</li>
-          <li>No sign-up required</li>
-          <li>Free to use, always</li>
-        </ul>
-        <a href="/pages/browse.html" class="cta-button">🔍 Start Browsing</a>
-      </div>
+    <section>
+      <h2>🎓 For Students</h2>
+      <ul>
+        <li>Find hostels near your college with ease</li>
+        <li>View photos of rooms, bathrooms and surroundings</li>
+        <li>Compare food, Wi-Fi, pricing, and sharing options</li>
+        <li>No agents, no commission — direct contact only</li>
+        <li>No sign-up required</li>
+        <li>Free to use, always</li>
+      </ul>
+      <a href="/pages/browse.html" class="cta-button">🔍 Browse Hostels</a>
+    </section>
 
-      <div class="adv-block">
-        <h2>🏠 For Hostel Owners</h2>
-        <ul>
-          <li>List your hostel for free — no middlemen involved</li>
-          <li>Feature at the top of the page with premium options</li>
-          <li>Reach real students actively looking for rooms</li>
-          <li>Showcase your hostel with photos & features</li>
-          <li>Receive calls or WhatsApp messages directly</li>
-          <li>Edit or remove your listing any time</li>
-        </ul>
-        <a href="/pages/listHostel.html" class="cta-button">📬 List Your Hostel</a>
-      </div>
+    <section>
+      <h2>🏠 For Hostel Owners</h2>
+      <ul>
+        <li>List your hostel for free — no middlemen involved</li>
+        <li>Feature at the top of the page with premium options</li>
+        <li>Reach real students actively looking for rooms</li>
+        <li>Showcase your hostel with photos & features</li>
+        <li>Receive calls or WhatsApp messages directly</li>
+        <li>Edit or remove your listing any time</li>
+      </ul>
+      <a href="/pages/listHostel.html" class="cta-button">📬 List Your Hostel / PG</a>
+    </section>
 
-    </div>
   </main>
 
   <footer>
