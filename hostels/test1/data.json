@@ -1,6 +1,7 @@
 {
   "name": "Sunrise Hostel",
   "location": "Near CET, Trivandrum",
+  "college": "CET Trivandrum",
   "roomType": "Double Sharing",
   "price": 4500,
   "amenities": ["Wi-Fi", "Food", "Laundry"],
