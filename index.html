@@ -16,7 +16,6 @@
       font-family: 'Inter', sans-serif;
       background: linear-gradient(135deg, #0d0d0d, #1a1a2e);
       color: #f0f0f0;
-      padding: 0;
       line-height: 1.6;
     }
 
@@ -107,12 +106,45 @@
       font-weight: bold;
     }
 
+    .info-section {
+      padding: 4rem 2rem;
+      text-align: center;
+    }
+
+    .info-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #ffa3fd, #cab9ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .info-section p {
+      max-width: 800px;
+      margin: auto;
+      font-size: 1.1rem;
+      color: #ccc;
+    }
+
+    .about {
+      background: linear-gradient(135deg, #1a1a2e, #2a1f4d);
+    }
+
+    .why {
+      background: linear-gradient(135deg, #1a1a2e, #312244);
+    }
+
+    .how {
+      background: linear-gradient(135deg, #1a1a2e, #2c2a52);
+    }
+
     footer {
       text-align: center;
       margin-top: 5rem;
       font-size: 0.95rem;
       color: #777;
-      padding-bottom: 2rem;
+      padding: 2rem 1rem;
+      border-top: 1px solid #222;
     }
 
     footer a {
@@ -137,13 +169,21 @@
         flex-direction: column;
         gap: 3rem;
       }
+
+      .info-section h2 {
+        font-size: 1.5rem;
+      }
+
+      .info-section p {
+        font-size: 1rem;
+      }
     }
   </style>
 </head>
 <body>
 
   <div class="hero">
-    <h1>Koodaram</h1>
+    <h1> 🏠 Koodaram</h1>
     <p>
       Starting college? Koodaram helps you discover trusted hostels near your campus, compare facilities with ease, and contact owners directly — no hassle, no middlemen.
     </p>
@@ -151,7 +191,6 @@
   </div>
 
   <main>
-
     <section>
       <h2>🎓 For Students</h2>
       <ul>
@@ -177,9 +216,31 @@
       </ul>
       <a href="/pages/listHostel.html" class="cta-button">📬 List Your Hostel / PG</a>
     </section>
-
   </main>
 
+  <div class="info-section all-info">
+  <h2> 💗 About Koodaram</h2>
+  <p>
+    Koodaram is a student-first platform to help you find the best hostels and PGs near your college — with zero hassle. We’re building the most transparent, no-middleman directory for student living in Kerala.
+  </p>
+
+  <br><br>
+
+  <h2> ❓ Why Koodaram?</h2>
+  <p>
+    Because students deserve better. No more unreliable WhatsApp forwards or shady Facebook groups. We help you see real photos, real facilities, and talk directly to hostel owners — for free.
+  </p>
+
+  <br><br>
+
+  <h2> 💡 How It Works</h2>
+  <p>
+    Hostel owners can submit their listing. You can search by college, compare hostels, and directly contact the owner via phone or WhatsApp. No login. No agents. No tricks.
+  </p>
+</div>
+
+
+  <!-- Footer -->
   <footer>
     © 2025 Koodaram. Made with ♥ by <a href="https://github.com/rohankishore" target="_blank">Rohan Kishore</a>.
   </footer>
