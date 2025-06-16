@@ -179,8 +179,66 @@
       }
     }
 
+    .navbar {
+  background-color: #0d0d0d;
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #222;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.nav-container {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.navbar .logo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff;
+  text-decoration: none;
+  background: linear-gradient(90deg, #a18cd1, #fbc2eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.navbar nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.navbar nav a {
+  color: #ccc;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.navbar nav a:hover {
+  color: #fff;
+}
+
+@media (max-width: 600px) {
+  .nav-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .navbar nav {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
+
+
     .pricing-section {
-  background: linear-gradient(135deg, #1a1a1a, #232336);
+  background: linear-gradient(135deg, #0d0d0d, #1a1a2e);
   padding: 5rem 2rem;
   text-align: center;
   color: #f0f0f0;
@@ -245,6 +303,20 @@
 
   </style>
 </head>
+
+<header class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo"> 🏠 Koodaram</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/pages/browse.html">Browse Hostels</a>
+      <a href="/pages/listHostel.html">List a Hostel</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#about">About</a>
+    </nav>
+  </div>
+</header>
+
 <body>
 
   <div class="hero">
