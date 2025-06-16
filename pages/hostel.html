@@ -6,18 +6,82 @@
   <title>Hostel Details – Koodaram</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Inter', sans-serif;
       line-height: 1.6;
       background: #121212;
       color: #eee;
-      padding: 2rem;
+      padding: 0;
       margin: 0;
+    }
+
+    /* Navbar */
+    header.navbar {
+      background-color: #0d0d0d;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .navbar .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      text-decoration: none;
+      background: linear-gradient(90deg, #a18cd1, #fbc2eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .navbar nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .navbar nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .navbar nav a:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 600px) {
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar nav {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 0.5rem;
+      }
     }
 
     .container {
       max-width: 860px;
-      margin: auto;
+      margin: 2rem auto;
       background: #1e1e2f;
       padding: 2rem;
       border-radius: 14px;
@@ -81,6 +145,8 @@
       font-size: 0.9rem;
       color: #aaa;
       text-align: center;
+      padding: 2rem;
+      border-top: 1px solid #222;
     }
 
     a {
@@ -93,24 +159,34 @@
     }
 
     @media (max-width: 500px) {
-      body {
-        padding: 1rem;
-      }
-
       .container {
         padding: 1.2rem;
+        margin: 1rem;
       }
     }
   </style>
 </head>
 <body>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo"> 🏠 Koodaram</a>
+      <nav>
+        <a href="/">Home</a>
+        <a href="/pages/browse.html">Browse Hostels</a>
+        <a href="/pages/listHostel.html">For Hostel Owners</a>
+        <a href="/pages/pricing.html">Pricing</a>
+        <a href="/pages/about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
   <div class="container" id="hostel-view">
     <p>Loading...</p>
   </div>
 
   <footer>
-    <br>
-    <p>© 2025 Koodaram. <a href="browse.html">← Back to Listings</a></p>
+    <p>© 2025 Koodaram. <a href="/pages/browse.html">← Back to Listings</a></p>
   </footer>
 
   <script>

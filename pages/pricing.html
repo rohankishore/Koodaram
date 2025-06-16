@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pricing - Koodaram</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a2e);
+      color: #f0f0f0;
+      line-height: 1.6;
+    }
+
+    header.navbar {
+      background-color: #0d0d0d;
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #222;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .navbar .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: #fff;
+      text-decoration: none;
+      background: linear-gradient(90deg, #a18cd1, #fbc2eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .navbar nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .navbar nav a {
+      color: #ccc;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .navbar nav a:hover {
+      color: #fff;
+    }
+
+    @media (max-width: 600px) {
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar nav {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+    }
+
+    .pricing-section {
+      padding: 4rem 2rem;
+      max-width: 1000px;
+      margin: auto;
+      text-align: center;
+    }
+
+    .pricing-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #ffa3fd, #cab9ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .pricing-section .pricing-intro {
+      font-size: 1.1rem;
+      color: #ccc;
+      margin-bottom: 3rem;
+    }
+
+    .pricing-cards {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+    }
+
+    .pricing-card {
+      background-color: #161625;
+      border: 1px solid #2e2e3e;
+      border-radius: 12px;
+      padding: 2rem;
+      width: 300px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .pricing-card h3 {
+      font-size: 1.4rem;
+      margin-bottom: 1rem;
+      color: #fff;
+    }
+
+    .pricing-card p {
+      color: #bbb;
+      margin-bottom: 0.5rem;
+      font-size: 0.95rem;
+    }
+
+    .pricing-card strong {
+      display: block;
+      margin-top: 1rem;
+      font-size: 1.3rem;
+      color: #ffb7ff;
+    }
+
+    .pricing-card.premium {
+      border: 2px solid #caa9ff;
+      background: linear-gradient(145deg, #221b35, #2d2540);
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #777;
+      padding: 2rem 1rem;
+      border-top: 1px solid #222;
+      margin-top: 5rem;
+    }
+
+    footer a {
+      color: #b783ff;
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="/" class="logo"> 🏠 Koodaram</a>
+      <nav>
+        <a href="https://koodaram.vercel.app/">Home</a>
+        <a href="/pages/browse.html">Browse Hostels</a>
+        <a href="/pages/listHostel.html">For Hostel Owners</a>
+        <a href="/pages/pricing.html">Pricing</a>
+        <a href="/pages/about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="pricing-section">
+    <h2>💰 Pricing</h2>
+    <p class="pricing-intro">
+      Koodaram is <strong>FREE</strong> for students — always. Hostel owners can list for free, or upgrade for more visibility. We verify every listing to keep quality high.
+    </p>
+
+    <div class="pricing-cards">
+      <div class="pricing-card">
+        <h3>Free</h3>
+        <p>✔ Appear in search results</p>
+        <p>✔ Add up to 5 photos and contact info</p>
+        <p>✔ Edit or remove any time</p>
+        <strong>₹0</strong>
+      </div>
+
+      <div class="pricing-card premium">
+        <h3>Premium (Coming Soon)</h3>
+        <p>⭐ Appear at the top of listings</p>
+        <p>✅ Verified Badge</p>
+        <p>📸 Extra photo slots</p>
+        <p>🔗 Priority WhatsApp link</p>
+        <strong>₹— /month</strong>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    © 2025 Koodaram. Made with ♥ by <a href="https://github.com/rohankishore" target="_blank">Rohan Kishore</a>.
+  </footer>
+
+</body>
+</html>
