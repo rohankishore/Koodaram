@@ -14,78 +14,43 @@
 
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #121212;
-      color: #eee;
-      padding: 2rem;
+      background: linear-gradient(135deg, #0d0d0d, #1a1a2e);
+      color: #f0f0f0;
+      padding: 0;
       line-height: 1.6;
     }
 
-    header {
+    .hero {
+      background: linear-gradient(to bottom, #0a0a0f, #121220);
+      padding: 4rem 2rem 3rem;
       text-align: center;
-      margin-bottom: 3rem;
+      border-bottom: 2px solid #222;
     }
 
-    header h1 {
-      font-size: 2.5rem;
+    .hero h1 {
+      font-size: 3rem;
       font-weight: 800;
+      background: linear-gradient(90deg, #a18cd1, #fbc2eb);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       margin-bottom: 1rem;
-      color: #dab6ff;
     }
 
-    header p {
-      font-size: 1.1rem;
+    .hero p {
+      font-size: 1.15rem;
       max-width: 720px;
       margin: auto;
       color: #ccc;
     }
 
-    main {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-      max-width: 900px;
-      margin: auto;
-    }
-
-    section {
-      background: #1e1e2f;
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 0 12px rgba(128, 0, 128, 0.1);
-    }
-
-    section h2 {
-      font-size: 1.7rem;
-      color: #dab6ff;
-      margin-bottom: 1rem;
-    }
-
-    section ul {
-      list-style: none;
-      padding-left: 0;
-    }
-
-    section ul li {
-      margin-bottom: 0.8rem;
-      padding-left: 1.5rem;
-      position: relative;
-    }
-
-    section ul li::before {
-      content: '✔️';
-      position: absolute;
-      left: 0;
-      top: 0;
-    }
-
     .cta-button {
       display: inline-block;
-      margin-top: 1.5rem;
-      background-color: #7f5af0;
+      margin-top: 2rem;
+      background: linear-gradient(90deg, #7f5af0, #674dc6);
       color: white;
-      padding: 0.75rem 1.5rem;
+      padding: 0.85rem 1.8rem;
       text-decoration: none;
-      border-radius: 10px;
+      border-radius: 12px;
       font-weight: 600;
       font-size: 1rem;
       transition: background 0.3s ease, transform 0.2s ease;
@@ -94,44 +59,96 @@
     }
 
     .cta-button:hover {
-      background-color: #674dc6;
-      transform: translateY(-2px);
+      transform: translateY(-3px);
+      opacity: 0.95;
+    }
+
+    main {
+      display: flex;
+      gap: 2rem;
+      justify-content: center;
+      max-width: 1100px;
+      margin: 4rem auto;
+      flex-wrap: wrap;
+      padding: 0 2rem;
+    }
+
+    section {
+      flex: 1 1 45%;
+      padding: 1rem;
+    }
+
+    section h2 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, #c471f5, #fa71cd);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    section ul {
+      list-style: none;
+      padding-left: 0;
+    }
+
+    section ul li {
+      margin-bottom: 1rem;
+      padding-left: 1.8rem;
+      position: relative;
+      color: #ddd;
+    }
+
+    section ul li::before {
+      content: '✔';
+      position: absolute;
+      left: 0;
+      color: #a066ff;
+      font-weight: bold;
     }
 
     footer {
       text-align: center;
-      margin-top: 4rem;
-      font-size: 0.9rem;
-      color: #999;
+      margin-top: 5rem;
+      font-size: 0.95rem;
+      color: #777;
+      padding-bottom: 2rem;
     }
 
     footer a {
-      color: #dab6ff;
+      color: #b783ff;
       text-decoration: none;
     }
 
+    footer a:hover {
+      text-decoration: underline;
+    }
+
     @media (max-width: 768px) {
-      header h1 {
-        font-size: 2rem;
+      .hero h1 {
+        font-size: 2.2rem;
       }
 
-      section h2 {
-        font-size: 1.4rem;
+      section {
+        flex: 1 1 100%;
+      }
+
+      main {
+        flex-direction: column;
+        gap: 3rem;
       }
     }
   </style>
 </head>
 <body>
 
-  <header>
+  <div class="hero">
     <h1>Koodaram</h1>
     <p>
       Starting college? Koodaram helps you discover trusted hostels near your campus, compare facilities with ease, and contact owners directly — no hassle, no middlemen.
     </p>
-
-          <a href="/pages/browse.html" class="cta-button">🔍 Search Hostels</a>
-
-  </header>
+    <a href="/pages/browse.html" class="cta-button">🔍 Search Hostels</a>
+  </div>
 
   <main>
 
