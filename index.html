@@ -178,6 +178,71 @@
         font-size: 1rem;
       }
     }
+
+    .pricing-section {
+  background: linear-gradient(135deg, #1a1a1a, #232336);
+  padding: 5rem 2rem;
+  text-align: center;
+  color: #f0f0f0;
+}
+
+.pricing-section h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  background: linear-gradient(90deg, #c471f5, #fa71cd);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.pricing-intro {
+  max-width: 700px;
+  margin: auto;
+  font-size: 1.1rem;
+  color: #ccc;
+  margin-bottom: 3rem;
+}
+
+.pricing-cards {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.pricing-card {
+  background-color: #2a2a3c;
+  border-radius: 16px;
+  padding: 2rem;
+  width: 280px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  text-align: left;
+  color: #eee;
+  transition: transform 0.2s ease;
+}
+
+.pricing-card h3 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #f0caff;
+}
+
+.pricing-card p {
+  margin: 0.5rem 0;
+  color: #ddd;
+}
+
+.pricing-card strong {
+  display: block;
+  margin-top: 1rem;
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+.pricing-card:hover {
+  transform: translateY(-5px);
+}
+
+
   </style>
 </head>
 <body>
@@ -240,7 +305,32 @@
 </div>
 
 
-  <!-- Footer -->
+  <div class="pricing-section">
+  <h2> 💰 Pricing</h2>
+  <p class="pricing-intro">
+    Koodaram is <strong>FREE</strong> for students — always. Hostel owners can list for free, or upgrade for more visibility. We will verify that the hostel is above standards, so don't worry about that.
+  </p>
+
+  <div class="pricing-cards">
+    <div class="pricing-card free">
+      <h3>Free</h3>
+      <p>✔ Appear in search results</p>
+      <p>✔ Add upto 5 photos and contact info</p>
+      <p>✔ Edit or remove any time</p>
+      <strong>₹0</strong>
+    </div>
+
+    <div class="pricing-card premium">
+      <h3>Premium (Soon)</h3>
+      <p>⭐ Appear at the top of listings</p>
+      <p>✅ Verified Badge</p>
+      <p>📸 Extra photo slots</p>
+      <p>🔗 Priority link to WhatsApp</p>
+      <strong>₹ - /month</strong>
+    </div>
+  </div>
+</div>
+
   <footer>
     © 2025 Koodaram. Made with ♥ by <a href="https://github.com/rohankishore" target="_blank">Rohan Kishore</a>.
   </footer>
