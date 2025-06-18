@@ -216,64 +216,49 @@
     let hostelDataCache = [];
 
     async function loadHostels() {
-      const { data: rows, error } = await supabase.from('hostels').select('*');
-      if (error) {
-        console.error("Error loading data from Supabase:", error);
-        return;
-      }
+  const { data: rows, error } = await supabase.from('hostels').select('*');
 
-      const grid = document.getElementById("hostel-grid");
-      grid.innerHTML = "";
-      hostelDataCache = [];
+  if (error) {
+    console.error("Supabase error:", error);
+    return;
+  }
 
-      for (const row of rows) {
-        const data = row.data;
-        data.id = row.id;
-        hostelDataCache.push(data);
+  console.log("Fetched rows:", rows); // Debug log
 
-        const imageURL = data.images?.[0] || "https://via.placeholder.com/400x180";
-        const gender = data.gender?.toLowerCase() || "unisex";
+  if (!rows || rows.length === 0) {
+    alert("No hostels found.");
+    return;
+  }
 
-        grid.innerHTML += `
-          <div class="hostel-card"
-            data-room="${data.roomType?.toLowerCase() || ''}"
-            data-location="${data.location?.toLowerCase() || ''}"
-            data-amenities="${(data.amenities || []).join(',').toLowerCase()}"
-            data-price="${data.price || 0}"
-            data-gender="${gender}"
-          >
-            <img src="${imageURL}" alt="${data.name}" />
-            <h3>${data.name}</h3>
-            <p>📍 ${data.location}</p>
-            <p>🛏️ ${data.roomType} • ₹${data.price}/month</p>
-            <p>✅ ${(data.amenities || []).join(', ')}</p>
-            <span class="gender ${gender}">${gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
-            <a href="hostel.html?name=${data.id}" class="view-button">View Hostel</a>
-          </div>
-        `;
-      }
-    }
+  const grid = document.getElementById("hostel-grid");
+  grid.innerHTML = "";
 
-    function applyFilters() {
-      const loc = document.getElementById("location").value.toLowerCase();
-      const type = document.getElementById("room-type").value.toLowerCase();
-      const amenity = document.getElementById("amenities").value.toLowerCase();
-      const gender = document.getElementById("gender").value.toLowerCase();
-      const price = parseInt(document.getElementById("price").value);
+  for (const row of rows) {
+    const data = row.data || row;  // Fallback to flat structure
+    data.id = row.id;
 
-      const cards = document.querySelectorAll(".hostel-card");
-      cards.forEach(card => {
-        const matchesLocation = !loc || card.dataset.location.includes(loc);
-        const matchesType = !type || card.dataset.room === type;
-        const matchesAmenity = !amenity || card.dataset.amenities.includes(amenity);
-        const matchesGender = !gender || card.dataset.gender === gender;
-        const matchesPrice = !price || parseInt(card.dataset.price) <= price;
+    const imageURL = data.images?.[0] || "https://via.placeholder.com/400x180";
+    const gender = data.gender?.toLowerCase() || "unisex";
 
-        card.style.display = (matchesLocation && matchesType && matchesAmenity && matchesGender && matchesPrice)
-          ? "block"
-          : "none";
-      });
-    }
+    grid.innerHTML += `
+      <div class="hostel-card"
+        data-room="${data.roomType?.toLowerCase() || ''}"
+        data-location="${data.location?.toLowerCase() || ''}"
+        data-amenities="${(data.amenities || []).join(',').toLowerCase()}"
+        data-price="${data.price || 0}"
+        data-gender="${gender}"
+      >
+        <img src="${imageURL}" alt="${data.name}" />
+        <h3>${data.name}</h3>
+        <p>📍 ${data.location}</p>
+        <p>🛏️ ${data.roomType} • ₹${data.price}/month</p>
+        <p>✅ ${(data.amenities || []).join(', ')}</p>
+        <span class="gender ${gender}">${gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
+        <a href="hostel.html?name=${data.id}" class="view-button">View Hostel</a>
+      </div>
+    `;
+  }
+}
 
     window.onload = loadHostels;
   </script>
