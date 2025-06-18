@@ -21,7 +21,6 @@
       margin: 0;
     }
 
-    /* Navbar */
     header.navbar {
       background-color: #0d0d0d;
       padding: 1rem 2rem;
@@ -140,6 +139,35 @@
       box-shadow: 0 0 10px rgba(186, 85, 211, 0.6);
     }
 
+    .review-section {
+      margin-top: 2rem;
+    }
+
+    .review-section h2 {
+      margin-bottom: 0.8rem;
+    }
+
+    .review {
+      background: #2a2a3a;
+      padding: 1rem;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    #writeReviewBtn {
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      background: #3a3a5a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #writeReviewBtn:hover {
+      background: #6d3bb6;
+    }
+
     footer {
       margin-top: 4rem;
       font-size: 0.9rem;
@@ -156,6 +184,28 @@
 
     a:hover {
       text-decoration: underline;
+    }
+
+    #reviewModal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+    }
+
+    #reviewModal .modal-box {
+      background: #1e1e2f;
+      padding: 2rem;
+      border-radius: 12px;
+      width: 90%;
+      max-width: 500px;
+      color: #fff;
     }
 
     @media (max-width: 500px) {
@@ -189,14 +239,28 @@
     <p>© 2025 Koodaram. <a href="/pages/browse.html">← Back to Listings</a></p>
   </footer>
 
+  <div id="reviewModal">
+    <div class="modal-box">
+      <h3>Write a Review</h3>
+      <label>Your Name (optional):</label>
+      <input type="text" id="reviewerName" placeholder="Anonymous" style="width:100%; padding:0.5rem; margin-bottom:1rem;">
+      <label>Your Review:</label>
+      <textarea id="reviewText" rows="5" style="width:100%; padding:0.5rem;" placeholder="Type your review..."></textarea><br><br>
+      <button id="submitReview" style="padding:0.5rem 1rem;">Submit</button>
+      <button id="cancelReview" style="padding:0.5rem 1rem; background:#555; margin-left:1rem;">Cancel</button>
+    </div>
+  </div>
+
   <script>
     const GITHUB_USER = "rohankishore";
     const REPO = "Koodaram";
     const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
 
+    let hostelName = "";
+
     async function loadHostelData() {
       const params = new URLSearchParams(window.location.search);
-      const hostelName = params.get("name");
+      hostelName = params.get("name");
 
       if (!hostelName) {
         document.getElementById("hostel-view").innerHTML = "<p>⚠️ Hostel not specified.</p>";
@@ -229,32 +293,50 @@
           </div>
 
           <div class="review-section">
-  <h2>Reviews</h2>
-  <div id="reviews">Loading reviews...</div>
-  <button id="writeReviewBtn">✍️ Write a Review</button>
-</div>
-
-<!-- Hidden Review Form Modal -->
-<div id="reviewModal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%;
-  background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 9999;">
-  <div style="background:#1e1e2f; padding:2rem; border-radius:12px; width:90%; max-width:500px; color:#fff;">
-    <h3>Write a Review</h3>
-    <label>Your Name (or leave blank for anonymous):</label><br>
-    <input type="text" id="reviewerName" placeholder="Your name" style="width:100%; padding:0.5rem; margin-bottom:1rem;"><br>
-    <label>Your Review:</label><br>
-    <textarea id="reviewText" rows="5" style="width:100%; padding:0.5rem;" placeholder="Type your review..."></textarea><br><br>
-    <button id="submitReview" style="padding:0.5rem 1rem;">Submit</button>
-    <button id="cancelReview" style="padding:0.5rem 1rem; background:#555; margin-left:1rem;">Cancel</button>
-  </div>
-</div>
-
+            <h2>Reviews</h2>
+            <div id="reviews">Loading reviews...</div>
+            <button id="writeReviewBtn">✍️ Write a Review</button>
+          </div>
         `;
 
         document.getElementById("hostel-view").innerHTML = view;
+        loadReviews();
+
+        document.getElementById("writeReviewBtn").onclick = () => {
+          document.getElementById("reviewModal").style.display = "flex";
+        };
+        document.getElementById("cancelReview").onclick = () => {
+          document.getElementById("reviewModal").style.display = "none";
+        };
+        document.getElementById("submitReview").onclick = () => {
+          const name = document.getElementById("reviewerName").value || "Anonymous";
+          const text = document.getElementById("reviewText").value;
+          if (!text.trim()) return alert("Please enter a review.");
+
+          alert("📦 Cannot submit: GitHub Pages is static and cannot write to files.\nBut here's what would be saved:\n\n" +
+                JSON.stringify({ name, text }, null, 2));
+          document.getElementById("reviewModal").style.display = "none";
+        };
 
       } catch (err) {
         document.getElementById("hostel-view").innerHTML = "<p>⚠️ Failed to load hostel details.</p>";
         console.error("Error loading hostel:", err);
+      }
+    }
+
+    async function loadReviews() {
+      try {
+        const res = await fetch(`${RAW_BASE}/${hostelName}/reviews.json`);
+        const reviews = await res.json();
+        const reviewsHTML = reviews.map(r => `
+          <div class="review">
+            <p><strong>${r.name || "Anonymous"}</strong></p>
+            <p>${r.text}</p>
+          </div>
+        `).join("");
+        document.getElementById("reviews").innerHTML = reviewsHTML || "<p>No reviews yet.</p>";
+      } catch {
+        document.getElementById("reviews").innerHTML = "<p>⚠️ No reviews available.</p>";
       }
     }
 
