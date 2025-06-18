@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Browse Hostels – Koodaram</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     body {
       background: #121212;
@@ -139,8 +140,6 @@
       transition: background 0.3s ease, box-shadow 0.3s ease;
     }
 
-
-
     .hostel-card a.view-button:hover {
       background: #512d8b;
       box-shadow: 0 0 10px rgba(186, 85, 211, 0.5);
@@ -199,68 +198,59 @@
   </section>
 
   <section class="hostel-grid" id="hostel-grid">
-    <!-- pinne cheyyam haha -->
+    <!-- Supabase content will load here -->
   </section>
 
   <footer>
-
     <br>
-
     <a href="https://koodaram.vercel.app/">← Back to Home</a>
-
-    <br>
-    <br>
-
+    <br><br>
     © 2025 Koodaram
   </footer>
 
   <script>
-    const GITHUB_USER = "rohankishore";
-    const REPO = "Koodaram";
-    const API_BASE = `https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/hostels`;
-    const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
+    const SUPABASE_URL = 'https://erflfdzpkceyqualkfkc.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVyZmxmZHpwa2NleXF1YWxrZmtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAyNTAxOTcsImV4cCI6MjA2NTgyNjE5N30.tOWD4ihKOtzxdydNwHD8w-BFrl2xr3TBfOT3EFk6bxQ';
+    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
     let hostelDataCache = [];
 
     async function loadHostels() {
-      const res = await fetch(API_BASE);
-      const folders = await res.json();
+      const { data: rows, error } = await supabase.from('hostels').select('*');
+      if (error) {
+        console.error("Error loading data from Supabase:", error);
+        return;
+      }
 
       const grid = document.getElementById("hostel-grid");
       grid.innerHTML = "";
       hostelDataCache = [];
 
-      for (const folder of folders) {
-        const jsonURL = `${RAW_BASE}/${folder.name}/data.json`;
-        try {
-          const res = await fetch(jsonURL);
-          const data = await res.json();
-          data.id = folder.name;
-          hostelDataCache.push(data);
+      for (const row of rows) {
+        const data = row.data;
+        data.id = row.id;
+        hostelDataCache.push(data);
 
-          const imageURL = `${RAW_BASE}/${folder.name}/${data.images?.[0] || "1.jpg"}`;
-          const gender = data.gender?.toLowerCase() || "unisex";
+        const imageURL = data.images?.[0] || "https://via.placeholder.com/400x180";
+        const gender = data.gender?.toLowerCase() || "unisex";
 
-          grid.innerHTML += `
-            <div class="hostel-card"
-              data-room="${data.roomType.toLowerCase()}"
-              data-location="${data.location.toLowerCase()}"
-              data-amenities="${data.amenities.join(",").toLowerCase()}"
-              data-price="${data.price}"
-              data-gender="${gender}"
-            >
-              <img src="${imageURL}" alt="${data.name}" />
-              <h3>${data.name}</h3>
-              <p>📍 ${data.location}</p>
-              <p>🛏️ ${data.roomType} • ₹${data.price}/month</p>
-              <p>✅ ${data.amenities.join(", ")}</p>
-              <span class="gender ${gender}">${gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
-              <a href="hostel.html?name=${folder.name}" class="view-button">View Hostel</a>
-            </div>
-          `;
-        } catch (err) {
-          console.warn("Could not load:", folder.name);
-        }
+        grid.innerHTML += `
+          <div class="hostel-card"
+            data-room="${data.roomType?.toLowerCase() || ''}"
+            data-location="${data.location?.toLowerCase() || ''}"
+            data-amenities="${(data.amenities || []).join(',').toLowerCase()}"
+            data-price="${data.price || 0}"
+            data-gender="${gender}"
+          >
+            <img src="${imageURL}" alt="${data.name}" />
+            <h3>${data.name}</h3>
+            <p>📍 ${data.location}</p>
+            <p>🛏️ ${data.roomType} • ₹${data.price}/month</p>
+            <p>✅ ${(data.amenities || []).join(', ')}</p>
+            <span class="gender ${gender}">${gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
+            <a href="hostel.html?name=${data.id}" class="view-button">View Hostel</a>
+          </div>
+        `;
       }
     }
 
@@ -287,6 +277,5 @@
 
     window.onload = loadHostels;
   </script>
-
 </body>
 </html>
