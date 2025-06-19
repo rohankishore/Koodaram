@@ -5,115 +5,138 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>For Hostel Owners – Koodaram</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
+  :root {
+    /* Updated to Golden Theme Variables */
+    --bg-dark: #1A1A1A; /* Deep charcoal background */
+    --surface: #1F3A4B; /* Deep teal for containers / blurred backgrounds */
+    --primary: #FFBF00; /* Amber Gold for main actions/highlights */
+    --primary-dark: #DAA520; /* Goldenrod for darker primary shades */
+    --accent: #FFD700; /* Classic Gold for prominent elements */
+    --text-light: #E0E0E0; /* Off-white for general text */
+    --link-color: #FFBF00; /* Amber Gold for general links */
+    --hover-glow: rgba(255, 215, 0, 0.6); /* Gold glow for interactive elements */
+  }
 
-    body {
-      background: linear-gradient(to bottom right, #1a1a2e, #16213e);
-      color: #f0f0f0;
-      font-family: 'Inter', sans-serif;
-      margin: 0;
-      padding: 2rem;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
+  * {
+    box-sizing: border-box;
+  }
 
-    header, footer {
-      text-align: center;
-      margin-bottom: 2rem;
-    }
+  body {
+    /* Using golden theme background gradient */
+    background: linear-gradient(to bottom right, #1A1A1A, #1F3A4B); /* Deep charcoal to deep teal */
+    color: var(--text-light); /* Off-white text */
+    font-family: 'Inter', sans-serif;
+    margin: 0;
+    padding: 2rem;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
+  header, footer {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .content {
+    backdrop-filter: blur(12px);
+    /* Using deep teal with transparency for content background */
+    background: rgba(31, 58, 75, 0.7); /* Match --surface but with opacity */
+    border: 1px solid rgba(255, 215, 0, 0.08); /* Subtle gold border */
+    border-radius: 16px;
+    padding: 2.5rem;
+    max-width: 760px;
+    width: 100%;
+    /* Gold shadow for the content box */
+    box-shadow: 0 0 20px rgba(255, 215, 0, 0.1);
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    color: var(--accent); /* Classic Gold for main heading */
+    margin-bottom: 0.3rem;
+  }
+
+  h2 {
+    margin-top: 2rem;
+    color: var(--primary); /* Amber Gold for subheadings */
+    font-size: 1.3rem;
+  }
+
+  p {
+    line-height: 1.7;
+    margin-bottom: 1.2rem;
+    font-size: 1rem;
+    color: #D3D3D3; /* Light grey for paragraphs */
+  }
+
+  ul {
+    margin-left: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-light); /* Off-white for list items */
+  }
+
+  ul li::marker {
+      color: var(--primary); /* Gold for list item bullets/numbers */
+  }
+
+
+  .whatsapp-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    /* Keeping a green for WhatsApp, but slightly more muted/darker to fit the theme */
+    background-color: #075E54; /* Darker WhatsApp green */
+    color: white;
+    padding: 0.85rem 1.8rem;
+    font-weight: 600;
+    font-size: 1rem;
+    border-radius: 10px;
+    text-decoration: none;
+    margin-top: 1.5rem;
+    transition: all 0.3s ease;
+    /* Subtle glow in a complementary color, like a desaturated gold-green */
+    box-shadow: 0 0 16px rgba(100, 150, 120, 0.3);
+  }
+
+  .whatsapp-button:hover {
+    background-color: #128C7E; /* Slightly brighter WhatsApp green on hover */
+    box-shadow: 0 0 24px rgba(100, 150, 120, 0.5);
+    transform: translateY(-2px);
+  }
+
+  footer {
+    font-size: 0.9rem;
+    color: #777; /* Standard grey for footer text */
+    margin-top: 3rem;
+  }
+
+  footer a {
+    color: var(--link-color); /* Amber Gold for footer links */
+    text-decoration: none;
+  }
+
+  footer a:hover {
+    text-decoration: underline;
+    color: var(--accent); /* Classic gold on hover */
+  }
+
+  @media (max-width: 600px) {
     .content {
-      backdrop-filter: blur(12px);
-      background: rgba(30, 30, 48, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 16px;
-      padding: 2.5rem;
-      max-width: 760px;
-      width: 100%;
-      box-shadow: 0 0 20px rgba(186, 85, 211, 0.1);
+      padding: 1.5rem;
     }
 
     h1 {
-      font-size: 2.2rem;
-      color: #dab6ff;
-      margin-bottom: 0.3rem;
+      font-size: 1.7rem;
     }
 
     h2 {
-      margin-top: 2rem;
-      color: #d5b3ff;
-      font-size: 1.3rem;
+      font-size: 1.1rem;
     }
-
-    p {
-      line-height: 1.7;
-      margin-bottom: 1.2rem;
-      font-size: 1rem;
-      color: #ccc;
-    }
-
-    ul {
-      margin-left: 1.2rem;
-      margin-bottom: 1.5rem;
-      color: #c2aaff;
-    }
-
-    .whatsapp-button {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #25D366;
-      color: white;
-      padding: 0.85rem 1.8rem;
-      font-weight: 600;
-      font-size: 1rem;
-      border-radius: 10px;
-      text-decoration: none;
-      margin-top: 1.5rem;
-      transition: all 0.3s ease;
-      box-shadow: 0 0 16px rgba(37, 211, 102, 0.3);
-    }
-
-    .whatsapp-button:hover {
-      background-color: #20c35a;
-      box-shadow: 0 0 24px rgba(37, 211, 102, 0.5);
-      transform: translateY(-2px);
-    }
-
-    footer {
-      font-size: 0.9rem;
-      color: #888;
-      margin-top: 3rem;
-    }
-
-    footer a {
-      color: #dab6ff;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 600px) {
-      .content {
-        padding: 1.5rem;
-      }
-
-      h1 {
-        font-size: 1.7rem;
-      }
-
-      h2 {
-        font-size: 1.1rem;
-      }
-    }
-  </style>
+  }
+</style>
 </head>
 <body>
 

@@ -5,161 +5,180 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Pricing - Koodaram</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+  :root {
+    /* Updated to Golden Theme Variables */
+    --bg-dark: #1A1A1A; /* Deep charcoal background */
+    --surface: #1F3A4B; /* Deep teal for section backgrounds / containers */
+    --primary: #FFBF00; /* Amber Gold for main actions/highlights */
+    --primary-dark: #DAA520; /* Goldenrod for darker primary shades */
+    --accent: #FFD700; /* Classic Gold for prominent elements */
+    --text-light: #E0E0E0; /* Off-white for general text */
+    --card-bg: #2C2C2C; /* Darker charcoal for card backgrounds */
+    --link-color: #FFBF00; /* Amber Gold for general links */
+    --hover-glow: rgba(255, 215, 0, 0.6); /* Gold glow for interactive elements */
+  }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0d0d0d, #1a1a2e);
-      color: #f0f0f0;
-      line-height: 1.6;
-    }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-    header.navbar {
-      background-color: #0d0d0d;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid #222;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+  body {
+    font-family: 'Inter', sans-serif;
+    /* Golden theme background gradient */
+    background: linear-gradient(135deg, var(--bg-dark), var(--surface)); /* Deep charcoal to deep teal */
+    color: var(--text-light); /* Off-white text */
+    line-height: 1.6;
+  }
 
+  header.navbar {
+    background-color: var(--bg-dark); /* Dark charcoal for consistent navbar */
+    padding: 1rem 2rem;
+    border-bottom: 1px solid #333; /* Darker border */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .nav-container {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .navbar .logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #fff; /* Fallback */
+    /* Logo in rich gold gradient */
+    background: linear-gradient(90deg, var(--accent), var(--primary)); /* Classic Gold to Amber Gold */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .navbar nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .navbar nav a {
+    color: #D3D3D3; /* Light grey for nav links */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .navbar nav a:hover {
+    color: var(--accent); /* Classic gold on hover */
+  }
+
+  @media (max-width: 600px) {
     .nav-container {
-      max-width: 1100px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    .navbar .logo {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #fff;
-      text-decoration: none;
-      background: linear-gradient(90deg, #a18cd1, #fbc2eb);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .navbar nav {
-      display: flex;
-      gap: 1.5rem;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 0.5rem;
     }
+  }
 
-    .navbar nav a {
-      color: #ccc;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
-    }
+  .pricing-section {
+    padding: 4rem 2rem;
+    max-width: 1000px;
+    margin: auto;
+    text-align: center;
+  }
 
-    .navbar nav a:hover {
-      color: #fff;
-    }
+  .pricing-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    /* Gold gradient for pricing section heading */
+    background: linear-gradient(90deg, var(--accent), var(--primary)); /* Classic Gold to Amber Gold */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-    @media (max-width: 600px) {
-      .nav-container {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+  .pricing-section .pricing-intro {
+    font-size: 1.1rem;
+    color: #D3D3D3; /* Light grey for intro text */
+    margin-bottom: 3rem;
+  }
 
-      .navbar nav {
-        flex-direction: column;
-        width: 100%;
-        margin-top: 0.5rem;
-      }
-    }
+  .pricing-cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+  }
 
-    .pricing-section {
-      padding: 4rem 2rem;
-      max-width: 1000px;
-      margin: auto;
-      text-align: center;
-    }
+  .pricing-card {
+    background-color: var(--card-bg); /* Darker charcoal for card background */
+    border: 1px solid #444444; /* Darker, more subtle border */
+    border-radius: 12px;
+    padding: 2rem;
+    width: 300px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-    .pricing-section h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(90deg, #ffa3fd, #cab9ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+  .pricing-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); /* Stronger gold glow on hover */
+  }
 
-    .pricing-section .pricing-intro {
-      font-size: 1.1rem;
-      color: #ccc;
-      margin-bottom: 3rem;
-    }
+  .pricing-card h3 {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    color: var(--accent); /* Classic Gold for card titles */
+  }
 
-    .pricing-cards {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 2rem;
-    }
+  .pricing-card p {
+    color: #D3D3D3; /* Light grey for card text */
+    margin-bottom: 0.5rem;
+    font-size: 0.95rem;
+  }
 
-    .pricing-card {
-      background-color: #161625;
-      border: 1px solid #2e2e3e;
-      border-radius: 12px;
-      padding: 2rem;
-      width: 300px;
-      box-shadow: 0 0 20px rgba(0,0,0,0.2);
-      transition: transform 0.3s ease;
-    }
+  .pricing-card strong {
+    display: block;
+    margin-top: 1rem;
+    font-size: 1.3rem;
+    color: var(--primary); /* Amber Gold for prices */
+  }
 
-    .pricing-card:hover {
-      transform: translateY(-5px);
-    }
+  .pricing-card.premium {
+    border: 2px solid var(--primary); /* Amber Gold border for premium card */
+    /* Deeper, richer gradient for premium card */
+    background: linear-gradient(145deg, #2A363B, #3B4B52); /* Darker teal/grey gradient */
+    box-shadow: 0 0 30px rgba(255, 191, 0, 0.5); /* Stronger premium gold glow */
+  }
 
-    .pricing-card h3 {
-      font-size: 1.4rem;
-      margin-bottom: 1rem;
-      color: #fff;
-    }
+  footer {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #777; /* Standard grey for footer text */
+    padding: 2rem 1rem;
+    border-top: 1px solid #333; /* Darker border */
+    margin-top: 5rem;
+  }
 
-    .pricing-card p {
-      color: #bbb;
-      margin-bottom: 0.5rem;
-      font-size: 0.95rem;
-    }
+  footer a {
+    color: var(--link-color); /* Amber Gold for footer links */
+    text-decoration: none;
+  }
 
-    .pricing-card strong {
-      display: block;
-      margin-top: 1rem;
-      font-size: 1.3rem;
-      color: #ffb7ff;
-    }
-
-    .pricing-card.premium {
-      border: 2px solid #caa9ff;
-      background: linear-gradient(145deg, #221b35, #2d2540);
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.95rem;
-      color: #777;
-      padding: 2rem 1rem;
-      border-top: 1px solid #222;
-      margin-top: 5rem;
-    }
-
-    footer a {
-      color: #b783ff;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  footer a:hover {
+    text-decoration: underline;
+    color: var(--accent); /* Classic gold on hover */
+  }
+</style>
 </head>
 <body>
 
