@@ -5,11 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Browse Hostels – Koodaram</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
+    :root {
+      --bg-dark: #121212;
+      --surface: #1f2c26;
+      --primary: #10b981;
+      --primary-dark: #059669;
+      --accent: #34d399;
+      --text-light: #e6fffa;
+      --card-bg: #15221b;
+    }
+
     body {
-      background: #121212;
-      color: #eee;
+      background: var(--bg-dark);
+      color: var(--text-light);
       font-family: 'Inter', sans-serif;
       margin: 0;
       padding: 2rem;
@@ -24,7 +33,7 @@
       display: flex;
       flex-wrap: wrap;
       gap: 1rem;
-      background: #1e1e2f;
+      background: var(--surface);
       padding: 1rem;
       border-radius: 10px;
       max-width: 1000px;
@@ -42,33 +51,33 @@
       display: block;
       font-size: 0.85rem;
       margin-bottom: 0.3rem;
-      color: #ccc;
+      color: #a7f3d0;
     }
 
     .filters input,
     .filters select {
       width: 100%;
       padding: 0.4rem;
-      background: #2b2b3d;
-      border: none;
+      background: #0d1c14;
+      border: 1px solid #14532d;
       border-radius: 6px;
       color: white;
     }
 
     .cta-button {
-      background: rebeccapurple;
+      background: var(--primary);
       color: white;
       border: none;
       padding: 0.7rem 1.4rem;
       border-radius: 6px;
       cursor: pointer;
       font-weight: 600;
-      transition: background 0.3s ease;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
     }
 
     .cta-button:hover {
-      background: #6d3bb6;
-      box-shadow: 0 0 12px rgba(186, 85, 211, 0.4);
+      background: var(--primary-dark);
+      box-shadow: 0 0 10px rgba(16, 185, 129, 0.3);
     }
 
     .hostel-grid {
@@ -79,16 +88,16 @@
     }
 
     .hostel-card {
-      background: #1e1e2f;
-      color: #eee;
+      background: var(--card-bg);
+      color: var(--text-light);
       padding: 1.5rem;
       border-radius: 12px;
       transition: box-shadow 0.3s ease, transform 0.2s ease;
-      box-shadow: 0 0 12px rgba(128, 0, 128, 0.1);
+      box-shadow: 0 0 12px rgba(16, 185, 129, 0.08);
     }
 
     .hostel-card:hover {
-      box-shadow: 0 0 20px rgba(186, 85, 211, 0.5);
+      box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
       transform: translateY(-4px);
     }
 
@@ -101,7 +110,7 @@
     }
 
     .hostel-card h3 {
-      color: #dab6ff;
+      color: var(--accent);
       margin-bottom: 0.3rem;
     }
 
@@ -115,24 +124,24 @@
     }
 
     .gender.male {
-      background: #007bff30;
-      color: #4da3ff;
+      background: #14532d;
+      color: #6ee7b7;
     }
 
     .gender.female {
-      background: #ff69b430;
-      color: #ff9ecf;
+      background: #374151;
+      color: #f9a8d4;
     }
 
     .gender.unisex {
-      background: #a26eff30;
-      color: #d5aaff;
+      background: #065f46;
+      color: #a7f3d0;
     }
 
     .hostel-card a.view-button {
       display: inline-block;
       margin-top: 0.8rem;
-      background: #2d1b47;
+      background: #14532d;
       color: white;
       padding: 0.6rem 1rem;
       border-radius: 6px;
@@ -141,8 +150,8 @@
     }
 
     .hostel-card a.view-button:hover {
-      background: #512d8b;
-      box-shadow: 0 0 10px rgba(186, 85, 211, 0.5);
+      background: #166534;
+      box-shadow: 0 0 10px rgba(52, 211, 153, 0.4);
     }
   </style>
 </head>
@@ -198,7 +207,7 @@
   </section>
 
   <section class="hostel-grid" id="hostel-grid">
-    <!-- Supabase content will load here -->
+    <!-- loaded dynamically -->
   </section>
 
   <footer>
@@ -209,58 +218,78 @@
   </footer>
 
   <script>
-    const SUPABASE_URL = 'https://erflfdzpkceyqualkfkc.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVyZmxmZHpwa2NleXF1YWxrZmtjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTAyNTAxOTcsImV4cCI6MjA2NTgyNjE5N30.tOWD4ihKOtzxdydNwHD8w-BFrl2xr3TBfOT3EFk6bxQ';
-    const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    const GITHUB_USER = "rohankishore";
+    const REPO = "Koodaram";
+    const API_BASE = `https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/hostels`;
+    const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
 
     let hostelDataCache = [];
 
     async function loadHostels() {
-  const { data: rows, error } = await supabase.from('hostels').select('*');
+      const res = await fetch(API_BASE);
+      const folders = await res.json();
 
-  if (error) {
-    console.error("Supabase error:", error);
-    return;
-  }
+      const grid = document.getElementById("hostel-grid");
+      grid.innerHTML = "";
+      hostelDataCache = [];
 
-  console.log("Fetched rows:", rows); // Debug log
+      for (const folder of folders) {
+        const jsonURL = `${RAW_BASE}/${folder.name}/data.json`;
+        try {
+          const res = await fetch(jsonURL);
+          const data = await res.json();
+          data.id = folder.name;
+          hostelDataCache.push(data);
 
-  if (!rows || rows.length === 0) {
-    alert("No hostels found.");
-    return;
-  }
+          const imageURL = `${RAW_BASE}/${folder.name}/${data.images?.[0] || "1.jpg"}`;
+          const gender = data.gender?.toLowerCase() || "unisex";
 
-  const grid = document.getElementById("hostel-grid");
-  grid.innerHTML = "";
+          grid.innerHTML += `
+            <div class="hostel-card"
+              data-room="${data.roomType.toLowerCase()}"
+              data-location="${data.location.toLowerCase()}"
+              data-amenities="${data.amenities.join(",").toLowerCase()}"
+              data-price="${data.price}"
+              data-gender="${gender}"
+            >
+              <img src="${imageURL}" alt="${data.name}" />
+              <h3>${data.name}</h3>
+              <p>📍 ${data.location}</p>
+              <p>🛏️ ${data.roomType} • ₹${data.price}/month</p>
+              <p>✅ ${data.amenities.join(", ")}</p>
+              <span class="gender ${gender}">${gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
+              <a href="hostel.html?name=${folder.name}" class="view-button">View Hostel</a>
+            </div>
+          `;
+        } catch (err) {
+          console.warn("Could not load:", folder.name);
+        }
+      }
+    }
 
-  for (const row of rows) {
-    const data = row.data || row;  // Fallback to flat structure
-    data.id = row.id;
+    function applyFilters() {
+      const loc = document.getElementById("location").value.toLowerCase();
+      const type = document.getElementById("room-type").value.toLowerCase();
+      const amenity = document.getElementById("amenities").value.toLowerCase();
+      const gender = document.getElementById("gender").value.toLowerCase();
+      const price = parseInt(document.getElementById("price").value);
 
-    const imageURL = data.images?.[0] || "https://via.placeholder.com/400x180";
-    const gender = data.gender?.toLowerCase() || "unisex";
+      const cards = document.querySelectorAll(".hostel-card");
+      cards.forEach(card => {
+        const matchesLocation = !loc || card.dataset.location.includes(loc);
+        const matchesType = !type || card.dataset.room === type;
+        const matchesAmenity = !amenity || card.dataset.amenities.includes(amenity);
+        const matchesGender = !gender || card.dataset.gender === gender;
+        const matchesPrice = !price || parseInt(card.dataset.price) <= price;
 
-    grid.innerHTML += `
-      <div class="hostel-card"
-        data-room="${data.roomType?.toLowerCase() || ''}"
-        data-location="${data.location?.toLowerCase() || ''}"
-        data-amenities="${(data.amenities || []).join(',').toLowerCase()}"
-        data-price="${data.price || 0}"
-        data-gender="${gender}"
-      >
-        <img src="${imageURL}" alt="${data.name}" />
-        <h3>${data.name}</h3>
-        <p>📍 ${data.location}</p>
-        <p>🛏️ ${data.roomType} • ₹${data.price}/month</p>
-        <p>✅ ${(data.amenities || []).join(', ')}</p>
-        <span class="gender ${gender}">${gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
-        <a href="hostel.html?name=${data.id}" class="view-button">View Hostel</a>
-      </div>
-    `;
-  }
-}
+        card.style.display = (matchesLocation && matchesType && matchesAmenity && matchesGender && matchesPrice)
+          ? "block"
+          : "none";
+      });
+    }
 
     window.onload = loadHostels;
   </script>
+
 </body>
 </html>
