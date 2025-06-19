@@ -6,214 +6,237 @@
   <title>Hostel Details – Koodaram</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+   :root {
+  /* Updated to Golden Theme Variables */
+  --bg-dark: #1A1A1A; /* Deep charcoal background */
+  --surface: #1F3A4B; /* Deep teal for section backgrounds / containers */
+  --primary: #FFBF00; /* Amber Gold for main actions/highlights */
+  --primary-dark: #DAA520; /* Goldenrod for darker primary shades */
+  --accent: #FFD700; /* Classic Gold for prominent elements */
+  --text-light: #E0E0E0; /* Off-white for general text */
+  --card-bg: #2C2C2C; /* Darker charcoal for review cards */
+  --input-bg: #222222; /* Slightly lighter dark for inputs */
+  --border-color: #444444; /* Darker border for inputs */
+  --link-color: #FFBF00; /* Amber Gold for general links */
+  --hover-glow: rgba(255, 215, 0, 0.6); /* Gold glow for interactive elements */
+}
 
-    body {
-      font-family: 'Inter', sans-serif;
-      line-height: 1.6;
-      background: #121212;
-      color: #eee;
-      padding: 0;
-      margin: 0;
-    }
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-    header.navbar {
-      background-color: #0d0d0d;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid #222;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  background: var(--bg-dark); /* Using deep charcoal */
+  color: var(--text-light); /* Off-white text */
+  padding: 0;
+  margin: 0;
+}
 
-    .nav-container {
-      max-width: 1100px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
+header.navbar {
+  background-color: #1A1A1A; /* Dark charcoal for consistent navbar */
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #333; /* Darker border */
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
 
-    .navbar .logo {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #fff;
-      text-decoration: none;
-      background: linear-gradient(90deg, #a18cd1, #fbc2eb);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+.nav-container {
+  max-width: 1100px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
 
-    .navbar nav {
-      display: flex;
-      gap: 1.5rem;
-    }
+.navbar .logo {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: #fff; /* Fallback */
+  /* Logo in rich gold gradient */
+  background: linear-gradient(90deg, #FFD700, #FFBF00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
 
-    .navbar nav a {
-      color: #ccc;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
-    }
+.navbar nav {
+  display: flex;
+  gap: 1.5rem;
+}
 
-    .navbar nav a:hover {
-      color: #fff;
-    }
+.navbar nav a {
+  color: #D3D3D3; /* Light grey for nav links */
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
 
-    @media (max-width: 600px) {
-      .nav-container {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+.navbar nav a:hover {
+  color: var(--accent); /* Classic gold on hover */
+}
 
-      .navbar nav {
-        flex-direction: column;
-        width: 100%;
-        margin-top: 0.5rem;
-      }
-    }
+@media (max-width: 600px) {
+  .nav-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
 
-    .container {
-      max-width: 860px;
-      margin: 2rem auto;
-      background: #1e1e2f;
-      padding: 2rem;
-      border-radius: 14px;
-      box-shadow: 0 0 20px rgba(128, 0, 128, 0.2);
-    }
+  .navbar nav {
+    flex-direction: column;
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+}
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 0.5rem;
-    }
+.container {
+  max-width: 860px;
+  margin: 2rem auto;
+  background: var(--surface); /* Deep teal for the main container */
+  padding: 2rem;
+  border-radius: 14px;
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); /* Subtle gold shadow for the container */
+}
 
-    .info p {
-      margin: 0.3rem 0;
-    }
+h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--accent); /* Classic gold for main heading */
+}
 
-    .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 1rem;
-      margin-top: 1.5rem;
-    }
+.info p {
+  margin: 0.3rem 0;
+  color: var(--text-light); /* Off-white for info text */
+}
 
-    .gallery img {
-      width: 100%;
-      border-radius: 10px;
-      height: 180px;
-      object-fit: cover;
-      transition: transform 0.3s ease;
-      box-shadow: 0 0 10px rgba(128, 0, 128, 0.15);
-    }
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
 
-    .gallery img:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 16px rgba(186, 85, 211, 0.5);
-    }
+.gallery img {
+  width: 100%;
+  border-radius: 10px;
+  height: 180px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.15); /* Subtle gold shadow */
+}
 
-    .contact-buttons {
-      margin-top: 1.5rem;
-    }
+.gallery img:hover {
+  transform: scale(1.03);
+  box-shadow: 0 0 16px var(--hover-glow); /* Stronger gold glow on hover */
+}
 
-    .contact-buttons a {
-      display: inline-block;
-      margin-right: 1rem;
-      margin-top: 0.5rem;
-      padding: 0.6rem 1.2rem;
-      border-radius: 6px;
-      background: #2c2c3a;
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
-      transition: 0.2s ease;
-    }
+.contact-buttons {
+  margin-top: 1.5rem;
+}
 
-    .contact-buttons a:hover {
-      background: #6d3bb6;
-      box-shadow: 0 0 10px rgba(186, 85, 211, 0.6);
-    }
+.contact-buttons a {
+  display: inline-block;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+  padding: 0.6rem 1.2rem;
+  border-radius: 6px;
+  background: var(--primary-dark); /* Goldenrod for contact buttons */
+  color: #1A1A1A; /* Dark text on gold */
+  text-decoration: none;
+  font-weight: 600;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
 
-    .review-section {
-      margin-top: 2rem;
-    }
+.contact-buttons a:hover {
+  background: var(--primary); /* Amber gold on hover */
+  box-shadow: 0 0 10px var(--hover-glow); /* Gold glow on hover */
+}
 
-    .review-section h2 {
-      margin-bottom: 0.8rem;
-    }
+.review-section {
+  margin-top: 2rem;
+}
 
-    .review {
-      background: #2a2a3a;
-      padding: 1rem;
-      border-radius: 10px;
-      margin-bottom: 1rem;
-    }
+.review-section h2 {
+  margin-bottom: 0.8rem;
+  color: var(--accent); /* Classic gold for review heading */
+}
 
-    #writeReviewBtn {
-      margin-top: 1rem;
-      padding: 0.5rem 1rem;
-      background: #3a3a5a;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
+.review {
+  background: var(--card-bg); /* Dark charcoal for review background */
+  padding: 1rem;
+  border-radius: 10px;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for reviews */
+}
 
-    #writeReviewBtn:hover {
-      background: #6d3bb6;
-    }
+#writeReviewBtn {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background: var(--primary); /* Amber gold for write review button */
+  color: #1A1A1A; /* Dark text */
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+}
 
-    footer {
-      margin-top: 4rem;
-      font-size: 0.9rem;
-      color: #aaa;
-      text-align: center;
-      padding: 2rem;
-      border-top: 1px solid #222;
-    }
+#writeReviewBtn:hover {
+  background: var(--primary-dark); /* Goldenrod on hover */
+  box-shadow: 0 0 10px var(--hover-glow); /* Gold glow on hover */
+}
 
-    a {
-      color: #caaaff;
-      text-decoration: none;
-    }
+footer {
+  margin-top: 4rem;
+  font-size: 0.9rem;
+  color: #777; /* Slightly lighter grey for footer text */
+  text-align: center;
+  padding: 2rem;
+  border-top: 1px solid #333; /* Darker border */
+}
 
-    a:hover {
-      text-decoration: underline;
-    }
+a {
+  color: var(--link-color); /* Amber gold for general links */
+  text-decoration: none;
+}
 
-    #reviewModal {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      align-items: center;
-      justify-content: center;
-      z-index: 9999;
-    }
+a:hover {
+  text-decoration: underline;
+  color: var(--accent); /* Classic gold on hover */
+}
 
-    #reviewModal .modal-box {
-      background: #1e1e2f;
-      padding: 2rem;
-      border-radius: 12px;
-      width: 90%;
-      max-width: 500px;
-      color: #fff;
-    }
+#reviewModal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
 
-    @media (max-width: 500px) {
-      .container {
-        padding: 1.2rem;
-        margin: 1rem;
-      }
-    }
+#reviewModal .modal-box {
+  background: var(--surface); /* Deep teal for modal background */
+  padding: 2rem;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  color: var(--text-light); /* Off-white text in modal */
+  box-shadow: 0 0 25px var(--hover-glow); /* Prominent gold glow for modal */
+}
+
+@media (max-width: 500px) {
+  .container {
+    padding: 1.2rem;
+    margin: 1rem;
+  }
+}
   </style>
 </head>
 <body>
