@@ -349,6 +349,57 @@ footer a:hover {
   text-decoration: none;
 }
 
+.colleges-section {
+  padding: 4rem 2rem 2rem;
+  text-align: center;
+  background: linear-gradient(135deg, #0c1e0c, #123320);
+}
+
+.colleges-section h2 {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  background: linear-gradient(90deg, #9affc7, #b9ffe3);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.marquee-container {
+  overflow: hidden;
+  position: relative;
+}
+
+.marquee {
+  display: flex;
+  gap: 2rem;
+  width: max-content;
+  animation: scrollLeft 20s linear infinite;
+  padding-bottom: 1.5rem;
+}
+
+.marquee2 {
+  animation: scrollRight 25s linear infinite;
+}
+
+.marquee img {
+  height: 60px;
+  object-fit: contain;
+  filter: brightness(1.1);
+  transition: transform 0.3s;
+}
+
+.marquee img:hover {
+  transform: scale(1.1);
+}
+
+@keyframes scrollLeft {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes scrollRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0); }
+}
 
 
 
@@ -406,6 +457,32 @@ footer a:hover {
     </section>
   </main>
 
+  <section class="colleges-section">
+  <h2>🏫 Colleges on Koodaram</h2>
+  <div class="marquee-container">
+    <div class="marquee marquee1">
+      <!-- Repeat logos here -->
+      <img src="/assets/logos/college1.png" alt="College 1" />
+      <img src="/assets/logos/college2.png" alt="College 2" />
+      <img src="/assets/logos/college3.png" alt="College 3" />
+      <img src="/assets/logos/college4.png" alt="College 4" />
+      <img src="/assets/logos/college5.png" alt="College 5" />
+      <!-- Duplicate for smooth loop -->
+      <img src="/assets/logos/college1.png" alt="College 1" />
+      <img src="/assets/logos/college2.png" alt="College 2" />
+    </div>
+    <div class="marquee marquee2">
+      <img src="/assets/logos/college6.png" alt="College 6" />
+      <img src="/assets/logos/college7.png" alt="College 7" />
+      <img src="/assets/logos/college8.png" alt="College 8" />
+      <img src="/assets/logos/college9.png" alt="College 9" />
+      <img src="/assets/logos/college10.png" alt="College 10" />
+      <img src="/assets/logos/college6.png" alt="College 6" />
+      <img src="/assets/logos/college7.png" alt="College 7" />
+    </div>
+  </div>
+</section>
+
   <section class="faq-section">
   <h2>❓ Frequently Asked Questions</h2>
   <div class="faq-container">
@@ -441,7 +518,7 @@ footer a:hover {
 
   <footer>
 
-    <a href="pages/terms.html">Terms & Conditions</a> 
+    <a href="pages/terms.html">Terms & Conditions</a> &nbsp;  <a>Credits</a>
 
     <br>
     <br>

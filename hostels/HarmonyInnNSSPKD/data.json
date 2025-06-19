@@ -1,0 +1,15 @@
+{
+  "name": "Harmony Inn BoysHostel",
+  "location": "Near NSS College, Palakkad",
+  "college": "NSS College Palakkad",
+  "roomType": "Triple Sharing",
+  "price": "",
+  "amenities": ["Bath attached rooms", "Food", "Laundry"],
+  "distance": "500m",
+  "contact": {
+    "phone": "+919847075667",
+    "whatsapp": "919847075667"
+  },
+  "images": ["1.jpg", "2.jpg", "3.jpg"],
+  "gender": "male"
+}
