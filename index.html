@@ -14,22 +14,25 @@
 
 body {
   font-family: 'Inter', sans-serif;
-  background: linear-gradient(135deg, #0d0d0d, #0f1f0f);
-  color: #f0f0f0;
+  /* Dark, sophisticated background */
+  background: linear-gradient(135deg, #1A1A1A, #1F3A4B); /* Deep charcoal to deep teal */
+  color: #E0E0E0; /* Off-white for general text */
   line-height: 1.6;
 }
 
 .hero {
-  background: linear-gradient(to bottom, #0a0f0a, #132b13);
+  /* Slightly darker base for hero section */
+  background: linear-gradient(to bottom, #101010, #172F3E); /* Even darker tones */
   padding: 4rem 2rem 3rem;
   text-align: center;
-  border-bottom: 2px solid #222;
+  border-bottom: 2px solid #333; /* Darker border */
 }
 
 .hero h1 {
   font-size: 3rem;
   font-weight: 800;
-  background: linear-gradient(90deg, #a8ff78, #78ffd6);
+  /* Rich gold gradient for main heading */
+  background: linear-gradient(90deg, #FFD700, #FFBF00); /* Classic Gold to Amber Gold */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 1rem;
@@ -39,27 +42,30 @@ body {
   font-size: 1.15rem;
   max-width: 720px;
   margin: auto;
-  color: #ccc;
+  color: #D3D3D3; /* Light grey for sub-text */
 }
 
 .cta-button {
   display: inline-block;
   margin-top: 2rem;
-  background: linear-gradient(90deg, #32cd84, #2ea671);
-  color: white;
+  /* Gold gradient for CTA button */
+  background: linear-gradient(90deg, #FFBF00, #DAA520); /* Amber Gold to Goldenrod */
+  color: #1A1A1A; /* Dark text on gold button for contrast */
   padding: 0.85rem 1.8rem;
   text-decoration: none;
   border-radius: 12px;
   font-weight: 600;
   font-size: 1rem;
-  transition: background 0.3s ease, transform 0.2s ease;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease; /* Add box-shadow transition */
   border: none;
   cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.4); /* Subtle glow */
 }
 
 .cta-button:hover {
   transform: translateY(-3px);
   opacity: 0.95;
+  box-shadow: 0 6px 20px rgba(255, 215, 0, 0.6); /* Enhanced glow on hover */
 }
 
 main {
@@ -75,13 +81,16 @@ main {
 section {
   flex: 1 1 45%;
   padding: 1rem;
+  border-radius: 12px; /* Add some rounded corners to sections */
+  overflow: hidden; /* Ensures background gradients respect border-radius */
 }
 
 section h2 {
   font-size: 1.8rem;
   font-weight: 700;
   margin-bottom: 1rem;
-  background: linear-gradient(90deg, #9aff9a, #a5ffc9);
+  /* Lighter gold gradient for section headings */
+  background: linear-gradient(90deg, #FFD700, #FFE066); /* Classic Gold to slightly lighter gold */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -95,14 +104,14 @@ section ul li {
   margin-bottom: 1rem;
   padding-left: 1.8rem;
   position: relative;
-  color: #ddd;
+  color: #D3D3D3; /* Light grey for list items */
 }
 
 section ul li::before {
   content: '✔';
   position: absolute;
   left: 0;
-  color: #70ffb3;
+  color: #DAA520; /* Goldenrod for checkmarks */
   font-weight: bold;
 }
 
@@ -114,7 +123,8 @@ section ul li::before {
 .info-section h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  background: linear-gradient(90deg, #b7fcd3, #d3ffe8);
+  /* Soft gold gradient for info section heading */
+  background: linear-gradient(90deg, #FFD700, #FFFACD); /* Classic Gold to Lemon Chiffon */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -123,19 +133,20 @@ section ul li::before {
   max-width: 800px;
   margin: auto;
   font-size: 1.1rem;
-  color: #ccc;
+  color: #D3D3D3; /* Light grey for info text */
 }
 
+/* Backgrounds for specific sections - using deep teal/grey tones */
 .about {
-  background: linear-gradient(135deg, #112d14, #1d4132);
+  background: linear-gradient(135deg, #1F3A4B, #2A4E5C); /* Deep teal tones */
 }
 
 .why {
-  background: linear-gradient(135deg, #112d14, #2a4e3c);
+  background: linear-gradient(135deg, #2A363B, #3B4B52); /* Darker teal/grey tones */
 }
 
 .how {
-  background: linear-gradient(135deg, #112d14, #1f4432);
+  background: linear-gradient(135deg, #1F3A4B, #2C4252); /* Deep teal tones */
 }
 
 footer {
@@ -144,16 +155,17 @@ footer {
   font-size: 0.95rem;
   color: #777;
   padding: 2rem 1rem;
-  border-top: 1px solid #222;
+  border-top: 1px solid #333; /* Darker border */
 }
 
 footer a {
-  color: #7effa6;
+  color: #FFBF00; /* Amber gold for footer links */
   text-decoration: none;
 }
 
 footer a:hover {
   text-decoration: underline;
+  color: #FFD700; /* Classic gold on hover */
 }
 
 @media (max-width: 768px) {
@@ -181,9 +193,9 @@ footer a:hover {
 
 /* Navbar */
 .navbar {
-  background-color: #0d1e0d;
+  background-color: #1A1A1A; /* Dark charcoal */
   padding: 1rem 2rem;
-  border-bottom: 1px solid #222;
+  border-bottom: 1px solid #333; /* Darker border */
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -201,9 +213,9 @@ footer a:hover {
 .navbar .logo {
   font-size: 1.4rem;
   font-weight: 800;
-  color: #fff;
-  text-decoration: none;
-  background: linear-gradient(90deg, #a8ff78, #78ffd6);
+  color: #fff; /* Fallback */
+  /* Logo in rich gold gradient */
+  background: linear-gradient(90deg, #FFD700, #FFBF00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -214,14 +226,14 @@ footer a:hover {
 }
 
 .navbar nav a {
-  color: #ccc;
+  color: #D3D3D3; /* Light grey for nav links */
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
 .navbar nav a:hover {
-  color: #fff;
+  color: #FFD700; /* Classic gold on hover */
 }
 
 @media (max-width: 600px) {
@@ -239,16 +251,17 @@ footer a:hover {
 
 /* Pricing Section */
 .pricing-section {
-  background: linear-gradient(135deg, #0d0d0d, #0f1f0f);
+  background: linear-gradient(135deg, #1A1A1A, #1F3A4B); /* Consistent dark background */
   padding: 5rem 2rem;
   text-align: center;
-  color: #f0f0f0;
+  color: #E0E0E0;
 }
 
 .pricing-section h2 {
   font-size: 2rem;
   margin-bottom: 1rem;
-  background: linear-gradient(90deg, #9effc6, #a8ffcc);
+  /* Gold gradient for pricing heading */
+  background: linear-gradient(90deg, #FFD700, #FFBF00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -257,7 +270,7 @@ footer a:hover {
   max-width: 700px;
   margin: auto;
   font-size: 1.1rem;
-  color: #ccc;
+  color: #D3D3D3;
   margin-bottom: 3rem;
 }
 
@@ -269,50 +282,52 @@ footer a:hover {
 }
 
 .pricing-card {
-  background-color: #1d3426;
+  background-color: #2C2C2C; /* Darker grey for card background */
   border-radius: 16px;
   padding: 2rem;
   width: 280px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.4); /* Stronger, darker shadow */
   text-align: left;
-  color: #eee;
-  transition: transform 0.2s ease;
+  color: #E0E0E0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease; /* Add box-shadow transition */
 }
 
 .pricing-card h3 {
   font-size: 1.5rem;
   margin-bottom: 1rem;
-  color: #adffc7;
+  color: #FFD700; /* Classic gold for card titles */
 }
 
 .pricing-card p {
   margin: 0.5rem 0;
-  color: #ddd;
+  color: #D3D3D3;
 }
 
 .pricing-card strong {
   display: block;
   margin-top: 1rem;
   font-size: 1.5rem;
-  color: #ffffff;
+  color: #FFBF00; /* Amber gold for prices */
 }
 
 .pricing-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3); /* Subtle gold glow on hover */
 }
 
 /* FAQ Section */
 .faq-section {
-  background: linear-gradient(135deg, #112d14, #1d4132);
+  background: linear-gradient(135deg, #1F3A4B, #2A4E5C); /* Consistent deep teal */
   padding: 4rem 2rem;
   text-align: center;
-  color: #f0f0f0;
+  color: #E0E0E0;
 }
 
 .faq-section h2 {
   font-size: 2rem;
   margin-bottom: 2rem;
-  background: linear-gradient(90deg, #afffd0, #d1ffe6);
+  /* Gold gradient for FAQ heading */
+  background: linear-gradient(90deg, #FFD700, #FFE680); /* Classic Gold to a brighter yellow-gold */
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -325,40 +340,42 @@ footer a:hover {
 
 .faq-item {
   margin-bottom: 2rem;
-  border-left: 4px solid #32cd84;
+  border-left: 4px solid #DAA520; /* Goldenrod for border */
   padding-left: 1rem;
 }
 
 .faq-item h3 {
   font-size: 1.2rem;
   margin-bottom: 0.5rem;
-  color: #ffffff;
+  color: #FFD700; /* Classic gold for FAQ questions */
 }
 
 .faq-item p {
   font-size: 1rem;
-  color: #ccc;
+  color: #D3D3D3;
 }
 
 .faq-item a {
-  color: #90ffc0;
+  color: #FFBF00; /* Amber gold for FAQ links */
   text-decoration: underline;
 }
 
 .faq-item a:hover {
   text-decoration: none;
+  color: #FFD700;
 }
 
 .colleges-section {
   padding: 4rem 2rem 2rem;
   text-align: center;
-  background: linear-gradient(135deg, #0c1e0c, #123320);
+  background: linear-gradient(135deg, #1A1A1A, #2C2C2C); /* Darker grey base for colleges */
 }
 
 .colleges-section h2 {
   font-size: 2rem;
   margin-bottom: 2rem;
-  background: linear-gradient(90deg, #9affc7, #b9ffe3);
+  /* Gold gradient for colleges heading */
+  background: linear-gradient(90deg, #FFD700, #FFE680);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -383,12 +400,14 @@ footer a:hover {
 .marquee img {
   height: 60px;
   object-fit: contain;
-  filter: brightness(1.1);
-  transition: transform 0.3s;
+  /* Adjust filter for gold theme - more desaturated or tinted */
+  filter: brightness(0.8) grayscale(0.5) sepia(0.8) hue-rotate(15deg) saturate(1.5); /* Example gold tint */
+  transition: transform 0.3s, filter 0.3s;
 }
 
 .marquee img:hover {
   transform: scale(1.1);
+  filter: brightness(1.1); /* Brighter on hover */
 }
 
 @keyframes scrollLeft {
@@ -465,7 +484,7 @@ footer a:hover {
       <img src="/assets/images/colleges/nsspkd.png" alt="" />
 
       <!-- Duplicate for smooth loop -->
-      <img src="/assets/logos/college1.png" alt="College 1" />
+      <img src="/assets/logos/college1.png" alt="" />
     </div>
     <div class="marquee marquee2">
 
