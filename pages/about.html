@@ -5,128 +5,144 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>About - Koodaram</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<style>
+  :root {
+    /* Golden Theme Variables */
+    --bg-dark: #1A1A1A; /* Deep charcoal background */
+    --surface: #1F3A4B; /* Deep teal for containers / blurred backgrounds */
+    --primary: #FFBF00; /* Amber Gold for main actions/highlights */
+    --primary-dark: #DAA520; /* Goldenrod for darker primary shades */
+    --accent: #FFD700; /* Classic Gold for prominent elements */
+    --text-light: #E0E0E0; /* Off-white for general text */
+    --link-color: #FFBF00; /* Amber Gold for general links */
+    --hover-glow: rgba(255, 215, 0, 0.6); /* Gold glow for interactive elements */
+  }
 
-    body {
-      font-family: 'Inter', sans-serif;
-      background: linear-gradient(135deg, #0d0d0d, #1a1a2e);
-      color: #f0f0f0;
-      line-height: 1.6;
-    }
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
 
-    header.navbar {
-      background-color: #0d0d0d;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid #222;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-dark); /* Deep charcoal background */
+    color: var(--text-light); /* Off-white text */
+    line-height: 1.6;
+  }
 
+  header.navbar {
+    background-color: var(--surface); /* Deep teal for nav background */
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--primary-dark); /* Goldenrod border */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for nav */
+  }
+
+  .nav-container {
+    max-width: 1100px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+
+  .navbar .logo {
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: var(--accent); /* Classic gold for logo */
+    text-decoration: none;
+    background: linear-gradient(90deg, var(--accent), var(--primary)); /* Gold gradient for logo */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .navbar nav {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .navbar nav a {
+    color: #D3D3D3; /* Light grey for general nav links */
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+  }
+
+  .navbar nav a:hover {
+    color: var(--accent); /* Classic gold on hover */
+  }
+
+  @media (max-width: 600px) {
     .nav-container {
-      max-width: 1100px;
-      margin: auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-    }
-
-    .navbar .logo {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: #fff;
-      text-decoration: none;
-      background: linear-gradient(90deg, #a18cd1, #fbc2eb);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .navbar nav {
-      display: flex;
-      gap: 1.5rem;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 0.5rem;
     }
+  }
 
-    .navbar nav a {
-      color: #ccc;
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s ease;
-    }
+  .info-section {
+    padding: 4rem 2rem;
+    text-align: center;
+    max-width: 800px;
+    margin: auto;
+    background: var(--surface); /* Deep teal for the info section background */
+    border-radius: 14px;
+    box-shadow: 0 0 20px var(--hover-glow); /* Subtle gold shadow */
+  }
 
-    .navbar nav a:hover {
-      color: #fff;
-    }
+  .info-section h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(90deg, var(--accent), var(--primary)); /* Gold gradient for heading */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
 
-    @media (max-width: 600px) {
-      .nav-container {
-        flex-direction: column;
-        align-items: flex-start;
-      }
+  .info-section p {
+    font-size: 1.1rem;
+    color: #D3D3D3; /* Light grey for paragraphs */
+    margin-bottom: 3rem;
+  }
 
-      .navbar nav {
-        flex-direction: column;
-        width: 100%;
-        margin-top: 0.5rem;
-      }
-    }
+  footer {
+    text-align: center;
+    font-size: 0.95rem;
+    color: #777; /* Standard grey for footer text */
+    padding: 2rem 1rem;
+    border-top: 1px solid var(--primary-dark); /* Goldenrod border */
+    margin-top: 5rem;
+  }
 
-    .info-section {
-      padding: 4rem 2rem;
-      text-align: center;
-      max-width: 800px;
-      margin: auto;
-    }
+  footer a {
+    color: var(--link-color); /* Amber gold for footer links */
+    text-decoration: none;
+  }
 
-    .info-section h2 {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-      background: linear-gradient(90deg, #ffa3fd, #cab9ff);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .info-section p {
-      font-size: 1.1rem;
-      color: #ccc;
-      margin-bottom: 3rem;
-    }
-
-    footer {
-      text-align: center;
-      font-size: 0.95rem;
-      color: #777;
-      padding: 2rem 1rem;
-      border-top: 1px solid #222;
-      margin-top: 5rem;
-    }
-
-    footer a {
-      color: #b783ff;
-      text-decoration: none;
-    }
-
-    footer a:hover {
-      text-decoration: underline;
-    }
-  </style>
+  footer a:hover {
+    text-decoration: underline;
+    color: var(--accent); /* Classic gold on hover */
+  }
+</style>
 </head>
 <body>
 
   <header class="navbar">
     <div class="nav-container">
-      <a href="/" class="logo"> 🏠 Koodaram</a>
+      <a href="https://koodaram.vercel.app/" class="logo"> 🏠 Koodaram</a>
       <nav>
-        <a href="/">Home</a>
-        <a href="/pages/browse.html">Browse Hostels</a>
-        <a href="/pages/listHostel.html">For Hostel Owners</a>
-        <a href="/pages/pricing.html">Pricing</a>
-        <a href="/pages/about.html">About</a>
+        <a href="https://koodaram.vercel.app/">Home</a>
+        <a href="/browse.html">Browse Hostels</a>
+        <a href="/listHostel.html">For Hostel Owners</a>
+        <a href="/pricing.html">Pricing</a>
       </nav>
     </div>
   </header>
