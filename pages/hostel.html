@@ -136,12 +136,13 @@ h1 {
 
 .contact-buttons {
   margin-top: 1.5rem;
+  display: flex; /* Use flexbox for button layout */
+  gap: 1rem; /* Space between buttons */
+  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
 }
 
 .contact-buttons a {
   display: inline-block;
-  margin-right: 1rem;
-  margin-top: 0.5rem;
   padding: 0.6rem 1.2rem;
   border-radius: 6px;
   background: var(--primary-dark); /* Goldenrod for contact buttons */
@@ -149,12 +150,29 @@ h1 {
   text-decoration: none;
   font-weight: 600;
   transition: background 0.2s ease, box-shadow 0.2s ease;
+  flex-grow: 1; /* Allow buttons to grow and fill space */
+  text-align: center; /* Center text in buttons */
 }
 
 .contact-buttons a:hover {
   background: var(--primary); /* Amber gold on hover */
   box-shadow: 0 0 10px var(--hover-glow); /* Gold glow on hover */
 }
+
+/* Map embed styling */
+.map-container {
+    margin-top: 2rem;
+    border-radius: 10px;
+    overflow: hidden; /* Ensures the iframe corners match the border-radius */
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); /* Gold shadow for the map */
+}
+.map-container iframe {
+    width: 100%;
+    height: 350px; /* Fixed height for the map */
+    border: 0; /* Remove default iframe border */
+    border-radius: 10px; /* Match container border-radius */
+}
+
 
 .review-section {
   margin-top: 2rem;
@@ -171,6 +189,15 @@ h1 {
   border-radius: 10px;
   margin-bottom: 1rem;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for reviews */
+}
+
+.review-stars {
+    color: var(--accent); /* Golden color for stars */
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+.review-stars .empty-star {
+    color: #555; /* A darker shade for empty stars */
 }
 
 #writeReviewBtn {
@@ -229,6 +256,71 @@ a:hover {
   max-width: 500px;
   color: var(--text-light); /* Off-white text in modal */
   box-shadow: 0 0 25px var(--hover-glow); /* Prominent gold glow for modal */
+  position: relative; /* For positioning close button */
+}
+
+#reviewModal .modal-box input[type="text"],
+#reviewModal .modal-box textarea {
+    width: 100%; /* Ensure inputs take full width */
+    padding: 0.8rem;
+    margin-bottom: 1rem;
+    background-color: var(--input-bg);
+    border: 1px solid var(--border-color);
+    color: var(--text-light);
+    border-radius: 6px;
+    box-sizing: border-box; /* Include padding in width */
+}
+
+#reviewModal .modal-box input[type="text"]:focus,
+#reviewModal .modal-box textarea:focus {
+    outline: none;
+    border-color: var(--primary); /* Highlight border on focus */
+    box-shadow: 0 0 8px var(--hover-glow);
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    font-size: 1.5rem;
+    color: var(--text-light);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    line-height: 1;
+    transition: color 0.2s ease;
+}
+.modal-close-btn:hover {
+    color: var(--accent);
+}
+
+#submitReview, #cancelReview {
+  padding: 0.7rem 1.4rem; /* Slightly larger buttons */
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+  font-weight: 600;
+  color: #1A1A1A;
+}
+
+#submitReview {
+    background: var(--primary);
+    border: none;
+}
+#submitReview:hover {
+    background: var(--primary-dark);
+    box-shadow: 0 0 10px var(--hover-glow);
+}
+
+#cancelReview {
+    background: #555;
+    color: var(--text-light); /* Lighter text on dark grey button */
+    border: none;
+    margin-left: 1rem;
+}
+#cancelReview:hover {
+    background: #777;
 }
 
 @media (max-width: 500px) {
@@ -259,18 +351,19 @@ a:hover {
   </div>
 
   <footer>
-    <p>© 2025 Koodaram. <a href="/pages/browse.html">← Back to Listings</a></p>
+    <p>© 2025 Koodaram. <a href="/pages/browse.html" id="backToListingsLink">← Back to Listings</a></p>
   </footer>
 
   <div id="reviewModal">
     <div class="modal-box">
+      <button class="modal-close-btn">×</button>
       <h3>Write a Review</h3>
-      <label>Your Name (optional):</label>
-      <input type="text" id="reviewerName" placeholder="Anonymous" style="width:100%; padding:0.5rem; margin-bottom:1rem;">
-      <label>Your Review:</label>
-      <textarea id="reviewText" rows="5" style="width:100%; padding:0.5rem;" placeholder="Type your review..."></textarea><br><br>
-      <button id="submitReview" style="padding:0.5rem 1rem;">Submit</button>
-      <button id="cancelReview" style="padding:0.5rem 1rem; background:#555; margin-left:1rem;">Cancel</button>
+      <label for="reviewerName">Your Name (optional):</label>
+      <input type="text" id="reviewerName" placeholder="Anonymous">
+      <label for="reviewText">Your Review:</label>
+      <textarea id="reviewText" rows="5" placeholder="Type your review..."></textarea><br>
+      <button id="submitReview">Submit</button>
+      <button id="cancelReview">Cancel</button>
     </div>
   </div>
 
@@ -285,6 +378,16 @@ a:hover {
       const params = new URLSearchParams(window.location.search);
       hostelName = params.get("name");
 
+      // Set the back link in the footer
+      const backToListingsLink = document.getElementById('backToListingsLink');
+      if (document.referrer && document.referrer.includes(window.location.origin) && document.referrer.includes('/pages/browse.html')) {
+          localStorage.setItem('lastBrowseUrl', document.referrer);
+          backToListingsLink.href = document.referrer;
+      } else {
+          // Fallback if referrer isn't from browse page or is external
+          backToListingsLink.href = "/pages/browse.html";
+      }
+
       if (!hostelName) {
         document.getElementById("hostel-view").innerHTML = "<p>⚠️ Hostel not specified.</p>";
         return;
@@ -297,6 +400,20 @@ a:hover {
         const imagesHTML = (data.images || []).map(img =>
           `<img src="${RAW_BASE}/${hostelName}/${img}" alt="${data.name} image">`
         ).join("");
+
+        // Conditionally include the map section
+        let mapSectionHTML = '';
+        if (data.gmap) {
+            mapSectionHTML = `
+                <div class="map-container">
+                    <iframe
+                      src="${data.gmap}"
+                      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                </div>
+            `;
+        }
+
 
         const view = `
           <h1>${data.name}</h1>
@@ -315,7 +432,7 @@ a:hover {
             <a href="https://wa.me/${data.contact?.whatsapp}">💬 WhatsApp</a>
           </div>
 
-          <div class="review-section">
+          ${mapSectionHTML} <div class="review-section">
             <h2>Reviews</h2>
             <div id="reviews">Loading reviews...</div>
             <button id="writeReviewBtn">✍️ Write a Review</button>
@@ -328,21 +445,42 @@ a:hover {
         document.getElementById("writeReviewBtn").onclick = () => {
           document.getElementById("reviewModal").style.display = "flex";
         };
+
+        // Modal close handlers
         document.getElementById("cancelReview").onclick = () => {
           document.getElementById("reviewModal").style.display = "none";
         };
+        document.querySelector('.modal-close-btn').onclick = () => {
+          document.getElementById('reviewModal').style.display = 'none';
+        };
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && document.getElementById('reviewModal').style.display === 'flex') {
+                document.getElementById('reviewModal').style.display = 'none';
+            }
+        });
+
         document.getElementById("submitReview").onclick = () => {
           const name = document.getElementById("reviewerName").value || "Anonymous";
           const text = document.getElementById("reviewText").value;
-          if (!text.trim()) return alert("Please enter a review.");
+          // For future: const rating = getSelectedRating(); // You'd implement a star rating input and get its value
 
-          alert("📦 Cannot submit: GitHub Pages is static and cannot write to files.\nBut here's what would be saved:\n\n" +
-                JSON.stringify({ name, text }, null, 2));
+          if (!text.trim()) {
+              alert("Please enter a review.");
+              return;
+          }
+
+          alert("📦 Cannot submit: GitHub Pages is static and cannot write to files.\n" +
+                "To save reviews, you'd need a backend server (e.g., Node.js, Python) or a service like Firebase/Supabase.\n\n" +
+                "But here's what would be saved:\n" +
+                JSON.stringify({ name, text /*, rating*/ }, null, 2));
           document.getElementById("reviewModal").style.display = "none";
+          // Clear inputs after "submission"
+          document.getElementById("reviewerName").value = "";
+          document.getElementById("reviewText").value = "";
         };
 
       } catch (err) {
-        document.getElementById("hostel-view").innerHTML = "<p>⚠️ Failed to load hostel details.</p>";
+        document.getElementById("hostel-view").innerHTML = "<p>⚠️ Failed to load hostel details. Please try again later.</p>";
         console.error("Error loading hostel:", err);
       }
     }
@@ -351,15 +489,23 @@ a:hover {
       try {
         const res = await fetch(`${RAW_BASE}/${hostelName}/reviews.json`);
         const reviews = await res.json();
-        const reviewsHTML = reviews.map(r => `
-          <div class="review">
-            <p><strong>${r.name || "Anonymous"}</strong></p>
-            <p>${r.text}</p>
-          </div>
-        `).join("");
-        document.getElementById("reviews").innerHTML = reviewsHTML || "<p>No reviews yet.</p>";
+        const reviewsHTML = reviews.map(r => {
+            // Assuming r.rating is a number from 0 to 5
+            const rating = r.rating || 0; // Default to 0 if not provided
+            const fullStars = '⭐'.repeat(rating);
+            const emptyStars = '<span class="empty-star">⭐</span>'.repeat(5 - rating);
+
+            return `
+              <div class="review">
+                <p><strong>${r.name || "Anonymous"}</strong></p>
+                <div class="review-stars">${fullStars}${emptyStars}</div>
+                <p>${r.text}</p>
+              </div>
+            `;
+        }).join("");
+        document.getElementById("reviews").innerHTML = reviewsHTML || "<p>No reviews yet. Be the first to leave a review!</p>";
       } catch {
-        document.getElementById("reviews").innerHTML = "<p>⚠️ No reviews available.</p>";
+        document.getElementById("reviews").innerHTML = "<p>⚠️ Could not load reviews for this hostel.</p>";
       }
     }
 
