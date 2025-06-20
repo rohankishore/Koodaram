@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Colleges - Koodaram</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        /* Golden Theme Variables */
+        :root {
+            --bg-dark: #1A1A1A; /* Deep charcoal background */
+            --surface: #1F3A4B; /* Deep teal for containers / blurred backgrounds */
+            --primary: #FFBF00; /* Amber Gold for main actions/highlights */
+            --primary-dark: #DAA520; /* Goldenrod for darker primary shades */
+            --accent: #FFD700; /* Classic Gold for prominent elements */
+            --text-light: #E0E0E0; /* Off-white for general text */
+            --link-color: #FFBF00; /* Amber Gold for general links */
+            --hover-glow: rgba(255, 215, 0, 0.6); /* Gold glow for interactive elements */
+        }
+
+        /* Base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg-dark); /* Deep charcoal background */
+            color: var(--text-light); /* Off-white text */
+            line-height: 1.6;
+        }
+
+        /* Navbar styles */
+        header.navbar {
+            background-color: var(--surface); /* Deep teal for nav background */
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for nav */
+        }
+
+        .nav-container {
+            max-width: 1100px;
+            margin: auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .navbar .logo {
+            font-size: 1.4rem;
+            font-weight: 800;
+            color: var(--accent); /* Classic gold for logo */
+            text-decoration: none;
+            background: linear-gradient(90deg, var(--accent), var(--primary)); /* Gold gradient for logo */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .navbar nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .navbar nav a {
+            color: #D3D3D3; /* Light grey for general nav links */
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+
+        .navbar nav a:hover {
+            color: var(--accent); /* Classic gold on hover */
+        }
+
+        /* Responsive Navbar */
+        @media (max-width: 600px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .navbar nav {
+                flex-direction: column;
+                width: 100%;
+                margin-top: 0.5rem;
+            }
+        }
+
+        /* Info section (used for main content) */
+        .info-section {
+            padding: 4rem 2rem;
+            text-align: center;
+            max-width: 800px;
+            margin: 2rem auto; /* Added margin-top for spacing from nav */
+            background: var(--surface); /* Deep teal for the info section background */
+            border-radius: 14px;
+            box-shadow: 0 0 20px var(--hover-glow); /* Subtle gold shadow */
+        }
+
+        .info-section h1 { /* Main title for the colleges page */
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-weight: 700;
+        }
+
+        .info-section h2 { /* Category headings (if needed, or for smaller sections) */
+            font-size: 1.8rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: var(--primary); /* Amber gold for subheadings */
+        }
+
+        .info-section p {
+            font-size: 1.1rem;
+            color: #D3D3D3; /* Light grey for paragraphs */
+            margin-bottom: 1.5rem;
+        }
+
+        .college-list {
+            list-style: none; /* Remove default list bullets */
+            padding: 0;
+            margin-top: 2rem;
+            text-align: left; /* Align list items to the left */
+        }
+
+        .college-list li {
+            margin-bottom: 1rem;
+            font-size: 1.15rem;
+            color: var(--text-light);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1); /* Subtle separator */
+            padding-bottom: 0.8rem;
+        }
+
+        .college-list li:last-child {
+            border-bottom: none; /* No border for the last item */
+            padding-bottom: 0;
+        }
+
+        .college-list li strong {
+            color: var(--accent); /* Highlight college names */
+            font-size: 1.25rem; /* Slightly larger for names */
+        }
+
+        .college-list li a {
+            color: var(--link-color);
+            text-decoration: none;
+            transition: color 0.2s ease, text-decoration 0.2s ease;
+        }
+
+        .college-list li a:hover {
+            color: var(--accent);
+            text-decoration: underline;
+        }
+
+        /* Footer styles */
+        footer {
+            text-align: center;
+            font-size: 0.95rem;
+            color: #777; /* Standard grey for footer text */
+            padding: 2rem 1rem;
+            border-top: 1px solid var(--primary-dark); /* Goldenrod border */
+            margin-top: 5rem;
+        }
+
+        footer a {
+            color: var(--link-color); /* Amber gold for footer links */
+            text-decoration: none;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
+            color: var(--accent); /* Classic gold on hover */
+        }
+
+        /* General link styling (if not specifically overridden) */
+        a {
+            color: var(--link-color); /* Amber gold for general links */
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+            color: var(--accent); /* Classic gold on hover */
+        }
+    </style>
+</head>
+<body>
+    <header class="navbar">
+        <div class="nav-container">
+            <a href="https://koodaram.vercel.app/" class="logo">🏠 Koodaram</a>
+            <nav>
+                <a href="https://koodaram.vercel.app/">Home</a>
+                <a href="/browse.html">Browse Hostels</a>
+                <a href="/listHostel.html">For Hostel Owners</a>
+                <a href="/pricing.html">Pricing</a>
+                <a href="/about.html">About</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="info-section">
+            <h1>Partnered Colleges & Institutions</h1>
+            <p>Discover a list of colleges and educational institutions whose students frequently seek accommodation through Koodaram. Many of our listed hostels are conveniently located near these campuses.</p>
+
+            <ul class="college-list">
+                <li><strong>NSS Engineering College, Palakkad</strong> - <a href="https://www.nssce.ac.in/" target="_blank">Visit Website</a></li>
+            </ul>
+
+            <p>If you represent an educational institution and would like to partner with us, please <a href="/contact.html">contact us</a>.</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Koodaram. All rights reserved. <a href="/terms.html">Terms of Service</a> | <a href="/credits.html">Credits</a></p>
+    </footer>
+</body>
+</html>
