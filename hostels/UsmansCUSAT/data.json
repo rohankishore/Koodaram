@@ -1,0 +1,25 @@
+{
+  "name": "Usman's Hostel",
+  "location": "South, Pipe Line Road, Kochi\nUniversity, Ernakulam — 682022 (Near\nCUSAT)",
+  "college": "CUSAT",
+  "roomType": "2/3/4 Sharing or Private",
+  "price": "",
+  "distance": "350",
+  "gender": "male",
+  "contact": {
+    "phone": "919995045591",
+    "whatsapp": "919995045591"
+  },
+  "rating": "3.6",
+  "amenities": [
+    "Wi-Fi",
+    "Full power backup",
+    "CCTV"
+  ],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg"
+  ],
+  "gmap": ""
+}
