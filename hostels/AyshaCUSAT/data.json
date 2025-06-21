@@ -1,0 +1,35 @@
+{
+  "name": "Aysha's Hostel",
+  "location": "Pottachal Nagar, Alfiya Nagar, Near CUSAT,  South Kalamassery, Kalamassery, Kochi, Ernakulam, Kerala 682033",
+  "college": "CUSAT",
+  "roomType": "2/3 Sharing",
+  "price": "7000",
+  "distance": "500",
+  "gender": "female",
+  "contact": {
+    "phone": "919947675111",
+    "whatsapp": "919947675111"
+  },
+  "rating": "3.5",
+  "amenities": [
+    "Parking",
+    "Wi-Fi",
+    "Individual Cupboard",
+    "Elevator",
+    "Cleaning Staff",
+    "Refridgerator",
+    "CCTV",
+    "Cab Service",
+    "Balcony",
+    "Common Kitchen",
+    "Iron Box",
+    "Locker"
+  ],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg",
+    "4.jpg"
+  ],
+  "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d502253.72185551!2d76.15522980624999!3d10.432904289578659!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080c344fc9d377%3A0x653d6a8d882d0daf!2sAyshas%20Hostel%20For%20Ladies!5e0!3m2!1sen!2sin!4v1750534134310!5m2!1sen!2sin"
+}
