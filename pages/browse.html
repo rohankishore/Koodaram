@@ -7,170 +7,175 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
     :root {
-  --bg-dark: #1A1A1A; /* Deep charcoal background */
-  --surface: #1F3A4B; /* Deep teal for filter section background */
-  --primary: #FFBF00; /* Amber Gold for main actions/highlights */
-  --primary-dark: #DAA520; /* Goldenrod for darker primary shades */
-  --accent: #FFD700; /* Classic Gold for prominent elements */
-  --text-light: #E0E0E0; /* Off-white for general text */
-  --card-bg: #2C2C2C; /* Darker charcoal for card backgrounds */
-  --input-bg: #222222; /* Slightly lighter dark for inputs */
-  --border-color: #444444; /* Darker border for inputs */
-}
+      --bg-dark: #1A1A1A;
+      --surface: #1F3A4B;
+      --primary: #FFBF00;
+      --primary-dark: #DAA520;
+      --accent: #FFD700;
+      --text-light: #E0E0E0;
+      --card-bg: #2C2C2C;
+      --input-bg: #222222;
+      --border-color: #444444;
+    }
 
-body {
-  background: var(--bg-dark);
-  color: var(--text-light);
-  font-family: 'Inter', sans-serif;
-  margin: 0;
-  padding: 2rem;
-}
+    body {
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 2rem;
+    }
 
-header, footer {
-  text-align: center;
-  margin-bottom: 2rem;
-}
+    header, footer {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
 
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1rem;
-  background: var(--surface); /* Deep teal from the new palette */
-  padding: 1rem;
-  border-radius: 10px;
-  max-width: 1000px;
-  margin-inline: auto;
-  margin-bottom: 2rem;
-  justify-content: space-between;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
-}
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      background: var(--surface);
+      padding: 1rem;
+      border-radius: 10px;
+      max-width: 1000px;
+      margin-inline: auto;
+      margin-bottom: 2rem;
+      justify-content: space-between;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
 
-.filters .filter-group {
-  flex: 1;
-  min-width: 150px;
-}
+    .filters .filter-group {
+      flex: 1;
+      min-width: 150px;
+    }
 
-.filters label {
-  display: block;
-  font-size: 0.85rem;
-  margin-bottom: 0.3rem;
-  color: var(--accent); /* Classic Gold for labels */
-}
+    .filters label {
+      display: block;
+      font-size: 0.85rem;
+      margin-bottom: 0.3rem;
+      color: var(--accent);
+    }
 
-.filters input,
-.filters select {
-  width: 100%;
-  padding: 0.4rem;
-  background: var(--input-bg); /* Darker grey for inputs */
-  border: 1px solid var(--border-color); /* Darker border */
-  border-radius: 6px;
-  color: var(--text-light); /* Off-white text in inputs */
-}
+    .filters input,
+    .filters select {
+      width: 100%;
+      padding: 0.4rem;
+      background: var(--input-bg);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      color: var(--text-light);
+    }
 
-.cta-button {
-  background: var(--primary); /* Amber Gold for CTA */
-  color: #1A1A1A; /* Dark text on gold button for contrast */
-  border: none;
-  padding: 0.7rem 1.4rem;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-  box-shadow: 0 0 10px rgba(255, 191, 0, 0.2); /* Subtle gold glow */
-}
+    .cta-button {
+      background: var(--primary);
+      color: #1A1A1A;
+      border: none;
+      padding: 0.7rem 1.4rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 0 10px rgba(255, 191, 0, 0.2);
+    }
 
-.cta-button:hover {
-  background: var(--primary-dark); /* Goldenrod on hover */
-  box-shadow: 0 0 15px rgba(255, 191, 0, 0.4); /* Enhanced gold glow */
-}
+    .cta-button:hover {
+      background: var(--primary-dark);
+      box-shadow: 0 0 15px rgba(255, 191, 0, 0.4);
+    }
 
-.hostel-grid {
-  display: grid;
-  gap: 2rem;
-  max-width: 1000px;
-  margin: auto;
-  /* Adjust grid columns for better responsiveness with the new theme */
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-}
+    .hostel-grid {
+      display: grid;
+      gap: 2rem;
+      max-width: 1000px;
+      margin: auto;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    }
 
-.hostel-card {
-  background: var(--card-bg); /* Darker charcoal for card background */
-  color: var(--text-light);
-  padding: 1.5rem;
-  border-radius: 12px;
-  transition: box-shadow 0.3s ease, transform 0.2s ease;
-  box-shadow: 0 0 12px rgba(255, 215, 0, 0.08); /* Subtle gold shadow */
-}
+    .hostel-card {
+      background: var(--card-bg);
+      color: var(--text-light);
+      padding: 1.5rem;
+      border-radius: 12px;
+      transition: box-shadow 0.3s ease, transform 0.2s ease;
+      box-shadow: 0 0 12px rgba(255, 215, 0, 0.08);
+    }
 
-.hostel-card:hover {
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.4); /* Prominent gold shadow on hover */
-  transform: translateY(-4px);
-}
+    .hostel-card:hover {
+      box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
+      transform: translateY(-4px);
+    }
 
-.hostel-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 0.8rem;
-}
+    .hostel-card img {
+      width: 100%;
+      height: 180px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 0.8rem;
+    }
 
-.hostel-card h3 {
-  color: var(--accent); /* Classic Gold for hostel names */
-  margin-bottom: 0.3rem;
-}
+    .hostel-card h3 {
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
 
-.hostel-card .gender {
-  display: inline-block;
-  font-size: 0.75rem;
-  font-weight: bold;
-  padding: 0.2rem 0.5rem;
-  border-radius: 4px;
-  margin-top: 0.4rem;
-  /* Text color for gender tags adjusted to fit gold theme */
-}
+    .rating-stars {
+      font-size: 1rem;
+      color: var(--accent);
+      letter-spacing: 2px;
+      margin-top: 0.4rem;
+    }
 
-.gender.male {
-  background: #3B4B52; /* Muted teal/grey for male */
-  color: #FFD700; /* Classic Gold for text */
-}
+    .hostel-card .gender {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: bold;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      margin-top: 0.4rem;
+    }
 
-.gender.female {
-  background: #4B3B52; /* Muted purple/grey for female (complementary) */
-  color: #FFBF00; /* Amber Gold for text */
-}
+    .gender.male {
+      background: #3B4B52;
+      color: #FFD700;
+    }
 
-.gender.unisex {
-  background: #1F3A4B; /* Deep teal for unisex */
-  color: #FFE680; /* Brighter gold for text */
-}
+    .gender.female {
+      background: #4B3B52;
+      color: #FFBF00;
+    }
 
-.hostel-card a.view-button {
-  display: inline-block;
-  margin-top: 0.8rem;
-  background: var(--primary-dark); /* Goldenrod for view button */
-  color: #1A1A1A; /* Dark text on button */
-  padding: 0.6rem 1rem;
-  border-radius: 6px;
-  text-decoration: none;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
+    .gender.unisex {
+      background: #1F3A4B;
+      color: #FFE680;
+    }
 
-.hostel-card a.view-button:hover {
-  background: var(--primary); /* Amber Gold on hover */
-  box-shadow: 0 0 10px rgba(255, 191, 0, 0.4); /* Gold glow on hover */
-}
+    .hostel-card a.view-button {
+      display: inline-block;
+      margin-top: 0.8rem;
+      background: var(--primary-dark);
+      color: #1A1A1A;
+      padding: 0.6rem 1rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
 
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .filters {
-    flex-direction: column;
-    align-items: stretch;
-  }
-  .filters .filter-group {
-    min-width: unset; /* Remove min-width to allow full width */
-  }
-}
+    .hostel-card a.view-button:hover {
+      background: var(--primary);
+      box-shadow: 0 0 10px rgba(255, 191, 0, 0.4);
+    }
+
+    @media (max-width: 768px) {
+      .filters {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .filters .filter-group {
+        min-width: unset;
+      }
+    }
   </style>
 </head>
 <body>
@@ -225,7 +230,7 @@ header, footer {
   </section>
 
   <section class="hostel-grid" id="hostel-grid">
-    <!-- loaded dynamically -->
+    <!-- Hostels will be injected here -->
   </section>
 
   <footer>
@@ -242,6 +247,13 @@ header, footer {
     const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
 
     let hostelDataCache = [];
+
+    function renderStars(rating) {
+      const full = "★";
+      const empty = "☆";
+      const value = Math.round(rating);
+      return `<div class="rating-stars" title="${rating}/5">${full.repeat(value)}${empty.repeat(5 - value)}</div>`;
+    }
 
     async function loadHostels() {
       const res = await fetch(API_BASE);
@@ -275,6 +287,7 @@ header, footer {
               <p>📍 ${data.location}</p>
               <p>🛏️ ${data.roomType} • ₹${data.price}/month</p>
               <p>✅ ${data.amenities.join(", ")}</p>
+              ${renderStars(data.rating || 0)}
               <span class="gender ${gender}">${gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
               <a href="hostel.html?name=${folder.name}" class="view-button">View Hostel</a>
             </div>
