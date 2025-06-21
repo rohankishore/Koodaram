@@ -1,0 +1,27 @@
+{
+  "name": "Ashiyana",
+  "location": "University Road, near CUSAT P.O, near John's Church, Vidya Nagar Colony, Thrikkakara, Kalamassery, Kochi, Kerala 682022",
+  "college": "CUSAT",
+  "roomType": "2/3/4 Sharing or Private",
+  "price": "3000",
+  "distance": "300",
+  "gender": "male",
+  "contact": {
+    "phone": "918714799817",
+    "whatsapp": "918714799817"
+  },
+  "rating": "4.4",
+  "amenities": [
+    "Attached bathroom",
+    "Wi-Fi",
+    "Individual cupboard",
+    "Balcony"
+  ],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg",
+    "4.jpg"
+  ],
+  "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.7039595747665!2d76.33326129999999!3d10.0412697!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080c389f44f971%3A0xdb21a47aa38ff974!2sAshiana%20Boy&#39;s%20Hostel!5e0!3m2!1sen!2sin!4v1750503332836!5m2!1sen!2sin"
+}
