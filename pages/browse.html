@@ -161,6 +161,18 @@
       transition: background 0.3s ease, box-shadow 0.3s ease;
     }
 
+      .stars {
+    color: #FFD700; /* Gold color */
+    font-size: 1.1rem;
+    margin-right: 4px;
+  }
+
+  .rating-text {
+    color: #bbb;
+    font-size: 0.9rem;
+    vertical-align: middle;
+  }
+
     .hostel-card a.view-button:hover {
       background: var(--primary);
       box-shadow: 0 0 10px rgba(255, 191, 0, 0.4);
@@ -249,11 +261,16 @@
     let hostelDataCache = [];
 
     function renderStars(rating) {
-      const full = "★";
-      const empty = "☆";
-      const value = Math.round(rating);
-      return `<div class="rating-stars" title="${rating}/5">${full.repeat(value)}${empty.repeat(5 - value)}</div>`;
-    }
+  const fullStars = Math.floor(rating);
+  const hasHalfStar = rating % 1 >= 0.5;
+  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
+
+  let starsHTML = '★'.repeat(fullStars);
+  if (hasHalfStar) starsHTML += '⯨'; // Optional: Use '☆' or a Unicode half-star if supported
+  starsHTML += '☆'.repeat(emptyStars);
+
+  return `<span class="stars">${starsHTML}</span> <span class="rating-text">(${rating.toFixed(1)})</span>`;
+}
 
     async function loadHostels() {
       const res = await fetch(API_BASE);
@@ -275,23 +292,23 @@
           const gender = data.gender?.toLowerCase() || "unisex";
 
           grid.innerHTML += `
-            <div class="hostel-card"
-              data-room="${data.roomType.toLowerCase()}"
-              data-location="${data.location.toLowerCase()}"
-              data-amenities="${data.amenities.join(",").toLowerCase()}"
-              data-price="${data.price}"
-              data-gender="${gender}"
-            >
-              <img src="${imageURL}" alt="${data.name}" />
-              <h3>${data.name}</h3>
-              <p>📍 ${data.location}</p>
-              <p>🛏️ ${data.roomType} • ₹${data.price}/month</p>
-              <p>✅ ${data.amenities.join(", ")}</p>
-              ${renderStars(data.rating || 0)}
-              <span class="gender ${gender}">${gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
-              <a href="hostel.html?name=${folder.name}" class="view-button">View Hostel</a>
-            </div>
-          `;
+  <div class="hostel-card"
+    data-room="${data.roomType.toLowerCase()}"
+    data-location="${data.location.toLowerCase()}"
+    data-amenities="${data.amenities.join(",").toLowerCase()}"
+    data-price="${data.price}"
+    data-gender="${gender}"
+  >
+    <img src="${imageURL}" alt="${data.name}" />
+    <h3>${data.name}</h3>
+    <p>📍 ${data.location}</p>
+    <p>🛏️ ${data.roomType} • ₹${data.price}/month</p>
+    <p>✅ ${data.amenities.join(", ")}</p>
+    <p>${renderStars(data.rating || 0)}</p>
+    <span class="gender ${gender}">${gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
+    <a href="hostel.html?name=${folder.name}" class="view-button">View Hostel</a>
+  </div>
+`;
         } catch (err) {
           console.warn("Could not load:", folder.name);
         }
