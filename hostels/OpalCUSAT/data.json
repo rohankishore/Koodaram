@@ -1,0 +1,18 @@
+{
+  "name": "Opal",
+  "location": "Opal Homes, Pipeline Rd, behind CUSAT Post Office, South Kalamassery, Kalamassery, Kochi, Kerala 682022",
+  "college": "CUSAT",
+  "roomType": "2/3 Sharing & Private",
+  "price": "3500",
+  "amenities": ["Parking 2 wheeler", "Laundry", "Water Filter", "Common Dining", "Attached Bathroom", "Individual cupboard"],
+  "distance": "450",
+  "contact": {
+    "phone": "+918281063499",
+    "whatsapp": "918281063499"
+  },
+  "images": ["1.jpg", "2.png", "3.jpg"],
+  "gender": "men",
+  "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.6623498210656!2d76.3302925!3d10.044696199999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080d6762b71a6f%3A0xf3d9a68bb7005175!2sOpal%20Homes%20Hostel!5e0!3m2!1sen!2sin!4v1750494754969!5m2!1sen!2sin"
+}
+
+
