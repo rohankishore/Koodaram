@@ -1,0 +1,21 @@
+{
+  "name": "Dream Valley",
+  "location": "28WJ+38H, Puthu Vail, Pipeline Road, CUSAT, Kalamassery, Kochi, Kerala 682022",
+  "college": "CUSAT",
+  "roomType": "Double Sharing",
+  "price": "2750",
+  "distance": "500",
+  "gender": "male",
+  "contact": {
+    "phone": "9194969 07220",
+    "whatsapp": "9194969 07220"
+  },
+  "rating": "3.8",
+  "amenities": [],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg"
+  ],
+  "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.65645992991!2d76.33085833653809!3d10.04518113012492!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080c399656c9cf%3A0xc1df47d93da289a2!2sDream%20Valley%20Housing!5e0!3m2!1sen!2sin!4v1750500978348!5m2!1sen!2sin"
+}
