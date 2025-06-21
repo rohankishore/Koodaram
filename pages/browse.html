@@ -101,17 +101,6 @@
       box-shadow: 0 0 12px rgba(255, 215, 0, 0.08);
     }
 
-    .stars {
-  color: #FFD700;
-  font-size: 1.1rem;
-}
-
-.rating-text {
-  color: #ccc;
-  font-size: 0.9rem;
-  margin-left: 4px;
-}
-
     .hostel-card:hover {
       box-shadow: 0 0 20px rgba(255, 215, 0, 0.4);
       transform: translateY(-4px);
@@ -241,6 +230,7 @@
   </section>
 
   <section class="hostel-grid" id="hostel-grid">
+    <!-- Hostels will be injected here -->
   </section>
 
   <footer>
@@ -258,17 +248,12 @@
 
     let hostelDataCache = [];
 
-function renderStars(rating) {
-  const fullStars = Math.floor(rating);
-  const hasHalfStar = rating % 1 >= 0.5;
-  const emptyStars = 5 - fullStars - (hasHalfStar ? 1 : 0);
-
-  let starsHTML = '★'.repeat(fullStars);
-  if (hasHalfStar) starsHTML += '☆'; // or ⯨ if you want to show half-star symbol
-  starsHTML += '☆'.repeat(emptyStars);
-
-  return `<span class="stars">${starsHTML}</span> <span class="rating-text">(${rating.toFixed(1)})</span>`;
-}
+    function renderStars(rating) {
+      const full = "★";
+      const empty = "☆";
+      const value = Math.round(rating);
+      return `<div class="rating-stars" title="${rating}/5">${full.repeat(value)}${empty.repeat(5 - value)}</div>`;
+    }
 
     async function loadHostels() {
       const res = await fetch(API_BASE);
