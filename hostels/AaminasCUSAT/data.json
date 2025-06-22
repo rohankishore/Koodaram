@@ -1,0 +1,28 @@
+{
+  "name": "Aaminas Ladies Hostel",
+  "location": "384J+QXW, Rockwell Nad Rd, Pradeeksha Nagar, Near CUSAT, North Kalamassery, Kalamassery, Ernakulam, Kochi, Kerala 683104",
+  "college": "CUSAT",
+  "roomType": "2/3 Sharing",
+  "price": "",
+  "distance": "900",
+  "gender": "female",
+  "contact": {
+    "phone": "9198477 74334",
+    "whatsapp": "9198477 74334"
+  },
+  "rating": "4.8",
+  "amenities": [
+    "Homely Food",
+    "Wi-Fi",
+    "Attached Bathroom",
+    "CCTV"
+  ],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg",
+    "4.jpg",
+    "5.jpg"
+  ],
+  "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3928.512895935556!2d76.32989277562183!3d10.056993972050222!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b080dafef50c5d3%3A0xf88477fce5129a53!2sAaminas%20Ladies%20Hostel!5e0!3m2!1sen!2sin!4v1750603566067!5m2!1sen!2sin"
+}
