@@ -367,149 +367,157 @@ a:hover {
     </div>
   </div>
 
-  <script>
-    const GITHUB_USER = "rohankishore";
-    const REPO = "Koodaram";
-    const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
+<script>
+  const GITHUB_USER = "rohankishore";
+  const REPO = "Koodaram";
+  const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
 
-    let hostelName = "";
+  let hostelName = "";
 
-    async function loadHostelData() {
-      const params = new URLSearchParams(window.location.search);
-      hostelName = params.get("name");
+  async function loadHostelData() {
+    const params = new URLSearchParams(window.location.search);
+    hostelName = params.get("name");
 
-      // Set the back link in the footer
-      const backToListingsLink = document.getElementById('backToListingsLink');
-      if (document.referrer && document.referrer.includes(window.location.origin) && document.referrer.includes('/pages/browse.html')) {
-          localStorage.setItem('lastBrowseUrl', document.referrer);
-          backToListingsLink.href = document.referrer;
-      } else {
-          // Fallback if referrer isn't from browse page or is external
-          backToListingsLink.href = "/pages/browse.html";
+    const backToListingsLink = document.getElementById('backToListingsLink');
+    if (
+      document.referrer &&
+      document.referrer.includes(window.location.origin) &&
+      document.referrer.includes('/pages/browse.html')
+    ) {
+      localStorage.setItem('lastBrowseUrl', document.referrer);
+      backToListingsLink.href = document.referrer;
+    } else {
+      backToListingsLink.href = "/pages/browse.html";
+    }
+
+    if (!hostelName) {
+      document.getElementById("hostel-view").innerHTML = "<p>⚠️ Hostel not specified.</p>";
+      return;
+    }
+
+    try {
+      const dataRes = await fetch(`${RAW_BASE}/${hostelName}/data.json`);
+      const data = await dataRes.json();
+
+      const imagesHTML = (data.images || [])
+        .map(img => `<img src="${RAW_BASE}/${hostelName}/${img}" alt="${data.name} image">`)
+        .join("");
+
+      // Format phone numbers like +91 8330076255
+      function formatPhone(number) {
+        if (!number || typeof number !== "string") return "";
+        if (number.startsWith("+")) return number;
+        return `+${number.slice(0, 2)} ${number.slice(2)}`;
       }
 
-      if (!hostelName) {
-        document.getElementById("hostel-view").innerHTML = "<p>⚠️ Hostel not specified.</p>";
-        return;
-      }
+      const callNumber = formatPhone(data.contact?.phone);
+      const whatsappNumber = formatPhone(data.contact?.whatsapp);
 
-      try {
-        const dataRes = await fetch(`${RAW_BASE}/${hostelName}/data.json`);
-        const data = await dataRes.json();
+      const contactHTML = `
+        <div class="contact-buttons">
+          <a href="tel:${data.contact?.phone}">📞 Call (${callNumber})</a>
+          <a href="https://wa.me/${data.contact?.whatsapp}">💬 WhatsApp (${whatsappNumber})</a>
+        </div>
+      `;
 
-        const imagesHTML = (data.images || []).map(img =>
-          `<img src="${RAW_BASE}/${hostelName}/${img}" alt="${data.name} image">`
-        ).join("");
+      const mapSectionHTML = data.gmap
+        ? `
+        <div class="map-container">
+          <iframe src="${data.gmap}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+        `
+        : "";
 
-        // Conditionally include the map section
-        let mapSectionHTML = '';
-        if (data.gmap) {
-            mapSectionHTML = `
-                <div class="map-container">
-                    <iframe
-                      src="${data.gmap}"
-                      allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade">
-                    </iframe>
-                </div>
-            `;
+      const view = `
+        <h1>${data.name}</h1>
+        <div class="info">
+          <p><strong>📍 Location:</strong> ${data.location}</p>
+          <p><strong>🛏️ Room Type:</strong> ${data.roomType}</p>
+          <p><strong>💰 Price:</strong> ₹${data.price}/month</p>
+          <p><strong>🧩 Amenities:</strong> ${data.amenities?.join(", ")}</p>
+          <p><strong>📏 Distance:</strong> ${data.distance}</p>
+        </div>
+
+        <div class="gallery">${imagesHTML}</div>
+
+        ${contactHTML}
+
+        ${mapSectionHTML}
+
+        <div class="review-section">
+          <h2>Reviews</h2>
+          <div id="reviews">Loading reviews...</div>
+          <button id="writeReviewBtn">✍️ Write a Review</button>
+        </div>
+      `;
+
+      document.getElementById("hostel-view").innerHTML = view;
+      loadReviews();
+
+      document.getElementById("writeReviewBtn").onclick = () => {
+        document.getElementById("reviewModal").style.display = "flex";
+      };
+
+      document.getElementById("cancelReview").onclick = () => {
+        document.getElementById("reviewModal").style.display = "none";
+      };
+      document.querySelector('.modal-close-btn').onclick = () => {
+        document.getElementById("reviewModal").style.display = "none";
+      };
+      document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape" && document.getElementById("reviewModal").style.display === "flex") {
+          document.getElementById("reviewModal").style.display = "none";
+        }
+      });
+
+      document.getElementById("submitReview").onclick = () => {
+        const name = document.getElementById("reviewerName").value || "Anonymous";
+        const text = document.getElementById("reviewText").value;
+
+        if (!text.trim()) {
+          alert("Please enter a review.");
+          return;
         }
 
+        alert("📦 Cannot submit: GitHub Pages is static and cannot write to files.\n" +
+              "To save reviews, you'd need a backend server (e.g., Node.js, Python) or a service like Firebase/Supabase.\n\n" +
+              "But here's what would be saved:\n" +
+              JSON.stringify({ name, text }, null, 2));
 
-        const view = `
-          <h1>${data.name}</h1>
-          <div class="info">
-            <p><strong>📍 Location:</strong> ${data.location}</p>
-            <p><strong>🛏️ Room Type:</strong> ${data.roomType}</p>
-            <p><strong>💰 Price:</strong> ₹${data.price}/month</p>
-            <p><strong>🧩 Amenities:</strong> ${data.amenities?.join(", ")}</p>
-            <p><strong>📏 Distance:</strong> ${data.distance}</p>
-          </div>
+        document.getElementById("reviewModal").style.display = "none";
+        document.getElementById("reviewerName").value = "";
+        document.getElementById("reviewText").value = "";
+      };
+    } catch (err) {
+      document.getElementById("hostel-view").innerHTML =
+        "<p>⚠️ Failed to load hostel details. Please try again later.</p>";
+      console.error("Error loading hostel:", err);
+    }
+  }
 
-          <div class="gallery">${imagesHTML}</div>
-
-          <div class="contact-buttons">
-            <a href="tel:${data.contact?.phone}">📞 Call</a>
-            <a href="https://wa.me/${data.contact?.whatsapp}">💬 WhatsApp</a>
-          </div>
-
-          ${mapSectionHTML} <div class="review-section">
-            <h2>Reviews</h2>
-            <div id="reviews">Loading reviews...</div>
-            <button id="writeReviewBtn">✍️ Write a Review</button>
+  async function loadReviews() {
+    try {
+      const res = await fetch(`${RAW_BASE}/${hostelName}/reviews.json`);
+      const reviews = await res.json();
+      const reviewsHTML = reviews.map(r => {
+        const rating = r.rating || 0;
+        const fullStars = '⭐'.repeat(rating);
+        const emptyStars = '<span class="empty-star">⭐</span>'.repeat(5 - rating);
+        return `
+          <div class="review">
+            <p><strong>${r.name || "Anonymous"}</strong></p>
+            <div class="review-stars">${fullStars}${emptyStars}</div>
+            <p>${r.text}</p>
           </div>
         `;
-
-        document.getElementById("hostel-view").innerHTML = view;
-        loadReviews();
-
-        document.getElementById("writeReviewBtn").onclick = () => {
-          document.getElementById("reviewModal").style.display = "flex";
-        };
-
-        // Modal close handlers
-        document.getElementById("cancelReview").onclick = () => {
-          document.getElementById("reviewModal").style.display = "none";
-        };
-        document.querySelector('.modal-close-btn').onclick = () => {
-          document.getElementById('reviewModal').style.display = 'none';
-        };
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && document.getElementById('reviewModal').style.display === 'flex') {
-                document.getElementById('reviewModal').style.display = 'none';
-            }
-        });
-
-        document.getElementById("submitReview").onclick = () => {
-          const name = document.getElementById("reviewerName").value || "Anonymous";
-          const text = document.getElementById("reviewText").value;
-          // For future: const rating = getSelectedRating(); // You'd implement a star rating input and get its value
-
-          if (!text.trim()) {
-              alert("Please enter a review.");
-              return;
-          }
-
-          alert("📦 Cannot submit: GitHub Pages is static and cannot write to files.\n" +
-                "To save reviews, you'd need a backend server (e.g., Node.js, Python) or a service like Firebase/Supabase.\n\n" +
-                "But here's what would be saved:\n" +
-                JSON.stringify({ name, text /*, rating*/ }, null, 2));
-          document.getElementById("reviewModal").style.display = "none";
-          // Clear inputs after "submission"
-          document.getElementById("reviewerName").value = "";
-          document.getElementById("reviewText").value = "";
-        };
-
-      } catch (err) {
-        document.getElementById("hostel-view").innerHTML = "<p>⚠️ Failed to load hostel details. Please try again later.</p>";
-        console.error("Error loading hostel:", err);
-      }
+      }).join("");
+      document.getElementById("reviews").innerHTML = reviewsHTML || "<p>No reviews yet. Be the first to leave a review!</p>";
+    } catch {
+      document.getElementById("reviews").innerHTML = "<p>⚠️ Could not load reviews for this hostel.</p>";
     }
+  }
 
-    async function loadReviews() {
-      try {
-        const res = await fetch(`${RAW_BASE}/${hostelName}/reviews.json`);
-        const reviews = await res.json();
-        const reviewsHTML = reviews.map(r => {
-            // Assuming r.rating is a number from 0 to 5
-            const rating = r.rating || 0; // Default to 0 if not provided
-            const fullStars = '⭐'.repeat(rating);
-            const emptyStars = '<span class="empty-star">⭐</span>'.repeat(5 - rating);
-
-            return `
-              <div class="review">
-                <p><strong>${r.name || "Anonymous"}</strong></p>
-                <div class="review-stars">${fullStars}${emptyStars}</div>
-                <p>${r.text}</p>
-              </div>
-            `;
-        }).join("");
-        document.getElementById("reviews").innerHTML = reviewsHTML || "<p>No reviews yet. Be the first to leave a review!</p>";
-      } catch {
-        document.getElementById("reviews").innerHTML = "<p>⚠️ Could not load reviews for this hostel.</p>";
-      }
-    }
-
-    loadHostelData();
-  </script>
+  loadHostelData();
+</script>
 </body>
 </html>
