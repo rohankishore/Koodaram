@@ -1,0 +1,23 @@
+{
+  "name": "Muscat Bay Boys Hostel",
+  "location": "HJHG+C46, Near RIT, Pampady, Kerala 686502",
+  "college": "RIT Kottayam",
+  "roomType": "2/3 sharing",
+  "price": "",
+  "distance": "350",
+  "gender": "male",
+  "contact": {
+    "phone": "917356450724",
+    "whatsapp": "917356450724"
+  },
+  "rating": "5",
+  "amenities": [
+    "-"
+  ],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg"
+  ],
+  "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3934.198016139977!2d76.6246692!3d9.578192699999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b062d3924dfd1e5%3A0x3b261779a8626cb7!2sMuscat%20Bay%20Boys%20Hostel%20%2C%20RIT%20Engineeeing%20College%20%2CPampady%2CKottayam!5e0!3m2!1sen!2sin!4v1750600755203!5m2!1sen!2sin"
+}
