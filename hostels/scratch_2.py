@@ -25,7 +25,7 @@ class HostelForm(QWidget):
         fields = [
             "name", "location", "college", "roomType", "price",
             "distance", "gender", "contact_phone", "contact_whatsapp",
-            "amenities (comma-separated)", "images (comma-separated)", "gmap"
+            "amenities (comma-separated)", "images (comma-separated)", "gmap", "rating"
         ]
 
         for field in fields:
@@ -72,6 +72,7 @@ class HostelForm(QWidget):
                     "phone": self.inputs["contact_phone"].text().strip(),
                     "whatsapp": self.inputs["contact_whatsapp"].text().strip(),
                 },
+                "rating": self.inputs["rating"].text().strip(),
                 "amenities": [a.strip() for a in self.inputs["amenities (comma-separated)"].toPlainText().split(",") if a.strip()],
                 "images": [i.strip() for i in self.inputs["images (comma-separated)"].toPlainText().split(",") if i.strip()],
                 "gmap": self.inputs["gmap"].toPlainText().strip()
