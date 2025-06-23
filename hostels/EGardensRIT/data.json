@@ -1,0 +1,24 @@
+{
+  "name": "E-Gardens",
+  "location": "Near RIT Kottayam, Kerala 686501",
+  "college": "RIT Kottayam",
+  "roomType": "Double Sharing",
+  "price": "-",
+  "distance": "200",
+  "gender": "male",
+  "contact": {
+    "phone": "9197447 96855",
+    "whatsapp": "9197447 96855"
+  },
+  "rating": "4",
+  "amenities": [
+    "NO FOOD"
+  ],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg",
+    "4.jpg"
+  ],
+  "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d251790.5955678536!2d76.31650179453128!3d9.575599800000026!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b062d9459774dc9%3A0x37e1b5ca060e5eb0!2sEgardens!5e0!3m2!1sen!2sin!4v1750674441497!5m2!1sen!2sin"
+}
