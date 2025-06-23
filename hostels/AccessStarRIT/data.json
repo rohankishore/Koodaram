@@ -1,0 +1,23 @@
+{
+  "name": "Access Star",
+  "location": "HJMG+23W RIT Kottayam playground, Pampady - Pangadapally Rd, Kerala 686501",
+  "college": "RIT Kottayam",
+  "roomType": "Triple Sharing",
+  "price": "-",
+  "distance": "800",
+  "gender": "male",
+  "contact": {
+    "phone": "NULL",
+    "whatsapp": "NULL"
+  },
+  "rating": "4.5",
+  "amenities": [
+    "Homely Food", "Good atmosphere"
+  ],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg"
+  ],
+  "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7868.293687444249!2d76.61568239357908!3d9.582608099999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b062de054190b35%3A0x39135db99a84268a!2sAccess%20Star%20Boys%20Hostel!5e0!3m2!1sen!2sin!4v1750675125739!5m2!1sen!2sin"
+}
