@@ -275,9 +275,12 @@
               <img src="${imageURL}" alt="${data.name}" />
               <h3>${data.name}</h3>
               <p>📍 ${data.location}</p>
-              <p>🛏️ ${data.roomType} • ₹${data.price}/month</p>
+              <p>🛏️ ${data.roomType}</p>
               <p>✅ ${data.amenities.join(", ")}</p>
               ${renderStars(data.rating || 0)}
+              <br>
+              <p><strong>₹${data.price}/month</strong></p>
+              <br>
               <span class="gender ${gender}">${gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
               <a href="hostel.html?name=${folder.name}" class="view-button">View Hostel</a>
             </div>
