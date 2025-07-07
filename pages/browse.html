@@ -188,16 +188,17 @@
   <section class="filters">
     <div class="filter-group">
       <label for="location">📍 Location</label>
-      <input type="text" id="location" placeholder="Enter college or city" />
+      <input type="text" id="location" placeholder="Enter city or area" />
     </div>
 
     <div class="filter-group">
-      <label for="room-type">🛏️ Room Type</label>
-      <select id="room-type">
-        <option value="">Any</option>
-        <option value="single">Single</option>
-        <option value="double">Double</option>
-        <option value="triple">Triple</option>
+      <label for="college">🎓 College</label>
+      <select id="college">
+        <option value="">All</option>
+        <option value="RIT Kottayam">RIT Kottayam</option>
+        <option value="cusat">CUSAT</option>
+        <option value="NSS College Palakkad">NSS College Palakkad</option>
+        <option value="GEC Thrissur">GEC Thrissur</option>
       </select>
     </div>
 
@@ -263,11 +264,12 @@
 
           const imageURL = `${RAW_BASE}/${folder.name}/${data.images?.[0] || "1.jpg"}`;
           const gender = data.gender?.toLowerCase() || "unisex";
+          const college = data.college?.toLowerCase() || "";
 
           grid.innerHTML += `
             <div class="hostel-card"
-              data-room="${data.roomType.toLowerCase()}"
               data-location="${data.location.toLowerCase()}"
+              data-college="${college}"
               data-amenities="${data.amenities.join(",").toLowerCase()}"
               data-price="${data.price}"
               data-gender="${gender}"
@@ -291,18 +293,18 @@
 
     function applyFilters() {
       const loc = document.getElementById("location").value.toLowerCase();
-      const type = document.getElementById("room-type").value.toLowerCase();
+      const college = document.getElementById("college").value.toLowerCase();
       const gender = document.getElementById("gender").value.toLowerCase();
       const price = parseInt(document.getElementById("price").value);
 
       const cards = document.querySelectorAll(".hostel-card");
       cards.forEach(card => {
         const matchesLocation = !loc || card.dataset.location.includes(loc);
-        const matchesType = !type || card.dataset.room === type;
+        const matchesCollege = !college || (card.dataset.college || '').includes(college);
         const matchesGender = !gender || card.dataset.gender === gender;
         const matchesPrice = isNaN(price) || parseInt(card.dataset.price) <= price;
 
-        card.style.display = (matchesLocation && matchesType && matchesGender && matchesPrice)
+        card.style.display = (matchesLocation && matchesCollege && matchesGender && matchesPrice)
           ? "block"
           : "none";
       });
