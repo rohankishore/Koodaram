@@ -1,0 +1,22 @@
+{
+  "name": "Kaveri Mens Hostel",
+  "location": "Kaveri Line, Viyyur, Pandikkavu, Ramavarmapuram, GECT Thrissur College-680009",
+  "college": "GEC Thrissur",
+  "roomType": "Single",
+  "price": "6500",
+  "distance": "500m",
+  "gender": "male",
+  "contact": {
+    "phone": "9895649200",
+    "whatsapp": "+91 9895649200"
+  },
+  "rating": "",
+  "amenities": [
+    "WiFi",
+    "Parking",
+    "Laundry",
+    "Food"
+  ],
+  "images": [],
+  "gmap": ""
+}

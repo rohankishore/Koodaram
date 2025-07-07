@@ -1,0 +1,26 @@
+{
+  "name": "Alpha Mens Hostel",
+  "location": "H64J+G7P, Majestic Rd, Mannumkad, Ramavarmapuram, GECT Thrissur, Thrissur, Kerala 680631",
+  "college": "GEC Thrissur",
+  "roomType": "Single",
+  "price": "4700",
+  "distance": "500m",
+  "gender": "male",
+  "contact": {
+    "phone": "9496144143",
+    "whatsapp": "+91 9496144143"
+  },
+  "rating": "4.0",
+  "amenities": [
+    "WiFi",
+    "Parking",
+    "Laundry",
+    "Food"
+  ],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg"
+  ],
+  "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3922.291504055615!2d76.2306919!3d10.5563467!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7ef195382da4b%3A0x163b999f9ccf0946!2sAlpha%20Gent&#39;s%20Hostel!5e0!3m2!1sen!2sin!4v1751881476933!5m2!1sen!2sin"
+}

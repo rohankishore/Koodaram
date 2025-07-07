@@ -3,7 +3,7 @@ import os
 import json
 from PyQt6.QtWidgets import (
     QApplication, QWidget, QLabel, QLineEdit, QTextEdit, QPushButton,
-    QVBoxLayout, QHBoxLayout, QMessageBox
+    QVBoxLayout, QMessageBox
 )
 
 
@@ -22,6 +22,23 @@ class HostelForm(QWidget):
         # Inputs for each JSON key
         self.inputs = {}
 
+        # Default values for pre-filling
+        default_values = {
+            "name": "Sample Hostel",
+            "location": "Thrissur",
+            "college": "GEC Thrissur",
+            "roomType": "-",
+            "price": "",
+            "distance": "500m",
+            "gender": "male",
+            "contact_phone": "",
+            "contact_whatsapp": "+91 ",
+            "amenities (comma-separated)": "WiFi, Parking, Laundry, Food",
+            "images (comma-separated)": "1.jpg,2.jpg,3.jpg",
+            "rating": "",
+            "gmap": ""
+        }
+
         fields = [
             "name", "location", "college", "roomType", "price",
             "distance", "gender", "contact_phone", "contact_whatsapp",
@@ -33,8 +50,10 @@ class HostelForm(QWidget):
             if "amenities" in field or "images" in field or "gmap" in field:
                 input_widget = QTextEdit()
                 input_widget.setFixedHeight(50)
+                input_widget.setPlainText(default_values.get(field, ""))
             else:
                 input_widget = QLineEdit()
+                input_widget.setText(default_values.get(field, ""))
 
             self.inputs[field] = input_widget
             layout.addWidget(label)
