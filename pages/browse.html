@@ -278,9 +278,7 @@
               <p>🛏️ ${data.roomType}</p>
               <p>✅ ${data.amenities.join(", ")}</p>
               ${renderStars(data.rating || 0)}
-              <br>
               <p><strong>₹${data.price}/month</strong></p>
-              <br>
               <span class="gender ${gender}">${gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
               <a href="hostel.html?name=${folder.name}" class="view-button">View Hostel</a>
             </div>
@@ -294,7 +292,6 @@
     function applyFilters() {
       const loc = document.getElementById("location").value.toLowerCase();
       const type = document.getElementById("room-type").value.toLowerCase();
-      const amenity = document.getElementById("amenities").value.toLowerCase();
       const gender = document.getElementById("gender").value.toLowerCase();
       const price = parseInt(document.getElementById("price").value);
 
@@ -302,11 +299,10 @@
       cards.forEach(card => {
         const matchesLocation = !loc || card.dataset.location.includes(loc);
         const matchesType = !type || card.dataset.room === type;
-        const matchesAmenity = !amenity || card.dataset.amenities.includes(amenity);
         const matchesGender = !gender || card.dataset.gender === gender;
-        const matchesPrice = !price || parseInt(card.dataset.price) <= price;
+        const matchesPrice = isNaN(price) || parseInt(card.dataset.price) <= price;
 
-        card.style.display = (matchesLocation && matchesType && matchesAmenity && matchesGender && matchesPrice)
+        card.style.display = (matchesLocation && matchesType && matchesGender && matchesPrice)
           ? "block"
           : "none";
       });
