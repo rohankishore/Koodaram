@@ -1,0 +1,23 @@
+{
+  "name": "Shiva Vishnu Mens Hostel",
+  "location": "Adiyara, Pallimoola, Mannumkad  Near GECT Thrissur, Ramavarmapuram, Thrissur, Kerala 680009",
+  "college": "GEC Thrissur",
+  "roomType": "-",
+  "price": "-",
+  "distance": "600",
+  "gender": "male",
+  "contact": {
+    "phone": "9947402816",
+    "whatsapp": "+919947402816"
+  },
+  "rating": "3.7",
+  "amenities": [
+    "Wi-Fi",
+    "Food (Veg & Non-Veg)",
+    "Neat Rooms"
+  ],
+  "images": [
+    "1.jpg"
+  ],
+  "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3922.3046741430317!2d76.2284502!3d10.555314300000001!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7ef0fe053194f%3A0xc6d09f7dc745ab1a!2sSt%20Anthony&#39;s%20mens%20hostel!5e0!3m2!1sen!2sin!4v1751874095075!5m2!1sen!2sin"
+}
