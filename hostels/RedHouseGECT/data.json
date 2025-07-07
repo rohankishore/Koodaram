@@ -1,0 +1,26 @@
+{
+  "name": "Red House Mens Hostel",
+  "location": "Viyyur, Pandikkavu, Thrissur, Kerala 680009 Near GECT Thrissur",
+  "college": "GEC Thrissur",
+  "roomType": "-",
+  "price": "6500",
+  "distance": "600m",
+  "gender": "male",
+  "contact": {
+    "phone": "9847039335",
+    "whatsapp": "+91 9847039335"
+  },
+  "rating": "4.5",
+  "amenities": [
+    "WiFi",
+    "Parking",
+    "Laundry",
+    "Food"
+  ],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg"
+  ],
+  "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3922.3862469720266!2d76.22450359999999!3d10.5489176!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7eefd7c3d1a43%3A0x5817b63f4a8b1985!2sRed%20house!5e0!3m2!1sen!2sin!4v1751882025397!5m2!1sen!2sin"
+}
