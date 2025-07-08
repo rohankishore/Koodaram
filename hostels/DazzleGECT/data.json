@@ -1,0 +1,22 @@
+{
+  "name": "Dazzle girls hostel",
+  "location": "Near \nnirmala, Pallimoola",
+  "college": "GEC Thrissur",
+  "roomType": "-",
+  "price": "6000",
+  "distance": "200m",
+  "gender": "female",
+  "contact": {
+    "phone": "9447121227",
+    "whatsapp": "+91 9447121227"
+  },
+  "rating": "",
+  "amenities": [
+    "WiFi",
+    "Parking",
+    "Laundry",
+    "Food"
+  ],
+  "images": [],
+  "gmap": ""
+}

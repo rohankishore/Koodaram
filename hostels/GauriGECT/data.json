@@ -1,0 +1,25 @@
+{
+  "name": "Gauri Hostel",
+  "location": "H62H+VC9, Adiyara, Mannumkad, Ramavarmapuram, Thrissur, Kerala 680631",
+  "college": "GEC Thrissur",
+  "roomType": "-",
+  "price": "5000",
+  "distance": "500m",
+  "gender": "female",
+  "contact": {
+    "phone": "8714821895",
+    "whatsapp": "+91 8714821895"
+  },
+  "rating": "4.7",
+  "amenities": [
+    "WiFi",
+    "Parking",
+    "Laundry",
+    "Food"
+  ],
+  "images": [
+    "1.jpg",
+    "2.jpg"
+  ],
+  "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3922.344740421545!2d76.2286072!3d10.5521729!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7ef1cc58c2809%3A0x48ff2d03afb05f18!2sGauri%20Hostel!5e0!3m2!1sen!2sin!4v1751970587152!5m2!1sen!2sin"
+}

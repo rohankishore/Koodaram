@@ -1,0 +1,22 @@
+{
+  "name": "Bass Palace Girls Hostel",
+  "location": "Govt. Engineering college, Pallimoola, Mannumkad, Ramavarmapuram, Thrissur, Kerala 680631",
+  "college": "GEC Thrissur",
+  "roomType": "-",
+  "price": "4750",
+  "distance": "500m",
+  "gender": "female",
+  "contact": {
+    "phone": "9605869879",
+    "whatsapp": "+91 9605869879"
+  },
+  "rating": "3.7",
+  "amenities": [
+    "WiFi",
+    "Parking",
+    "Laundry",
+    "Food"
+  ],
+  "images": [],
+  "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3922.2861305391175!2d76.2286273!3d10.556767899999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ba7ef71ee1bcb37%3A0x3cf4c060fe4e6a85!2sBass%20Palace%20Girls%20Hostel!5e0!3m2!1sen!2sin!4v1751970004921!5m2!1sen!2sin"
+}
