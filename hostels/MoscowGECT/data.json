@@ -1,0 +1,22 @@
+{
+  "name": "Moscow Mens Hostel",
+  "location": "Evanoor",
+  "college": "GEC Thrissur",
+  "roomType": "-",
+  "price": "1800 + 150/- per day for food",
+  "distance": "300m",
+  "gender": "male",
+  "contact": {
+    "phone": "7994646271",
+    "whatsapp": "+91 7994646271"
+  },
+  "rating": "",
+  "amenities": [
+    "WiFi",
+    "Parking",
+    "Laundry",
+    "Food"
+  ],
+  "images": [],
+  "gmap": ""
+}
