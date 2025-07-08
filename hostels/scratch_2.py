@@ -30,7 +30,7 @@ class HostelForm(QWidget):
             "roomType": "-",
             "price": "",
             "distance": "500m",
-            "gender": "male",
+            "gender": "female",
             "contact_phone": "",
             "contact_whatsapp": "+91 ",
             "amenities (comma-separated)": "WiFi, Parking, Laundry, Food",
