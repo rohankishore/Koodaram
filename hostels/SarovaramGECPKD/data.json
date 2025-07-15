@@ -1,0 +1,23 @@
+{
+  "name": "Sarovaram Ladies Hostel",
+  "location": "Engineering College, Mannampatta, Kulakkattukurssi, Sreekrishnapuram, Kerala 679513",
+  "college": "GEC Palakkad",
+  "roomType": "-",
+  "price": "",
+  "distance": "400m",
+  "gender": "female",
+  "contact": {
+    "phone": "9947123341",
+    "whatsapp": "919947123341"
+  },
+  "rating": "3",
+  "amenities": [
+    "WiFi",
+    "Study Space",
+    "Hygiene",
+    "CCTV",
+    "Water Purifier"
+  ],
+  "images": [],
+  "gmap": ""
+}
