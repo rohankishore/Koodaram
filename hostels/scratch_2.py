@@ -25,15 +25,15 @@ class HostelForm(QWidget):
         # Default values for pre-filling
         default_values = {
             "name": "Sample Hostel",
-            "location": "Thrissur",
-            "college": "GEC Thrissur",
+            "location": "",
+            "college": "GEC Palakkad",
             "roomType": "-",
             "price": "",
-            "distance": "500m",
+            "distance": "400m",
             "gender": "female",
             "contact_phone": "",
-            "contact_whatsapp": "+91 ",
-            "amenities (comma-separated)": "WiFi, Parking, Laundry, Food",
+            "contact_whatsapp": "91",
+            "amenities (comma-separated)": "WiFi, Study Space, CCTV, Food",
             "images (comma-separated)": "1.jpg,2.jpg,3.jpg",
             "rating": "",
             "gmap": ""
