@@ -1,0 +1,24 @@
+{
+  "name": "Vrundhavanam",
+  "location": "",
+  "college": "GEC Palakkad",
+  "roomType": "-",
+  "price": "",
+  "distance": "400m",
+  "gender": "female",
+  "contact": {
+    "phone": "9400647064",
+    "whatsapp": "919400647064"
+  },
+  "rating": "3.5",
+  "amenities": [
+    "WiFi",
+    "Study Space",
+    "CCTV",
+    "Food",
+    "Purifier",
+    "Hygienic"
+  ],
+  "images": [],
+  "gmap": ""
+}

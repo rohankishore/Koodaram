@@ -1,0 +1,24 @@
+{
+  "name": "Lakshmisree Ladies Hostel",
+  "location": "",
+  "college": "GEC Palakkad",
+  "roomType": "-",
+  "price": "",
+  "distance": "450m",
+  "gender": "female",
+  "contact": {
+    "phone": "8848536943",
+    "whatsapp": "918848536943"
+  },
+  "rating": "3.5",
+  "amenities": [
+    "WiFi",
+    "Study Space",
+    "CCTV",
+    "Food",
+    "Purifier",
+    "Hygienic"
+  ],
+  "images": [],
+  "gmap": ""
+}

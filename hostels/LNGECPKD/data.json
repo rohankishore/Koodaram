@@ -1,0 +1,24 @@
+{
+  "name": "Lakshmi Narayana Ladies Hostel",
+  "location": "",
+  "college": "GEC Palakkad",
+  "roomType": "-",
+  "price": "",
+  "distance": "450m",
+  "gender": "female",
+  "contact": {
+    "phone": "8921314839",
+    "whatsapp": "918921314839"
+  },
+  "rating": "3.6",
+  "amenities": [
+    "WiFi",
+    "Study Space",
+    "CCTV",
+    "Food",
+    "Purifier",
+    "Hygienic"
+  ],
+  "images": [],
+  "gmap": ""
+}
