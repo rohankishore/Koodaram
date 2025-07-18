@@ -367,6 +367,7 @@ a:hover {
     </div>
   </div>
 
+
 <script>
   const GITHUB_USER = "rohankishore";
   const REPO = "Koodaram";
@@ -403,7 +404,6 @@ a:hover {
         .map(img => `<img src="${RAW_BASE}/${hostelName}/${img}" alt="${data.name} image">`)
         .join("");
 
-      // Format phone numbers like +91 8330076255
       function formatPhone(number) {
         if (!number || typeof number !== "string") return "";
         if (number.startsWith("+")) return number;
@@ -417,6 +417,16 @@ a:hover {
         <div class="contact-buttons">
           <a href="tel:${data.contact?.phone}">📞 Call (${callNumber})</a>
           <a href="https://wa.me/${data.contact?.whatsapp}">💬 WhatsApp (${whatsappNumber})</a>
+        </div>
+      `;
+
+      const rating = parseFloat(data.rating);
+      const fullStars = '⭐'.repeat(Math.floor(rating));
+      const halfStar = rating % 1 >= 0.5 ? '⭐' : '';
+      const emptyStars = '<span class="empty-star">⭐</span>'.repeat(5 - Math.ceil(rating));
+      const ratingHTML = `
+        <div class="review-stars" style="margin: 1rem 0;">
+          <span style="margin-left: 8px; font-weight: 500;">(${rating.toFixed(1)}/5)</span>
         </div>
       `;
 
@@ -438,6 +448,7 @@ a:hover {
           <p><strong>📏 Distance:</strong> ${data.distance}</p>
         </div>
 
+        ${ratingHTML}
         <div class="gallery">${imagesHTML}</div>
 
         ${contactHTML}
@@ -445,19 +456,19 @@ a:hover {
         ${mapSectionHTML}
 
         <div class="review-section">
-          <h2>Reviews</h2>
-          <div id="reviews">Loading reviews...</div>
+          <h2>Ratings</h2>
+          <div id="reviews">Loading ratings...</div>
           <button id="writeReviewBtn">✍️ Write a Review</button>
         </div>
       `;
 
       document.getElementById("hostel-view").innerHTML = view;
-      loadReviews();
+      loadReviews(data.reviews);
 
+      // Modal functionality
       document.getElementById("writeReviewBtn").onclick = () => {
         document.getElementById("reviewModal").style.display = "flex";
       };
-
       document.getElementById("cancelReview").onclick = () => {
         document.getElementById("reviewModal").style.display = "none";
       };
@@ -465,7 +476,7 @@ a:hover {
         document.getElementById("reviewModal").style.display = "none";
       };
       document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape" && document.getElementById("reviewModal").style.display === "flex") {
+        if (e.key === "Escape") {
           document.getElementById("reviewModal").style.display = "none";
         }
       });
@@ -488,6 +499,7 @@ a:hover {
         document.getElementById("reviewerName").value = "";
         document.getElementById("reviewText").value = "";
       };
+
     } catch (err) {
       document.getElementById("hostel-view").innerHTML =
         "<p>⚠️ Failed to load hostel details. Please try again later.</p>";
@@ -495,29 +507,28 @@ a:hover {
     }
   }
 
-  async function loadReviews() {
-    try {
-      const res = await fetch(`${RAW_BASE}/${hostelName}/reviews.json`);
-      const reviews = await res.json();
-      const reviewsHTML = reviews.map(r => {
-        const rating = r.rating || 0;
-        const fullStars = '⭐'.repeat(rating);
-        const emptyStars = '<span class="empty-star">⭐</span>'.repeat(5 - rating);
-        return `
-          <div class="review">
-            <p><strong>${r.name || "Anonymous"}</strong></p>
-            <div class="review-stars">${fullStars}${emptyStars}</div>
-            <p>${r.text}</p>
-          </div>
-        `;
-      }).join("");
-      document.getElementById("reviews").innerHTML = reviewsHTML || "<p>No reviews yet. Be the first to leave a review!</p>";
-    } catch {
-      document.getElementById("reviews").innerHTML = "<p>⚠️ Could not load reviews for this hostel.</p>";
+  function loadReviews(reviews = []) {
+    if (!Array.isArray(reviews) || reviews.length === 0) {
+      document.getElementById("reviews").innerHTML = "<p>No ratings yet.</p>";
+      return;
     }
+
+    const ratingsHTML = reviews.map(r => {
+      const rating = parseInt(r.rating) || 0;
+      const fullStars = '⭐'.repeat(rating);
+      const emptyStars = '<span class="empty-star">⭐</span>'.repeat(5 - rating);
+      return `
+        <div class="review-stars" style="margin-bottom: 0.6rem;">
+          ${fullStars}${emptyStars} <span style="margin-left: 8px; font-weight: 500;">(${rating}/5)</span>
+        </div>
+      `;
+    }).join("");
+
+    document.getElementById("reviews").innerHTML = ratingsHTML;
   }
 
   loadHostelData();
 </script>
+
 </body>
 </html>
