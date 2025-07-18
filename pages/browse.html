@@ -218,6 +218,18 @@
       <input type="number" id="price" placeholder="e.g. 5000" />
     </div>
 
+    <div class="filter-group">
+  <label for="ratingRange">⭐ Rating</label>
+  <select id="ratingRange">
+    <option value="0-5">All</option>
+    <option value="5-5">5 only</option>
+    <option value="4-5">4–5</option>
+    <option value="3-4">3–4</option>
+    <option value="2-3">2–3</option>
+    <option value="1-2">1–2</option>
+  </select>
+</div>
+
     <button class="cta-button" onclick="applyFilters()">Apply Filters</button>
   </section>
 
@@ -232,87 +244,95 @@
     © 2025 Koodaram
   </footer>
 
-  <script>
-    const GITHUB_USER = "rohankishore";
-    const REPO = "Koodaram";
-    const API_BASE = `https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/hostels`;
-    const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
+<script>
+  const GITHUB_USER = "rohankishore";
+  const REPO = "Koodaram";
+  const API_BASE = `https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/hostels`;
+  const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
 
-    let hostelDataCache = [];
+  let hostelDataCache = [];
 
-    function renderStars(rating) {
-      const full = "★";
-      const empty = "☆";
-      const value = Math.round(rating);
-      return `<div class="rating-stars" title="${rating}/5">${full.repeat(value)}${empty.repeat(5 - value)}</div>`;
-    }
+  function renderStars(rating) {
+    const full = "★";
+    const empty = "☆";
+    const value = Math.round(rating);
+    return `<div class="rating-stars" title="${rating}/5">${full.repeat(value)}${empty.repeat(5 - value)}</div>`;
+  }
 
-    async function loadHostels() {
-      const res = await fetch(API_BASE);
-      const folders = await res.json();
+  async function loadHostels() {
+    const res = await fetch(API_BASE);
+    const folders = await res.json();
 
-      const grid = document.getElementById("hostel-grid");
-      grid.innerHTML = "";
-      hostelDataCache = [];
+    const grid = document.getElementById("hostel-grid");
+    grid.innerHTML = "";
+    hostelDataCache = [];
 
-      for (const folder of folders) {
-        const jsonURL = `${RAW_BASE}/${folder.name}/data.json`;
-        try {
-          const res = await fetch(jsonURL);
-          const data = await res.json();
-          data.id = folder.name;
-          hostelDataCache.push(data);
+    for (const folder of folders) {
+      const jsonURL = `${RAW_BASE}/${folder.name}/data.json`;
+      try {
+        const res = await fetch(jsonURL);
+        const data = await res.json();
+        data.id = folder.name;
+        hostelDataCache.push(data);
 
-          const imageURL = `${RAW_BASE}/${folder.name}/${data.images?.[0] || "1.jpg"}`;
-          const gender = data.gender?.toLowerCase() || "unisex";
-          const college = data.college?.toLowerCase() || "";
+        const imageURL = `${RAW_BASE}/${folder.name}/${data.images?.[0] || "1.jpg"}`;
+        const gender = data.gender?.toLowerCase() || "unisex";
+        const college = data.college?.toLowerCase() || "";
+        const rating = parseFloat(data.rating) || 0;
 
-          grid.innerHTML += `
-            <div class="hostel-card"
-              data-location="${data.location.toLowerCase()}"
-              data-college="${college}"
-              data-amenities="${data.amenities.join(",").toLowerCase()}"
-              data-price="${data.price}"
-              data-gender="${gender}"
-            >
-              <img src="${imageURL}" alt="${data.name}" />
-              <h3>${data.name}</h3>
-              <p>📍 ${data.location}</p>
-              <p>🛏️ ${data.roomType}</p>
-              <p>✅ ${data.amenities.join(", ")}</p>
-              ${renderStars(data.rating || 0)}
-              <p><strong>₹${data.price}/month</strong></p>
-              <span class="gender ${gender}">${gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
-              <a href="hostel.html?name=${folder.name}" class="view-button">View Hostel</a>
-            </div>
-          `;
-        } catch (err) {
-          console.warn("Could not load:", folder.name);
-        }
+        grid.innerHTML += `
+          <div class="hostel-card"
+            data-location="${data.location.toLowerCase()}"
+            data-college="${college}"
+            data-amenities="${data.amenities.join(",").toLowerCase()}"
+            data-price="${data.price}"
+            data-gender="${gender}"
+            data-rating="${rating}"
+          >
+            <img src="${imageURL}" alt="${data.name}" />
+            <h3>${data.name}</h3>
+            <p>📍 ${data.location}</p>
+            <p>🛏️ ${data.roomType}</p>
+            <p>✅ ${data.amenities.join(", ")}</p>
+            ${renderStars(rating)}
+            <p><strong>₹${data.price}/month</strong></p>
+            <span class="gender ${gender}">${gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
+            <a href="hostel.html?name=${folder.name}" class="view-button">View Hostel</a>
+          </div>
+        `;
+      } catch (err) {
+        console.warn("Could not load:", folder.name);
       }
     }
+  }
 
-    function applyFilters() {
-      const loc = document.getElementById("location").value.toLowerCase();
-      const college = document.getElementById("college").value.toLowerCase();
-      const gender = document.getElementById("gender").value.toLowerCase();
-      const price = parseInt(document.getElementById("price").value);
+  function applyFilters() {
+    const loc = document.getElementById("location").value.toLowerCase();
+    const college = document.getElementById("college").value.toLowerCase();
+    const gender = document.getElementById("gender").value.toLowerCase();
+    const price = parseInt(document.getElementById("price").value);
+    const [ratingMin, ratingMax] = document
+      .getElementById("ratingRange")
+      .value.split("-")
+      .map(Number);
 
-      const cards = document.querySelectorAll(".hostel-card");
-      cards.forEach(card => {
-        const matchesLocation = !loc || card.dataset.location.includes(loc);
-        const matchesCollege = !college || (card.dataset.college || '').includes(college);
-        const matchesGender = !gender || card.dataset.gender === gender;
-        const matchesPrice = isNaN(price) || parseInt(card.dataset.price) <= price;
+    const cards = document.querySelectorAll(".hostel-card");
+    cards.forEach(card => {
+      const matchesLocation = !loc || card.dataset.location.includes(loc);
+      const matchesCollege = !college || (card.dataset.college || '').includes(college);
+      const matchesGender = !gender || card.dataset.gender === gender;
+      const matchesPrice = isNaN(price) || parseInt(card.dataset.price) <= price;
+      const rating = parseFloat(card.dataset.rating);
+      const matchesRating = rating >= ratingMin && rating <= ratingMax;
 
-        card.style.display = (matchesLocation && matchesCollege && matchesGender && matchesPrice)
-          ? "block"
-          : "none";
-      });
-    }
+      card.style.display = (matchesLocation && matchesCollege && matchesGender && matchesPrice && matchesRating)
+        ? "block"
+        : "none";
+    });
+  }
 
-    window.onload = loadHostels;
-  </script>
+  window.onload = loadHostels;
+</script>
 
 </body>
 </html>
