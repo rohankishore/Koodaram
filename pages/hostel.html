@@ -337,7 +337,7 @@ a:hover {
     <div class="nav-container">
       <a href="/" class="logo"> 🏠 Koodaram</a>
       <nav>
-        <a href="/">Home</a>
+        <a href="https://koodaram.vercel.app/">Home</a>
         <a href="/pages/browse.html">Browse Hostels</a>
         <a href="/pages/listHostel.html">For Hostel Owners</a>
         <a href="/pages/pricing.html">Pricing</a>
@@ -401,8 +401,10 @@ a:hover {
       const data = await dataRes.json();
 
       const imagesHTML = (data.images || [])
-        .map(img => `<img src="${RAW_BASE}/${hostelName}/${img}" alt="${data.name} image">`)
-        .join("");
+  .map(img => `<a href="${RAW_BASE}/${hostelName}/${img}" target="_blank" rel="noopener">
+                 <img src="${RAW_BASE}/${hostelName}/${img}" alt="${data.name} image">
+               </a>`)
+  .join("");
 
       function formatPhone(number) {
         if (!number || typeof number !== "string") return "";
