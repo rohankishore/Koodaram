@@ -470,24 +470,79 @@ footer a:hover {
 
 <body>
 
-  <div class="hero">
-  <h1> 🏠 Koodaram</h1>
-  <p>
-    Starting college? Koodaram helps you discover trusted hostels near your campus, compare facilities with ease, and contact owners directly — no hassle, no middlemen.
-  </p>
+  <!-- Call-to-action Buttons -->
+<div class="hero">
+  <h1>🏠 Koodaram</h1>
+  <p>Find hostels near your college with ease</p>
+  <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem;">
+    <a href="/pages/browse.html" class="cta-button">🔍 Search Hostels</a>
+    <button class="cta-button" onclick="togglePersonalizeForm()">✨ Personalize</button>
+  </div>
 
-  <!-- NEW STATS SECTION -->
+  <!-- Modal Backdrop -->
+  <div id="personalize-backdrop" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background-color:rgba(0,0,0,0.7); z-index:999;"></div>
 
-  <a href="/pages/browse.html" class="cta-button">🔍 Search Hostels</a> <br> <br>
+  <!-- Personalize Form as Popup -->
+  <div id="personalize-form" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background-color:#2C2C2C; padding:2rem; border-radius:12px; z-index:1000; width:90%; max-width:500px; text-align:left;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom:1rem;">
+      <h3 style="color:#FFD700;">🎯 Find Hostels That Suit You</h3>
+      <button onclick="togglePersonalizeForm()" style="background:none; border:none; font-size:1.2rem; color:white; cursor:pointer;">❌</button>
+    </div>
 
-      <div id="hero-stats" style="margin-top: 2rem;">
+    <label for="college-select" style="display:block; margin-bottom:0.25rem;">Select College:</label>
+    <select id="college-select" style="width:100%; padding:0.5rem; margin-bottom:1rem; border-radius:8px;">
+      <option value="">--Choose--</option>
+      <option value="gect">GEC Thrissur</option>
+      <option value="nsspkd">NSS Palakkad</option>
+      <option value="cusat">CUSAT</option>
+      <option value="rit">RIT Kottayam</option>
+      <option value="gecpkd">GEC Palakkad</option>
+    </select>
+
+    <label for="gender-select" style="display:block; margin-bottom:0.25rem;">Gender:</label>
+    <select id="gender-select" style="width:100%; padding:0.5rem; margin-bottom:1rem; border-radius:8px;">
+      <option value="">--Choose--</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select>
+
+    <button class="cta-button" onclick="searchPersonalizedHostels()">🔍 Show Hostels</button>
+  </div>
+
+  <div id="hero-stats" style="margin-top: 2rem;" align="center">
     <p style="font-size:1.2rem;">
       🏠 Total Hostels: <span id="total-hostels">Loading...</span><br>
       🎓 Total Colleges: <span id="college-count">Loading...</span>
     </p>
   </div>
-
 </div>
+
+<script>
+  function togglePersonalizeForm() {
+    const form = document.getElementById('personalize-form');
+    const backdrop = document.getElementById('personalize-backdrop');
+    const isVisible = form.style.display === 'block';
+
+    form.style.display = isVisible ? 'none' : 'block';
+    backdrop.style.display = isVisible ? 'none' : 'block';
+  }
+
+  function searchPersonalizedHostels() {
+    const college = document.getElementById('college-select').value;
+    const gender = document.getElementById('gender-select').value;
+
+    if (!college || !gender) {
+      alert("Please select both college and gender.");
+      return;
+    }
+
+    const query = `college=${encodeURIComponent(college)}&gender=${encodeURIComponent(gender)}`;
+    window.location.href = `/pages/browse.html?${query}`;
+  }
+</script>
+
+
 
   <main>
     <section>
@@ -652,6 +707,28 @@ function animateCounter(id, target, duration) {
 
 document.addEventListener("DOMContentLoaded", fetchStats);
 </script>
+
+<script>
+  function togglePersonalizeForm() {
+    const form = document.getElementById("personalize-form");
+    form.style.display = form.style.display === "none" ? "block" : "none";
+  }
+
+  function searchPersonalizedHostels() {
+    const college = document.getElementById("college-select").value;
+    const gender = document.getElementById("gender-select").value;
+
+    if (!college || !gender) {
+      alert("Please select both college and gender.");
+      return;
+    }
+
+    const url = `/pages/browse.html?college=${encodeURIComponent(college)}&gender=${encodeURIComponent(gender)}`;
+    window.location.href = url;
+  }
+</script>
+
+
 
 
 </body>
