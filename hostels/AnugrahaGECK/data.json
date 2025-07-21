@@ -1,0 +1,27 @@
+{
+  "name": "Anugraha",
+  "location": "Opp. Engineering College, West Hill-673005",
+  "college": "GEC Kozhikode",
+  "roomType": "-",
+  "price": "",
+  "distance": "150m",
+  "gender": "unisex",
+  "contact": {
+    "phone": "7947111288",
+    "whatsapp": "917947111288"
+  },
+  "rating": "5",
+  "amenities": [
+    "WiFi",
+    "Study Space",
+    "CCTV",
+    "Food"
+  ],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg",
+    "4.jpg"
+  ],
+  "gmap": ""
+}
