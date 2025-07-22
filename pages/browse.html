@@ -18,45 +18,6 @@
       --border-color: #444444;
     }
 
-    .model-redirect {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-}
-
-.model-box {
-  background: var(--surface);
-  border-left: 6px solid var(--primary);
-  padding: 1rem 1.5rem;
-  border-radius: 12px;
-  max-width: 600px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-  color: var(--text-light);
-  font-size: 1rem;
-  text-align: center;
-}
-
-.model-box p {
-  margin: 0 0 1rem 0;
-}
-
-.model-btn {
-  display: inline-block;
-  background: var(--primary-dark);
-  color: #1A1A1A;
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  text-decoration: none;
-  font-weight: 600;
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-.model-btn:hover {
-  background: var(--primary);
-  box-shadow: 0 0 12px rgba(255, 191, 0, 0.4);
-}
-
-
     body {
       background: var(--bg-dark);
       color: var(--text-light);
@@ -232,17 +193,29 @@
 
 
     <div class="filter-group">
-      <label for="college">🎓 College</label>
-      <select id="college">
-        <option value="">All</option>
-        <option value="RIT Kottayam">RIT Kottayam</option>
-        <option value="cusat">CUSAT</option>
-        <option value="NSS College Palakkad">NSS College Palakkad</option>
-        <option value="GEC Thrissur">GEC Thrissur</option>
-        <option value="GEC Palakkad">GEC Palakkad</option>
-        <option value="GEC Kozhikode">GEC Kozhikode</option>
-      </select>
-    </div>
+  <label for="college">🎓 College</label>
+  <select id="college" onchange="handleCollegeChange()">
+    <option value="">All</option>
+    <option value="cusat">CUSAT</option>
+    <option value="GEC Kozhikode">GEC Kozhikode</option>
+    <option value="GEC Palakkad">GEC Palakkad</option>
+    <option value="GEC Thrissur">GEC Thrissur</option>
+    <option value="Model Engineering College">Model Engineering College</option>
+    <option value="NSS College Palakkad">NSS College Palakkad</option>
+    <option value="RIT Kottayam">RIT Kottayam</option>
+  </select>
+</div>
+
+<script>
+  function handleCollegeChange() {
+    const college = document.getElementById('college').value;
+
+    if (college === 'Model Engineering College') {
+      window.open('https://hostelfinderbyflink.netlify.app', '_blank');
+    }
+  }
+</script>
+
 
     <div class="filter-group">
       <label for="gender">🧍 Gender</label>
@@ -274,12 +247,6 @@
     <button class="cta-button" onclick="applyFilters()">Apply Filters</button>
   </section>
 
-      <section class="model-redirect">
-  <div class="model-box">
-🏫 Looking for hostels near <strong>Model Engineering College</strong>? Discover them on the <strong>F-Link</strong> hostel finder.   <br>  <br> <a href="https://hostelfinderbyflink.netlify.app" class="model-btn" target="_blank" rel="noopener noreferrer">View Model Engineering College Hostels</a>
-
-  </div>
-</section>
 
   <section class="hostel-grid" id="hostel-grid">
     <!-- Hostels ivde add aakam ig -->
