@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Collaborators - Koodaram</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --bg-dark: #1A1A1A;
+      --surface: #1a1a1a;
+      --primary: #FFBF00;
+      --primary-dark: #DAA520;
+      --accent: #FFD700;
+      --text-light: #E0E0E0;
+      --link-color: #FFBF00;
+      --hover-glow: rgba(255, 215, 0, 0.6);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+    }
+
+    header.navbar {
+      background-color: var(--surface);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-container {
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .navbar .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      text-decoration: none;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .navbar nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .navbar nav a {
+      color: #D3D3D3;
+      text-decoration: none;
+      font-weight: 500;
+    }
+
+    .navbar nav a:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 600px) {
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar nav {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+    }
+
+    .info-section {
+      padding: 4rem 2rem;
+      text-align: center;
+      max-width: 900px;
+      margin: 2rem auto;
+      background: var(--surface);
+      border-radius: 14px;
+      box-shadow: 0 0 20px var(--hover-glow);
+    }
+
+    .info-section h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-weight: 700;
+    }
+
+    .collab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+      padding: 1rem;
+    }
+
+    .collab-item {
+      background-color: #222;
+      padding: 1.2rem;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 0 8px rgba(255, 215, 0, 0.1);
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+
+    .collab-item:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 0 16px var(--hover-glow);
+    }
+
+    .collab-item img {
+      max-height: 60px;
+      object-fit: contain;
+      margin-bottom: 1rem;
+      filter: brightness(0.95);
+    }
+
+    .collab-item strong {
+      display: block;
+      font-size: 1.15rem;
+      color: var(--accent);
+      margin-bottom: 0.3rem;
+    }
+
+    .collab-item a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+
+    .collab-item a:hover {
+      color: var(--accent);
+      text-decoration: underline;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #777;
+      padding: 2rem 1rem;
+      border-top: 1px solid var(--primary-dark);
+      margin-top: 5rem;
+    }
+
+    footer a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+      color: var(--accent);
+    }
+  </style>
+</head>
+<body>
+  <header class="navbar">
+    <div class="nav-container">
+      <a href="https://koodaram.vercel.app/" class="logo">🏠 Koodaram</a>
+      <nav>
+        <a href="https://koodaram.vercel.app/">Home</a>
+        <a href="browse.html">Browse Hostels</a>
+        <a href="listHostel.html">For Hostel Owners</a>
+        <a href="pricing.html">Pricing</a>
+        <a href="about.html">About</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="info-section">
+      <h1>Our Collaborators</h1>
+      <p>Meet our amazing collaborators who support and empower the Koodaram ecosystem.</p>
+
+      <div class="collab-grid">
+        <div class="collab-item">
+          <img src="assets/images/collabs/flink.jpg" alt="FLink Logo">
+          <strong>FLINK</strong>
+          <a href="https://flinkwebs.netlify.app/" target="_blank">Visit Website</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Koodaram. All rights reserved. <a href="terms.html">Terms of Service</a> | <a href="credits.html">Credits</a></p>
+  </footer>
+</body>
+</html>
