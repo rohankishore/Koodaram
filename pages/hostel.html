@@ -431,16 +431,16 @@ a:hover {
       function formatPhone(number) {
         if (!number || typeof number !== "string") return "";
         if (number.startsWith("+")) return number;
-        return `+${number.slice(0, 2)} ${number.slice(2)}`;
+        return `${number}`;
       }
 
       const callNumber = formatPhone(data.contact?.phone);
-      const whatsappNumber = formatPhone(data.contact?.whatsapp);
+      const whatsappNumber = formatPhone(data.contact?.phone);
 
       const contactHTML = `
         <div class="contact-buttons">
           <a href="tel:${data.contact?.phone}">📞 Call (${callNumber})</a>
-          <a href="https://wa.me/${data.contact?.whatsapp}">💬 WhatsApp (${whatsappNumber})</a>
+          <a href="https://wa.me/91${whatsappNumber}">💬 WhatsApp (${whatsappNumber})</a>
         </div>
       `;
 

@@ -18,6 +18,23 @@
       --border-color: #444444;
     }
 
+    .amenities {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.5rem;
+}
+
+.amenities span {
+  background: var(--surface);
+  color: var(--accent);
+  font-size: 0.75rem;
+  padding: 0.3rem 0.6rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-color);
+}
+
+
     body {
       background: var(--bg-dark);
       color: var(--text-light);
@@ -362,7 +379,9 @@
             <h3>${data.name}</h3>
             <p>📍 ${data.location}</p>
             <p>🛏️ ${data.roomType}</p>
-            <p>✅ ${data.amenities.join(", ")}</p>
+            <div class="amenities">
+             ${data.amenities.map(item => `<span>${item}</span>`).join("")}
+             </div>
             ${renderStars(rating)}
             <p><strong>₹${data.price}/month</strong></p>
             <span class="gender ${gender}">${gender.charAt(0).toUpperCase() + gender.slice(1)}</span>
