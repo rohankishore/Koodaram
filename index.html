@@ -349,7 +349,7 @@ footer a:hover {
 
 /* FAQ Section */
 .faq-section {
-  background: linear-gradient(135deg, #1F3A4B, #2A4E5C); /* Consistent deep teal */
+  background: linear-gradient(135deg, #1F3A4B, #2A4E5C);
   padding: 4rem 2rem;
   text-align: center;
   color: #E0E0E0;
@@ -400,7 +400,7 @@ footer a:hover {
 .colleges-section {
   padding: 4rem 2rem 2rem;
   text-align: center;
-  background: linear-gradient(135deg, #1A1A1A, #2C2C2C);
+  background: linear-gradient(135deg, #1F3A4B, #2A4E5C); ;
 }
 
 .colleges-section h2 {
@@ -436,6 +436,52 @@ footer a:hover {
   transition: transform 0.3s, filter 0.3s;
 }
 
+#donate-section {
+  background-color: linear-gradient(135deg, #1F3A4B, #2A4E5C);
+  padding: 4rem 1rem;
+  text-align: center;
+}
+
+.donate-container {
+  max-width: 600px;
+  margin: auto;
+  padding: 2rem;
+  background: linear-gradient(135deg, #1F3A4B, #2A4E5C);;
+  border-radius: 16px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.05);
+}
+
+.donate-container h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  color: black;
+}
+
+.donate-container p {
+  font-size: 1.1rem;
+  color: white;
+  line-height: 1.6;
+  margin-bottom: 2rem;
+}
+
+.donate-button {
+  display: inline-block;
+  background-color: #ffd700;
+  color: #000;
+  padding: 0.75rem 1.75rem;
+  font-weight: bold;
+  border-radius: 8px;
+  text-decoration: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.donate-button:hover {
+  background-color: #ffc800;
+  transform: translateY(-2px);
+}
+
+
 .marquee img:hover {
   transform: scale(1.1);
   filter: brightness(1.1); /* Brighter on hover */
@@ -451,17 +497,17 @@ footer a:hover {
   100% { transform: translateX(0); }
 }
 
-  </style>
+</style>
 
   <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": "Koodaram",
-  "url": "https://koodaram.vercel.app",
-  "logo": "https://koodaram.vercel.app/assets/images/icons/koodaram.png"
-}
-</script>
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Koodaram",
+    "url": "https://koodaram.vercel.app",
+    "logo": "https://koodaram.vercel.app/assets/images/icons/koodaram.png"
+  }
+  </script>
 
 </head>
 
@@ -616,6 +662,15 @@ footer a:hover {
   </p>
 </section>
 
+<section id="donate-section">
+  <div class="donate-container">
+    <h2>💖 Support Koodaram</h2>
+    <p>Found Koodaram useful? Help keep the project alive by buying a coffee or sending a small donation!</p>
+    <a href="pages/donate.html" target="_blank" class="donate-button">🙏 Donate Now</a>
+  </div>
+</section>
+
+
 
   <section class="faq-section">
   <h2>❓ Frequently Asked Questions</h2>
@@ -657,7 +712,7 @@ footer a:hover {
 
   <footer>
 
-    <a href="pages/terms.html">Terms & Conditions</a> &nbsp;  <a href="pages/credits.html">Credits</a> &nbsp; <a href="pages/colleges.html">College List</a> &nbsp; <a href="pages/collabs.html">Collaborations</a>
+    <a href="pages/terms.html">Terms & Conditions</a> &nbsp;  <a href="pages/credits.html">Credits</a> &nbsp; <a href="pages/colleges.html">College List</a> &nbsp; <a href="pages/collabs.html">Collaborations</a> &nbsp; <a href="pages/donate.html">Donate</a>
 
     <br>
     <br>
