@@ -1,0 +1,17 @@
+{
+  "name": "M C hostel",
+  "location": "",
+  "college": "CUCEK",
+  "roomType": "",
+  "price": "",
+  "distance": "",
+  "gender": "male",
+  "contact": {
+    "phone": "9846634939",
+    "whatsapp": "919846634939"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [],
+  "gmap": ""
+}

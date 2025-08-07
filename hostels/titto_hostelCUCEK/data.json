@@ -1,0 +1,17 @@
+{
+  "name": "Titto hostel",
+  "location": "",
+  "college": "CUCEK",
+  "roomType": "",
+  "price": "",
+  "distance": "",
+  "gender": "male",
+  "contact": {
+    "phone": "9446923375",
+    "whatsapp": "919446923375"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [],
+  "gmap": ""
+}

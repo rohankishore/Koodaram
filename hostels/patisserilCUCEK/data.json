@@ -1,0 +1,17 @@
+{
+  "name": "Patisseril",
+  "location": "",
+  "college": "CUCEK",
+  "roomType": "",
+  "price": "",
+  "distance": "",
+  "gender": "male",
+  "contact": {
+    "phone": "9497110280",
+    "whatsapp": "919497110280"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [],
+  "gmap": ""
+}

@@ -1,0 +1,22 @@
+{
+  "name": "Gourisankaram",
+  "location": "",
+  "college": "CUCEK",
+  "roomType": "-",
+  "price": "",
+  "distance": "-",
+  "gender": "male",
+  "contact": {
+    "phone": "8893165699",
+    "whatsapp": "918893165699"
+  },
+  "rating": "",
+  "amenities": [
+    "WiFi",
+    "Study Space",
+    "CCTV",
+    "Food"
+  ],
+  "images": [],
+  "gmap": ""
+}

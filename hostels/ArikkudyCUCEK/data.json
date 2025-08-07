@@ -1,0 +1,22 @@
+{
+  "name": "Arikkudy Doctors hostel",
+  "location": "",
+  "college": "CUCEK",
+  "roomType": "-",
+  "price": "",
+  "distance": "-",
+  "gender": "male",
+  "contact": {
+    "phone": "8301061243",
+    "whatsapp": "918301061243"
+  },
+  "rating": "",
+  "amenities": [
+    "WiFi",
+    "Study Space",
+    "CCTV",
+    "Food"
+  ],
+  "images": [],
+  "gmap": ""
+}

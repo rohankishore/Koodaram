@@ -1,0 +1,22 @@
+{
+  "name": "Aradhana hostel",
+  "location": "",
+  "college": "CUCEK",
+  "roomType": "-",
+  "price": "",
+  "distance": "-",
+  "gender": "male",
+  "contact": {
+    "phone": "9400159430",
+    "whatsapp": "919400159430"
+  },
+  "rating": "",
+  "amenities": [
+    "WiFi",
+    "Study Space",
+    "CCTV",
+    "Food"
+  ],
+  "images": [],
+  "gmap": ""
+}

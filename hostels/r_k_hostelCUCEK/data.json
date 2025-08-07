@@ -1,0 +1,17 @@
+{
+  "name": "R K hostel",
+  "location": "",
+  "college": "CUCEK",
+  "roomType": "",
+  "price": "",
+  "distance": "",
+  "gender": "male",
+  "contact": {
+    "phone": "9747405020",
+    "whatsapp": "919747405020"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [],
+  "gmap": ""
+}

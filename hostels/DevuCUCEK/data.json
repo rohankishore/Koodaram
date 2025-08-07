@@ -1,0 +1,22 @@
+{
+  "name": "Devu Home Stay",
+  "location": "",
+  "college": "CUCEK",
+  "roomType": "-",
+  "price": "",
+  "distance": "-",
+  "gender": "male",
+  "contact": {
+    "phone": "9437975692",
+    "whatsapp": "919437975692"
+  },
+  "rating": "",
+  "amenities": [
+    "WiFi",
+    "Study Space",
+    "CCTV",
+    "Food"
+  ],
+  "images": [],
+  "gmap": ""
+}
