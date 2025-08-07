@@ -1,0 +1,22 @@
+{
+  "name": "Adhish Home Stay (K.K Soman)",
+  "location": "Pulincunnoo, Pullinkunnu",
+  "college": "CUCEK",
+  "roomType": "-",
+  "price": "",
+  "distance": "-",
+  "gender": "male",
+  "contact": {
+    "phone": "9605346250",
+    "whatsapp": "919605346250"
+  },
+  "rating": "",
+  "amenities": [
+    "WiFi",
+    "Study Space",
+    "CCTV",
+    "Food"
+  ],
+  "images": [],
+  "gmap": ""
+}

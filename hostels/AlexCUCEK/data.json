@@ -1,0 +1,22 @@
+{
+  "name": "Alex prayikalam",
+  "location": "Pulincunnoo, Pullinkunnu",
+  "college": "CUCEK",
+  "roomType": "-",
+  "price": "",
+  "distance": "-",
+  "gender": "male",
+  "contact": {
+    "phone": "9495152414",
+    "whatsapp": "919495152414"
+  },
+  "rating": "",
+  "amenities": [
+    "WiFi",
+    "Study Space",
+    "CCTV",
+    "Food"
+  ],
+  "images": [],
+  "gmap": ""
+}

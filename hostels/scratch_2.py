@@ -26,7 +26,7 @@ class HostelForm(QWidget):
         default_values = {
             "name": "Sample Hostel",
             "location": "",
-            "college": "GEC Palakkad",
+            "college": "CUCEK",
             "roomType": "-",
             "price": "",
             "distance": "400m",
