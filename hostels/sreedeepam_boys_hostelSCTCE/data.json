@@ -1,0 +1,22 @@
+{
+  "name": "Sreedeepam Boys Hostel",
+  "location": "",
+  "college": "SCT Trivandrum",
+  "roomType": "",
+  "price": "6000",
+  "distance": "less than 1 km",
+  "gender": "male",
+  "contact": {
+    "phone": "9446186940",
+    "whatsapp": "919446186940"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg"
+  ],
+  "gmap": "",
+  "address": "Kairali Garden, Viswambharan Road, Pappanamcode"
+}

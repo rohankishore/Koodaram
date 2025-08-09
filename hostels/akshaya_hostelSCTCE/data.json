@@ -1,0 +1,22 @@
+{
+  "name": "Akshaya Hostel",
+  "location": "",
+  "college": "SCT Trivandrum",
+  "roomType": "",
+  "price": "6000",
+  "distance": "less than 1 km",
+  "gender": "male",
+  "contact": {
+    "phone": "8129795560",
+    "whatsapp": "918129795560"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg"
+  ],
+  "gmap": "",
+  "address": "Near SBI, Pappanamcode Kuttikadu Lane, Opposite Dental clinic"
+}

@@ -2,61 +2,217 @@ import zipfile
 import json
 import os
 
-# [cite_start]Data extracted from the ladies_hostel_new.pdf [cite: 2]
+# The hostel data you provided
 hostel_data = [
-    {"name": "Aiswarya hostel, njanjaakkal, pulincunno", "phone": "9142246206"},
-    {"name": "Anija's hostel, padithara house, pulincunnoo", "phone": "8157987895"},
-    {"name": "Anju home stay, njaanjaakkal, pulincunnoo", "phone": "9539997672"},
-    {"name": "Arikudy ladies hostel, near circle office, pulincunnoo", "phone": "9447553423"},
-    {"name": "Babus Hostel, Opposite to Engineering College", "phone": "8848476768, 7025066850"},
-    {"name": "K.M Hostel", "phone": "7594025753"},
-    {"name": "Manalayil", "phone": "8376945147, 7306791235"},
-    {"name": "Muppathilchira Girls Hostel", "phone": "9656499882, 9497634830"},
-    {"name": "Padisserry home stay, opposite to Engg college", "phone": "9061815862"},
-    {"name": "Punnoor hostel", "phone": "9745069107"},
-    {"name": "Radhamadhavam, Near Engg College", "phone": "9349524770, 7561824770"},
-    {"name": "Raj Nivas", "phone": "9447500490"},
-    {"name": "S H Hostel", "phone": "8281748079"},
-    {"name": "SS Hostel", "phone": "9995051567"},
-    {"name": "Sarang", "phone": "8078523371"},
-    {"name": "Vithuvattickal", "phone": "9447500633"},
-    {"name": "College Girls Hostel (Petals Hostel)", "phone": "04772707500"},
+  {
+    "name": "Achus Hostel",
+    "location": "",
+    "college": "SCT Trivandrum",
+    "roomType": "",
+    "price": "6000",
+    "distance": "less than 1 km",
+    "gender": "male",
+    "contact": {
+      "phone": "8136954246",
+      "whatsapp": "918136954246"
+    },
+    "rating": "",
+    "amenities": [],
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "gmap": "",
+    "address": "Susha Bhavan, Palace road, Pappanamcode (Opp. KSRTC central works)"
+  },
+  {
+    "name": "Atham Boys Hostel",
+    "location": "",
+    "college": "SCT Trivandrum",
+    "roomType": "",
+    "price": "6000",
+    "distance": "1 Km",
+    "gender": "male",
+    "contact": {
+      "phone": "8848726001",
+      "whatsapp": "918848726001"
+    },
+    "rating": "",
+    "amenities": [],
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "gmap": "",
+    "address": "SivaLalitham, TC 52/3245 Viswambaran Road Pappanamcode"
+  },
+  {
+    "name": "Vipas Hostel",
+    "location": "",
+    "college": "SCT Trivandrum",
+    "roomType": "",
+    "price": "6000",
+    "distance": "less than 1 km",
+    "gender": "male",
+    "contact": {
+      "phone": "9447244188",
+      "whatsapp": "919447244188"
+    },
+    "rating": "",
+    "amenities": [],
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "gmap": "",
+    "address": "Kairali Garden, Viswambharan Road, Pappanamcode"
+  },
+  {
+    "name": "Boys Hostel",
+    "location": "",
+    "college": "SCT Trivandrum",
+    "roomType": "",
+    "price": "6000",
+    "distance": "less than 1 km",
+    "gender": "male",
+    "contact": {
+      "phone": "9895718340",
+      "whatsapp": "919895718340"
+    },
+    "rating": "",
+    "amenities": [],
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "gmap": "",
+    "address": "Near CSIR-NIIST, Nanthancode Lane Thukkuvila ANRA-63 Estate Road Pappanamcode"
+  },
+  {
+    "name": "Akshaya Hostel",
+    "location": "",
+    "college": "SCT Trivandrum",
+    "roomType": "",
+    "price": "6000",
+    "distance": "less than 1 km",
+    "gender": "male",
+    "contact": {
+      "phone": "8129795560",
+      "whatsapp": "918129795560"
+    },
+    "rating": "",
+    "amenities": [],
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "gmap": "",
+    "address": "Near SBI, Pappanamcode Kuttikadu Lane, Opposite Dental clinic"
+  },
+  {
+    "name": "CASTELLO BOYS HOSTEL",
+    "location": "",
+    "college": "SCT Trivandrum",
+    "roomType": "",
+    "price": "6000",
+    "distance": "less than 1 km",
+    "gender": "male",
+    "contact": {
+      "phone": "9447321328",
+      "whatsapp": "919447321328"
+    },
+    "rating": "",
+    "amenities": [],
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "gmap": "",
+    "address": "TC 52/1904, Kaimanom, Thiruvananthapuram-40"
+  },
+  {
+    "name": "Komalam's boys hostel",
+    "location": "",
+    "college": "SCT Trivandrum",
+    "roomType": "",
+    "price": "6000",
+    "distance": "less than 1 km",
+    "gender": "male",
+    "contact": {
+      "phone": "8281412050",
+      "whatsapp": "918281412050"
+    },
+    "rating": "",
+    "amenities": [],
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "gmap": "",
+    "address": "N-12, Nirappil lane, Ram Nagar, Pappanamcode-18"
+  },
+  {
+    "name": "Niaz Hostel",
+    "location": "",
+    "college": "SCT Trivandrum",
+    "roomType": "",
+    "price": "6000",
+    "distance": "1 Km",
+    "gender": "male",
+    "contact": {
+      "phone": "7025029233",
+      "whatsapp": "917025029233"
+    },
+    "rating": "",
+    "amenities": [],
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "gmap": "",
+    "address": "Niyas Building, Karakkamandapam, Nemom PO"
+  },
+  {
+    "name": "Sreedeepam Boys Hostel",
+    "location": "",
+    "college": "SCT Trivandrum",
+    "roomType": "",
+    "price": "6000",
+    "distance": "less than 1 km",
+    "gender": "male",
+    "contact": {
+      "phone": "9446186940",
+      "whatsapp": "919446186940"
+    },
+    "rating": "",
+    "amenities": [],
+    "images": [
+      "1.jpg",
+      "2.jpg",
+      "3.jpg"
+    ],
+    "gmap": "",
+    "address": "Kairali Garden, Viswambharan Road, Pappanamcode"
+  }
 ]
 
 # Create the zip file
 with zipfile.ZipFile('hostels.zip', 'w', zipfile.ZIP_DEFLATED) as zipf:
     for hostel in hostel_data:
         # Sanitize the hostel name for the folder name
-        folder_name_raw = hostel["name"].split(',')[0].lower().replace(' ', '_').replace('.', '').replace('(',
-                                                                                                          '').replace(
-            ')', '')
-        folder_name = f"{folder_name_raw}CUCEK/"
-
-        # Get the primary phone number for WhatsApp
-        primary_phone = hostel["phone"].split(',')[0].strip()
-        whatsapp_number = f"91{primary_phone}"
-
-        # Create the JSON data structure
-        json_data = {
-            "name": hostel["name"],
-            "location": "",
-            "college": "CUCEK",
-            "roomType": "",
-            "price": "",
-            "distance": "",
-            "gender": "female",
-            "contact": {
-                "phone": hostel["phone"],
-                "whatsapp": whatsapp_number
-            },
-            "rating": "",
-            "amenities": [],
-            "images": [],
-            "gmap": ""
-        }
+        folder_name_raw = hostel["name"].split(',')[0].lower().replace("'", "").replace(' ', '_').replace('.', '').replace('(', '').replace(')', '')
+        folder_name = f"{folder_name_raw}SCTCE/"
 
         # Convert the dictionary to a JSON formatted string
-        json_string = json.dumps(json_data, indent=2)
+        json_string = json.dumps(hostel, indent=2)
 
         # Define the file path within the zip archive
         file_path = os.path.join(folder_name, "data.json")

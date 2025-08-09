@@ -1,0 +1,22 @@
+{
+  "name": "CASTELLO BOYS HOSTEL",
+  "location": "",
+  "college": "SCT Trivandrum",
+  "roomType": "",
+  "price": "6000",
+  "distance": "less than 1 km",
+  "gender": "male",
+  "contact": {
+    "phone": "9447321328",
+    "whatsapp": "919447321328"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg"
+  ],
+  "gmap": "",
+  "address": "TC 52/1904, Kaimanom, Thiruvananthapuram-40"
+}

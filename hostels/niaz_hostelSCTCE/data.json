@@ -1,0 +1,22 @@
+{
+  "name": "Niaz Hostel",
+  "location": "",
+  "college": "SCT Trivandrum",
+  "roomType": "",
+  "price": "6000",
+  "distance": "1 Km",
+  "gender": "male",
+  "contact": {
+    "phone": "7025029233",
+    "whatsapp": "917025029233"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [
+    "img.png",
+    "img1.png",
+    "img2.png"
+  ],
+  "gmap": "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3946.3577477174226!2d76.99014199999999!3d8.464548699999998!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3b05ba952f0d588b%3A0x49e954bd07b8a8cc!2sNiaz%20Hostel!5e0!3m2!1sen!2sin!4v1754751419434!5m2!1sen!2sin",
+  "address": "Niyas Building, Karakkamandapam, Nemom PO"
+}

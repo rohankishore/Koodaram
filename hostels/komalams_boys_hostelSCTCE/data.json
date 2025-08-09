@@ -1,0 +1,22 @@
+{
+  "name": "Komalam's boys hostel",
+  "location": "",
+  "college": "SCT Trivandrum",
+  "roomType": "",
+  "price": "6000",
+  "distance": "less than 1 km",
+  "gender": "male",
+  "contact": {
+    "phone": "8281412050",
+    "whatsapp": "918281412050"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg"
+  ],
+  "gmap": "",
+  "address": "N-12, Nirappil lane, Ram Nagar, Pappanamcode-18"
+}
