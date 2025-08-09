@@ -1,0 +1,17 @@
+{
+  "name": "S H Hostel",
+  "location": "",
+  "college": "CUCEK",
+  "roomType": "",
+  "price": "",
+  "distance": "",
+  "gender": "female",
+  "contact": {
+    "phone": "8281748079",
+    "whatsapp": "918281748079"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [],
+  "gmap": ""
+}

@@ -1,0 +1,17 @@
+{
+  "name": "Raj Nivas",
+  "location": "",
+  "college": "CUCEK",
+  "roomType": "",
+  "price": "",
+  "distance": "",
+  "gender": "female",
+  "contact": {
+    "phone": "9447500490",
+    "whatsapp": "919447500490"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [],
+  "gmap": ""
+}

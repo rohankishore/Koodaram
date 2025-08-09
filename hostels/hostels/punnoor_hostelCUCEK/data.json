@@ -1,0 +1,17 @@
+{
+  "name": "Punnoor hostel",
+  "location": "",
+  "college": "CUCEK",
+  "roomType": "",
+  "price": "",
+  "distance": "",
+  "gender": "female",
+  "contact": {
+    "phone": "9745069107",
+    "whatsapp": "919745069107"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [],
+  "gmap": ""
+}

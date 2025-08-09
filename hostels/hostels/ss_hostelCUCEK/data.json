@@ -1,0 +1,17 @@
+{
+  "name": "SS Hostel",
+  "location": "",
+  "college": "CUCEK",
+  "roomType": "",
+  "price": "",
+  "distance": "",
+  "gender": "female",
+  "contact": {
+    "phone": "9995051567",
+    "whatsapp": "919995051567"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [],
+  "gmap": ""
+}

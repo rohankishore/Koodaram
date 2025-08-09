@@ -1,0 +1,17 @@
+{
+  "name": "K.M Hostel",
+  "location": "",
+  "college": "CUCEK",
+  "roomType": "",
+  "price": "",
+  "distance": "",
+  "gender": "female",
+  "contact": {
+    "phone": "7594025753",
+    "whatsapp": "917594025753"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [],
+  "gmap": ""
+}
