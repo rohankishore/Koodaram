@@ -1,0 +1,22 @@
+{
+  "name": "Arafa, BETA Girls Hostel",
+  "location": "",
+  "college": "SCT Trivandrum",
+  "roomType": "",
+  "price": "6500",
+  "distance": "less than 1 km",
+  "gender": "female",
+  "contact": {
+    "phone": "9048426865",
+    "whatsapp": "919048426865"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg"
+  ],
+  "gmap": "",
+  "address": "TC 53/2052(2), Opposite to kumar Tea Stall, Estate Road"
+}

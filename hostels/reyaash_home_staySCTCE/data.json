@@ -1,0 +1,22 @@
+{
+  "name": "Reyaash Home Stay",
+  "location": "",
+  "college": "SCT Trivandrum",
+  "roomType": "",
+  "price": "6000",
+  "distance": "less than 1 km",
+  "gender": "female",
+  "contact": {
+    "phone": "9037666515",
+    "whatsapp": "919037666515"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg"
+  ],
+  "gmap": "",
+  "address": "TC 52/539, MRA-B 9, Mangalassery Lane, Oppo. Govt. Polytechnic, Kaimanam"
+}

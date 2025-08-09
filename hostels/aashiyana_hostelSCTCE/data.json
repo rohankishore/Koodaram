@@ -1,0 +1,22 @@
+{
+  "name": "Aashiyana Hostel",
+  "location": "",
+  "college": "SCT Trivandrum",
+  "roomType": "",
+  "price": "6000 / 5500",
+  "distance": "1 km",
+  "gender": "female",
+  "contact": {
+    "phone": "9447229223",
+    "whatsapp": "919447229223"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg"
+  ],
+  "gmap": "",
+  "address": "Karakkamandapam junction, Nemom"
+}

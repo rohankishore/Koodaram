@@ -1,0 +1,22 @@
+{
+  "name": "MAS Girls Hostel",
+  "location": "",
+  "college": "SCT Trivandrum",
+  "roomType": "",
+  "price": "6500",
+  "distance": "less than 1 km",
+  "gender": "female",
+  "contact": {
+    "phone": "9497004554",
+    "whatsapp": "919497004554"
+  },
+  "rating": "",
+  "amenities": [],
+  "images": [
+    "1.jpg",
+    "2.jpg",
+    "3.jpg"
+  ],
+  "gmap": "",
+  "address": "TC 53/270,C K Sadanam, Near Care & Cure Hospital Estate Road, Pappanamcode"
+}
