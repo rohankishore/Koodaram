@@ -21,252 +21,240 @@ body.light-mode {
 }
 
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 body {
-  font-family: 'Inter', sans-serif;
-  background: var(--bg-color);
-  color: var(--text-color);
-  line-height: 1.6;
-  transition: background 0.3s ease, color 0.3s ease;
+    font-family: 'Inter', sans-serif;
+    background: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    transition: background 0.3s ease, color 0.3s ease;
 }
 
+/* ================= HERO ================= */
 .hero {
-  position: relative;
-  overflow: hidden;
-  padding: 8rem 2rem 6rem;
-  text-align: center;
-  color: #FFD700;
-
-  /* Bold, vibrant gradient background with depth */
-  background: linear-gradient(135deg, #1a1a1a 0%, #1f3a4b 40%, #2a2a2a 100%);
-  border-radius: 16px;
-
-  /* Soft glowing overlay */
-  box-shadow: inset 0 0 80px rgba(255, 191, 0, 0.2);
-
-  /* Animated light streaks */
-  animation: heroPulse 6s ease-in-out infinite alternate;
+    position: relative;
+    overflow: hidden;
+    padding: 8rem 2rem 6rem;
+    text-align: center;
+    background: var(--bg-color);
+    border-radius: 16px;
+    box-shadow: inset 0 0 120px rgba(255, 215, 0, 0.2);
 }
 
-/* Floating sparkles / particles */
-.hero::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
-  transform: translateX(-50%);
-  animation: floatParticles 10s linear infinite;
-  pointer-events: none;
-}
-
-/* Pulse animation for glowing effect */
-@keyframes heroPulse {
-  0% { box-shadow: inset 0 0 50px rgba(255, 191, 0, 0.1); }
-  50% { box-shadow: inset 0 0 100px rgba(255, 191, 0, 0.3); }
-  100% { box-shadow: inset 0 0 50px rgba(255, 191, 0, 0.1); }
-}
-
-/* Particle floating motion */
-@keyframes floatParticles {
-  0% { transform: translateX(-50%) translateY(0) rotate(0deg); }
-  50% { transform: translateX(-50%) translateY(20px) rotate(15deg); }
-  100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
-}
-
+.hero::before,
 .hero::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.03), transparent 70%),
-              radial-gradient(circle at 70% 70%, rgba(255, 191, 0, 0.03), transparent 70%);
-  animation: waveMove 20s linear infinite;
-  pointer-events: none;
+    content: "";
+    position: absolute;
+    width: 200%;
+    height: 200%;
+    pointer-events: none;
+}
+
+/* Floating sparkles */
+.hero::before {
+    top: 0;
+    left: 50%;
+    background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+    transform: translateX(-50%);
+    animation: floatParticles 10s linear infinite;
+}
+
+/* Glimmering wave overlay */
+.hero::after {
+    top: -50%;
+    left: -50%;
+    background: radial-gradient(circle at 30% 30%, rgba(255, 191, 0, 0.03), transparent 70%),
+                radial-gradient(circle at 70% 70%, rgba(255, 191, 0, 0.03), transparent 70%);
+    animation: waveMove 20s linear infinite;
+}
+
+/* Particle animations */
+@keyframes floatParticles {
+    0% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+    50% { transform: translateX(-50%) translateY(20px) rotate(15deg); }
+    100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
 }
 
 @keyframes waveMove {
-  0% { transform: translate(0,0) rotate(0deg); }
-  50% { transform: translate(15px, 10px) rotate(10deg); }
-  100% { transform: translate(0,0) rotate(0deg); }
+    0% { transform: translate(0,0) rotate(0deg); }
+    50% { transform: translate(15px, 10px) rotate(10deg); }
+    100% { transform: translate(0,0) rotate(0deg); }
 }
 
+/* Gradient text for hero */
 .hero h1 {
-  background: linear-gradient(270deg, var(--primary-gold), var(--secondary-gold), var(--primary-gold));
-  background-size: 600% 600%;
-  animation: gradientShift 6s ease infinite;
-}
-
-@keyframes gradientShift {
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+    font-size: 3.5rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    margin-bottom: 1rem;
+    background: linear-gradient(270deg, var(--primary-gold), var(--secondary-gold), var(--primary-gold));
+    background-size: 600% 600%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 6s ease infinite;
 }
 
 .hero p {
-  font-size: 1.2rem;
-  max-width: 720px;
-  margin: auto;
-  color: var(--text-color-light);
+    font-size: 1.2rem;
+    max-width: 720px;
+    margin: auto;
+    color: var(--text-color-light);
 }
 
+/* CTA Button */
 .cta-button {
-  display: inline-block;
-  margin-top: 2.5rem;
-  background: linear-gradient(90deg, var(--secondary-gold), var(--primary-gold));
-  color: #1A1A1A;
-  padding: 1rem 2.2rem;
-  text-decoration: none;
-  border-radius: 10px;
-  font-weight: 700;
-  font-size: 1.1rem;
-  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
-  border: none;
-  cursor: pointer;
-  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.25);
+    display: inline-block;
+    margin-top: 2.5rem;
+    background: linear-gradient(90deg, var(--secondary-gold), var(--primary-gold));
+    color: #1A1A1A;
+    padding: 1rem 2.2rem;
+    text-decoration: none;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 1.1rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 4px 20px rgba(255, 215, 0, 0.25);
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 .cta-button:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 25px rgba(255, 215, 0, 0.4);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 25px rgba(255, 215, 0, 0.4);
 }
 
+/* Gradient animation keyframes */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+/* ================= MAIN / SECTIONS ================= */
 main {
-  max-width: 960px;
-  margin: 2rem auto;
-  padding: 0 2rem;
+    max-width: 960px;
+    margin: 2rem auto;
+    padding: 0 2rem;
 }
 
 section {
-  padding: 4rem 0;
-  border-bottom: 1px solid var(--border-color);
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-color);
 }
 
 section:last-child {
     border-bottom: none;
 }
 
-section h2 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 3rem;
-  text-align: center;
-  background: linear-gradient(90deg, var(--primary-gold), var(--secondary-gold));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Section titles shimmer */
+section h2, 
+.pricing-card h3, 
+.faq-item h3, 
+.submit-hostel-section h2, 
+.colleges-section h2, 
+.donate-container h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    margin-bottom: 1.5rem;
+    text-align: center;
+    background: linear-gradient(270deg, var(--primary-gold), var(--secondary-gold), var(--primary-gold));
+    background-size: 600% 600%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradientShift 6s ease infinite;
 }
 
 section ul {
-  list-style: none;
-  padding-left: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 2.5rem;
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2.5rem;
 }
 
 section ul li {
-  margin-bottom: 1rem;
-  padding-left: 2rem;
-  position: relative;
-  color: var(--text-color-light);
-  font-size: 1.1rem;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+    position: relative;
+    color: var(--text-color-light);
+    font-size: 1.1rem;
 }
 
 section ul li::before {
-  content: '✓';
-  position: absolute;
-  left: 0;
-  color: var(--secondary-gold);
-  font-weight: bold;
-  font-size: 1.2rem;
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--secondary-gold);
+    font-weight: bold;
+    font-size: 1.2rem;
 }
 
-footer {
-  text-align: center;
-  margin-top: 6rem;
-  font-size: 1rem;
-  color: #888;
-  padding: 3rem 1rem;
-  background-color: var(--card-bg-color);
-}
-
-footer a {
-  color: var(--secondary-gold);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-footer a:hover {
-  text-decoration: none;
-  color: var(--primary-gold);
-}
-
-.pricing-section,
-.submit-hostel-section,
-.faq-section,
-.colleges-section,
+/* ================= PRICING CARDS ================= */
+.pricing-section, 
+.submit-hostel-section, 
+.faq-section, 
+.colleges-section, 
 #donate-section {
     background: none;
     padding: 5rem 2rem;
 }
 
 .pricing-cards {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 2.5rem;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 2.5rem;
 }
 
 .pricing-card {
-  background-color: var(--surface-color);
-  border-radius: 12px;
-  padding: 2.5rem;
-  width: 300px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  text-align: left;
-  color: var(--text-color);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid var(--border-color);
+    background-color: var(--surface-color);
+    border-radius: 12px;
+    padding: 2.5rem;
+    width: 300px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    text-align: left;
+    color: var(--text-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid var(--border-color);
 }
 
 .pricing-card:hover {
-  transform: translateY(-8px);
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    transform: translateY(-8px);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
 }
 
+/* ================= FAQ ================= */
 .faq-container {
-  max-width: 900px;
-  margin: auto;
-  text-align: left;
+    max-width: 900px;
+    margin: auto;
+    text-align: left;
 }
 
 .faq-item {
-  margin-bottom: 2.5rem;
-  border-left: 4px solid var(--secondary-gold);
-  padding-left: 2rem;
+    margin-bottom: 2.5rem;
+    border-left: 4px solid var(--secondary-gold);
+    padding-left: 2rem;
 }
 
+/* ================= MARQUEE ================= */
 .marquee-container {
-  overflow: hidden;
-  position: relative;
-  padding: 3rem 0;
+    overflow: hidden;
+    position: relative;
+    padding: 3rem 0;
 }
 
 .marquee img {
-  height: 70px;
-  object-fit: contain;
-  transition: transform 0.3s, filter 0.3s;
-  margin: 0 2.5rem;
-  filter: grayscale(50%);
-  opacity: 0.8;
+    height: 70px;
+    object-fit: contain;
+    transition: transform 0.3s, filter 0.3s;
+    margin: 0 2.5rem;
+    filter: grayscale(50%);
+    opacity: 0.8;
 }
 
 .marquee img:hover {
@@ -274,56 +262,60 @@ footer a:hover {
     opacity: 1;
 }
 
+/* ================= DONATE CONTAINER ================= */
 .donate-container {
-  max-width: 600px;
-  margin: auto;
-  padding: 3rem;
-  background-color: var(--surface-color);
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  border: 1px solid var(--border-color);
+    max-width: 600px;
+    margin: auto;
+    padding: 3rem;
+    background-color: var(--surface-color);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    border: 1px solid var(--border-color);
 }
 
-/* Navbar */
+/* ================= NAVBAR ================= */
 .navbar {
-  background-color: var(--bg-color);
-  padding: 1rem 2rem;
-  border-bottom: 1px solid var(--border-color);
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  transition: background-color 0.3s ease;
+    background-color: var(--bg-color);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
 }
 
 .nav-container {
-  max-width: 1200px;
-  margin: auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.navbar .logo { 
-  font-size: 1.6rem; font-weight: 800; color: #fff; 
-  background: linear-gradient(90deg, var(--primary-gold), var(--secondary-gold)); -webkit-background-clip: text; 
-  -webkit-text-fill-color: transparent; text-decoration: none; 
-} 
+.navbar .logo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-decoration: none;
+    background: linear-gradient(90deg, var(--primary-gold), var(--secondary-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
 .navbar nav {
-  display: flex;
-  gap: 2rem;
+    display: flex;
+    gap: 2rem;
 }
 
 .navbar nav a {
-  color: var(--text-color-light);
-  text-decoration: none;
-  font-weight: 600;
-  transition: color 0.2s ease;
-  font-size: 1.05rem;
+    color: var(--text-color-light);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+    font-size: 1.05rem;
 }
 
 .navbar nav a:hover {
-  color: var(--primary-gold);
+    color: var(--primary-gold);
 }
 
 .nav-right {
@@ -333,24 +325,24 @@ footer a:hover {
 }
 
 .hamburger {
-  display: none;
-  cursor: pointer;
-  background: none;
-  border: none;
-  padding: 0;
-  z-index: 1001;
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    z-index: 1001;
 }
 
 .hamburger span {
-  display: block;
-  width: 28px;
-  height: 3px;
-  margin: 6px auto;
-  background-color: var(--text-color);
-  transition: all 0.3s ease-in-out;
+    display: block;
+    width: 28px;
+    height: 3px;
+    margin: 6px auto;
+    background-color: var(--text-color);
+    transition: all 0.3s ease-in-out;
 }
 
-/* Theme-toggle-button */
+/* ================= THEME TOGGLE ================= */
 .theme-toggle-button {
     background: var(--surface-color);
     border: 1px solid var(--border-color);
@@ -392,59 +384,56 @@ body.light-mode .theme-toggle-button .moon-icon {
     transform: scale(0);
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-.hero h1 {
-    background-size: 600% 600%;
-    -webkit-background-clip: text;       /* Apply gradient to text only */
-    -webkit-text-fill-color: transparent; /* Hide the solid background */
-    display: inline-block;               /* Important for correct clipping */
-    animation: gradientShift 6s ease infinite;
-    color: unset;                         /* Remove any previous color like #FFD700 */
-}
-
-  main {
-    flex-direction: column;
-    gap: 0;
-  }
-
-  section {
-    padding: 3rem 1rem;
-  }
-
-  .navbar nav {
-    display: none;
-    flex-direction: column;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    width: 100%;
-    background-color: var(--card-bg-color);
-    padding: 1rem 0;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-  }
-
-  .navbar nav.active {
-    display: flex;
-  }
-
-  .navbar nav a {
-    padding: 1rem 0;
+/* ================= FOOTER ================= */
+footer {
     text-align: center;
-    width: 100%;
-  }
-
-  .hamburger {
-    display: block;
-  }
+    margin-top: 6rem;
+    font-size: 1rem;
+    color: #888;
+    padding: 3rem 1rem;
+    background-color: var(--card-bg-color);
 }
 
-@keyframes scrollLeft {
-  0% { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+footer a {
+    color: var(--secondary-gold);
+    text-decoration: none;
+    transition: color 0.2s ease;
 }
 
-@keyframes scrollRight {
-  0% { transform: translateX(-50%); }
-  100% { transform: translateX(0); }
+footer a:hover {
+    text-decoration: none;
+    color: var(--primary-gold);
 }
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+    .hero h1 { font-size: 2.5rem; }
+    main { flex-direction: column; gap: 0; }
+    section { padding: 3rem 1rem; }
+
+    .navbar nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--card-bg-color);
+        padding: 1rem 0;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .navbar nav.active { display: flex; }
+
+    .navbar nav a {
+        padding: 1rem 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .hamburger { display: block; }
+}
+
+/* ================= MARQUEE ANIMATION ================= */
+@keyframes scrollLeft { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+@keyframes scrollRight { 0% { transform: translateX(-50%); } 100% { transform: translateX(0); } }
