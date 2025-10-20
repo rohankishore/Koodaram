@@ -24,16 +24,23 @@
 <header class="navbar">
   <div class="nav-container">
     <a href="https://hostlr.vercel.app/" class="logo"> 🏠 Hostlr</a>
-    <nav>
-      <a href="/">Home</a>
-      <a href="/pages/browse.html">Browse Hostels</a>
-      <a href="/pages/listHostel.html">List Hostel</a>
-      <a href="pages/about.html">About</a>
-    </nav>
-    <button id="theme-toggle" class="theme-toggle-button">
-        <span class="sun-icon">☀️</span>
-        <span class="moon-icon">🌙</span>
+    <button class="hamburger" id="hamburger-button">
+      <span></span>
+      <span></span>
+      <span></span>
     </button>
+    <div class="nav-links" id="nav-links">
+      <nav>
+        <a href="/">Home</a>
+        <a href="/pages/browse.html">Browse Hostels</a>
+        <a href="/pages/listHostel.html">List Hostel</a>
+        <a href="pages/about.html">About</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle-button">
+          <span class="sun-icon">☀️</span>
+          <span class="moon-icon">🌙</span>
+      </button>
+    </div>
   </div>
 </header>
 
@@ -309,6 +316,14 @@ document.addEventListener("DOMContentLoaded", fetchStats);
   if (savedTheme === 'light') {
     body.classList.add('light-mode');
   }
+</script>
+<script>
+  const hamburgerButton = document.getElementById('hamburger-button');
+  const navLinks = document.getElementById('nav-links');
+
+  hamburgerButton.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+  });
 </script>
 </body>
 </html>

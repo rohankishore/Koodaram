@@ -184,29 +184,6 @@ footer a:hover {
   color: var(--primary-gold);
 }
 
-@media (max-width: 768px) {
-  .hero h1 {
-    font-size: 2.2rem;
-  }
-
-  section {
-    flex: 1 1 100%;
-  }
-
-  main {
-    flex-direction: column;
-    gap: 3rem;
-  }
-
-  .info-section h2 {
-    font-size: 1.5rem;
-  }
-
-  .info-section p {
-    font-size: 1rem;
-  }
-}
-
 .navbar {
   background-color: var(--gradient-start);
   padding: 1rem 2rem;
@@ -248,19 +225,6 @@ footer a:hover {
 
 .navbar nav a:hover {
   color: var(--primary-gold);
-}
-
-@media (max-width: 600px) {
-  .nav-container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .navbar nav {
-    flex-direction: column;
-    width: 100%;
-    margin-top: 0.5rem;
-  }
 }
 
 .pricing-section {
@@ -543,4 +507,82 @@ body.light-mode .theme-toggle-button .sun-icon {
 body.light-mode .theme-toggle-button .moon-icon {
     opacity: 0;
     transform: scale(0);
+}
+
+/* Hamburger Menu */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.hamburger span {
+  height: 3px;
+  width: 25px;
+  background: var(--text-color);
+  margin-bottom: 4px;
+  border-radius: 5px;
+  transition: all 0.3s ease-in-out;
+}
+
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  section {
+    flex: 1 1 100%;
+  }
+
+  main {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
+  .info-section h2 {
+    font-size: 1.5rem;
+  }
+
+  .info-section p {
+    font-size: 1rem;
+  }
+
+  .nav-container {
+    flex-wrap: wrap;
+  }
+
+  .navbar nav {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 1rem;
+  }
+
+  .nav-links {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  .navbar nav a {
+    padding: 1rem 0;
+    text-align: center;
+    width: 100%;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .theme-toggle-button {
+    margin-top: 1rem;
+  }
 }
