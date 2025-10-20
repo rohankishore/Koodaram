@@ -3,169 +3,178 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>About - Koodaram</title>
+  <title>About - Hostlr</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-  :root {
-    /* Golden Theme Variables */
-    --bg-dark: #1A1A1A; /* Deep charcoal background */
-    --surface: #1F3A4B; /* Deep teal for containers / blurred backgrounds */
-    --primary: #FFBF00; /* Amber Gold for main actions/highlights */
-    --primary-dark: #DAA520; /* Goldenrod for darker primary shades */
-    --accent: #FFD700; /* Classic Gold for prominent elements */
-    --text-light: #E0E0E0; /* Off-white for general text */
-    --link-color: #FFBF00; /* Amber Gold for general links */
-    --hover-glow: rgba(255, 215, 0, 0.6); /* Gold glow for interactive elements */
-  }
+  <style>
+    :root {
+      /* Golden Theme Variables */
+      --bg-dark: #1A1A1A;
+      --surface: #1F3A4B;
+      --primary: #FFBF00;
+      --primary-dark: #DAA520;
+      --accent: #FFD700;
+      --text-light: #E0E0E0;
+      --link-color: #FFBF00;
+      --hover-glow: rgba(255, 215, 0, 0.6);
+    }
 
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-  body {
-    font-family: 'Inter', sans-serif;
-    background: var(--bg-dark); /* Deep charcoal background */
-    color: var(--text-light); /* Off-white text */
-    line-height: 1.6;
-  }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      line-height: 1.6;
+    }
 
-  header.navbar {
-    background-color: var(--surface); /* Deep teal for nav background */
-    padding: 1rem 2rem;
-    border-bottom: 1px solid var(--primary-dark); /* Goldenrod border */
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Subtle shadow for nav */
-  }
+    header.navbar {
+      background-color: var(--surface);
+      padding: 1rem 2rem;
+      border-bottom: 1px solid var(--primary-dark);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    }
 
-  .nav-container {
-    max-width: 1100px;
-    margin: auto;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-  }
-
-  .navbar .logo {
-    font-size: 1.4rem;
-    font-weight: 800;
-    color: var(--accent); /* Classic gold for logo */
-    text-decoration: none;
-    background: linear-gradient(90deg, var(--accent), var(--primary)); /* Gold gradient for logo */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .navbar nav {
-    display: flex;
-    gap: 1.5rem;
-  }
-
-  .navbar nav a {
-    color: #D3D3D3; /* Light grey for general nav links */
-    text-decoration: none;
-    font-weight: 500;
-    transition: color 0.2s ease;
-  }
-
-  .navbar nav a:hover {
-    color: var(--accent); /* Classic gold on hover */
-  }
-
-  @media (max-width: 600px) {
     .nav-container {
-      flex-direction: column;
-      align-items: flex-start;
+      max-width: 1100px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .navbar .logo {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--accent);
+      text-decoration: none;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
     .navbar nav {
-      flex-direction: column;
-      width: 100%;
-      margin-top: 0.5rem;
+      display: flex;
+      gap: 1.5rem;
     }
-  }
 
-  .info-section {
-    padding: 4rem 2rem;
-    text-align: center;
-    max-width: 800px;
-    margin: auto;
-    background: var(--surface); /* Deep teal for the info section background */
-    border-radius: 14px;
-    box-shadow: 0 0 20px var(--hover-glow); /* Subtle gold shadow */
-  }
+    .navbar nav a {
+      color: #D3D3D3;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
 
-  .info-section h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-    background: linear-gradient(90deg, var(--accent), var(--primary)); /* Gold gradient for heading */
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
+    .navbar nav a:hover {
+      color: var(--accent);
+    }
 
-  .info-section p {
-    font-size: 1.1rem;
-    color: #D3D3D3; /* Light grey for paragraphs */
-    margin-bottom: 3rem;
-  }
+    @media (max-width: 600px) {
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .navbar nav {
+        flex-direction: column;
+        width: 100%;
+        margin-top: 0.5rem;
+      }
+    }
 
-  footer {
-    text-align: center;
-    font-size: 0.95rem;
-    color: #777; /* Standard grey for footer text */
-    padding: 2rem 1rem;
-    border-top: 1px solid var(--primary-dark); /* Goldenrod border */
-    margin-top: 5rem;
-  }
+    .info-section {
+      padding: 4rem 2rem;
+      text-align: center;
+      max-width: 800px;
+      margin: auto;
+      background: var(--surface);
+      border-radius: 14px;
+      box-shadow: 0 0 20px var(--hover-glow);
+    }
 
-  footer a {
-    color: var(--link-color); /* Amber gold for footer links */
-    text-decoration: none;
-  }
+    .info-section h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(90deg, var(--accent), var(--primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
 
-  footer a:hover {
-    text-decoration: underline;
-    color: var(--accent); /* Classic gold on hover */
-  }
-</style>
+    .info-section p {
+      font-size: 1.1rem;
+      color: #D3D3D3;
+      margin-bottom: 3rem;
+    }
+
+    footer {
+      text-align: center;
+      font-size: 0.95rem;
+      color: #777;
+      padding: 2rem 1rem;
+      border-top: 1px solid var(--primary-dark);
+      margin-top: 5rem;
+    }
+
+    footer a {
+      color: var(--link-color);
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+      color: var(--accent);
+    }
+  </style>
 </head>
 <body>
 
   <header class="navbar">
     <div class="nav-container">
-      <a href="https://koodaram.vercel.app/" class="logo"> 🏠 Koodaram</a>
+      <a href="https://hostlr.vercel.app/" class="logo"> 🏠 Hostlr</a>
       <nav>
-        <a href="https://koodaram.vercel.app/">Home</a>
+        <a href="https://hostlr.vercel.app/">Home</a>
         <a href="browse.html">Browse Hostels</a>
-        <a href="listHostel.html">For Hostel Owners</a>
-        <a href="pricing.html">Pricing</a>
+        <a href="listHostel.html">Contribute</a>
+        <a href="community.html">Community</a>
       </nav>
     </div>
   </header>
 
   <div class="info-section">
-    <h2>💗 About Koodaram</h2>
+    <h2>💛 About Hostlr</h2>
     <p>
-      Koodaram is a student-first platform to help you find the best hostels and PGs near your college — with zero hassle. We’re building the most transparent, no-middleman directory for student living in Kerala.
+      Hostlr is a <strong>student-run, decentralized hostel network</strong> built to help you find verified hostels and PGs near your campus — without corporate control or hidden fees. 
+      What started as a small project to make hostel discovery simple is now growing into a community movement for open, transparent student living.
     </p>
 
-    <h2>❓ Why Koodaram?</h2>
+    <h2>🌍 Why Hostlr?</h2>
     <p>
-      Because students deserve better. No more unreliable WhatsApp forwards or shady Facebook groups. We help you see real photos, real facilities, and talk directly to hostel owners — for free.
+      Because students deserve ownership of their own spaces. Hostlr isn’t run by investors or agencies — it’s powered by students who care about honest listings, verified facilities, and open data.
+      Every hostel you see is <strong>added, reviewed, and maintained by the student community</strong>.
     </p>
 
-    <h2>💡 How It Works</h2>
+    <h2>⚙️ How It Works</h2>
     <p>
-      Hostel owners can submit their listing. You can search by college, compare hostels, and directly contact the owner via phone or WhatsApp. No login. No agents. No tricks.
+      Hostlr runs on open data — anyone can list a hostel or verify details through our community repository. 
+      You can browse hostels by college, compare amenities, and directly contact owners via WhatsApp or phone. 
+      No logins, no agents, no middlemen. Just trust and transparency, powered by students.
+    </p>
+
+    <h2>🚀 Join the Movement</h2>
+    <p>
+      Contribute listings, verify hostels, or improve the platform — everything’s open source on GitHub.  
+      Together, we’re building the future of student living, one hostel at a time.
     </p>
   </div>
 
   <footer>
-    © 2025 Koodaram. Made with ♥ by <a href="https://github.com/rohankishore" target="_blank">Rohan Kishore</a>.
+    © 2025 Hostlr. Built with ♥ by <a href="https://github.com/rohankishore" target="_blank">Rohan Kishore</a> & the student community.
   </footer>
 
 </body>
