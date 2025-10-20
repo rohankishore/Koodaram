@@ -1,4 +1,3 @@
-![Hostlr](https://img.freepik.com/free-vector/hostel-logo-design-template_7492-21.jpg)
 
 # Hostlr
 
