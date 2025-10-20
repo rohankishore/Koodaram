@@ -35,9 +35,68 @@ body {
 }
 
 .hero {
-  background: linear-gradient(180deg, rgba(31, 31, 31, 0) 0%, #1f1f1f 100%), linear-gradient(180deg, #2a2a2a 0%, rgba(42, 42, 42, 0) 100%);
-  padding: 6rem 2rem 4rem;
+  position: relative;
+  overflow: hidden;
+  padding: 8rem 2rem 6rem;
   text-align: center;
+  color: #FFD700;
+
+  /* Bold, vibrant gradient background with depth */
+  background: linear-gradient(135deg, #1a1a1a 0%, #1f3a4b 40%, #2a2a2a 100%);
+  border-radius: 16px;
+
+  /* Soft glowing overlay */
+  box-shadow: inset 0 0 80px rgba(255, 191, 0, 0.2);
+
+  /* Animated light streaks */
+  animation: heroPulse 6s ease-in-out infinite alternate;
+}
+
+/* Floating sparkles / particles */
+.hero::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
+  transform: translateX(-50%);
+  animation: floatParticles 10s linear infinite;
+  pointer-events: none;
+}
+
+/* Pulse animation for glowing effect */
+@keyframes heroPulse {
+  0% { box-shadow: inset 0 0 50px rgba(255, 191, 0, 0.1); }
+  50% { box-shadow: inset 0 0 100px rgba(255, 191, 0, 0.3); }
+  100% { box-shadow: inset 0 0 50px rgba(255, 191, 0, 0.1); }
+}
+
+/* Particle floating motion */
+@keyframes floatParticles {
+  0% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+  50% { transform: translateX(-50%) translateY(20px) rotate(15deg); }
+  100% { transform: translateX(-50%) translateY(0) rotate(0deg); }
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle at 30% 30%, rgba(255, 215, 0, 0.03), transparent 70%),
+              radial-gradient(circle at 70% 70%, rgba(255, 191, 0, 0.03), transparent 70%);
+  animation: waveMove 20s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes waveMove {
+  0% { transform: translate(0,0) rotate(0deg); }
+  50% { transform: translate(15px, 10px) rotate(10deg); }
+  100% { transform: translate(0,0) rotate(0deg); }
 }
 
 .hero h1 {
