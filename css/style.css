@@ -1,12 +1,12 @@
 :root {
     --bg-color: #1f1f1f;
     --text-color: #E0E0E0;
-    --card-bg-color: #1E1E1E;
-    --border-color: #333;
-    --primary-gold: #FFD700;
-    --secondary-gold: #FFBF00;
+    --card-bg-color: #2a2a2a;
+    --border-color: #444;
+    --primary-gold: #ffd700;
+    --secondary-gold: #ffc400;
     --surface-color: #2C2C2C;
-    --text-color-light: #d3d3d3;
+    --text-color-light: #b0b0b0;
 }
 
 body.light-mode {
@@ -35,22 +35,23 @@ body {
 }
 
 .hero {
-  background: none;
-  padding: 4rem 2rem 3rem;
+  background: linear-gradient(180deg, rgba(31, 31, 31, 0) 0%, #1f1f1f 100%), linear-gradient(180deg, #2a2a2a 0%, rgba(42, 42, 42, 0) 100%);
+  padding: 6rem 2rem 4rem;
   text-align: center;
 }
 
 .hero h1 {
-  font-size: 3rem;
+  font-size: 3.5rem;
   font-weight: 800;
   background: linear-gradient(90deg, var(--primary-gold), var(--secondary-gold));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   margin-bottom: 1rem;
+  letter-spacing: -1px;
 }
 
 .hero p {
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   max-width: 720px;
   margin: auto;
   color: var(--text-color-light);
@@ -58,33 +59,33 @@ body {
 
 .cta-button {
   display: inline-block;
-  margin-top: 2rem;
+  margin-top: 2.5rem;
   background: linear-gradient(90deg, var(--secondary-gold), var(--primary-gold));
   color: #1A1A1A;
-  padding: 0.85rem 1.8rem;
+  padding: 1rem 2.2rem;
   text-decoration: none;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 1rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 1.1rem;
   transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
   border: none;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(255, 215, 0, 0.3);
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.25);
 }
 
 .cta-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 15px rgba(255, 215, 0, 0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 25px rgba(255, 215, 0, 0.4);
 }
 
 main {
-  max-width: 900px;
-  margin: 4rem auto;
+  max-width: 960px;
+  margin: 2rem auto;
   padding: 0 2rem;
 }
 
 section {
-  padding: 3rem 0;
+  padding: 4rem 0;
   border-bottom: 1px solid var(--border-color);
 }
 
@@ -93,9 +94,9 @@ section:last-child {
 }
 
 section h2 {
-  font-size: 2.2rem;
-  font-weight: 700;
-  margin-bottom: 2rem;
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin-bottom: 3rem;
   text-align: center;
   background: linear-gradient(90deg, var(--primary-gold), var(--secondary-gold));
   -webkit-background-clip: text;
@@ -106,41 +107,44 @@ section ul {
   list-style: none;
   padding-left: 0;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 2rem;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2.5rem;
 }
 
 section ul li {
   margin-bottom: 1rem;
-  padding-left: 1.8rem;
+  padding-left: 2rem;
   position: relative;
   color: var(--text-color-light);
+  font-size: 1.1rem;
 }
 
 section ul li::before {
-  content: '✔';
+  content: '✓';
   position: absolute;
   left: 0;
   color: var(--secondary-gold);
   font-weight: bold;
+  font-size: 1.2rem;
 }
 
 footer {
   text-align: center;
-  margin-top: 5rem;
-  font-size: 0.95rem;
-  color: #777;
-  padding: 2rem 1rem;
+  margin-top: 6rem;
+  font-size: 1rem;
+  color: #888;
+  padding: 3rem 1rem;
   background-color: var(--card-bg-color);
 }
 
 footer a {
   color: var(--secondary-gold);
   text-decoration: none;
+  transition: color 0.2s ease;
 }
 
 footer a:hover {
-  text-decoration: underline;
+  text-decoration: none;
   color: var(--primary-gold);
 }
 
@@ -150,30 +154,31 @@ footer a:hover {
 .colleges-section,
 #donate-section {
     background: none;
-    padding: 4rem 2rem;
+    padding: 5rem 2rem;
 }
 
 .pricing-cards {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
 .pricing-card {
   background-color: var(--surface-color);
-  border-radius: 8px;
-  padding: 2rem;
-  width: 280px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  padding: 2.5rem;
+  width: 300px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   text-align: left;
   color: var(--text-color);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: 1px solid var(--border-color);
 }
 
 .pricing-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+  transform: translateY(-8px);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
 }
 
 .faq-container {
@@ -183,31 +188,39 @@ footer a:hover {
 }
 
 .faq-item {
-  margin-bottom: 2rem;
-  border-left: 3px solid var(--secondary-gold);
-  padding-left: 1.5rem;
+  margin-bottom: 2.5rem;
+  border-left: 4px solid var(--secondary-gold);
+  padding-left: 2rem;
 }
 
 .marquee-container {
   overflow: hidden;
   position: relative;
-  padding: 2rem 0;
+  padding: 3rem 0;
 }
 
 .marquee img {
-  height: 60px;
+  height: 70px;
   object-fit: contain;
   transition: transform 0.3s, filter 0.3s;
-  margin: 0 2rem;
+  margin: 0 2.5rem;
+  filter: grayscale(50%);
+  opacity: 0.8;
+}
+
+.marquee img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
 }
 
 .donate-container {
   max-width: 600px;
   margin: auto;
-  padding: 2rem;
+  padding: 3rem;
   background-color: var(--surface-color);
-  border-radius: 8px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--border-color);
 }
 
 /* Navbar */
@@ -218,10 +231,11 @@ footer a:hover {
   position: sticky;
   top: 0;
   z-index: 1000;
+  transition: background-color 0.3s ease;
 }
 
 .nav-container {
-  max-width: 1100px;
+  max-width: 1200px;
   margin: auto;
   display: flex;
   align-items: center;
@@ -229,7 +243,7 @@ footer a:hover {
 }
 
 .navbar .logo {
-  font-size: 1.4rem;
+  font-size: 1.6rem;
   font-weight: 800;
   color: #fff;
   background: linear-gradient(90deg, var(--primary-gold), var(--secondary-gold));
@@ -240,14 +254,15 @@ footer a:hover {
 
 .navbar nav {
   display: flex;
-  gap: 1.5rem;
+  gap: 2rem;
 }
 
 .navbar nav a {
   color: var(--text-color-light);
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 600;
   transition: color 0.2s ease;
+  font-size: 1.05rem;
 }
 
 .navbar nav a:hover {
@@ -271,9 +286,9 @@ footer a:hover {
 
 .hamburger span {
   display: block;
-  width: 25px;
+  width: 28px;
   height: 3px;
-  margin: 5px auto;
+  margin: 6px auto;
   background-color: var(--text-color);
   transition: all 0.3s ease-in-out;
 }
@@ -287,15 +302,15 @@ footer a:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 70px;
-    height: 35px;
+    width: 60px;
+    height: 30px;
     position: relative;
     transition: background-color 0.3s ease;
 }
 
 .theme-toggle-button .sun-icon,
 .theme-toggle-button .moon-icon {
-    font-size: 1.5rem;
+    font-size: 1.2rem;
     position: absolute;
     transition: opacity 0.3s ease, transform 0.3s ease;
 }
@@ -323,7 +338,7 @@ body.light-mode .theme-toggle-button .moon-icon {
 /* Responsive Styles */
 @media (max-width: 768px) {
   .hero h1 {
-    font-size: 2.2rem;
+    font-size: 2.5rem;
   }
 
   main {
@@ -332,19 +347,19 @@ body.light-mode .theme-toggle-button .moon-icon {
   }
 
   section {
-    padding: 2rem 1rem;
+    padding: 3rem 1rem;
   }
 
   .navbar nav {
     display: none;
     flex-direction: column;
     position: absolute;
-    top: 65px; /* Adjust to navbar height */
+    top: 100%;
     left: 0;
     width: 100%;
     background-color: var(--card-bg-color);
     padding: 1rem 0;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.2);
   }
 
   .navbar nav.active {
@@ -352,8 +367,9 @@ body.light-mode .theme-toggle-button .moon-icon {
   }
 
   .navbar nav a {
-    padding: 0.5rem 0;
+    padding: 1rem 0;
     text-align: center;
+    width: 100%;
   }
 
   .hamburger {
