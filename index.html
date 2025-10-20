@@ -5,7 +5,7 @@
 
   <meta name="google-site-verification" content="qK4_9fj-_oQbk3XLWuUA937Uz-_O0nlkaY0OL_GaeYM" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Koodaram</title>
+  <title>Hostlr</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
 
@@ -13,9 +13,9 @@
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "name": "Koodaram",
-    "url": "https://koodaram.vercel.app",
-    "logo": "https://koodaram.vercel.app/assets/images/icons/koodaram.png"
+    "name": "Hostlr",
+    "url": "https://hostlr.vercel.app",
+    "logo": "https://hostlr.vercel.app/assets/images/icons/hostlr.png"
   }
   </script>
 
@@ -23,7 +23,7 @@
 
 <header class="navbar">
   <div class="nav-container">
-    <a href="https://koodaram.vercel.app/" class="logo"> 🏠 Koodaram</a>
+    <a href="https://hostlr.vercel.app/" class="logo"> 🏠 Hostlr</a>
     <nav>
       <a href="/">Home</a>
       <a href="/pages/browse.html">Browse Hostels</a>
@@ -41,8 +41,8 @@
 <body>
 
 <div class="hero">
-  <h1>🏠 Koodaram</h1>
-  <p>    Starting college? Koodaram helps you discover trusted hostels near your campus, compare facilities with ease, and contact owners directly — no hassle, no middlemen.</p>
+  <h1>🏠 Hostlr</h1>
+  <p>    Starting college? Hostlr helps you discover trusted hostels near your campus, compare facilities with ease, and contact owners directly — no hassle, no middlemen.</p>
   <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem;">
     <a href="/pages/browse.html" class="cta-button">🔍 Search Hostels</a>
     <button class="cta-button" onclick="togglePersonalizeForm()">💖 Personalize</button>
@@ -84,8 +84,8 @@
 
   <div id="hero-stats" style="margin-top: 2rem;" align="center">
     <p style="font-size:1.2rem;">
-      🏠 Total Hostels: <span id="total-hostels">Loading...</span><br>
-      🎓 Total Colleges: <span id="college-count">Loading...</span>
+      🏠 Total Hostels: <span id="total-hostels">106</span><br>
+      🎓 Total Colleges: <span id="college-count">8</span>
     </p>
   </div>
 </div>
@@ -145,7 +145,7 @@
   </main>
 
   <section class="colleges-section">
-  <h2>🏫 Colleges on Koodaram</h2>
+  <h2>🏫 Colleges on Hostlr</h2>
   <div class="marquee-container">
     <div class="marquee marquee1">
       <img src="/assets/images/colleges/gect.png" alt="GEC Thrissur" />
@@ -180,8 +180,8 @@
 
 <section id="donate-section">
   <div class="donate-container">
-    <h2>💖 Support Koodaram</h2>
-    <p>Found Koodaram useful? Help keep the project alive by buying a coffee or sending a small donation!</p>
+    <h2>💖 Support Hostlr</h2>
+    <p>Found Hostlr useful? Help keep the project alive by buying a coffee or sending a small donation!</p>
     <a href="pages/donate.html" target="_blank" class="donate-button">🙏 Donate Now</a>
   </div>
 </section>
@@ -192,11 +192,11 @@
   <h2>❓ Frequently Asked Questions</h2>
   <div class="faq-container">
     <div class="faq-item">
-      <h3>Is Koodaram free to use?</h3>
-      <p>Yes! Koodaram is completely free for students. You can browse hostels, view photos, and contact owners without paying anything.</p>
+      <h3>Is Hostlr free to use?</h3>
+      <p>Yes! Hostlr is completely free for students. You can browse hostels, view photos, and contact owners without paying anything.</p>
     </div>
     <div class="faq-item">
-      <h3>Does Koodaram check every hostel personally?</h3>
+      <h3>Does Hostlr check every hostel personally?</h3>
       <p>No. We DO NOT check every hostel individually. Hostels with Verified or Premium badge(s) has been thoroughly verified to be above standards.</p>
     </div>
     <div class="faq-item">
@@ -214,12 +214,12 @@
     </div>
     <div class="faq-item">
       <h3>How are ratings calculated?</h3>
-      <p>Koodaram, as of now doesnt have it's own rating system. We use real user reviews from Google Businesses for our rating system</p>
+      <p>Hostlr, as of now doesnt have it's own rating system. We use real user reviews from Google Businesses for our rating system</p>
     </div>
     <div class="faq-item">
-      <h3>Does Koodaram charge hostel owners?</h3>
+      <h3>Does Hostlr charge hostel owners?</h3>
       <p>Basic listings are free. We offer optional premium plans for higher visibility — see our <a href="/pages/pricing.html">Pricing</a> page for details.
-      Though we may have to charge compulsorily from the owners if the maintenance of the site becomes out of our expense criteria. Anyways, Koodaram will be 100% FREE for all students.</p>
+      Though we may have to charge compulsorily from the owners if the maintenance of the site becomes out of our expense criteria. Anyways, Hostlr will be 100% FREE for all students.</p>
     </div>
   </div>
 </section>
@@ -233,13 +233,13 @@
     <br>
     <br>
 
-    © 2025 Koodaram. Made with ♥ by <a href="https://github.com/rohankishore" target="_blank">Rohan Kishore</a>.
+    © 2025 Hostlr. Made with ♥ by <a href="https://github.com/rohankishore" target="_blank">Rohan Kishore</a>.
   </footer>
 
 <script>
 async function fetchStats() {
   const GITHUB_USER = "rohankishore";
-  const REPO = "Koodaram";
+  const REPO = "Hostlr";
   const API_BASE = `https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/hostels`;
   const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
 
