@@ -163,7 +163,7 @@
 
   <script>
     const { createClient } = supabase;
-    const _supabase = createClient("<%= process.env.SUPABASE_URL %>", "<%= process.env.SUPABASE_ANON_KEY %>");
+    const _supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
 
     const signupButton = document.getElementById('signup-button');
     const loginButton = document.getElementById('login-button');
