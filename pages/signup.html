@@ -161,13 +161,8 @@
     <p id="message"></p>
   </div>
 
+  <script src="supabase-init.js"></script>
   <script>
-    const supabaseUrl = process.env.SUPABASE_URL;
-    const supabaseAnonKey = process.env.SUPABASE_ANON_KEY;
-
-    const { createClient } = supabase
-    const _supabase = createClient(supabaseUrl, supabaseAnonKey)
-
     const signupButton = document.getElementById('signup-button');
     const loginButton = document.getElementById('login-button');
     const emailInput = document.getElementById('email');
