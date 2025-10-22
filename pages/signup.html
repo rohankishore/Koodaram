@@ -162,8 +162,13 @@
   </div>
 
   <script>
+    // WARNING: It is not recommended to hardcode API keys in your code.
+    // This is a security risk and should be avoided in production environments.
+    const supabaseUrl = 'YOUR_SUPABASE_URL';
+    const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY';
+
     const { createClient } = supabase;
-    const _supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+    const _supabase = createClient(supabaseUrl, supabaseAnonKey);
 
     const signupButton = document.getElementById('signup-button');
     const loginButton = document.getElementById('login-button');
