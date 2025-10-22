@@ -161,7 +161,16 @@
     <p id="message"></p>
   </div>
 
-  <script src="supabase-init.js"></script>
+  <script>
+    let _supabase;
+    if (typeof process !== 'undefined') {
+        const { createClient } = supabase;
+        _supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+    } else {
+        // Fallback for local development
+        document.write('<script src="supabase-init.js"><\/script>');
+    }
+  </script>
   <script>
     const signupButton = document.getElementById('signup-button');
     const loginButton = document.getElementById('login-button');
