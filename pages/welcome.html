@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Welcome to Koodaram</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+    :root {
+      --bg-dark: #0f0f0f;
+      --surface: #1a1a1a;
+      --primary: #ffd700;
+      --accent: #ffbf00;
+      --text-light: #e6e6e6;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .welcome-container {
+      max-width: 600px;
+      width: 100%;
+      padding: 2rem;
+    }
+
+    .step {
+      display: none;
+      animation: fadeIn 0.5s;
+    }
+
+    .step.active {
+      display: block;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 800;
+      color: var(--primary);
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #ccc;
+      margin-bottom: 2rem;
+    }
+
+    .input-group {
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      display: block;
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 1rem;
+      background: var(--surface);
+      border: 1px solid #444;
+      border-radius: 8px;
+      color: var(--text-light);
+      font-size: 1.2rem;
+    }
+
+    button {
+      background: var(--primary);
+      color: var(--bg-dark);
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 1.2rem;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background: var(--accent);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="welcome-container">
+    <div id="step1" class="step active">
+      <h1>Welcome to Koodaram!</h1>
+      <p>Let's get your profile set up.</p>
+      <div class="input-group">
+        <label for="gender">What's your gender?</label>
+        <select id="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <button id="next-step1">Next</button>
+    </div>
+
+    <div id="step2" class="step">
+      <h1>One last thing...</h1>
+      <div class="input-group">
+        <label for="college">What college are you from?</label>
+        <input type="text" id="college" placeholder="Enter your college name">
+      </div>
+      <button id="submit">Submit</button>
+    </div>
+
+    <div id="thank-you" class="step">
+      <h1>Thank you!</h1>
+      <p>Your profile is complete. You can now browse hostels.</p>
+      <a href="/pages/browse.html"><button>Browse Hostels</button></a>
+    </div>
+  </div>
+
+  <script>
+    // WARNING: It is not recommended to hardcode API keys in your code.
+    // This is a security risk and should be avoided in production environments.
+    const supabaseUrl = 'YOUR_SUPABASE_URL';
+    const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY';
+
+    const { createClient } = supabase;
+    const _supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+    const step1 = document.getElementById('step1');
+    const step2 = document.getElementById('step2');
+    const thankYou = document.getElementById('thank-you');
+
+    const nextStep1 = document.getElementById('next-step1');
+    const submit = document.getElementById('submit');
+
+    const genderInput = document.getElementById('gender');
+    const collegeInput = document.getElementById('college');
+
+    nextStep1.addEventListener('click', () => {
+      step1.classList.remove('active');
+      step2.classList.add('active');
+    });
+
+    submit.addEventListener('click', async () => {
+      const { data: { user } } = await _supabase.auth.getUser();
+
+      if (user) {
+        const { data, error } = await _supabase
+          .from('profiles')
+          .insert([
+            { id: user.id, gender: genderInput.value, college: collegeInput.value },
+          ]);
+
+        if (error) {
+          console.error('Error inserting profile data:', error);
+        } else {
+          step2.classList.remove('active');
+          thankYou.classList.add('active');
+        }
+      } else {
+        // Handle the case where the user is not logged in
+        window.location.href = '/pages/signup.html';
+      }
+    });
+  </script>
+
+</body>
+</html>
