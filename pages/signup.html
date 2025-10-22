@@ -163,45 +163,52 @@
 
   <script>
     let _supabase;
-    if (typeof process !== 'undefined') {
+    if (typeof process !== 'undefined' && process.env.SUPABASE_URL) {
         const { createClient } = supabase;
         _supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_ANON_KEY);
+        initializeAuth();
     } else {
         // Fallback for local development
-        document.write('<script src="supabase-init.js"><\/script>');
+        const script = document.createElement('script');
+        script.src = 'supabase-init.js';
+        script.onload = () => {
+            initializeAuth();
+        };
+        document.head.appendChild(script);
     }
-  </script>
-  <script>
-    const signupButton = document.getElementById('signup-button');
-    const loginButton = document.getElementById('login-button');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
-    const message = document.getElementById('message');
 
-    signupButton.addEventListener('click', async () => {
-      const { data, error } = await _supabase.auth.signUp({
-        email: emailInput.value,
-        password: passwordInput.value,
-      })
-      if (error) {
-        message.textContent = error.message;
-      } else {
-        message.textContent = 'Signed up successfully! Please check your email to verify your account.';
-      }
-    });
+    function initializeAuth() {
+        const signupButton = document.getElementById('signup-button');
+        const loginButton = document.getElementById('login-button');
+        const emailInput = document.getElementById('email');
+        const passwordInput = document.getElementById('password');
+        const message = document.getElementById('message');
 
-    loginButton.addEventListener('click', async () => {
-      const { data, error } = await _supabase.auth.signInWithPassword({
-        email: emailInput.value,
-        password: passwordInput.value,
-      })
-      if (error) {
-        message.textContent = error.message;
-      } else {
-        message.textContent = 'Logged in successfully!';
-        // Redirect to a protected page, e.g., window.location.href = '/dashboard';
-      }
-    });
+        signupButton.addEventListener('click', async () => {
+          const { data, error } = await _supabase.auth.signUp({
+            email: emailInput.value,
+            password: passwordInput.value,
+          })
+          if (error) {
+            message.textContent = error.message;
+          } else {
+            message.textContent = 'Signed up successfully! Please check your email to verify your account.';
+          }
+        });
+
+        loginButton.addEventListener('click', async () => {
+          const { data, error } = await _supabase.auth.signInWithPassword({
+            email: emailInput.value,
+            password: passwordInput.value,
+          })
+          if (error) {
+            message.textContent = error.message;
+          } else {
+            message.textContent = 'Logged in successfully!';
+            // Redirect to a protected page, e.g., window.location.href = '/dashboard';
+          }
+        });
+    }
   </script>
 
 </body>
