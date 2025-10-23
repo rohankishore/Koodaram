@@ -94,6 +94,21 @@
       margin: 3rem auto;
     }
 
+    .community-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .filter-bar select {
+        background: var(--input-bg-dark);
+        color: var(--text-light);
+        border: var(--border-gold);
+        border-radius: 8px;
+        padding: 0.8rem;
+    }
+
     .create-post-btn {
       background: var(--gold);
       color: #000;
@@ -102,7 +117,6 @@
       font-weight: 600;
       text-decoration: none;
       display: inline-block;
-      margin-bottom: 2rem;
     }
 
     .post-card {
@@ -238,8 +252,25 @@
 </header>
 
 <main class="community-container">
-  <h1>Community Discussions</h1>
-  <a href="#" id="create-post-btn" class="create-post-btn">Create Post</a>
+    <div class="community-header">
+        <h1>Community Discussions</h1>
+        <a href="#" id="create-post-btn" class="create-post-btn">Create Post</a>
+    </div>
+
+    <div class="filter-bar" style="margin-bottom: 2rem;">
+        <select id="college-filter">
+            <option value="">All Colleges</option>
+            <option value="CUSAT">CUSAT</option>
+            <option value="CUCEK">CUCEK</option>
+            <option value="SCTCE">SCT Trivandrum</option>
+            <option value="GECK">GEC Kozhikode</option>
+            <option value="GECPKD">GEC Palakkad</option>
+            <option value="GECT">GEC Thrissur</option>
+            <option value="NSSPKD">NSS College Palakkad</option>
+            <option value="RIT">RIT Kottayam</option>
+        </select>
+    </div>
+
   <div id="posts-container"></div>
 </main>
 
@@ -296,6 +327,7 @@
   const submitPostBtn = document.getElementById('submit-post-btn');
   const hamburgerButton = document.getElementById('hamburger-button');
   const mainNav = document.getElementById('main-nav');
+  const collegeFilter = document.getElementById('college-filter');
 
   const GITHUB_USER = "Koodaram-Inc";
   const REPO = "koodaram-data";
@@ -309,11 +341,13 @@
   hamburgerButton.addEventListener('click', toggleMenu);
   hamburgerButton.addEventListener('touchstart', toggleMenu);
 
-  async function fetchPostsAndReplies() {
-    const { data: posts, error } = await _supabase
-      .from('community_posts')
-      .select('*, profile:profiles(name)')
-      .order('created_at', { ascending: false });
+  async function fetchPostsAndReplies(college = null) {
+    let query = _supabase.from('community_posts').select('*, profile:profiles(name)').order('created_at', { ascending: false });
+    if (college) {
+        query = query.eq('college', college);
+    }
+
+    const { data: posts, error } = await query;
 
     if (posts) {
       postsContainer.innerHTML = '';
@@ -343,11 +377,7 @@
         `;
         postsContainer.appendChild(postEl);
 
-        const { data: replies } = await _supabase
-          .from('community_replies')
-          .select('*, profile:profiles(name)')
-          .eq('post_id', post.id)
-          .order('created_at', { ascending: true });
+        const { data: replies } = await _supabase.from('community_replies').select('*, profile:profiles(name)').eq('post_id', post.id).order('created_at', { ascending: true });
 
         if (replies && replies.length > 0) {
           const repliesContainer = postEl.querySelector('.replies-container');
@@ -464,8 +494,25 @@
     }
   });
 
-  // Initial fetch
-  fetchPostsAndReplies();
+  collegeFilter.addEventListener('change', () => {
+    const selectedCollege = collegeFilter.value;
+    const url = new URL(window.location);
+    if (selectedCollege) {
+        url.searchParams.set('college', selectedCollege);
+    } else {
+        url.searchParams.delete('college');
+    }
+    window.history.pushState({}, '', url);
+    fetchPostsAndReplies(selectedCollege);
+  });
+
+  // Initial fetch with filter from URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const collegeFromUrl = urlParams.get('college');
+  if (collegeFromUrl) {
+    collegeFilter.value = collegeFromUrl;
+  }
+  fetchPostsAndReplies(collegeFromUrl);
 
 </script>
 
