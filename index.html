@@ -5,20 +5,10 @@
 
   <meta name="google-site-verification" content="qK4_9fj-_oQbk3XLWuUA937Uz-_O0nlkaY0OL_GaeYM" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Koodaram</title>
+  <title>Koodaram - A Decentralized Hostel Network</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "name": "Koodaram",
-    "url": "https://koodaram.vercel.app",
-    "logo": "https://koodaram.vercel.app/assets/images/icons/koodaram.png"
-  }
-  </script>
 
 </head>
 
@@ -26,21 +16,17 @@
 
 <header class="navbar">
   <div class="nav-container">
-    <a href="https://koodaram.vercel.app/" class="logo"> 🏠 Koodaram</a>
+    <a href="/" class="logo"> 🏠 Koodaram</a>
     <nav id="main-nav">
       <a href="/">Home</a>
       <a href="/pages/browse.html">Browse Hostels</a>
       <a href="/pages/community.html">Community</a>
       <a href="/pages/listHostel.html">List Hostel</a>
-      <a href="pages/about.html">About</a>
-      <a href="pages/profile.html">Profile</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/pages/profile.html">Profile</a>
     </nav>
     <div class="nav-right">
         <a href="/pages/signup.html" class="nav-cta-button">Sign Up / Login</a>
-        <button id="theme-toggle" class="theme-toggle-button">
-            <span class="sun-icon">☀️</span>
-            <span class="moon-icon">🌙</span>
-        </button>
         <button class="hamburger" id="hamburger-button">
           <span></span>
           <span></span>
@@ -51,326 +37,135 @@
 </header>
 
 <div class="hero">
-  <h1>🏠 Koodaram</h1>
-  <p>Koodaram is a decentralized, student-run network where college students can find and verify hostels and PGs, powered by community data and open governance. No paywalls. No corporate control.</p>
+  <h1>Your Campus, Your Hostels, Your Network.</h1>
+  <p>A decentralized, student-run network for finding and verifying hostels. Powered by community, for the community.</p>
   <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem;">
-    <a href="/pages/browse.html" class="cta-button">🔍 Search Hostels</a>
-    <button class="cta-button" onclick="togglePersonalizeForm()">💖 Personalize</button>
-  </div>
-
-  <!-- Modal Backdrop -->
-  <div id="personalize-backdrop" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background-color:rgba(0,0,0,0.7); z-index:999;"></div>
-
-  <!-- Personalize Form as Popup -->
-  <div id="personalize-form" style="display:none; position:fixed; top:50%; left:50%; transform:translate(-50%,-50%); background-color:#2C2C2C; padding:2rem; border-radius:12px; z-index:1000; width:90%; max-width:500px; text-align:left;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom:1rem;">
-      <h3 style="color:#FFD700;">🎯 Find Hostels That Suit You</h3>
-      <button onclick="togglePersonalizeForm()" style="background:none; border:none; font-size:1.2rem; color:white; cursor:pointer;">❌</button>
-    </div>
-
-    <label for="college-select" style="display:block; margin-bottom:0.25rem;">Select College:</label>
-    <select id="college-select" style="width:100%; padding:0.5rem; margin-bottom:1rem; border-radius:8px;">
-      <option value="">--Choose--</option>
-      <option value="GEC Thrissur">GEC Thrissur</option>
-      <option value="NSS Palakkad">NSS Palakkad</option>
-      <option value="cusat">CUSAT</option>
-      <option value="cucek">CUCEK</option>
-      <option value="SCT Trivandrum">SCT Trivandrum</option>
-       <option value="RIT Kottayam">RIT Kottayam</option>
-      <option value="GEC Palakkad">GEC Palakkad</option>
-      <option value="GEC Kozhikode">GEC Kozhikode</option>
-    </select>
-
-    <label for="gender-select" style="display:block; margin-bottom:0.25rem;">Gender:</label>
-    <select id="gender-select" style="width:100%; padding:0.5rem; margin-bottom:1rem; border-radius:8px;">
-      <option value="">--Choose--</option>
-      <option value="male">Male</option>
-      <option value="female">Female</option>
-      <option value="other">Other</option>
-    </select>
-
-    <button class="cta-button" onclick="searchPersonalizedHostels()">🔍 Show Hostels</button>
-  </div>
-
-  <div id="hero-stats" style="margin-top: 2rem;" align="center">
-    <p style="font-size:1.2rem;">
-      🏠 Total Hostels: <span id="total-hostels">106</span><br>
-      🎓 Total Colleges: <span id="college-count">8</span>
-    </p>
+    <a href="/pages/browse.html" class="cta-button">🔍 Find Your Hostel</a>
+    <a href="/pages/community.html" class="cta-button">💬 Join the Community</a>
   </div>
 </div>
 
-<script>
-  function togglePersonalizeForm() {
-    const form = document.getElementById('personalize-form');
-    const backdrop = document.getElementById('personalize-backdrop');
-    const isVisible = form.style.display === 'block';
-
-    form.style.display = isVisible ? 'none' : 'block';
-    backdrop.style.display = isVisible ? 'none' : 'block';
-  }
-
-  function searchPersonalizedHostels() {
-    const college = document.getElementById('college-select').value;
-    const gender = document.getElementById('gender-select').value;
-
-    if (!college || !gender) {
-      alert("Please select both college and gender.");
-      return;
-    }
-
-    const query = `college=${encodeURIComponent(college)}&gender=${encodeURIComponent(gender)}`;
-    window.location.href = `/pages/browse.html?${query}`;
-  }
-</script>
-
-
-
-  <main>
-    <section>
-      <h2>Why Koodaram?</h2>
-      <ul>
-        <li style="font-size: 1.1rem; margin-bottom: 0.5rem;"><strong>Find hostels near your college</strong> with ease</li>
-        <li style="font-size: 1.1rem; margin-bottom: 0.5rem;"><strong>View photos</strong> of rooms, bathrooms and surroundings</li>
-        <li style="font-size: 1.1rem; margin-bottom: 0.5rem;"><strong>Compare</strong> food, Wi-Fi, pricing, and sharing options</li>
-        <li style="font-size: 1.1rem; margin-bottom: 0.5rem;"><strong>No agents, no commission</strong> — direct contact only</li>
-        <li style="font-size: 1.1rem; margin-bottom: 0.5rem;"><strong>Free to use, always</strong></li>
-      </ul>
-    </section>
-  </main>
-
-  
-
-
-
-  <section class="colleges-section">
-  <h2>🏫 Colleges on Koodaram</h2>
-  <div class="marquee-container">
-    <div class="marquee marquee1">
-      <img src="/assets/images/colleges/gect.png" alt="GEC Thrissur" />
-      <img src="/assets/images/colleges/nsspkd.png" alt="NSS Palakkad" />
-      <img src="/assets/images/colleges/cusat.png" alt="CUSAT" />
-      <img src="/assets/images/colleges/rit.png" alt="RIT Kottayam" />
-      <img src="/assets/images/colleges/gecpkd.png" alt="GEC Palakkad" />
-      <img src="/assets/images/colleges/geckz.png" alt="GEC Kozhikode" />
-      <img src="/assets/images/colleges/sctce.png" alt="SCT Trivandrum" />
-
-
-      <img src="/assets/logos/college1.png" alt="" />
+<section class="how-it-works-section">
+    <h2>How It Works</h2>
+    <div class="steps-container">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <h3>Students Submit & Verify</h3>
+        <p>Real students submit and verify hostel information, ensuring data is up-to-date and trustworthy.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <h3>Community Governed</h3>
+        <p>The community discusses and reviews hostels, creating a transparent and self-regulating ecosystem.</p>
+      </div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <h3>Everyone Benefits</h3>
+        <p>Access a free, open, and honest database of hostels, without corporate control or paywalls.</p>
+      </div>
     </div>
-    <div class="marquee marquee2">
-
-    </div>
-
-    For the full list, check <a href="pages/colleges.html">College List</a>
-
-  </div>
 </section>
 
-  <section class="submit-hostel-section">
-  <h2>📝 Are you an ongoing student?</h2>
-  <p>
-    Are you a student who (knows/lives) (a/in) good hostel that isn't listed yet? Help others by submitting it here!
-  </p>
-  <a href="https://wa.me/918089990317" class="cta-button">📬 Submit a Hostel</a>
-  <p style="margin-top:1rem; font-size:0.95rem;">
-  </p>
+<section class="community-highlight-section">
+    <h2>From the Community</h2>
+    <div id="community-posts-container" class="community-posts-container">
+      <!-- Posts will be loaded here by JS -->
+    </div>
 </section>
 
-<section id="donate-section">
-  <div class="donate-container">
-    <h2>💖 Support Koodaram</h2>
-    <p>Found Koodaram useful? Help keep the project alive by buying a coffee or sending a small donation!</p>
-    <a href="pages/donate.html" target="_blank" class="donate-button">🙏 Donate Now</a>
-  </div>
-</section>
-
-
-
-  <section class="faq-section">
-  <h2>❓ Frequently Asked Questions</h2>
-  <div class="faq-container">
-    <div class="faq-item">
-      <h3>Is Koodaram free to use?</h3>
-      <p>Yes! Koodaram is completely free for students. You can browse hostels, view photos, and contact owners without paying anything.</p>
+<section class="faq-section">
+  <h2>Frequently Asked Questions</h2>
+  <div class="faq-accordion">
+    <div class="faq-accordion-item">
+      <div class="faq-accordion-question">Is Koodaram free to use?</div>
+      <div class="faq-accordion-answer">
+        <p>Yes! Koodaram is completely free for students. You can browse hostels, view photos, and contact owners without paying anything.</p>
+      </div>
     </div>
-    <div class="faq-item">
-      <h3>Does Koodaram check every hostel personally?</h3>
-      <p>No. We DO NOT check every hostel individually. Hostels with Verified or Premium badge(s) has been thoroughly verified to be above standards.</p>
+    <div class="faq-accordion-item">
+      <div class="faq-accordion-question">How do you ensure data is accurate?</div>
+      <div class="faq-accordion-answer">
+        <p>Our model is built on community verification. While we don't check every hostel personally, information is submitted and validated by a network of students. The community forums also play a big role in keeping information current.</p>
+      </div>
     </div>
-    <div class="faq-item">
-      <h3>How do I list my hostel?</h3>
-      <p>Simply go to the <a href="/pages/listHostel.html">List Hostel</a> page, click on the WhatsApp button, and send us your hostel details. No registration required.</p>
-    </div>
-    <div class="faq-item">
-      <h3>Do you verify hostels?</h3>
-      <p>We do not verify every listing individually, but we allow users to report incorrect or outdated listings. We also promote trusted hostels based on user feedback. Additionally, we'll be featuring <strong>PREMIUM</strong>
-      plan for hostel owners to promote their listing and to also get a verification badge. Such hostels will be thoroughly checked if they're above our standards</p>
-    </div>
-    <div class="faq-item">
-      <h3>Can I update my listing later?</h3>
-      <p>Yes! You can contact us on WhatsApp to update your listing. You can update or remove your listing any time.</p>
-    </div>
-    <div class="faq-item">
-      <h3>How are ratings calculated?</h3>
-      <p>Koodaram, as of now doesnt have it's own rating system. We use real user reviews from Google Businesses for our rating system</p>
+    <div class="faq-accordion-item">
+      <div class="faq-accordion-question">How do I contribute?</div>
+      <div class="faq-accordion-answer">
+        <p>You can contribute by listing a new hostel, adding reviews and ratings, or participating in community discussions to verify information. Signed-in users have access to all community features.</p>
+      </div>
     </div>
   </div>
 </section>
 
-
-
-  <footer>
-
-    <a href="pages/terms.html">Terms & Conditions</a> &nbsp;  <a href="pages/credits.html">Credits</a> &nbsp; <a href="pages/colleges.html">College List</a> &nbsp; <a href="pages/collabs.html">Collaborations</a> &nbsp; <a href="pages/donate.html">Donate</a>
-
-    <br>
-    <br>
-
-    © 2025 Koodaram. Made with ♥ by <a href="https://github.com/rohankishore" target="_blank">Rohan Kishore</a>.
-  </footer>
+<footer>
+    <p>© 2025 Koodaram. A decentralized, student-run initiative.</p>
+</footer>
 
 <script>
-async function fetchStats() {
-  const GITHUB_USER = "rohankishore";
-  const REPO = "Koodaram";
-  const API_BASE = `https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/hostels`;
-  const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
+  const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
+  const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nZ2Zzb214enJmb2plc3picXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTM0NDksImV4cCI6MjA3NjcyOTQ0OX0.oWZ77VC3iuzi7r2tcI0sXGWwPgCQT-csrd2TdLJgimw';
+  const { createClient } = supabase;
+  const _supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-  let hostelCount = 0;
-  let collegesSet = new Set();
-
-  try {
-    const res = await fetch(API_BASE);
-    const folders = await res.json();
-
-    for (const folder of folders) {
-      try {
-        const jsonURL = `${RAW_BASE}/${folder.name}/data.json`;
-        const dataRes = await fetch(jsonURL);
-        const data = await dataRes.json();
-
-        hostelCount++;
-        collegesSet.add((data.college || "").trim().toLowerCase());
-      } catch (err) {
-        console.warn("Error loading data for:", folder.name);
-      }
-    }
-  } catch (err) {
-    console.error("Error fetching hostel list:", err);
-  }
-
-  document.getElementById("total-hostels").textContent = hostelCount;
-  animateCounter("college-count", collegesSet.size, 1500);
-}
-
-function animateCounter(id, target, duration) {
-  const element = document.getElementById(id);
-  let start = 0;
-  const stepTime = Math.max(Math.floor(duration / target), 20);
-
-  function step() {
-    if (start < target) {
-      start++;
-      element.textContent = start;
-      setTimeout(step, stepTime);
-    } else {
-      element.textContent = target;
-    }
-  }
-  step();
-}
-
-document.addEventListener("DOMContentLoaded", fetchStats);
-</script>
-
-<script>
-  function togglePersonalizeForm() {
-    const form = document.getElementById("personalize-form");
-    form.style.display = form.style.display === "none" ? "block" : "none";
-  }
-
-  function searchPersonalizedHostels() {
-    const college = document.getElementById("college-select").value;
-    const gender = document.getElementById("gender-select").value;
-
-    if (!college || !gender) {
-      alert("Please select both college and gender.");
-      return;
-    }
-
-    const url = `/pages/browse.html?college=${encodeURIComponent(college)}&gender=${encodeURIComponent(gender)}`;
-    window.location.href = url;
-  }
-</script>
-
-
-
-
-<script>
-  const themeToggle = document.getElementById('theme-toggle');
-  const body = document.body;
-
-  themeToggle.addEventListener('click', () => {
-    body.classList.toggle('light-mode');
-    const isLightMode = body.classList.contains('light-mode');
-    localStorage.setItem('theme', isLightMode ? 'light' : 'dark');
+  // FAQ Accordion
+  const faqItems = document.querySelectorAll('.faq-accordion-item');
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-accordion-question');
+    question.addEventListener('click', () => {
+      item.classList.toggle('active');
+    });
   });
 
-  // On page load, check for saved theme
-  const savedTheme = localStorage.getItem('theme');
-  if (savedTheme === 'light') {
-    body.classList.add('light-mode');
+  // Fetch Community Posts
+  async function fetchCommunityPosts() {
+    const postsContainer = document.getElementById('community-posts-container');
+    const { data: posts, error } = await _supabase
+      .from('community_posts')
+      .select('*, profile:profiles(name)')
+      .order('created_at', { ascending: false })
+      .limit(3);
+
+    if (posts) {
+        postsContainer.innerHTML = '';
+        posts.forEach(post => {
+            const authorName = post.is_anonymous ? 'Anonymous' : (post.profile ? post.profile.name : 'Anonymous');
+            const postCard = `
+                <div class="community-post-card">
+                    <p class="author">${authorName}</p>
+                    <p class="hostel-info">${post.hostel} @ ${post.college}</p>
+                    <p>${post.message.substring(0, 100)}...</p>
+                </div>
+            `;
+            postsContainer.innerHTML += postCard;
+        });
+    }
   }
-</script>
-<script>
+
+  // Hamburger Menu
   const hamburgerButton = document.getElementById('hamburger-button');
   const mainNav = document.getElementById('main-nav');
-
   function toggleMenu(e) {
     e.preventDefault();
     mainNav.classList.toggle('active');
   }
-
   hamburgerButton.addEventListener('click', toggleMenu);
   hamburgerButton.addEventListener('touchstart', toggleMenu);
-</script>
-<script>
-  // Redirect to dashboard if logged in, otherwise hide signup button
-  (async () => {
-    const { createClient } = supabase;
-    const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
-    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nZ2Zzb214enJmb2plc3picXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTM0NDksImV4cCI6MjA3NjcyOTQ0OX0.oWZ77VC3iuzi7r2tcI0sXGWwPgCQT-csrd2TdLJgimw';
-    const _supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+  // Auth Logic
+  (async () => {
     const { data: { user } } = await _supabase.auth.getUser();
     if (user) {
-      // If user is on the root page, redirect to their profile/dashboard.
       if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
         window.location.href = '/pages/profile.html';
       }
-      // Also hide the signup button on any page this script runs on.
-      const signupButton = document.querySelector('a[href="/pages/signup.html"]');
-      if(signupButton) signupButton.style.display = 'none';
+      document.querySelector('a[href="/pages/signup.html"]').style.display = 'none';
+      document.querySelector('.logo').href = '/pages/profile.html';
     }
   })();
-</script>
-<script>
-  // Change logo link to dashboard if logged in
-  (async () => {
-    const { createClient } = supabase;
-    const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
-    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nZ2Zzb214enJmb2plc3picXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTM0NDksImV4cCI6MjA3NjcyOTQ0OX0.oWZ77VC3iuzi7r2tcI0sXGWwPgCQT-csrd2TdLJgimw';
-    const _supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-    const { data: { user } } = await _supabase.auth.getUser();
-    if (user) {
-      const logoLink = document.querySelector('.logo');
-      if (logoLink) {
-        logoLink.href = '/pages/profile.html';
-      }
-    }
-  })();
+  // Initial data fetch
+  fetchCommunityPosts();
 </script>
+
 </body>
 </html>
