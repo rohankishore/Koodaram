@@ -225,6 +225,11 @@
       width: 100%;
     }
 
+    select option {
+      background: var(--bg-dark);
+      color: var(--text-light);
+    }
+
     input:focus, select:focus, textarea:focus {
       border-color: var(--gold);
       box-shadow: 0 0 5px var(--gold);
@@ -294,15 +299,14 @@
       <label for="college-select">College</label>
       <select id="college-select">
         <option value="">Select a College</option>
-        <option value="cusat">CUSAT</option>
-        <option value="cucek">CUCEK</option>
-        <option value="SCT Trivandrum">SCT Trivandrum</option>
-        <option value="GEC Kozhikode">GEC Kozhikode</option>
-        <option value="GEC Palakkad">GEC Palakkad</option>
-        <option value="GEC Thrissur">GEC Thrissur</option>
-        <option value="Model Engineering College">Model Engineering College</option>
-        <option value="NSS College Palakkad">NSS College Palakkad</option>
-        <option value="RIT Kottayam">RIT Kottayam</option>
+        <option value="CUSAT">CUSAT</option>
+        <option value="CUCEK">CUCEK</option>
+        <option value="SCTCE">SCT Trivandrum</option>
+        <option value="GECK">GEC Kozhikode</option>
+        <option value="GECPKD">GEC Palakkad</option>
+        <option value="GECT">GEC Thrissur</option>
+        <option value="NSSPKD">NSS College Palakkad</option>
+        <option value="RIT">RIT Kottayam</option>
       </select>
     </div>
     <div class="input-group">
@@ -325,23 +329,6 @@
 
 <script>
   const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
-  const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nZ2Zzb214enJmb2plc3picXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTM0NDksImV4cCI6MjA3NjcyOTQ0OX0.oWZ77VC3iuzi7r2tcI0sXGWwPgCQT-csrd2TdLJgimw';
-  const { createClient } = supabase;
-  const _supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-  const modal = document.getElementById('create-post-modal');
-  const createPostBtn = document.getElementById('create-post-btn');
-  const closeModalBtn = document.getElementById('close-modal-btn');
-
-  createPostBtn.onclick = () => { modal.style.display = 'block'; }
-  closeModalBtn.onclick = () => { modal.style.display = 'none'; }
-  window.onclick = (event) => {
-    if (event.target == modal) {
-      modal.style.display = 'none';
-    }
-  }
-
-    const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
   const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nZ2Zzb214enJmb2plc3picXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTM0NDksImV4cCI6MjA3NjcyOTQ0OX0.oWZ77VC3iuzi7r2tcI0sXGWwPgCQT-csrd2TdLJgimw';
   const { createClient } = supabase;
   const _supabase = createClient(supabaseUrl, supabaseAnonKey);
@@ -401,9 +388,9 @@
 
   // Populate hostels based on college
   collegeSelect.addEventListener('change', async () => {
-    const college = collegeSelect.value;
+    const collegeAbbr = collegeSelect.value;
     hostelSelect.innerHTML = '<option value="">Loading hostels...</option>';
-    if (!college) {
+    if (!collegeAbbr) {
         hostelSelect.innerHTML = '<option value="">Select a Hostel</option>';
         return;
     }
@@ -412,17 +399,16 @@
     const folders = await res.json();
     hostelSelect.innerHTML = '<option value="">Select a Hostel</option>';
     for (const folder of folders) {
-        if (folder.name.toLowerCase().includes(college.toLowerCase())) {
+        if (folder.name.toLowerCase().includes(collegeAbbr.toLowerCase())) {
             const jsonURL = `${RAW_BASE}/${folder.name}/data.json`;
             try {
                 const res = await fetch(jsonURL);
+                if (!res.ok) continue;
                 const data = await res.json();
-                if(data.college.toLowerCase() === college.toLowerCase()){
-                    const option = document.createElement('option');
-                    option.value = data.name;
-                    option.textContent = data.name;
-                    hostelSelect.appendChild(option);
-                }
+                const option = document.createElement('option');
+                option.value = data.name;
+                option.textContent = data.name;
+                hostelSelect.appendChild(option);
             } catch (err) {
                 console.warn("Could not load hostel data for:", folder.name);
             }
@@ -438,7 +424,7 @@
       return;
     }
 
-    const college = collegeSelect.value;
+    const college = collegeSelect.options[collegeSelect.selectedIndex].text;
     const hostel = hostelSelect.value;
     const message = messageInput.value;
     const is_anonymous = anonymousCheckbox.checked;
