@@ -7,18 +7,17 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <style>
    :root {
-  /* Updated to Golden Theme Variables */
-  --bg-dark: #1A1A1A; /* Deep charcoal background */
-  --surface: #1F3A4B; /* Deep teal for section backgrounds / containers */
-  --primary: #FFBF00; /* Amber Gold for main actions/highlights */
-  --primary-dark: #DAA520; /* Goldenrod for darker primary shades */
-  --accent: #FFD700; /* Classic Gold for prominent elements */
-  --text-light: #E0E0E0; /* Off-white for general text */
-  --card-bg: #2C2C2C; /* Darker charcoal for review cards */
-  --input-bg: #222222; /* Slightly lighter dark for inputs */
-  --border-color: #444444; /* Darker border for inputs */
-  --link-color: #FFBF00; /* Amber Gold for general links */
-  --hover-glow: rgba(255, 215, 0, 0.6); /* Gold glow for interactive elements */
+  --bg-dark: #1A1A1A;
+  --surface: #1F3A4B;
+  --primary: #FFBF00;
+  --primary-dark: #DAA520;
+  --accent: #FFD700;
+  --text-light: #E0E0E0;
+  --card-bg: #2C2C2C;
+  --input-bg: #222222;
+  --border-color: #444444;
+  --link-color: #FFBF00;
+  --hover-glow: rgba(255, 215, 0, 0.6);
 }
 
 * {
@@ -30,16 +29,16 @@
 body {
   font-family: 'Inter', sans-serif;
   line-height: 1.6;
-  background: var(--bg-dark); /* Using deep charcoal */
-  color: var(--text-light); /* Off-white text */
+  background: var(--bg-dark);
+  color: var(--text-light);
   padding: 0;
   margin: 0;
 }
 
 header.navbar {
-  background-color: #1A1A1A; /* Dark charcoal for consistent navbar */
+  background-color: #1A1A1A;
   padding: 1rem 2rem;
-  border-bottom: 1px solid #333; /* Darker border */
+  border-bottom: 1px solid #333;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -57,60 +56,41 @@ header.navbar {
 .navbar .logo {
   font-size: 1.4rem;
   font-weight: 800;
-  color: #fff; /* Fallback */
-  /* Logo in rich gold gradient */
+  color: #fff;
   background: linear-gradient(90deg, #FFD700, #FFBF00);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
-.navbar nav {
-  display: flex;
-  gap: 1.5rem;
-}
-
 .navbar nav a {
-  color: #D3D3D3; /* Light grey for nav links */
+  color: #D3D3D3;
   text-decoration: none;
   font-weight: 500;
   transition: color 0.2s ease;
 }
 
 .navbar nav a:hover {
-  color: var(--accent); /* Classic gold on hover */
-}
-
-@media (max-width: 600px) {
-  .nav-container {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
-  .navbar nav {
-    flex-direction: column;
-    width: 100%;
-    margin-top: 0.5rem;
-  }
+  color: var(--accent);
 }
 
 .container {
   max-width: 860px;
   margin: 2rem auto;
-  background: var(--surface); /* Deep teal for the main container */
+  background: var(--surface);
   padding: 2rem;
   border-radius: 14px;
-  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2); /* Subtle gold shadow for the container */
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.2);
 }
 
 h1 {
   font-size: 2rem;
   margin-bottom: 0.5rem;
-  color: var(--accent); /* Classic gold for main heading */
+  color: var(--accent);
 }
 
 .info p {
   margin: 0.3rem 0;
-  color: var(--text-light); /* Off-white for info text */
+  color: var(--text-light);
 }
 
 .gallery {
@@ -131,13 +111,13 @@ h1 {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 150px; /* increase size */
+  width: 150px;
   height: 150px;
   transform: translate(-50%, -50%);
   background-image: url('/assets/images/icons/koodaram_transparent.png');
   background-size: contain;
   background-repeat: no-repeat;
-  opacity: 0.5; /* subtle but visible */
+  opacity: 0.5;
   pointer-events: none;
 }
 
@@ -148,209 +128,81 @@ h1 {
   height: 180px;
   object-fit: cover;
   transition: transform 0.3s ease;
-  box-shadow: 0 0 10px rgba(255, 215, 0, 0.15); /* Subtle gold shadow */
+  box-shadow: 0 0 10px rgba(255, 215, 0, 0.15);
 }
 
 .gallery img:hover {
   transform: scale(1.03);
-  box-shadow: 0 0 16px var(--hover-glow); /* Stronger gold glow on hover */
+  box-shadow: 0 0 16px var(--hover-glow);
 }
 
 .contact-buttons {
   margin-top: 1.5rem;
-  display: flex; /* Use flexbox for button layout */
-  gap: 1rem; /* Space between buttons */
-  flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
 }
 
 .contact-buttons a {
   display: inline-block;
-  padding: 0.6rem 1.2rem;
+  padding: 0.8rem 1.2rem;
   border-radius: 6px;
-  background: var(--primary-dark); /* Goldenrod for contact buttons */
-  color: #1A1A1A; /* Dark text on gold */
+  background: var(--primary-dark);
+  color: #1A1A1A;
   text-decoration: none;
   font-weight: 600;
   transition: background 0.2s ease, box-shadow 0.2s ease;
-  flex-grow: 1; /* Allow buttons to grow and fill space */
-  text-align: center; /* Center text in buttons */
+  text-align: center;
 }
 
 .contact-buttons a:hover {
-  background: var(--primary); /* Amber gold on hover */
-  box-shadow: 0 0 10px var(--hover-glow); /* Gold glow on hover */
+  background: var(--primary);
+  box-shadow: 0 0 10px var(--hover-glow);
 }
 
-/* Map embed styling */
+.community-btn {
+    background: var(--surface) !important;
+    color: var(--gold) !important;
+    border: 1px solid var(--gold);
+}
+
+.community-btn:hover {
+    background: var(--gold) !important;
+    color: #000 !important;
+}
+
 .map-container {
     margin-top: 2rem;
     border-radius: 10px;
-    overflow: hidden; /* Ensures the iframe corners match the border-radius */
-    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3); /* Gold shadow for the map */
+    overflow: hidden;
+    box-shadow: 0 0 15px rgba(255, 215, 0, 0.3);
 }
 .map-container iframe {
     width: 100%;
-    height: 350px; /* Fixed height for the map */
-    border: 0; /* Remove default iframe border */
-    border-radius: 10px; /* Match container border-radius */
-}
-
-
-.review-section {
-  margin-top: 2rem;
-}
-
-.review-section h2 {
-  margin-bottom: 0.8rem;
-  color: var(--accent); /* Classic gold for review heading */
-}
-
-.review {
-  background: var(--card-bg); /* Dark charcoal for review background */
-  padding: 1rem;
-  border-radius: 10px;
-  margin-bottom: 1rem;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2); /* Subtle shadow for reviews */
-}
-
-.review-stars {
-    color: var(--accent); /* Golden color for stars */
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-}
-.review-stars .empty-star {
-    color: #555; /* A darker shade for empty stars */
-}
-
-#writeReviewBtn {
-  margin-top: 1rem;
-  padding: 0.5rem 1rem;
-  background: var(--primary); /* Amber gold for write review button */
-  color: #1A1A1A; /* Dark text */
-  border: none;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s ease, box-shadow 0.2s ease;
-}
-
-#writeReviewBtn:hover {
-  background: var(--primary-dark); /* Goldenrod on hover */
-  box-shadow: 0 0 10px var(--hover-glow); /* Gold glow on hover */
+    height: 350px;
+    border: 0;
+    border-radius: 10px;
 }
 
 footer {
   margin-top: 4rem;
   font-size: 0.9rem;
-  color: #777; /* Slightly lighter grey for footer text */
+  color: #777;
   text-align: center;
   padding: 2rem;
-  border-top: 1px solid #333; /* Darker border */
+  border-top: 1px solid #333;
 }
 
 a {
-  color: var(--link-color); /* Amber gold for general links */
+  color: var(--link-color);
   text-decoration: none;
 }
 
 a:hover {
   text-decoration: underline;
-  color: var(--accent); /* Classic gold on hover */
+  color: var(--accent);
 }
 
-#reviewModal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.7);
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-}
-
-#reviewModal .modal-box {
-  background: var(--surface); /* Deep teal for modal background */
-  padding: 2rem;
-  border-radius: 12px;
-  width: 90%;
-  max-width: 500px;
-  color: var(--text-light); /* Off-white text in modal */
-  box-shadow: 0 0 25px var(--hover-glow); /* Prominent gold glow for modal */
-  position: relative; /* For positioning close button */
-}
-
-#reviewModal .modal-box input[type="text"],
-#reviewModal .modal-box textarea {
-    width: 100%; /* Ensure inputs take full width */
-    padding: 0.8rem;
-    margin-bottom: 1rem;
-    background-color: var(--input-bg);
-    border: 1px solid var(--border-color);
-    color: var(--text-light);
-    border-radius: 6px;
-    box-sizing: border-box; /* Include padding in width */
-}
-
-#reviewModal .modal-box input[type="text"]:focus,
-#reviewModal .modal-box textarea:focus {
-    outline: none;
-    border-color: var(--primary); /* Highlight border on focus */
-    box-shadow: 0 0 8px var(--hover-glow);
-}
-
-.modal-close-btn {
-    position: absolute;
-    top: 15px;
-    right: 15px;
-    font-size: 1.5rem;
-    color: var(--text-light);
-    cursor: pointer;
-    background: none;
-    border: none;
-    padding: 0;
-    line-height: 1;
-    transition: color 0.2s ease;
-}
-.modal-close-btn:hover {
-    color: var(--accent);
-}
-
-#submitReview, #cancelReview {
-  padding: 0.7rem 1.4rem; /* Slightly larger buttons */
-  border-radius: 6px;
-  cursor: pointer;
-  transition: background 0.2s ease, box-shadow 0.2s ease;
-  font-weight: 600;
-  color: #1A1A1A;
-}
-
-#submitReview {
-    background: var(--primary);
-    border: none;
-}
-#submitReview:hover {
-    background: var(--primary-dark);
-    box-shadow: 0 0 10px var(--hover-glow);
-}
-
-#cancelReview {
-    background: #555;
-    color: var(--text-light); /* Lighter text on dark grey button */
-    border: none;
-    margin-left: 1rem;
-}
-#cancelReview:hover {
-    background: #777;
-}
-
-@media (max-width: 500px) {
-  .container {
-    padding: 1.2rem;
-    margin: 1rem;
-  }
-}
   </style>
 </head>
 <body>
@@ -376,20 +228,6 @@ a:hover {
     <p>© 2025 Koodaram. <a href="/pages/browse.html" id="backToListingsLink">← Back to Listings</a></p>
   </footer>
 
-  <div id="reviewModal">
-    <div class="modal-box">
-      <button class="modal-close-btn">×</button>
-      <h3>Write a Review</h3>
-      <label for="reviewerName">Your Name (optional):</label>
-      <input type="text" id="reviewerName" placeholder="Anonymous">
-      <label for="reviewText">Your Review:</label>
-      <textarea id="reviewText" rows="5" placeholder="Type your review..."></textarea><br>
-      <button id="submitReview">Submit</button>
-      <button id="cancelReview">Cancel</button>
-    </div>
-  </div>
-
-
 <script>
   const GITHUB_USER = "Koodaram-Inc";
   const REPO = "koodaram-data";
@@ -401,18 +239,6 @@ a:hover {
     const params = new URLSearchParams(window.location.search);
     hostelName = params.get("name");
 
-    const backToListingsLink = document.getElementById('backToListingsLink');
-    if (
-      document.referrer &&
-      document.referrer.includes(window.location.origin) &&
-      document.referrer.includes('/pages/browse.html')
-    ) {
-      localStorage.setItem('lastBrowseUrl', document.referrer);
-      backToListingsLink.href = document.referrer;
-    } else {
-      backToListingsLink.href = "/pages/browse.html";
-    }
-
     if (!hostelName) {
       document.getElementById("hostel-view").innerHTML = "<p>⚠️ Hostel not specified.</p>";
       return;
@@ -423,132 +249,60 @@ a:hover {
       const data = await dataRes.json();
 
       const imagesHTML = (data.images && data.images.length > 0) 
-? data.images.map(img => `<a href="${RAW_BASE}/${hostelName}/${img}" target="_blank" rel="noopener">
-                 <img src="${RAW_BASE}/${hostelName}/${img}" alt="${data.name} image">
-               </a>`).join("")
-: "<p>No images available for this hostel.</p>";
-
-      function formatPhone(number) {
-        if (!number || typeof number !== "string") return "";
-        if (number.startsWith("+")) return number;
-        return `${number}`;
-      }
-
-      const callNumber = formatPhone(data.contact?.phone);
-      const whatsappNumber = formatPhone(data.contact?.phone);
+        ? data.images.map(img => `<a href="${RAW_BASE}/${hostelName}/${img}" target="_blank" rel="noopener"><img src="${RAW_BASE}/${hostelName}/${img}" alt="${data.name} image"></a>`).join("")
+        : "<p>No images available for this hostel.</p>";
 
       const contactHTML = `
         <div class="contact-buttons">
-          <a href="tel:${data.contact?.phone}">📞 Call (${callNumber})</a>
-          <a href="https://wa.me/91${whatsappNumber}">💬 WhatsApp (${whatsappNumber})</a>
-        </div>
-      `;
-
-      const rating = parseFloat(data.rating);
-      const fullStars = '⭐'.repeat(Math.floor(rating));
-      const halfStar = rating % 1 >= 0.5 ? '⭐' : '';
-      const emptyStars = '<span class="empty-star">⭐</span>'.repeat(5 - Math.ceil(rating));
-      const ratingHTML = `
-        <div class="review-stars" style="margin: 1rem 0;">
-          <span style="margin-left: 8px; font-weight: 500;">(${rating.toFixed(1)}/5)</span>
+          <a href="tel:${data.contact?.phone}">📞 Call</a>
+          <a href="https://wa.me/91${data.contact?.phone}">💬 WhatsApp</a>
+          <a href="#" id="community-link" class="community-btn">👥 View Community</a>
         </div>
       `;
 
       const mapSectionHTML = data.gmap
-        ? `
-        <div class="map-container">
-          <iframe src="${data.gmap}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-        </div>
-        `
+        ? `<div class="map-container"><iframe src="${data.gmap}" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>`
         : "";
 
       const view = `
         <h1>${data.name}</h1>
         <div class="info">
           <p><strong>📍 Location:</strong> ${data.location}</p>
+          <p><strong>🎓 College:</strong> ${data.college}</p>
           <p><strong>🛏️ Room Type:</strong> ${data.roomType}</p>
           <p><strong>💰 Price:</strong> ₹${data.price}/month</p>
           <p><strong>🧩 Amenities:</strong> ${data.amenities?.join(", ")}</p>
-          <p><strong>📏 Distance:</strong> ${data.distance}</p>
         </div>
-
-        ${ratingHTML}
         <div class="gallery">${imagesHTML}</div>
-
         ${contactHTML}
-
         ${mapSectionHTML}
-
-        <div class="review-section">
-          <h2>Ratings</h2>
-          <div id="reviews">Loading ratings...</div>
-          <button id="writeReviewBtn">✍️ Write a Review</button>
-        </div>
       `;
 
       document.getElementById("hostel-view").innerHTML = view;
-      loadReviews(data.reviews);
 
-      // Modal functionality
-      document.getElementById("writeReviewBtn").onclick = () => {
-        document.getElementById("reviewModal").style.display = "flex";
-      };
-      document.getElementById("cancelReview").onclick = () => {
-        document.getElementById("reviewModal").style.display = "none";
-      };
-      document.querySelector('.modal-close-btn').onclick = () => {
-        document.getElementById("reviewModal").style.display = "none";
-      };
-      document.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") {
-          document.getElementById("reviewModal").style.display = "none";
-        }
-      });
-
-      document.getElementById("submitReview").onclick = () => {
-        const name = document.getElementById("reviewerName").value || "Anonymous";
-        const text = document.getElementById("reviewText").value;
-
-        if (!text.trim()) {
-          alert("Please enter a review.");
-          return;
-        }
-
-        alert("📦 Cannot submit: GitHub Pages is static and cannot write to files.\n" +
-              "To save reviews, you'd need a backend server (e.g., Node.js, Python) or a service like Firebase/Supabase.\n\n" +
-              "But here's what would be saved:\n" +
-              JSON.stringify({ name, text }, null, 2));
-
-        document.getElementById("reviewModal").style.display = "none";
-        document.getElementById("reviewerName").value = "";
-        document.getElementById("reviewText").value = "";
-      };
+      const collegeForUrl = getCollegeAbbreviation(data.college);
+      if (collegeForUrl) {
+          document.getElementById('community-link').href = `/pages/community.html?college=${collegeForUrl}`;
+      }
 
     } catch (err) {
-      document.getElementById("hostel-view").innerHTML =
-        "<p>⚠️ Failed to load hostel details. Please try again later.</p>";
+      document.getElementById("hostel-view").innerHTML = "<p>⚠️ Failed to load hostel details. Please try again later.</p>";
       console.error("Error loading hostel:", err);
     }
   }
 
-  function loadReviews(reviews = []) {
-    if (!Array.isArray(reviews) || reviews.length === 0) {
-      document.getElementById("reviews").innerHTML = "<p>No ratings yet.</p>";
-      return;
-    }
-
-    const ratingsHTML = reviews.map(r => {
-      const rating = parseInt(r.rating) || 0;
-      const fullStars = '⭐'.repeat(rating);
-      const emptyStars = '<span class="empty-star">⭐</span>'.repeat(5 - rating);
-      return `
-        <div class="review-stars" style="margin-bottom: 0.6rem;">
-          ${fullStars}${emptyStars} <span style="margin-left: 8px; font-weight: 500;">(${rating}/5)</span>
-        </div>
-      `;
-    }).join("");
-
-    document.getElementById("reviews").innerHTML = ratingsHTML;
+  function getCollegeAbbreviation(collegeName) {
+      const mapping = {
+        "CUSAT": "CUSAT",
+        "CUCEK": "CUCEK",
+        "SCT College of Engineering": "SCTCE",
+        "Government Engineering College, Kozhikode": "GECK",
+        "Government Engineering College, Palakkad": "GECPKD",
+        "Government Engineering College, Thrissur": "GECT",
+        "NSS College of Engineering, Palakkad": "NSSPKD",
+        "Rajiv Gandhi Institute of Technology, Kottayam": "RIT"
+      };
+      return mapping[collegeName] || collegeName;
   }
 
   loadHostelData();
