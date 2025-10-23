@@ -8,6 +8,7 @@
   <title>Koodaram</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
   <script type="application/ld+json">
   {
@@ -329,6 +330,26 @@ document.addEventListener("DOMContentLoaded", fetchStats);
   hamburgerButton.addEventListener('click', () => {
     mainNav.classList.toggle('active');
   });
+</script>
+<script>
+  // Redirect to dashboard if logged in, otherwise hide signup button
+  (async () => {
+    const { createClient } = supabase;
+    const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
+    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nZ2Zzb214enJmb2plc3picXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTM0NDksImV4cCI6MjA3NjcyOTQ0OX0.oWZ77VC3iuzi7r2tcI0sXGWwPgCQT-csrd2TdLJgimw';
+    const _supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+    const { data: { user } } = await _supabase.auth.getUser();
+    if (user) {
+      // If user is on the root page, redirect to their profile/dashboard.
+      if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
+        window.location.href = '/pages/profile.html';
+      }
+      // Also hide the signup button on any page this script runs on.
+      const signupButton = document.querySelector('a[href="/pages/signup.html"]');
+      if(signupButton) signupButton.style.display = 'none';
+    }
+  })();
 </script>
 </body>
 </html>
