@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Your Profile - Koodaram</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+<header class="navbar">
+  <div class="nav-container">
+    <a href="https://koodaram.vercel.app/" class="logo"> 🏠 Koodaram</a>
+    <nav id="main-nav">
+      <a href="/">Home</a>
+      <a href="/pages/browse.html">Browse Hostels</a>
+      <a href="/pages/listHostel.html">List Hostel</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/pages/profile.html">Profile</a>
+    </nav>
+    <div class="nav-right">
+        <a href="/pages/signup.html" class="nav-cta-button">Sign Up / Login</a>
+        <button id="theme-toggle" class="theme-toggle-button">
+            <span class="sun-icon">☀️</span>
+            <span class="moon-icon">🌙</span>
+        </button>
+        <button class="hamburger" id="hamburger-button">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+    </div>
+  </div>
+</header>
+
+<main class="profile-container">
+  <h1>Your Profile</h1>
+  <div id="profile-form">
+    <div class="input-group">
+      <label for="name">Name</label>
+      <input type="text" id="name" placeholder="Enter your name">
+    </div>
+    <div class="input-group">
+      <label for="gender">Gender</label>
+      <select id="gender">
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label for="college">College</label>
+      <input type="text" id="college" placeholder="Enter your college name">
+    </div>
+    <button id="update-profile">Update Profile</button>
+    <button id="logout">Logout</button>
+  </div>
+</main>
+
+<script>
+  const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
+  const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nZ2Zzb214enJmb2plc3picXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTM0NDksImV4cCI6MjA3NjcyOTQ0OX0.oWZ77VC3iuzi7r2tcI0sXGWwPgCQT-csrd2TdLJgimw';
+
+  const { createClient } = supabase;
+  const _supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+  const nameInput = document.getElementById('name');
+  const genderInput = document.getElementById('gender');
+  const collegeInput = document.getElementById('college');
+  const updateProfileButton = document.getElementById('update-profile');
+  const logoutButton = document.getElementById('logout');
+
+  // Fetch and display user profile
+  (async () => {
+    const { data: { user } } = await _supabase.auth.getUser();
+    if (user) {
+      const { data: profile, error } = await _supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+
+      if (profile) {
+        nameInput.value = profile.name;
+        genderInput.value = profile.gender;
+        collegeInput.value = profile.college;
+      }
+    } else {
+      window.location.href = '/pages/signup.html';
+    }
+  })();
+
+  // Update profile
+  updateProfileButton.addEventListener('click', async () => {
+    const { data: { user } } = await _supabase.auth.getUser();
+    if (user) {
+      const { data, error } = await _supabase
+        .from('profiles')
+        .upsert({
+          id: user.id,
+          name: nameInput.value,
+          gender: genderInput.value,
+          college: collegeInput.value,
+        });
+
+      if (error) {
+        alert('Error updating profile: ' + error.message);
+      } else {
+        alert('Profile updated successfully!');
+      }
+    }
+  });
+
+  // Logout
+  logoutButton.addEventListener('click', async () => {
+    await _supabase.auth.signOut();
+    window.location.href = '/';
+  });
+</script>
+
+</body>
+</html>

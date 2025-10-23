@@ -151,13 +151,29 @@ const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
     const step3 = document.getElementById('step3');
     const thankYou = document.getElementById('thank-you');
 
-    const nextStep1 = document.getElementById('next-step1');
-    const nextStep2 = document.getElementById('next-step2');
     const submit = document.getElementById('submit');
 
     const nameInput = document.getElementById('name');
     const genderInput = document.getElementById('gender');
     const collegeInput = document.getElementById('college');
+
+    // Check if user is logged in and has a profile
+    (async () => {
+      const { data: { user } } = await _supabase.auth.getUser();
+      if (user) {
+        const { data: profile, error } = await _supabase
+          .from('profiles')
+          .select('*')
+          .eq('id', user.id)
+          .single();
+
+        if (profile) {
+          // If profile exists, redirect to browse page with filters
+          const query = `college=${encodeURIComponent(profile.college)}&gender=${encodeURIComponent(profile.gender)}`;
+          window.location.href = `/pages/browse.html?${query}`;
+        }
+      }
+    })();
 
     nextStep1.addEventListener('click', () => {
       step1.classList.remove('active');
@@ -175,7 +191,7 @@ const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
       if (user) {
         const { data, error } = await _supabase
           .from('profiles')
-          .insert([
+          .upsert([
             { id: user.id, name: nameInput.value, gender: genderInput.value, college: collegeInput.value },
           ]);
 
