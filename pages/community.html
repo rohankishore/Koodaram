@@ -98,7 +98,7 @@
       gap: 1rem;
     }
 
-    .reply-btn, .view-replies-btn {
+    .reply-btn, .view-replies-btn, .submit-reply-btn {
       background: none;
       border: 1px solid var(--gold);
       color: var(--gold);
@@ -129,15 +129,56 @@
       border: var(--border-gold);
       border-radius: 8px;
       padding: 0.8rem;
+      margin-bottom: 1rem;
     }
 
-    /* ... (modal styles) ... */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.6);
+    }
+
+    .modal-content {
+      background-color: var(--bg-dark);
+      margin: 10% auto;
+      padding: 2rem;
+      border: var(--border-gold);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    .close-btn {
+      color: var(--text-muted);
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
   </style>
 </head>
 <body>
 
 <header class="navbar">
-  <!-- ... navbar content ... -->
+  <div class="nav-container">
+    <a href="/" class="logo">🏠 Koodaram</a>
+    <nav id="main-nav">
+      <a href="/">Home</a>
+      <a href="/pages/browse.html">Browse Hostels</a>
+      <a href="/pages/community.html">Community</a>
+      <a href="/pages/listHostel.html">List Hostel</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/pages/profile.html">Profile</a>
+    </nav>
+    <div class="nav-right">
+      <a href="/pages/signup.html" class="nav-cta-button">Sign Up / Login</a>
+    </div>
+  </div>
 </header>
 
 <main class="community-container">
@@ -146,7 +187,41 @@
   <div id="posts-container"></div>
 </main>
 
-<!-- ... (modal for create post) ... -->
+<div id="create-post-modal" class="modal">
+  <div class="modal-content">
+    <span id="close-modal-btn" class="close-btn">&times;</span>
+    <h2>Create a New Post</h2>
+    <div class="input-group">
+      <label for="college-select">College</label>
+      <select id="college-select">
+        <option value="">Select a College</option>
+        <option value="CUSAT">CUSAT</option>
+        <option value="CUCEK">CUCEK</option>
+        <option value="SCTCE">SCT Trivandrum</option>
+        <option value="GECK">GEC Kozhikode</option>
+        <option value="GECPKD">GEC Palakkad</option>
+        <option value="GECT">GEC Thrissur</option>
+        <option value="NSSPKD">NSS College Palakkad</option>
+        <option value="RIT">RIT Kottayam</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label for="hostel-select">Hostel</label>
+      <select id="hostel-select">
+        <option value="">Select a Hostel</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label for="post-message">Message</label>
+      <textarea id="post-message" rows="5" placeholder="Share your thoughts..."></textarea>
+    </div>
+    <div class="input-group" style="flex-direction: row; align-items: center;">
+      <input type="checkbox" id="anonymous-checkbox" style="width: auto; margin-right: 10px;">
+      <label for="anonymous-checkbox" style="margin-bottom: 0;">Post Anonymously</label>
+    </div>
+    <button id="submit-post-btn">Submit Post</button>
+  </div>
+</div>
 
 <script>
   const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
@@ -155,6 +230,18 @@
   const _supabase = createClient(supabaseUrl, supabaseAnonKey);
 
   const postsContainer = document.getElementById('posts-container');
+  const modal = document.getElementById('create-post-modal');
+  const createPostBtn = document.getElementById('create-post-btn');
+  const closeModalBtn = document.getElementById('close-modal-btn');
+  const collegeSelect = document.getElementById('college-select');
+  const hostelSelect = document.getElementById('hostel-select');
+  const messageInput = document.getElementById('post-message');
+  const anonymousCheckbox = document.getElementById('anonymous-checkbox');
+  const submitPostBtn = document.getElementById('submit-post-btn');
+
+  const GITHUB_USER = "Koodaram-Inc";
+  const REPO = "koodaram-data";
+  const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
 
   async function fetchPostsAndReplies() {
     const { data: posts, error } = await _supabase
@@ -182,8 +269,8 @@
           <div class="reply-form-container" style="display: none;">
             <textarea placeholder="Write a reply..."></textarea>
             <div>
-              <input type="checkbox" class="anonymous-reply-checkbox">
-              <label>Reply anonymously</label>
+              <input type="checkbox" class="anonymous-reply-checkbox" style="width: auto; margin-right: 10px;">
+              <label style="margin-bottom: 0;">Reply anonymously</label>
             </div>
             <button class="submit-reply-btn">Submit Reply</button>
           </div>
@@ -231,14 +318,89 @@
     }
 
     if (e.target.classList.contains('submit-reply-btn')) {
-      // ... (submit reply logic from before) ...
+      const postCard = e.target.closest('.post-card');
+      const postId = postCard.dataset.postId;
+      const message = postCard.querySelector('.reply-form-container textarea').value;
+      const is_anonymous = postCard.querySelector('.anonymous-reply-checkbox').checked;
+
+      const { data: { user } } = await _supabase.auth.getUser();
+      if (!user) { alert('You must be logged in to reply.'); return; }
+      if (!message) { alert('Reply message cannot be empty.'); return; }
+
+      const { error } = await _supabase.from('community_replies').insert([{ post_id: postId, message, is_anonymous, user_id: user.id }]);
+      if (error) { alert('Error submitting reply: ' + error.message); } 
+      else { fetchPostsAndReplies(); }
+    }
+  });
+
+  createPostBtn.onclick = async () => {
+    const { data: { user } } = await _supabase.auth.getUser();
+    if (!user) {
+      alert('You need to be logged in to create a post.');
+      window.location.href = '/pages/signup.html';
+      return;
+    }
+    modal.style.display = 'block';
+  }
+  closeModalBtn.onclick = () => { modal.style.display = 'none'; }
+  window.onclick = (event) => {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  }
+
+  collegeSelect.addEventListener('change', async () => {
+    const collegeAbbr = collegeSelect.value;
+    hostelSelect.innerHTML = '<option value="">Loading hostels...</option>';
+    if (!collegeAbbr) {
+        hostelSelect.innerHTML = '<option value="">Select a Hostel</option>';
+        return;
+    }
+
+    const res = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/hostels`);
+    const folders = await res.json();
+    hostelSelect.innerHTML = '<option value="">Select a Hostel</option>';
+    for (const folder of folders) {
+        if (folder.name.toLowerCase().includes(collegeAbbr.toLowerCase())) {
+            const jsonURL = `${RAW_BASE}/${folder.name}/data.json`;
+            try {
+                const res = await fetch(jsonURL);
+                if (!res.ok) continue;
+                const data = await res.json();
+                const option = document.createElement('option');
+                option.value = data.name;
+                option.textContent = data.name;
+                hostelSelect.appendChild(option);
+            } catch (err) {
+                console.warn("Could not load hostel data for:", folder.name);
+            }
+        }
+    }
+  });
+
+  submitPostBtn.addEventListener('click', async () => {
+    const { data: { user } } = await _supabase.auth.getUser();
+    if (!user) { alert('You must be logged in to post.'); return; }
+
+    const college = collegeSelect.options[collegeSelect.selectedIndex].text;
+    const hostel = hostelSelect.value;
+    const message = messageInput.value;
+    const is_anonymous = anonymousCheckbox.checked;
+
+    if (!college || !hostel || !message) { alert('Please fill out all fields.'); return; }
+
+    const { error } = await _supabase.from('community_posts').insert([{ college, hostel, message, is_anonymous, user_id: user.id }]);
+    if (error) { alert('Error creating post: ' + error.message); } 
+    else {
+      alert('Post created successfully!');
+      modal.style.display = 'none';
+      fetchPostsAndReplies();
     }
   });
 
   // Initial fetch
   fetchPostsAndReplies();
 
-  // ... (rest of the script) ...
 </script>
 
 </body>
