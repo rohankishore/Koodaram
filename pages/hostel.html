@@ -422,11 +422,11 @@ a:hover {
       const dataRes = await fetch(`${RAW_BASE}/${hostelName}/data.json`);
       const data = await dataRes.json();
 
-      const imagesHTML = (data.images || [])
-  .map(img => `<a href="${RAW_BASE}/${hostelName}/${img}" target="_blank" rel="noopener">
+      const imagesHTML = (data.images && data.images.length > 0) 
+? data.images.map(img => `<a href="${RAW_BASE}/${hostelName}/${img}" target="_blank" rel="noopener">
                  <img src="${RAW_BASE}/${hostelName}/${img}" alt="${data.name} image">
-               </a>`)
-  .join("");
+               </a>`).join("")
+: "<p>No images available for this hostel.</p>";
 
       function formatPhone(number) {
         if (!number || typeof number !== "string") return "";
