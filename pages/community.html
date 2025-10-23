@@ -333,6 +333,15 @@
   const { createClient } = supabase;
   const _supabase = createClient(supabaseUrl, supabaseAnonKey);
 
+  // Hide signup button if logged in
+  (async () => {
+    const { data: { user } } = await _supabase.auth.getUser();
+    const signupButton = document.querySelector('a[href="/pages/signup.html"]');
+    if (user) {
+      if(signupButton) signupButton.style.display = 'none';
+    }
+  })();
+
   const modal = document.getElementById('create-post-modal');
   const createPostBtn = document.getElementById('create-post-btn');
   const closeModalBtn = document.getElementById('close-modal-btn');
