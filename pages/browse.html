@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Browse Hostels – Koodaram</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
     :root {
       --bg-dark: #1A1A1A;
@@ -16,36 +17,111 @@
       --card-bg: #2C2C2C;
       --input-bg: #222222;
       --border-color: #444444;
+      --gold: #d4af37;
+      --gold-light: #f5e6a1;
+      --text-muted: #c5c5c5;
+      --transition: all 0.3s ease;
     }
 
     .amenities {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.4rem;
-  margin-top: 0.5rem;
-}
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 0.5rem;
+    }
 
-.amenities span {
-  background: var(--surface);
-  color: var(--accent);
-  font-size: 0.75rem;
-  padding: 0.3rem 0.6rem;
-  border-radius: 999px;
-  border: 1px solid var(--border-color);
-}
-
+    .amenities span {
+      background: var(--surface);
+      color: var(--accent);
+      font-size: 0.75rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+    }
 
     body {
       background: var(--bg-dark);
       color: var(--text-light);
       font-family: 'Inter', sans-serif;
       margin: 0;
-      padding: 2rem;
     }
 
-    header, footer {
-      text-align: center;
-      margin-bottom: 2rem;
+    .navbar {
+      background: linear-gradient(90deg, #000, #1a1a1a);
+      padding: 1rem 2rem;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      width: 90%;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      color: var(--gold);
+      font-weight: 800;
+      font-size: 1.3rem;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .logo:hover {
+      color: var(--gold-light);
+    }
+
+    #main-nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    #main-nav a:hover {
+      color: var(--gold-light);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .nav-cta-button {
+      background: var(--gold);
+      color: #000;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .nav-cta-button:hover {
+      background: var(--gold-light);
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
     }
 
     .filters {
@@ -56,8 +132,7 @@
       padding: 1rem;
       border-radius: 10px;
       max-width: 1000px;
-      margin-inline: auto;
-      margin-bottom: 2rem;
+      margin: 2rem auto;
       justify-content: space-between;
       box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
     }
@@ -107,6 +182,7 @@
       max-width: 1000px;
       margin: auto;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      padding: 2rem;
     }
 
     .hostel-card {
@@ -183,6 +259,11 @@
       box-shadow: 0 0 10px rgba(255, 191, 0, 0.4);
     }
 
+    footer {
+      text-align: center;
+      padding: 2rem;
+    }
+
     @media (max-width: 768px) {
       .filters {
         flex-direction: column;
@@ -192,15 +273,53 @@
       .filters .filter-group {
         min-width: unset;
       }
+
+      .navbar nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: #1a1a1a;
+        padding: 1rem 0;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      }
+
+      .navbar nav.active { display: flex; }
+
+      .navbar nav a {
+        padding: 1rem 0;
+        text-align: center;
+        width: 100%;
+      }
+
+      .hamburger { display: flex; }
+      #main-nav { display: none; }
     }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Browse Hostels</h1>
-    <p>Filter and explore hostels near your college in Kerala.</p>
-  </header>
+<header class="navbar">
+  <div class="nav-container">
+    <a href="/" class="logo">🏠 Koodaram</a>
+    <nav id="main-nav">
+      <a href="/">Home</a>
+      <a href="/pages/browse.html">Browse Hostels</a>
+      <a href="/pages/community.html">Community</a>
+      <a href="/pages/listHostel.html">List Hostel</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/pages/profile.html">Profile</a>
+    </nav>
+    <div class="nav-right">
+      <a href="/pages/signup.html" class="nav-cta-button">Sign Up / Login</a>
+      <button class="hamburger" id="hamburger-button">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
 
   <section class="filters">
     <div class="filter-group">
@@ -273,7 +392,7 @@
 
   <footer>
     <br>
-    <a href="https://koodaram.vercel.app/">← Back to Home</a>
+    <a href="/">← Back to Home</a>
     <br><br>
     © 2025 Koodaram
   </footer>
@@ -341,7 +460,6 @@
         : "none";
     });
 
-    // Update the URL to reflect filters
     const query = new URLSearchParams();
     if (loc) query.set("location", loc);
     if (college) query.set("college", college);
@@ -385,7 +503,7 @@
           <div class="hostel-card"
             data-location="${data.location.toLowerCase()}"
             data-college="${college}"
-            data-amenities="${data.amenities.join(",").toLowerCase()}"
+            data-amenities="${(data.amenities || []).join(",").toLowerCase()}"
             data-price="${data.price}"
             data-gender="${gender}"
             data-rating="${rating}"
@@ -395,7 +513,7 @@
             <p>📍 ${data.location}</p>
             <p>🛏️ ${data.roomType}</p>
             <div class="amenities">
-             ${data.amenities.map(item => `<span>${item}</span>`).join("")}
+             ${(data.amenities || []).map(item => `<span>${item}</span>`).join("")}
              </div>
             ${renderStars(rating)}
             <p><strong>₹${data.price}/month</strong></p>
@@ -414,7 +532,30 @@
 
   window.onload = loadHostels;
 </script>
+<script>
+  const hamburgerButton = document.getElementById('hamburger-button');
+  const mainNav = document.getElementById('main-nav');
 
+  hamburgerButton.addEventListener('click', () => {
+    mainNav.classList.toggle('active');
+  });
 
+  // Auth and logo link logic
+  (async () => {
+    const { createClient } = supabase;
+    const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
+    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nZ2Zzb214enJmb2plc3picXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTM0NDksImV4cCI6MjA3NjcyOTQ0OX0.oWZ77VC3iuzi7r2tcI0sXGWwPgCQT-csrd2TdLJgimw';
+    const _supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+    const { data: { user } } = await _supabase.auth.getUser();
+    const signupButton = document.querySelector('a[href="/pages/signup.html"]');
+    const logoLink = document.querySelector('.logo');
+
+    if (user) {
+      if(signupButton) signupButton.style.display = 'none';
+      if(logoLink) logoLink.href = '/pages/profile.html';
+    }
+  })();
+</script>
 </body>
 </html>
