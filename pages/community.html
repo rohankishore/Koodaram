@@ -341,8 +341,131 @@
     }
   }
 
-  // NOTE: You need to create a table named 'community_posts' in your Supabase project.
-  // Columns: id (uuid), created_at (timestampz), college (text), hostel (text), message (text), is_anonymous (boolean), user_id (uuid, foreign key to profiles.id)
+    const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
+  const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nZ2Zzb214enJmb2plc3picXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTM0NDksImV4cCI6MjA3NjcyOTQ0OX0.oWZ77VC3iuzi7r2tcI0sXGWwPgCQT-csrd2TdLJgimw';
+  const { createClient } = supabase;
+  const _supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+  const modal = document.getElementById('create-post-modal');
+  const createPostBtn = document.getElementById('create-post-btn');
+  const closeModalBtn = document.getElementById('close-modal-btn');
+  const collegeSelect = document.getElementById('college-select');
+  const hostelSelect = document.getElementById('hostel-select');
+  const messageInput = document.getElementById('post-message');
+  const anonymousCheckbox = document.getElementById('anonymous-checkbox');
+  const submitPostBtn = document.getElementById('submit-post-btn');
+  const postsContainer = document.getElementById('posts-container');
+
+  const GITHUB_USER = "Koodaram-Inc";
+  const REPO = "koodaram-data";
+  const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
+
+  // Modal logic
+  createPostBtn.onclick = async () => {
+    const { data: { user } } = await _supabase.auth.getUser();
+    if (!user) {
+      alert('You need to be logged in to create a post.');
+      window.location.href = '/pages/signup.html';
+      return;
+    }
+    modal.style.display = 'block';
+  }
+  closeModalBtn.onclick = () => { modal.style.display = 'none'; }
+  window.onclick = (event) => {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  }
+
+  // Fetch all posts
+  async function fetchPosts() {
+    const { data: posts, error } = await _supabase
+      .from('community_posts')
+      .select('*, profile:profiles(name)')
+      .order('created_at', { ascending: false });
+
+    if (posts) {
+      postsContainer.innerHTML = '';
+      posts.forEach(post => {
+        const authorName = post.is_anonymous ? 'Anonymous' : (post.profile ? post.profile.name : 'Anonymous');
+        postsContainer.innerHTML += `
+          <div class="post-card">
+            <p class="author">${authorName}</p>
+            <p class="hostel-info">${post.hostel} @ ${post.college}</p>
+            <p>${post.message}</p>
+          </div>
+        `;
+      });
+    }
+  }
+
+  // Populate hostels based on college
+  collegeSelect.addEventListener('change', async () => {
+    const college = collegeSelect.value;
+    hostelSelect.innerHTML = '<option value="">Loading hostels...</option>';
+    if (!college) {
+        hostelSelect.innerHTML = '<option value="">Select a Hostel</option>';
+        return;
+    }
+
+    const res = await fetch(`https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/hostels`);
+    const folders = await res.json();
+    hostelSelect.innerHTML = '<option value="">Select a Hostel</option>';
+    for (const folder of folders) {
+        if (folder.name.toLowerCase().includes(college.toLowerCase())) {
+            const jsonURL = `${RAW_BASE}/${folder.name}/data.json`;
+            try {
+                const res = await fetch(jsonURL);
+                const data = await res.json();
+                if(data.college.toLowerCase() === college.toLowerCase()){
+                    const option = document.createElement('option');
+                    option.value = data.name;
+                    option.textContent = data.name;
+                    hostelSelect.appendChild(option);
+                }
+            } catch (err) {
+                console.warn("Could not load hostel data for:", folder.name);
+            }
+        }
+    }
+  });
+
+  // Submit post
+  submitPostBtn.addEventListener('click', async () => {
+    const { data: { user } } = await _supabase.auth.getUser();
+    if (!user) {
+      alert('You must be logged in to post.');
+      return;
+    }
+
+    const college = collegeSelect.value;
+    const hostel = hostelSelect.value;
+    const message = messageInput.value;
+    const is_anonymous = anonymousCheckbox.checked;
+
+    if (!college || !hostel || !message) {
+      alert('Please fill out all fields.');
+      return;
+    }
+
+    const { error } = await _supabase
+      .from('community_posts')
+      .insert([
+        { college, hostel, message, is_anonymous, user_id: user.id }
+      ]);
+
+    if (error) {
+      alert('Error creating post: ' + error.message);
+    } else {
+      alert('Post created successfully!');
+      modal.style.display = 'none';
+      fetchPosts(); // Refresh posts
+    }
+  });
+
+
+  // Initial fetch
+  fetchPosts();
 
 </script>
 </body>

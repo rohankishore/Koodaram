@@ -384,7 +384,34 @@
   themeToggle.addEventListener('click', () => {
     const isLight = !document.body.classList.contains('light-mode');
     applyTheme(isLight);
-  });
+  // Fetch and display user's community contributions
+  (async () => {
+    const { data: { user } } = await _supabase.auth.getUser();
+    if (user) {
+      const { data: posts, error } = await _supabase
+        .from('community_posts')
+        .select('*')
+        .eq('user_id', user.id)
+        .eq('is_anonymous', false)
+        .order('created_at', { ascending: false });
+
+      if (posts) {
+        const postsContainer = document.getElementById('user-posts-container');
+        if (posts.length === 0) {
+          postsContainer.innerHTML = '<p>You have not made any public contributions yet.</p>';
+          return;
+        }
+        posts.forEach(post => {
+          postsContainer.innerHTML += `
+            <div class="post-card" style="background: var(--card-bg-dark); padding: 1.5rem; border-radius: 16px; border: var(--border-gold); margin-bottom: 1.5rem;">
+              <p class="hostel-info" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">${post.hostel} @ ${post.college}</p>
+              <p>${post.message}</p>
+            </div>
+          `;
+        });
+      }
+    }
+  })();
 </script>
 </body>
 </html>
