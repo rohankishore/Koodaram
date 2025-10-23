@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Your Profile - Koodaram</title>
+  <title>Your Dashboard - Koodaram</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -96,48 +96,53 @@
       background: var(--gold-light);
     }
 
-    .theme-toggle-button {
-      background: transparent;
-      border: none;
-      cursor: pointer;
-      font-size: 1.3rem;
-    }
-
-    .hamburger {
-      display: none;
-      flex-direction: column;
-      gap: 5px;
-      background: none;
-      border: none;
-      cursor: pointer;
-    }
-
-    .hamburger span {
-      display: block;
-      width: 25px;
-      height: 3px;
-      background: var(--gold);
-      border-radius: 2px;
-    }
-
-    /* ===== Profile Section ===== */
-    .profile-container {
+    /* ===== Dashboard ===== */
+    .dashboard-container {
       width: 90%;
-      max-width: 500px;
+      max-width: 800px;
       margin: 3rem auto;
+    }
+
+    #welcome-message {
+      font-size: 2.5rem;
+      font-weight: 800;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      margin-bottom: 2rem;
+    }
+
+    .quick-actions {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+
+    .action-btn {
+      background: var(--card-bg-dark);
+      border: var(--border-gold);
+      color: var(--gold-light);
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+
+    .action-btn:hover {
+      background: var(--gold);
+      color: #000;
+      transform: translateY(-2px);
+    }
+
+    .profile-container {
       background: var(--card-bg-dark);
       padding: 2rem;
       border-radius: 16px;
       border: var(--border-gold);
       box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
       transition: var(--transition);
-    }
-
-    .profile-container h1 {
-      text-align: center;
-      color: var(--gold-light);
-      margin-bottom: 2rem;
-      font-weight: 700;
+      margin-top: 2rem;
     }
 
     .input-group {
@@ -162,11 +167,6 @@
       transition: var(--transition);
     }
 
-    input:focus, select:focus {
-      border-color: var(--gold);
-      box-shadow: 0 0 5px var(--gold);
-    }
-
     button {
       background: var(--gold);
       color: #000;
@@ -180,78 +180,19 @@
       margin-top: 0.6rem;
     }
 
-    button:hover {
-      background: var(--gold-light);
-      transform: translateY(-1px);
-    }
-
     #logout {
       background: transparent;
       color: var(--gold);
       border: var(--border-gold);
     }
 
-    #logout:hover {
-      background: var(--gold);
-      color: #000;
-    }
-
-    /* ===== Light Mode ===== */
-    body.light-mode {
-      background: var(--bg-light);
-      color: var(--text-dark);
-    }
-
-    body.light-mode .navbar {
-      background: linear-gradient(90deg, #fff, #f5f5f5);
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-    }
-
-    body.light-mode .logo {
-      color: var(--gold);
-    }
-
-    body.light-mode nav a {
-      color: #444;
-    }
-
-    body.light-mode nav a:hover {
-      color: var(--gold);
-    }
-
-    body.light-mode .profile-container {
-      background: var(--card-bg-light);
-      box-shadow: 0 0 25px rgba(0, 0, 0, 0.1);
-    }
-
-    body.light-mode input,
-    body.light-mode select {
-      background: var(--input-bg-light);
-      color: #111;
-      border-color: rgba(212, 175, 55, 0.5);
-    }
-
-    body.light-mode label {
-      color: #333;
-    }
-
-    /* ===== Responsive ===== */
-    @media (max-width: 768px) {
-      .hamburger {
-        display: flex;
-      }
-
-      #main-nav {
-        display: none;
-      }
-    }
   </style>
 </head>
 
 <body>
 <header class="navbar">
   <div class="nav-container">
-    <a href="https://koodaram.vercel.app/" class="logo">🏠 Koodaram</a>
+    <a href="/" class="logo">🏠 Koodaram</a>
     <nav id="main-nav">
       <a href="/">Home</a>
       <a href="/pages/browse.html">Browse Hostels</a>
@@ -262,47 +203,50 @@
     </nav>
     <div class="nav-right">
       <a href="/pages/signup.html" class="nav-cta-button">Sign Up / Login</a>
-      <button id="theme-toggle" class="theme-toggle-button">
-        <span class="sun-icon">☀️</span>
-        <span class="moon-icon" style="display:none;">🌙</span>
-      </button>
-      <button class="hamburger" id="hamburger-button">
-        <span></span><span></span><span></span>
-      </button>
     </div>
   </div>
 </header>
 
-<main class="profile-container">
-  <h1>Your Profile</h1>
-  <div id="profile-form">
-    <div class="input-group">
-      <label for="name">Name</label>
-      <input type="text" id="name" placeholder="Enter your name">
-    </div>
-    <div class="input-group">
-      <label for="gender">Gender</label>
-      <select id="gender">
-        <option value="male">Male</option>
-        <option value="female">Female</option>
-        <option value="other">Other</option>
-      </select>
-    </div>
-    <div class="input-group">
-      <label for="college">College</label>
-      <input type="text" id="college" placeholder="Enter your college name">
-    </div>
-    <button id="update-profile">Update Profile</button>
-    <button id="logout">Logout</button>
-  </div>
-</main>
+<main class="dashboard-container">
+  <h1 id="welcome-message">Welcome!</h1>
 
-<div class="community-contributions" style="width: 90%; max-width: 500px; margin: 3rem auto;">
-  <h2>Your Community Contributions</h2>
-  <div id="user-posts-container">
-    <!-- User's non-anonymous posts will be loaded here -->
+  <div class="quick-actions">
+    <a href="/pages/community.html" class="action-btn">Create Post</a>
+    <a href="/pages/browse.html" class="action-btn">Browse Hostels</a>
+    <a href="#" id="edit-profile-btn" class="action-btn">Edit Profile</a>
   </div>
-</div>
+
+  <div id="profile-form-container" class="profile-container" style="display:none;">
+    <h2>Edit Your Profile</h2>
+    <div id="profile-form">
+      <div class="input-group">
+        <label for="name">Name</label>
+        <input type="text" id="name" placeholder="Enter your name">
+      </div>
+      <div class="input-group">
+        <label for="gender">Gender</label>
+        <select id="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+      <div class="input-group">
+        <label for="college">College</label>
+        <input type="text" id="college" placeholder="Enter your college name">
+      </div>
+      <button id="update-profile">Update Profile</button>
+    </div>
+  </div>
+
+  <div class="community-contributions">
+    <h2>Your Community Contributions</h2>
+    <div id="user-posts-container">
+      <!-- User's non-anonymous posts will be loaded here -->
+    </div>
+  </div>
+  <button id="logout" style="margin-top: 3rem;">Logout</button>
+</main>
 
 <script>
   const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
@@ -315,104 +259,74 @@
   const collegeInput = document.getElementById('college');
   const updateProfileButton = document.getElementById('update-profile');
   const logoutButton = document.getElementById('logout');
-  const themeToggle = document.getElementById('theme-toggle');
-  const sunIcon = document.querySelector('.sun-icon');
-  const moonIcon = document.querySelector('.moon-icon');
+  const editProfileBtn = document.getElementById('edit-profile-btn');
+  const profileFormContainer = document.getElementById('profile-form-container');
 
-  // Hide signup button if logged in
+  // --- AUTH & DATA FETCHING ---
   (async () => {
     const { data: { user } } = await _supabase.auth.getUser();
-    const signupButton = document.querySelector('a[href="/pages/signup.html"]');
-    if (user) {
-      if(signupButton) signupButton.style.display = 'none';
-    }
-  })();
-
-  // Fetch and display user profile
-  (async () => {
-    const { data: { user } } = await _supabase.auth.getUser();
-    if (user) {
-      const { data: profile } = await _supabase
-        .from('profiles')
-        .select('*')
-        .eq('id', user.id)
-        .single();
-      if (profile) {
-        nameInput.value = profile.name;
-        genderInput.value = profile.gender;
-        collegeInput.value = profile.college;
-      }
-    } else {
+    if (!user) {
       window.location.href = '/pages/signup.html';
+      return;
+    }
+
+    // Hide signup button
+    const signupButton = document.querySelector('a[href="/pages/signup.html"]');
+    if (signupButton) signupButton.style.display = 'none';
+
+    // Change logo link
+    const logoLink = document.querySelector('.logo');
+    if (logoLink) logoLink.href = '/pages/profile.html';
+
+    // Fetch profile and posts
+    const { data: profile } = await _supabase.from('profiles').select('*').eq('id', user.id).single();
+    if (profile) {
+      nameInput.value = profile.name;
+      genderInput.value = profile.gender;
+      collegeInput.value = profile.college;
+      document.getElementById('welcome-message').textContent = `Welcome, ${profile.name || 'Koodaram User'}!`;
+    }
+
+    const { data: posts } = await _supabase.from('community_posts').select('*').eq('user_id', user.id).eq('is_anonymous', false).order('created_at', { ascending: false });
+    const postsContainer = document.getElementById('user-posts-container');
+    if (posts && posts.length > 0) {
+        posts.forEach(post => {
+          postsContainer.innerHTML += `
+            <div style="background: var(--card-bg-dark); padding: 1rem; border-radius: 8px; margin-bottom: 1rem; border: var(--border-gold);">
+              <p style="font-size: 0.9rem; color: var(--text-muted);">${post.hostel} @ ${post.college}</p>
+              <p>${post.message}</p>
+            </div>
+          `;
+        });
+    } else {
+        postsContainer.innerHTML = '<p>You have not made any public contributions yet.</p>';
     }
   })();
 
-  // Update profile
+  // --- EVENT LISTENERS ---
+  editProfileBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    profileFormContainer.style.display = profileFormContainer.style.display === 'none' ? 'block' : 'none';
+  });
+
   updateProfileButton.addEventListener('click', async () => {
     const { data: { user } } = await _supabase.auth.getUser();
     if (user) {
-      const { error } = await _supabase
-        .from('profiles')
-        .upsert({
-          id: user.id,
-          name: nameInput.value,
-          gender: genderInput.value,
-          college: collegeInput.value,
-        });
+      const { error } = await _supabase.from('profiles').upsert({ id: user.id, name: nameInput.value, gender: genderInput.value, college: collegeInput.value });
       if (error) alert('Error updating profile: ' + error.message);
-      else alert('Profile updated successfully!');
+      else {
+        alert('Profile updated successfully!');
+        document.getElementById('welcome-message').textContent = `Welcome, ${nameInput.value || 'Koodaram User'}!`;
+        profileFormContainer.style.display = 'none';
+      }
     }
   });
 
-  // Logout
   logoutButton.addEventListener('click', async () => {
     await _supabase.auth.signOut();
     window.location.href = '/';
   });
 
-  // === Theme Toggle ===
-  function applyTheme(isLight) {
-    document.body.classList.toggle('light-mode', isLight);
-    sunIcon.style.display = isLight ? 'none' : 'inline';
-    moonIcon.style.display = isLight ? 'inline' : 'none';
-    localStorage.setItem('koodaram-theme', isLight ? 'light' : 'dark');
-  }
-
-  const savedTheme = localStorage.getItem('koodaram-theme');
-  if (savedTheme === 'light') applyTheme(true);
-
-  themeToggle.addEventListener('click', () => {
-    const isLight = !document.body.classList.contains('light-mode');
-    applyTheme(isLight);
-  // Fetch and display user's community contributions
-  (async () => {
-    const { data: { user } } = await _supabase.auth.getUser();
-    if (user) {
-      const { data: posts, error } = await _supabase
-        .from('community_posts')
-        .select('*')
-        .eq('user_id', user.id)
-        .eq('is_anonymous', false)
-        .order('created_at', { ascending: false });
-
-      if (posts) {
-        const postsContainer = document.getElementById('user-posts-container');
-        if (posts.length === 0) {
-          postsContainer.innerHTML = '<p>You have not made any public contributions yet.</p>';
-          return;
-        }
-        posts.forEach(post => {
-          postsContainer.innerHTML += `
-            <div class="post-card" style="background: var(--card-bg-dark); padding: 1.5rem; border-radius: 16px; border: var(--border-gold); margin-bottom: 1.5rem;">
-              <p class="hostel-info" style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 1rem;">${post.hostel} @ ${post.college}</p>
-              <p>${post.message}</p>
-            </div>
-          `;
-        });
-      }
-    }
-  })();
-</script>\
-
+</script>
 </body>
 </html>
