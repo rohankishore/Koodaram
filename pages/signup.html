@@ -37,7 +37,7 @@
       overflow-x: hidden;
     }
 
-    .signup-container {
+    .auth-container {
       background: rgba(30, 30, 30, 0.8);
       backdrop-filter: blur(14px);
       border: 1px solid rgba(255, 215, 0, 0.15);
@@ -48,6 +48,38 @@
       box-shadow: 0 0 30px rgba(255, 215, 0, 0.1);
       animation: fadeInUp 1.2s ease forwards;
       text-align: center;
+    }
+    
+    .tab-buttons {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 2rem;
+      background: #2a2a2a;
+      border-radius: 12px;
+      padding: 0.5rem;
+    }
+
+    .tab-link {
+      background: transparent;
+      border: none;
+      color: #ccc;
+      padding: 0.8rem 1.5rem;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: 600;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      width: 50%;
+    }
+
+    .tab-link.active {
+      background: linear-gradient(90deg, #ffbf00, #ffd700);
+      color: #1a1a1a;
+      box-shadow: 0 0 18px rgba(255, 215, 0, 0.25);
+    }
+
+    .tab-content {
+      display: none;
     }
 
     h1 {
@@ -97,12 +129,6 @@
       box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
     }
 
-    .button-group {
-      display: flex;
-      gap: 1rem;
-      justify-content: center;
-    }
-
     button {
       background: linear-gradient(90deg, #ffbf00, #ffd700);
       color: #1a1a1a;
@@ -114,6 +140,7 @@
       cursor: pointer;
       transition: all 0.3s ease;
       box-shadow: 0 0 18px rgba(255, 215, 0, 0.25);
+      width: 100%;
     }
 
     button:hover {
@@ -139,31 +166,48 @@
 </head>
 <body>
 
-  <div class="signup-container">
-    <h1>Join the Koodaram Movement</h1>
-    <p>Create an account to join the hostel decentralisation movement.</p>
-    
-    <form id="auth-form">
-      <div class="input-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" required>
-      </div>
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" required>
-      </div>
-      <div class="button-group">
-        <button type="button" id="signup-button">Sign Up</button>
+  <div class="auth-container">
+    <div class="tab-buttons">
+      <button class="tab-link active" onclick="openTab(event, 'login')">Login</button>
+      <button class="tab-link" onclick="openTab(event, 'signup')">Sign Up</button>
+    </div>
+
+    <div id="login" class="tab-content" style="display: block;">
+      <h1>Login to Koodaram</h1>
+      <p>Welcome back! Access your profile and manage your listings.</p>
+      <form id="login-form">
+        <div class="input-group">
+          <label for="login-email">Email</label>
+          <input type="email" id="login-email" required>
+        </div>
+        <div class="input-group">
+          <label for="login-password">Password</label>
+          <input type="password" id="login-password" required>
+        </div>
         <button type="button" id="login-button">Login</button>
-      </div>
-    </form>
+      </form>
+    </div>
+
+    <div id="signup" class="tab-content">
+      <h1>Join the Koodaram Movement</h1>
+      <p>Create an account to join the hostel decentralisation movement.</p>
+      <form id="signup-form">
+        <div class="input-group">
+          <label for="signup-email">Email</label>
+          <input type="email" id="signup-email" required>
+        </div>
+        <div class="input-group">
+          <label for="signup-password">Password</label>
+          <input type="password" id="signup-password" required>
+        </div>
+        <button type="button" id="signup-button">Sign Up</button>
+      </form>
+    </div>
 
     <p id="message"></p>
   </div>
 
   <script>
-    // WARNING: It is not recommended to hardcode API keys in your code.
-    // This is a security risk and should be avoided in production environments.
     const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
     const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nZ2Zzb214enJmb2plc3picXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTM0NDksImV4cCI6MjA3NjcyOTQ0OX0.oWZ77VC3iuzi7r2tcI0sXGWwPgCQT-csrd2TdLJgimw';
 
@@ -172,14 +216,31 @@
 
     const signupButton = document.getElementById('signup-button');
     const loginButton = document.getElementById('login-button');
-    const emailInput = document.getElementById('email');
-    const passwordInput = document.getElementById('password');
+    const signupEmailInput = document.getElementById('signup-email');
+    const signupPasswordInput = document.getElementById('signup-password');
+    const loginEmailInput = document.getElementById('login-email');
+    const loginPasswordInput = document.getElementById('login-password');
     const message = document.getElementById('message');
+
+    function openTab(evt, tabName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tab-content");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tab-link");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(tabName).style.display = "block";
+      evt.currentTarget.className += " active";
+      message.textContent = '';
+    }
 
     signupButton.addEventListener('click', async () => {
       const { data, error } = await _supabase.auth.signUp({
-        email: emailInput.value,
-        password: passwordInput.value,
+        email: signupEmailInput.value,
+        password: signupPasswordInput.value,
       })
       if (error) {
         message.textContent = error.message;
@@ -190,8 +251,8 @@
 
     loginButton.addEventListener('click', async () => {
       const { data, error } = await _supabase.auth.signInWithPassword({
-        email: emailInput.value,
-        password: passwordInput.value,
+        email: loginEmailInput.value,
+        password: loginPasswordInput.value,
       })
       if (error) {
         message.textContent = error.message;

@@ -311,6 +311,15 @@
   const sunIcon = document.querySelector('.sun-icon');
   const moonIcon = document.querySelector('.moon-icon');
 
+  // Hide signup button if logged in
+  (async () => {
+    const { data: { user } } = await _supabase.auth.getUser();
+    const signupButton = document.querySelector('a[href="/pages/signup.html"]');
+    if (user) {
+      if(signupButton) signupButton.style.display = 'none';
+    }
+  })();
+
   // Fetch and display user profile
   (async () => {
     const { data: { user } } = await _supabase.auth.getUser();

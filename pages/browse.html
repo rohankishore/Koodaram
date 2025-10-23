@@ -286,6 +286,19 @@
 
   let hostelDataCache = [];
 
+  function handleImageError(img) {
+    const placeholder = document.createElement('div');
+    placeholder.style.height = '180px';
+    placeholder.style.display = 'flex';
+    placeholder.style.alignItems = 'center';
+    placeholder.style.justifyContent = 'center';
+    placeholder.style.background = '#333';
+    placeholder.style.borderRadius = '8px';
+    placeholder.style.color = '#ccc';
+    placeholder.textContent = 'No Image Available';
+    img.replaceWith(placeholder);
+  }
+
   function renderStars(rating) {
     const full = "★";
     const empty = "☆";
