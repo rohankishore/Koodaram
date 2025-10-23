@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Community - Koodaram</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    /* ===== Koodaram Gold Theme ===== */
+    :root {
+      --gold: #d4af37;
+      --gold-light: #f5e6a1;
+      --bg-dark: #121212;
+      --bg-light: #fafafa;
+      --text-light: #f7f7f7;
+      --text-dark: #1c1c1c;
+      --text-muted: #c5c5c5;
+      --card-bg-dark: rgba(255, 255, 255, 0.05);
+      --card-bg-light: #ffffff;
+      --input-bg-dark: rgba(255, 255, 255, 0.08);
+      --input-bg-light: #f8f8f8;
+      --border-gold: 1px solid rgba(212, 175, 55, 0.4);
+      --transition: all 0.3s ease;
+      font-family: 'Inter', sans-serif;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      background: var(--bg-dark);
+      color: var(--text-light);
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      transition: var(--transition);
+    }
+
+    /* ===== Navbar ===== */
+    .navbar {
+      background: linear-gradient(90deg, #000, #1a1a1a);
+      padding: 1rem 0;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+      transition: var(--transition);
+    }
+
+    .nav-container {
+      width: 90%;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      color: var(--gold);
+      font-weight: 800;
+      font-size: 1.3rem;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .logo:hover {
+      color: var(--gold-light);
+    }
+
+    nav a {
+      color: var(--text-muted);
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: 500;
+      transition: var(--transition);
+    }
+
+    nav a:hover {
+      color: var(--gold-light);
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .nav-cta-button {
+      background: var(--gold);
+      color: #000;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    .nav-cta-button:hover {
+      background: var(--gold-light);
+    }
+
+    .theme-toggle-button {
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 1.3rem;
+    }
+
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .hamburger span {
+      display: block;
+      width: 25px;
+      height: 3px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+
+    /* ===== Community Section ===== */
+    .community-container {
+      width: 90%;
+      max-width: 800px;
+      margin: 3rem auto;
+    }
+
+    .create-post-btn {
+      background: var(--gold);
+      color: #000;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: var(--transition);
+      display: inline-block;
+      margin-bottom: 2rem;
+    }
+
+    .create-post-btn:hover {
+      background: var(--gold-light);
+    }
+
+    .post-card {
+      background: var(--card-bg-dark);
+      padding: 1.5rem;
+      border-radius: 16px;
+      border: var(--border-gold);
+      margin-bottom: 1.5rem;
+    }
+
+    .post-card .author {
+      font-weight: 600;
+      color: var(--gold-light);
+    }
+
+    .post-card .hostel-info {
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      margin-bottom: 1rem;
+    }
+
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.6);
+      padding-top: 60px;
+    }
+
+    .modal-content {
+      background-color: var(--bg-dark);
+      margin: 5% auto;
+      padding: 2rem;
+      border: var(--border-gold);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 500px;
+    }
+
+    .close-btn {
+      color: var(--text-muted);
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .close-btn:hover,
+    .close-btn:focus {
+      color: var(--gold-light);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* General input styles from profile */
+    .input-group {
+      display: flex;
+      flex-direction: column;
+      margin-bottom: 1.5rem;
+    }
+
+    label {
+      margin-bottom: 0.4rem;
+      color: var(--gold-light);
+      font-weight: 600;
+    }
+
+    input, select, textarea {
+      background: var(--input-bg-dark);
+      color: var(--text-light);
+      border: var(--border-gold);
+      border-radius: 8px;
+      padding: 0.8rem;
+      outline: none;
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      border-color: var(--gold);
+      box-shadow: 0 0 5px var(--gold);
+    }
+
+    button {
+      background: var(--gold);
+      color: #000;
+      border: none;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: 700;
+      width: 100%;
+      transition: var(--transition);
+      margin-top: 0.6rem;
+    }
+
+    button:hover {
+      background: var(--gold-light);
+      transform: translateY(-1px);
+    }
+
+  </style>
+</head>
+
+<body>
+<header class="navbar">
+  <div class="nav-container">
+    <a href="https://koodaram.vercel.app/" class="logo">🏠 Koodaram</a>
+    <nav id="main-nav">
+      <a href="/">Home</a>
+      <a href="/pages/browse.html">Browse Hostels</a>
+      <a href="/pages/community.html">Community</a>
+      <a href="/pages/listHostel.html">List Hostel</a>
+      <a href="/pages/about.html">About</a>
+      <a href="/pages/profile.html">Profile</a>
+    </nav>
+    <div class="nav-right">
+      <a href="/pages/signup.html" class="nav-cta-button">Sign Up / Login</a>
+      <button id="theme-toggle" class="theme-toggle-button">
+        <span class="sun-icon">☀️</span>
+        <span class="moon-icon" style="display:none;">🌙</span>
+      </button>
+      <button class="hamburger" id="hamburger-button">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main class="community-container">
+  <h1>Community Discussions</h1>
+  <a href="#" id="create-post-btn" class="create-post-btn">Create Post</a>
+
+  <div id="posts-container">
+    <!-- Posts will be loaded here -->
+  </div>
+</main>
+
+<!-- Create Post Modal -->
+<div id="create-post-modal" class="modal">
+  <div class="modal-content">
+    <span id="close-modal-btn" class="close-btn">&times;</span>
+    <h2>Create a New Post</h2>
+    <div class="input-group">
+      <label for="college-select">College</label>
+      <select id="college-select">
+        <option value="">Select a College</option>
+        <option value="cusat">CUSAT</option>
+        <option value="cucek">CUCEK</option>
+        <option value="SCT Trivandrum">SCT Trivandrum</option>
+        <option value="GEC Kozhikode">GEC Kozhikode</option>
+        <option value="GEC Palakkad">GEC Palakkad</option>
+        <option value="GEC Thrissur">GEC Thrissur</option>
+        <option value="Model Engineering College">Model Engineering College</option>
+        <option value="NSS College Palakkad">NSS College Palakkad</option>
+        <option value="RIT Kottayam">RIT Kottayam</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label for="hostel-select">Hostel</label>
+      <select id="hostel-select">
+        <option value="">Select a Hostel</option>
+      </select>
+    </div>
+    <div class="input-group">
+      <label for="post-message">Message</label>
+      <textarea id="post-message" rows="5" placeholder="Share your thoughts..."></textarea>
+    </div>
+    <div class="input-group" style="flex-direction: row; align-items: center;">
+      <input type="checkbox" id="anonymous-checkbox" style="width: auto; margin-right: 10px;">
+      <label for="anonymous-checkbox" style="margin-bottom: 0;">Post Anonymously</label>
+    </div>
+    <button id="submit-post-btn">Submit Post</button>
+  </div>
+</div>
+
+<script>
+  const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
+  const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nZ2Zzb214enJmb2plc3picXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTM0NDksImV4cCI6MjA3NjcyOTQ0OX0.oWZ77VC3iuzi7r2tcI0sXGWwPgCQT-csrd2TdLJgimw';
+  const { createClient } = supabase;
+  const _supabase = createClient(supabaseUrl, supabaseAnonKey);
+
+  const modal = document.getElementById('create-post-modal');
+  const createPostBtn = document.getElementById('create-post-btn');
+  const closeModalBtn = document.getElementById('close-modal-btn');
+
+  createPostBtn.onclick = () => { modal.style.display = 'block'; }
+  closeModalBtn.onclick = () => { modal.style.display = 'none'; }
+  window.onclick = (event) => {
+    if (event.target == modal) {
+      modal.style.display = 'none';
+    }
+  }
+
+  // NOTE: You need to create a table named 'community_posts' in your Supabase project.
+  // Columns: id (uuid), created_at (timestampz), college (text), hostel (text), message (text), is_anonymous (boolean), user_id (uuid, foreign key to profiles.id)
+
+</script>
+</body>
+</html>
