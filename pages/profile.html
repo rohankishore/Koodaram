@@ -238,9 +238,14 @@
   // --- Hamburger Menu ---
   const hamburgerButton = document.getElementById('hamburger-button');
   const mainNav = document.getElementById('main-nav');
-  hamburgerButton.addEventListener('click', () => {
+  
+  function toggleMenu(e) {
+    e.preventDefault();
     mainNav.classList.toggle('active');
-  });
+  }
+
+  hamburgerButton.addEventListener('click', toggleMenu);
+  hamburgerButton.addEventListener('touchstart', toggleMenu);
 
   // ... (rest of the dashboard logic) ...
 </script>

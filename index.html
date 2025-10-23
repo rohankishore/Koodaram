@@ -327,9 +327,13 @@ document.addEventListener("DOMContentLoaded", fetchStats);
   const hamburgerButton = document.getElementById('hamburger-button');
   const mainNav = document.getElementById('main-nav');
 
-  hamburgerButton.addEventListener('click', () => {
+  function toggleMenu(e) {
+    e.preventDefault();
     mainNav.classList.toggle('active');
-  });
+  }
+
+  hamburgerButton.addEventListener('click', toggleMenu);
+  hamburgerButton.addEventListener('touchstart', toggleMenu);
 </script>
 <script>
   // Redirect to dashboard if logged in, otherwise hide signup button

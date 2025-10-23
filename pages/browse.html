@@ -536,9 +536,13 @@
   const hamburgerButton = document.getElementById('hamburger-button');
   const mainNav = document.getElementById('main-nav');
 
-  hamburgerButton.addEventListener('click', () => {
+  function toggleMenu(e) {
+    e.preventDefault();
     mainNav.classList.toggle('active');
-  });
+  }
+
+  hamburgerButton.addEventListener('click', toggleMenu);
+  hamburgerButton.addEventListener('touchstart', toggleMenu);
 
   // Auth and logo link logic
   (async () => {
