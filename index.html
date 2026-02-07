@@ -20,7 +20,6 @@
     <nav id="main-nav">
       <a href="/">Home</a>
       <a href="/pages/browse.html">Browse Hostels</a>
-      <a href="/pages/community.html">Community</a>
       <a href="/pages/listHostel.html">List Hostel</a>
       <a href="/pages/about.html">About</a>
       <a href="/pages/profile.html">Profile</a>
@@ -38,10 +37,9 @@
 
 <div class="hero">
   <h1>Kerala’s #1 Student-Run Hostel Search Platform</h1>
-  <p>A decentralized, student-run network for finding and verifying hostels. Powered by community, for the community.</p>
+  <p>A decentralized, student-run network for finding and verifying hostels near your campus.</p>
   <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem;">
     <a href="/pages/browse.html" class="cta-button">🔍 Find Your Hostel</a>
-    <a href="/pages/community.html" class="cta-button">💬 Join the Community</a>
   </div>
 </div>
 
@@ -55,8 +53,8 @@
       </div>
       <div class="step-card">
         <div class="step-number">2</div>
-        <h3>Community Governed</h3>
-        <p>The community discusses and reviews hostels, creating a transparent and self-regulating ecosystem.</p>
+        <h3>Transparent & Open</h3>
+        <p>All hostel data is open-source and freely accessible, ensuring transparency without corporate control.</p>
       </div>
       <div class="step-card">
         <div class="step-number">3</div>
@@ -79,21 +77,21 @@
     <div class="faq-accordion-item">
       <div class="faq-accordion-question">Does Koodaram requires an account to use?</div>
       <div class="faq-accordion-answer">
-        <p>Not really. You can browse Koodaram without having an account. You'll need an account only for posting in Community, or if you like better tailored hostel results.</p>
+        <p>Not really. You can browse Koodaram without having an account. You'll need an account only if you want better tailored hostel results.</p>
       </div>
     </div>
 
     <div class="faq-accordion-item">
       <div class="faq-accordion-question">How do you ensure data is accurate?</div>
       <div class="faq-accordion-answer">
-        <p>Our model is built on community verification. While we don't check every hostel personally, information is submitted and validated by a network of students. The community forums also play a big role in keeping information current.</p>
+        <p>Our model is built on student verification. While we don't check every hostel personally, information is submitted and validated by a network of students who keep the listings up-to-date.</p>
       </div>
     </div>
 
     <div class="faq-accordion-item">
       <div class="faq-accordion-question">How do I contribute?</div>
       <div class="faq-accordion-answer">
-        <p>You can contribute by listing a new hostel, adding reviews and ratings, or participating in community discussions to verify information. Signed-in users have access to all community features.</p>
+        <p>You can contribute by listing a new hostel, adding reviews and ratings to help verify information for other students.</p>
       </div>
     </div>
 
@@ -126,30 +124,7 @@
     });
   });
 
-  // Fetch Community Posts
-  async function fetchCommunityPosts() {
-    const postsContainer = document.getElementById('community-posts-container');
-    const { data: posts, error } = await _supabase
-      .from('community_posts')
-      .select('*, profile:profiles(name)')
-      .order('created_at', { ascending: false })
-      .limit(3);
 
-    if (posts) {
-        postsContainer.innerHTML = '';
-        posts.forEach(post => {
-            const authorName = post.is_anonymous ? 'Anonymous' : (post.profile ? post.profile.name : 'Anonymous');
-            const postCard = `
-                <div class="community-post-card">
-                    <p class="author">${authorName}</p>
-                    <p class="hostel-info">${post.hostel} @ ${post.college}</p>
-                    <p>${post.message.substring(0, 100)}...</p>
-                </div>
-            `;
-            postsContainer.innerHTML += postCard;
-        });
-    }
-  }
 
   // Hamburger Menu
   const hamburgerButton = document.getElementById('hamburger-button');
@@ -173,8 +148,7 @@
     }
   })();
 
-  // Initial data fetch
-  fetchCommunityPosts();
+
 </script>
 
 </body>
