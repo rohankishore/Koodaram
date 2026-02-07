@@ -488,43 +488,6 @@ footer a:hover {
     margin-bottom: 1rem;
 }
 
-/* ================= COMMUNITY HIGHLIGHT ================= */
-.community-highlight-section {
-    padding: 5rem 2rem;
-}
-
-.community-highlight-section h2 {
-    text-align: center;
-    font-size: 2.5rem;
-    margin-bottom: 3rem;
-}
-
-.community-posts-container {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 1.5rem;
-    max-width: 1200px;
-    margin: auto;
-}
-
-.community-post-card {
-    background: var(--card-bg-color);
-    padding: 1.5rem;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-}
-
-.community-post-card .author {
-    font-weight: 600;
-    color: var(--primary-gold);
-}
-
-.community-post-card .hostel-info {
-    font-size: 0.9rem;
-    color: var(--text-color-light);
-    margin-bottom: 1rem;
-}
-
 /* ================= FAQ ACCORDION ================= */
 .faq-accordion {
     max-width: 800px;
