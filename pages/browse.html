@@ -309,10 +309,9 @@
       <a href="/pages/browse.html">Browse Hostels</a>
       <a href="/pages/listHostel.html">List Hostel</a>
       <a href="/pages/about.html">About</a>
-      <a href="/pages/profile.html">Profile</a>
     </nav>
     <div class="nav-right">
-      <a href="/pages/signup.html" class="nav-cta-button">Sign Up / Login</a>
+      <a href="https://github.com/Koodaram-Inc/koodaram-data" target="_blank" class="nav-cta-button">⭐ Open Source</a>
       <button class="hamburger" id="hamburger-button">
         <span></span><span></span><span></span>
       </button>
@@ -542,23 +541,6 @@
 
   hamburgerButton.addEventListener('click', toggleMenu);
   hamburgerButton.addEventListener('touchstart', toggleMenu);
-
-  // Auth and logo link logic
-  (async () => {
-    const { createClient } = supabase;
-    const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
-    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nZ2Zzb214enJmb2plc3picXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTM0NDksImV4cCI6MjA3NjcyOTQ0OX0.oWZ77VC3iuzi7r2tcI0sXGWwPgCQT-csrd2TdLJgimw';
-    const _supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-    const { data: { user } } = await _supabase.auth.getUser();
-    const signupButton = document.querySelector('a[href="/pages/signup.html"]');
-    const logoLink = document.querySelector('.logo');
-
-    if (user) {
-      if(signupButton) signupButton.style.display = 'none';
-      if(logoLink) logoLink.href = '/pages/profile.html';
-    }
-  })();
 </script>
 </body>
 </html>

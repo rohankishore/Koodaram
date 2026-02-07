@@ -22,10 +22,9 @@
       <a href="/pages/browse.html">Browse Hostels</a>
       <a href="/pages/listHostel.html">List Hostel</a>
       <a href="/pages/about.html">About</a>
-      <a href="/pages/profile.html">Profile</a>
     </nav>
     <div class="nav-right">
-        <a href="/pages/signup.html" class="nav-cta-button">Sign Up / Login</a>
+        <a href="https://github.com/Koodaram-Inc/koodaram-data" target="_blank" class="nav-cta-button">⭐ Open Source</a>
         <button class="hamburger" id="hamburger-button">
           <span></span>
           <span></span>
@@ -36,10 +35,11 @@
 </header>
 
 <div class="hero">
-  <h1>Kerala’s #1 Student-Run Hostel Search Platform</h1>
-  <p>A decentralized, student-run network for finding and verifying hostels near your campus.</p>
+  <h1>Kerala's #1 Open Hostel Finder</h1>
+  <p>A completely free and open-source platform for finding and verifying hostels near your campus. No accounts, no paywalls, no corporate control.</p>
   <div style="margin-top: 1rem; display: flex; justify-content: center; gap: 1rem;">
     <a href="/pages/browse.html" class="cta-button">🔍 Find Your Hostel</a>
+    <a href="https://github.com/Koodaram-Inc/koodaram-data" target="_blank" class="cta-button">🛠️ View on GitHub</a>
   </div>
 </div>
 
@@ -48,18 +48,18 @@
     <div class="steps-container">
       <div class="step-card">
         <div class="step-number">1</div>
-        <h3>Students Submit & Verify</h3>
-        <p>Real students submit and verify hostel information, ensuring data is up-to-date and trustworthy.</p>
+        <h3>100% Open Source</h3>
+        <p>All hostel data is hosted on GitHub and freely accessible. No accounts needed, no data locked behind paywalls.</p>
       </div>
       <div class="step-card">
         <div class="step-number">2</div>
-        <h3>Transparent & Open</h3>
-        <p>All hostel data is open-source and freely accessible, ensuring transparency without corporate control.</p>
+        <h3>Student Verified</h3>
+        <p>Real students submit and verify hostel information, ensuring data is up-to-date and trustworthy.</p>
       </div>
       <div class="step-card">
         <div class="step-number">3</div>
-        <h3>Everyone Benefits</h3>
-        <p>Access a free, open, and honest database of hostels, without corporate control or paywalls.</p>
+        <h3>Completely Free</h3>
+        <p>Browse hostels, view photos, and contact owners — all without paying a rupee or creating an account.</p>
       </div>
     </div>
 </section>
@@ -75,9 +75,9 @@
     </div>
 
     <div class="faq-accordion-item">
-      <div class="faq-accordion-question">Does Koodaram requires an account to use?</div>
+      <div class="faq-accordion-question">Do I need an account to use Koodaram?</div>
       <div class="faq-accordion-answer">
-        <p>Not really. You can browse Koodaram without having an account. You'll need an account only if you want better tailored hostel results.</p>
+        <p>No! Koodaram is completely open — no accounts, no sign-ups, no tracking. Just browse, search, and find your hostel.</p>
       </div>
     </div>
 
@@ -95,10 +95,10 @@
       </div>
     </div>
 
-        <div class="faq-accordion-item">
+    <div class="faq-accordion-item">
       <div class="faq-accordion-question">Is Koodaram fully open source?</div>
       <div class="faq-accordion-answer">
-        <p>Every data regarding hostels are open source and can be found on <a href="https://github.com/Koodaram-Inc/koodaram-data">GitHub</a>, Though the source code cannot be made open due to API keys and security concerns on user data.p>
+        <p>Yes! All hostel data is open source and available on <a href="https://github.com/Koodaram-Inc/koodaram-data" target="_blank">GitHub</a>. Anyone can view, verify, or contribute to the hostel listings. The platform code is also open — we believe in total transparency.</p>
       </div>
     </div>
 
@@ -135,18 +135,6 @@
   }
   hamburgerButton.addEventListener('click', toggleMenu);
   hamburgerButton.addEventListener('touchstart', toggleMenu);
-
-  // Auth Logic
-  (async () => {
-    const { data: { user } } = await _supabase.auth.getUser();
-    if (user) {
-      if (window.location.pathname === '/' || window.location.pathname === '/index.html') {
-        window.location.href = '/pages/profile.html';
-      }
-      document.querySelector('a[href="/pages/signup.html"]').style.display = 'none';
-      document.querySelector('.logo').href = '/pages/profile.html';
-    }
-  })();
 
 
 </script>
