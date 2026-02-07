@@ -150,50 +150,33 @@
   <div class="info-section">
     <h2>💛 About Koodaram</h2>
     <p>
-      Koodaram is a <strong>student-run, decentralized hostel network</strong> built to help you find verified hostels and PGs near your campus — without corporate control or hidden fees. 
+      Koodaram is <strong>Kerala's #1 Open Hostel Finder</strong> — a completely free and open-source platform built to help you find verified hostels and PGs near your campus. No corporate control, no hidden fees, no accounts required. 
       What started as a small project to make hostel discovery simple is now growing into a movement for open, transparent student living.
     </p>
 
-    <h2>🌍 Why Koodaram?</h2>
+    <h2>🌍 Why Open Source?</h2>
     <p>
-      Because students deserve ownership of their own spaces. Koodaram isn’t run by investors or agencies — it’s powered by students who care about honest listings, verified facilities, and open data.
-      Every hostel you see is <strong>added, reviewed, and maintained by students</strong>.
+      Because students deserve ownership of their own data. Koodaram isn't run by investors or agencies — it's powered by students who believe in open data and transparency.
+      Every hostel listing is <strong>publicly available on GitHub</strong>, free for anyone to view, verify, or contribute to. No data is locked behind paywalls or login screens.
     </p>
 
     <h2>⚙️ How It Works</h2>
     <p>
-      Koodaram runs on open data — anyone can list a hostel or verify details through our open repository. 
+      Koodaram runs on <strong>100% open data</strong> — anyone can list a hostel or verify details through our <a href="https://github.com/Koodaram-Inc/koodaram-data" target="_blank">GitHub repository</a>. 
       You can browse hostels by college, compare amenities, and directly contact owners via WhatsApp or phone. 
-      No logins, no agents, no middlemen. Just trust and transparency, powered by students.
+      <strong>No accounts, no sign-ups, no tracking</strong>. Just trust and transparency, powered by students.
     </p>
 
     <h2>🚀 Join the Movement</h2>
     <p>
-      Contribute listings, verify hostels, or improve the platform — everything’s open source on GitHub.  
-      Together, we’re building the future of student living, one hostel at a time.
+      Contribute listings, verify hostels, or improve the platform — everything's open source on <a href="https://github.com/Koodaram-Inc/koodaram-data" target="_blank">GitHub</a>.  
+      Together, we're building the future of student living, one hostel at a time. <strong>Free as in freedom, free as in beer.</strong>
     </p>
   </div>
 
   <footer>
-    © 2025 Koodaram. Built with ♥ by <a href="https://github.com/rohankishore" target="_blank">Rohan Kishore</a> & students.
+    © 2025 Koodaram - <strong>Kerala's #1 Open Hostel Finder</strong>. Built with ♥ by <a href="https://github.com/rohankishore" target="_blank">Rohan Kishore</a> & students. <a href="https://github.com/Koodaram-Inc/koodaram-data" target="_blank">View on GitHub</a>
   </footer>
 
-<script>
-  // Change logo link to dashboard if logged in
-  (async () => {
-    const { createClient } = supabase;
-    const supabaseUrl = 'https://nggfsomxzrfojeszbqqq.supabase.co';
-    const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5nZ2Zzb214enJmb2plc3picXFxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjExNTM0NDksImV4cCI6MjA3NjcyOTQ0OX0.oWZ77VC3iuzi7r2tcI0sXGWwPgCQT-csrd2TdLJgimw';
-    const _supabase = createClient(supabaseUrl, supabaseAnonKey);
-
-    const { data: { user } } = await _supabase.auth.getUser();
-    if (user) {
-      const logoLink = document.querySelector('.logo');
-      if (logoLink) {
-        logoLink.href = '/pages/profile.html';
-      }
-    }
-  })();
-</script>
 </body>
 </html>
