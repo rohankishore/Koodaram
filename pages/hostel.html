@@ -160,17 +160,6 @@ h1 {
   box-shadow: 0 0 10px var(--hover-glow);
 }
 
-.community-btn {
-    background: var(--surface) !important;
-    color: var(--gold) !important;
-    border: 1px solid var(--gold);
-}
-
-.community-btn:hover {
-    background: var(--gold) !important;
-    color: #000 !important;
-}
-
 .map-container {
     margin-top: 2rem;
     border-radius: 10px;
@@ -256,7 +245,6 @@ a:hover {
         <div class="contact-buttons">
           <a href="tel:${data.contact?.phone}">📞 Call</a>
           <a href="https://wa.me/91${data.contact?.phone}">💬 WhatsApp</a>
-          <a href="#" id="community-link" class="community-btn">👥 View Community</a>
         </div>
       `;
 
@@ -279,11 +267,6 @@ a:hover {
       `;
 
       document.getElementById("hostel-view").innerHTML = view;
-
-      const collegeForUrl = getCollegeAbbreviation(data.college);
-      if (collegeForUrl) {
-          document.getElementById('community-link').href = `/pages/community.html?college=${collegeForUrl}`;
-      }
 
     } catch (err) {
       document.getElementById("hostel-view").innerHTML = "<p>⚠️ Failed to load hostel details. Please try again later.</p>";
