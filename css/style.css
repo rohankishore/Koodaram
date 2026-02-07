@@ -34,7 +34,6 @@ body {
     transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* ================= HERO ================= */
 .hero {
     position: relative;
     overflow: hidden;
@@ -54,7 +53,6 @@ body {
     pointer-events: none;
 }
 
-/* Floating sparkles */
 .hero::before {
     top: 0;
     left: 50%;
@@ -63,7 +61,6 @@ body {
     animation: floatParticles 10s linear infinite;
 }
 
-/* Glimmering wave overlay */
 .hero::after {
     top: -50%;
     left: -50%;
@@ -72,7 +69,6 @@ body {
     animation: waveMove 20s linear infinite;
 }
 
-/* Particle animations */
 @keyframes floatParticles {
     0% { transform: translateX(-50%) translateY(0) rotate(0deg); }
     50% { transform: translateX(-50%) translateY(20px) rotate(15deg); }
@@ -85,7 +81,6 @@ body {
     100% { transform: translate(0,0) rotate(0deg); }
 }
 
-/* Gradient text for hero */
 .hero h1 {
     font-size: 3.5rem;
     font-weight: 800;
@@ -105,7 +100,6 @@ body {
     color: var(--text-color-light);
 }
 
-/* CTA Button */
 .cta-button {
     display: inline-block;
     margin-top: 2.5rem;
@@ -147,14 +141,12 @@ body {
     box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
 }
 
-/* Gradient animation keyframes */
 @keyframes gradientShift {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
 }
 
-/* ================= MAIN / SECTIONS ================= */
 main {
     max-width: 960px;
     margin: 2rem auto;
@@ -171,7 +163,6 @@ section:last-child {
     border-bottom: none;
 }
 
-/* Section titles shimmer */
 section h2, 
 .pricing-card h3, 
 .faq-item h3, 
@@ -214,7 +205,6 @@ section ul li::before {
     font-size: 1.2rem;
 }
 
-/* ================= PRICING CARDS ================= */
 .pricing-section, 
 .submit-hostel-section, 
 .faq-section, 
@@ -248,7 +238,6 @@ section ul li::before {
     box-shadow: 0 15px 35px rgba(0,0,0,0.2);
 }
 
-/* ================= FAQ ================= */
 .faq-container {
     max-width: 900px;
     margin: auto;
@@ -261,7 +250,6 @@ section ul li::before {
     padding-left: 2rem;
 }
 
-/* ================= MARQUEE ================= */
 .marquee-container {
     overflow: hidden;
     position: relative;
@@ -282,7 +270,6 @@ section ul li::before {
     opacity: 1;
 }
 
-/* ================= DONATE CONTAINER ================= */
 .donate-container {
     max-width: 600px;
     margin: auto;
@@ -293,7 +280,6 @@ section ul li::before {
     border: 1px solid var(--border-color);
 }
 
-/* ================= NAVBAR ================= */
 .navbar {
     background-color: var(--bg-color);
     padding: 1rem 2rem;
@@ -362,7 +348,6 @@ section ul li::before {
     transition: all 0.3s ease-in-out;
 }
 
-/* ================= THEME TOGGLE ================= */
 .theme-toggle-button {
     background: var(--surface-color);
     border: 1px solid var(--border-color);
@@ -404,7 +389,6 @@ body.light-mode .theme-toggle-button .moon-icon {
     transform: scale(0);
 }
 
-/* ================= FOOTER ================= */
 footer {
     text-align: center;
     margin-top: 6rem;
@@ -425,7 +409,6 @@ footer a:hover {
     color: var(--primary-gold);
 }
 
-/* ================= RESPONSIVE ================= */
 @media (max-width: 768px) {
     .hero h1 { font-size: 2.5rem; }
     main { flex-direction: column; gap: 0; }
@@ -454,7 +437,6 @@ footer a:hover {
     .hamburger { display: block; }
 }
 
-/* ================= HOW IT WORKS ================= */
 .how-it-works-section {
     padding: 5rem 2rem;
     text-align: center;
@@ -488,7 +470,6 @@ footer a:hover {
     margin-bottom: 1rem;
 }
 
-/* ================= FAQ ACCORDION ================= */
 .faq-accordion {
     max-width: 800px;
     margin: 3rem auto;
@@ -529,6 +510,6 @@ footer a:hover {
 }
 
 .faq-accordion-item.active .faq-accordion-answer {
-    max-height: 300px; /* Adjust as needed */
+    max-height: 300px;
     padding: 0 1.5rem 1.5rem;
 }
