@@ -1,6 +1,11 @@
-# 🏠 Koodaram - Kerala's #1 Open Hostel Finder
+<DIV ALIGN="CENTER">
 
-A **100% free and open-source** platform for finding and verifying hostels near your campus. No accounts, no paywalls, no corporate control.
+<img width="3497" height="1324" alt="Group 5" src="https://github.com/user-attachments/assets/c9944966-d32c-4bcf-bb81-0177a1dc73d0" />
+
+
+A **100% free and open-source (free as in freedom)** platform for finding and verifying hostels near your campus. No accounts, no paywalls, no corporate control.
+
+</DIV>
 
 ## ⭐ Why Koodaram?
 
