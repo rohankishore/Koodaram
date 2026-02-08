@@ -1,5 +1,6 @@
 import{ useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import Stack from '../component/Stack';
 import './Browse.css';
 
 const GITHUB_USER = "Koodaram-Inc";
@@ -196,20 +197,34 @@ function Browse() {
             <div className="no-results">No hostels found matching your criteria</div>
           ) : (
             filteredHostels.map(hostel => {
-              const imageURL = `${RAW_BASE}/${hostel.folderName}/${hostel.images?.[0] || "1.jpg"}`;
               const gender = hostel.gender?.toLowerCase() || "unisex";
               const rating = parseFloat(hostel.rating) || 0;
+              
+              // Create cards array for Stack component from all images
+              const imageCards = (hostel.images || ["1.jpg"]).map((imageName, idx) => ({
+                id: idx + 1,
+                content: (
+                  <img 
+                    key={idx}
+                    src={`${RAW_BASE}/${hostel.folderName}/${imageName}`}
+                    alt={`${hostel.name} - Image ${idx + 1}`}
+                    className="card-image"
+                    onError={(e) => {
+                      e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext fill="%23999" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="20"%3ENo Image%3C/text%3E%3C/svg%3E';
+                    }}
+                  />
+                )
+              }));
 
               return (
                 <div key={hostel.id} className="hostel-card">
                   <div className="hostel-card-image-wrapper">
-                    <img 
-                      src={imageURL} 
-                      alt={hostel.name}
-                      onError={(e) => {
-                        e.target.style.display = 'none';
-                        e.target.parentElement.innerHTML = '<div class="image-placeholder">📷<br>No Image</div>';
-                      }}
+                    <Stack 
+                      cards={imageCards}
+                      randomRotation={true}
+                      sensitivity={150}
+                      sendToBackOnClick={true}
+                      mobileClickOnly={true}
                     />
                   </div>
                   <div className="hostel-card-content">
