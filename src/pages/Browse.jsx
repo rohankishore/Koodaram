@@ -1,7 +1,9 @@
-import{ useState, useEffect, useRef } from 'react';
+import{ useState, useEffect } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
-import { motion, useMotionValue, useSpring } from 'motion/react';
+import { HiAdjustmentsHorizontal } from 'react-icons/hi2';
+import { IoClose } from 'react-icons/io5';
 import Stack from '../component/Stack';
+import SpotlightCard from '../component/SpotlightCard';
 import './Browse.css';
 
 const GITHUB_USER = "Koodaram-Inc";
@@ -13,6 +15,7 @@ function Browse() {
   const [searchParams, setSearchParams] = useSearchParams();
   const [hostels, setHostels] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
     location: searchParams.get('location') || '',
     college: searchParams.get('college') || '',
@@ -93,53 +96,6 @@ function Browse() {
     );
   };
 
-  const HostelCard = ({ hostel, children }) => {
-    const ref = useRef(null);
-    const rotateX = useSpring(useMotionValue(0), { damping: 30, stiffness: 100, mass: 2 });
-    const rotateY = useSpring(useMotionValue(0), { damping: 30, stiffness: 100, mass: 2 });
-    const scale = useSpring(1, { damping: 30, stiffness: 100, mass: 2 });
-
-    function handleMouse(e) {
-      if (!ref.current) return;
-      const rect = ref.current.getBoundingClientRect();
-      const offsetX = e.clientX - rect.left - rect.width / 2;
-      const offsetY = e.clientY - rect.top - rect.height / 2;
-      const rotationX = (offsetY / (rect.height / 2)) * -8;
-      const rotationY = (offsetX / (rect.width / 2)) * 8;
-      rotateX.set(rotationX);
-      rotateY.set(rotationY);
-    }
-
-    function handleMouseEnter() {
-      scale.set(1.02);
-    }
-
-    function handleMouseLeave() {
-      scale.set(1);
-      rotateX.set(0);
-      rotateY.set(0);
-    }
-
-    return (
-      <motion.div
-        ref={ref}
-        className="hostel-card"
-        style={{
-          rotateX,
-          rotateY,
-          scale,
-          transformStyle: 'preserve-3d',
-          perspective: 1000
-        }}
-        onMouseMove={handleMouse}
-        onMouseEnter={handleMouseEnter}
-        onMouseLeave={handleMouseLeave}
-      >
-        {children}
-      </motion.div>
-    );
-  };
-
   const filteredHostels = hostels.filter(hostel => {
     const matchesLocation = !filters.location || 
       hostel.location?.toLowerCase().includes(filters.location.toLowerCase());
@@ -159,8 +115,18 @@ function Browse() {
 
   return (
     <div className="page-container">
-      <aside className="filters">
-        <h2>Filters</h2>
+      <button className="mobile-filter-toggle" onClick={() => setShowFilters(!showFilters)}>
+        <HiAdjustmentsHorizontal size={24} />
+        <span>Filters</span>
+      </button>
+
+      <aside className={`filters ${showFilters ? 'filters-open' : ''}`}>
+        <div className="filters-header">
+          <h2>Filters</h2>
+          <button className="close-filters" onClick={() => setShowFilters(false)}>
+            <IoClose size={24} />
+          </button>
+        </div>
         
         <div className="filter-group">
           <label htmlFor="location">Location</label>
@@ -262,7 +228,7 @@ function Browse() {
               ));
 
               return (
-                <HostelCard key={hostel.id} hostel={hostel}>
+                <SpotlightCard key={hostel.id} className="hostel-card" spotlightColor="rgba(255, 215, 0, 0.15)">
                   <div className="hostel-card-image-wrapper">
                     <Stack 
                       cards={imageCards}
@@ -295,7 +261,7 @@ function Browse() {
                       View Details →
                     </Link>
                   </div>
-                </HostelCard>
+                </SpotlightCard>
               );
             })
           )}

@@ -13,6 +13,38 @@
   --text-muted: #c5c5c5;
 }
 
+.mobile-filter-toggle {
+  display: none;
+}
+
+.filters-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.filters-header h2 {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.close-filters {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.close-filters:hover {
+  background-color: rgba(255, 215, 0, 0.1);
+}
+
 .page-container {
   display: flex;
   gap: 2rem;
@@ -86,21 +118,15 @@
   display: grid;
   gap: 2.5rem;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  perspective: 1000px;
 }
 
 .hostel-card {
-  background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+  background: transparent;
   color: var(--text-light);
   border-radius: 16px;
   overflow: hidden;
-  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 
-              0 0 0 1px rgba(255, 215, 0, 0.1),
-              inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  transition: all 0.3s ease;
   position: relative;
-  transform-style: preserve-3d;
-  will-change: transform;
 }
 
 .hostel-card::before {
@@ -114,18 +140,23 @@
   opacity: 0;
   transition: opacity 0.4s ease;
   pointer-events: none;
-  z-index: 1;
+  z-index: 0;
 }
 
-.hostel-card:hover::before {
-  opacity: 1;
+.card-spotlight.hostel-card {
+  background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 
+              0 0 0 1px rgba(255, 215, 0, 0.1),
+              inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  padding: 0;
 }
 
-.hostel-card:hover {
+.card-spotlight.hostel-card:hover {
   box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6), 
               0 0 0 1px rgba(255, 215, 0, 0.3),
               0 0 32px rgba(255, 215, 0, 0.15),
               inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  transform: translateY(-4px);
 }
 
 .hostel-card-image-wrapper {
@@ -338,8 +369,63 @@
 }
 
 @media (max-width: 768px) {
+  .mobile-filter-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    position: fixed;
+    top: 6.5rem;
+    right: 1rem;
+    z-index: 100;
+    background: linear-gradient(135deg, var(--accent), var(--primary));
+    color: #000;
+    border: none;
+    padding: 0.75rem 1.25rem;
+    border-radius: 50px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3), 
+                0 2px 6px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+  }
+
+  .mobile-filter-toggle:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(255, 215, 0, 0.4), 
+                0 3px 8px rgba(0, 0, 0, 0.3);
+  }
+
+  .mobile-filter-toggle:active {
+    transform: translateY(0);
+  }
+
+  .close-filters {
+    display: block;
+  }
+
+  .filters {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 85%;
+    max-width: 320px;
+    height: 100vh;
+    z-index: 200;
+    transform: translateX(-100%);
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+    box-shadow: none;
+  }
+
+  .filters-open {
+    transform: translateX(0);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+  }
+
   .page-container {
     margin: 1rem auto;
+    padding-top: 4rem;
   }
 
   .filters {
