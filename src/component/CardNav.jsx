@@ -153,7 +153,9 @@ const CardNav = ({
           </div>
 
           <div className="logo-container">
-            <span className="logo-text">Koodaram</span>
+            <Link to="/" className="logo-link">
+              <span className="logo-text">Koodaram</span>
+            </Link>
           </div>
 
           <Link
