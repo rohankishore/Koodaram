@@ -86,6 +86,7 @@
   display: grid;
   gap: 2.5rem;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  perspective: 1000px;
 }
 
 .hostel-card {
@@ -98,6 +99,8 @@
               0 0 0 1px rgba(255, 215, 0, 0.1),
               inset 0 1px 0 rgba(255, 255, 255, 0.05);
   position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
 }
 
 .hostel-card::before {
