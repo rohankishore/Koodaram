@@ -1,7 +1,7 @@
 .navbar {
-    background-color: var(--bg-color);
+    background-color: #1a1a1a;
     padding: 1rem 2rem;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -20,9 +20,7 @@
     font-size: 1.6rem;
     font-weight: 800;
     text-decoration: none;
-    background: linear-gradient(90deg, var(--primary-gold), var(--secondary-gold));
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
+    color: white;
 }
 
 .navbar nav {
@@ -31,7 +29,7 @@
 }
 
 .navbar nav a {
-    color: var(--text-color-light);
+    color: #ffffff;
     text-decoration: none;
     font-weight: 600;
     transition: color 0.2s ease;
@@ -83,7 +81,7 @@
     display: block;
     width: 28px;
     height: 3px;
-    background-color: var(--text-color);
+    background-color: white;
     transition: all 0.3s ease-in-out;
     border-radius: 2px;
 }
