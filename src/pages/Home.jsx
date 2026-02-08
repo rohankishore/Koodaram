@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import Dither from '../component/Dither';
+import CardSwap, { Card } from '../component/CardSwap';
 import './Home.css';
 
 function Home() {
