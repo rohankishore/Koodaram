@@ -46,8 +46,8 @@ function App() {
           logo="🏠"
           logoAlt="Koodaram Logo"
           items={navItems}
-          baseColor="#fff"
-          menuColor="#000"
+          baseColor="#1a1a1a"
+          menuColor="#fff"
           buttonBgColor="#e94560"
           buttonTextColor="#fff"
           ctaLabel="List Hostel"

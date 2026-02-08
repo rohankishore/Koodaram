@@ -94,7 +94,7 @@
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: var(--card-bg-color);
+        background-color: #1a1a1a;
         padding: 1rem 0;
         box-shadow: 0 8px 16px rgba(0,0,0,0.2);
     }
