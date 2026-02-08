@@ -1,21 +1,17 @@
-.hero {
-    position: relative;
-    overflow: hidden;
-    padding: 8rem 2rem 6rem;
-    text-align: center;
-    background: transparent;
-    border-radius: 16px;
-    z-index: 1;
-}
-
-.hero-grainient {
-    position: absolute;
+.page-grainient {
+    position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     z-index: 0;
-    border-radius: 16px;
+}
+
+.hero {
+    position: relative;
+    padding: 8rem 2rem 6rem;
+    text-align: center;
+    z-index: 1;
 }
 
 .hero h1 {
@@ -37,11 +33,6 @@
     max-width: 720px;
     margin: auto;
     color: var(--text-color-light);
-    position: relative;
-    z-index: 2;
-}
-
-.hero > div:not(.hero-grainient) {
     position: relative;
     z-index: 2;
 }

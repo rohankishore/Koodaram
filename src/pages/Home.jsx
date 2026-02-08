@@ -43,8 +43,8 @@ function Home() {
 
   return (
     <>
+      <Grainient className="page-grainient" />
       <div className="hero">
-        <Grainient className="hero-grainient" />
         <h1>Kerala's #1 Open Hostel Finder</h1>
         <p>A completely free and open-source platform for finding and verifying hostels near your campus. No accounts, no paywalls, no corporate control.</p>
         <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>
