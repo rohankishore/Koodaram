@@ -17,6 +17,10 @@
   display: none;
 }
 
+.filter-overlay {
+  display: none;
+}
+
 .filters-header {
   display: flex;
   justify-content: space-between;
@@ -369,6 +373,18 @@
 }
 
 @media (max-width: 768px) {
+  .filter-overlay {
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 150;
+    backdrop-filter: blur(2px);
+  }
+
   .mobile-filter-toggle {
     display: flex;
     align-items: center;
@@ -388,6 +404,18 @@
     box-shadow: 0 4px 12px rgba(255, 215, 0, 0.3), 
                 0 2px 6px rgba(0, 0, 0, 0.2);
     transition: all 0.3s ease;
+    animation: slideInFromRight 0.4s ease-out;
+  }
+
+  @keyframes slideInFromRight {
+    from {
+      opacity: 0;
+      transform: translateX(100px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
   }
 
   .mobile-filter-toggle:hover {

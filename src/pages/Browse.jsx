@@ -76,6 +76,7 @@ function Browse() {
     if (filters.price) params.price = filters.price;
     params.rating = filters.rating;
     setSearchParams(params);
+    setShowFilters(false); // Close filters on mobile after applying
   };
 
   const handleCollegeChange = (value) => {
@@ -115,10 +116,14 @@ function Browse() {
 
   return (
     <div className="page-container">
-      <button className="mobile-filter-toggle" onClick={() => setShowFilters(!showFilters)}>
-        <HiAdjustmentsHorizontal size={24} />
-        <span>Filters</span>
-      </button>
+      {showFilters && <div className="filter-overlay" onClick={() => setShowFilters(false)} />}
+      
+      {!showFilters && (
+        <button className="mobile-filter-toggle" onClick={() => setShowFilters(true)}>
+          <HiAdjustmentsHorizontal size={24} />
+          <span>Filters</span>
+        </button>
+      )}
 
       <aside className={`filters ${showFilters ? 'filters-open' : ''}`}>
         <div className="filters-header">
