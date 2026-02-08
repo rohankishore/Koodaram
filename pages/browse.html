@@ -135,65 +135,105 @@
       border-radius: 2px;
     }
 
-    .filters {
+    .page-container {
       display: flex;
-      flex-wrap: wrap;
-      gap: 1rem;
-      background: var(--surface);
-      padding: 1rem;
-      border-radius: 10px;
-      max-width: 1000px;
+      gap: 2rem;
+      max-width: 1400px;
       margin: 2rem auto;
-      justify-content: space-between;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      padding: 0 2rem;
+      align-items: flex-start;
+    }
+
+    .filters {
+      position: sticky;
+      top: 90px;
+      background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
+      padding: 2rem;
+      border-radius: 16px;
+      width: 280px;
+      flex-shrink: 0;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 
+                  0 0 0 1px rgba(255, 215, 0, 0.1),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    }
+
+    .filters h2 {
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid rgba(255, 215, 0, 0.2);
     }
 
     .filters .filter-group {
-      flex: 1;
-      min-width: 150px;
+      margin-bottom: 1.5rem;
     }
 
     .filters label {
       display: block;
       font-size: 0.85rem;
-      margin-bottom: 0.3rem;
-      color: var(--accent);
+      margin-bottom: 0.5rem;
+      color: var(--text-light);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
     .filters input,
     .filters select {
       width: 100%;
-      padding: 0.4rem;
+      padding: 0.7rem 0.9rem;
       background: var(--input-bg);
       border: 1px solid var(--border-color);
-      border-radius: 6px;
+      border-radius: 8px;
       color: var(--text-light);
+      font-size: 0.9rem;
+      transition: all 0.3s ease;
+    }
+
+    .filters input:focus,
+    .filters select:focus {
+      outline: none;
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+    }
+
+    .main-content {
+      flex: 1;
+      min-width: 0;
     }
 
     .cta-button {
-      background: var(--primary);
-      color: #1A1A1A;
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #000;
       border: none;
-      padding: 0.7rem 1.4rem;
-      border-radius: 6px;
+      padding: 0.85rem 1.5rem;
+      border-radius: 10px;
       cursor: pointer;
-      font-weight: 600;
-      transition: background 0.3s ease, box-shadow 0.3s ease;
-      box-shadow: 0 0 10px rgba(255, 191, 0, 0.2);
+      font-weight: 700;
+      font-size: 0.9rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(255, 191, 0, 0.3),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 215, 0, 0.4);
+      width: 100%;
     }
 
     .cta-button:hover {
-      background: var(--primary-dark);
-      box-shadow: 0 0 15px rgba(255, 191, 0, 0.4);
+      background: linear-gradient(135deg, var(--accent) 0%, var(--primary) 100%);
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.5),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.4);
+      transform: translateY(-2px);
+      border-color: rgba(255, 215, 0, 0.6);
     }
 
     .hostel-grid {
       display: grid;
       gap: 2.5rem;
-      max-width: 1100px;
-      margin: auto;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      padding: 2.5rem;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     }
 
     .hostel-card {
@@ -358,19 +398,46 @@
 
     footer {
       text-align: center;
-      padding: 2rem;
+      padding: 3rem 0 2rem;
+      margin-top: 4rem;
+      border-top: 1px solid rgba(255, 215, 0, 0.1);
+      color: var(--text-muted);
+    }
+
+    footer a {
+      color: var(--gold);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.3s ease;
+    }
+
+    footer a:hover {
+      color: var(--gold-light);
+    }
+
+    @media (max-width: 1024px) {
+      .page-container {
+        flex-direction: column;
+        padding: 0 1.5rem;
+      }
+
+      .filters {
+        position: static;
+        width: 100%;
+        max-width: 100%;
+      }
+
+      .filters h2 {
+        font-size: 1.2rem;
+      }
+
+      .hostel-grid {
+        grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+        gap: 2rem;
+      }
     }
 
     @media (max-width: 768px) {
-      .filters {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .filters .filter-group {
-        min-width: unset;
-      }
-
       .navbar nav {
         display: none;
         flex-direction: column;
@@ -394,9 +461,16 @@
       .hamburger { display: flex; }
       #main-nav { display: none; }
 
+      .page-container {
+        margin: 1rem auto;
+      }
+
+      .filters {
+        padding: 1.5rem;
+      }
+
       .hostel-grid {
         grid-template-columns: 1fr;
-        padding: 1.5rem;
         gap: 2rem;
       }
 
@@ -430,42 +504,33 @@
   </div>
 </header>
 
-  <section class="filters">
+<div class="page-container">
+  <aside class="filters">
+    <h2>Filters</h2>
+    
     <div class="filter-group">
-      <label for="location">📍 Location</label>
+      <label for="location">Location</label>
       <input type="text" id="location" placeholder="Enter city or area" />
     </div>
 
+    <div class="filter-group">
+      <label for="college">College</label>
+      <select id="college" onchange="handleCollegeChange()">
+        <option value="">All</option>
+        <option value="cusat">CUSAT</option>
+        <option value="cucek">CUCEK</option>
+        <option value="SCT Trivandrum">SCT Trivandrum</option>
+        <option value="GEC Kozhikode">GEC Kozhikode</option>
+        <option value="GEC Palakkad">GEC Palakkad</option>
+        <option value="GEC Thrissur">GEC Thrissur</option>
+        <option value="Model Engineering College">Model Engineering College</option>
+        <option value="NSS College Palakkad">NSS College Palakkad</option>
+        <option value="RIT Kottayam">RIT Kottayam</option>
+      </select>
+    </div>
 
     <div class="filter-group">
-  <label for="college">🎓 College</label>
-  <select id="college" onchange="handleCollegeChange()">
-    <option value="">All</option>
-    <option value="cusat">CUSAT</option>
-    <option value="cucek">CUCEK</option>
-    <option value="SCT Trivandrum">SCT Trivandrum</option>
-    <option value="GEC Kozhikode">GEC Kozhikode</option>
-    <option value="GEC Palakkad">GEC Palakkad</option>
-    <option value="GEC Thrissur">GEC Thrissur</option>
-    <option value="Model Engineering College">Model Engineering College</option>
-    <option value="NSS College Palakkad">NSS College Palakkad</option>
-    <option value="RIT Kottayam">RIT Kottayam</option>
-  </select>
-</div>
-
-<script>
-  function handleCollegeChange() {
-    const college = document.getElementById('college').value;
-
-    if (college === 'Model Engineering College') {
-      window.open('https://hostelfinderbyflink.netlify.app', '_blank');
-    }
-  }
-</script>
-
-
-    <div class="filter-group">
-      <label for="gender">🧍 Gender</label>
+      <label for="gender">Gender</label>
       <select id="gender">
         <option value="">All</option>
         <option value="male">Male Only</option>
@@ -475,35 +540,36 @@
     </div>
 
     <div class="filter-group">
-      <label for="price">💸 Max Price</label>
+      <label for="price">Max Price</label>
       <input type="number" id="price" placeholder="e.g. 5000" />
     </div>
 
     <div class="filter-group">
-  <label for="ratingRange">⭐ Rating</label>
-  <select id="ratingRange">
-    <option value="0-5">All</option>
-    <option value="5-5">5 only</option>
-    <option value="4-5">4–5</option>
-    <option value="3-4">3–4</option>
-    <option value="2-3">2–3</option>
-    <option value="1-2">1–2</option>
-  </select>
-</div>
+      <label for="ratingRange">Rating</label>
+      <select id="ratingRange">
+        <option value="0-5">All</option>
+        <option value="5-5">5 only</option>
+        <option value="4-5">4–5</option>
+        <option value="3-4">3–4</option>
+        <option value="2-3">2–3</option>
+        <option value="1-2">1–2</option>
+      </select>
+    </div>
 
     <button class="cta-button" onclick="applyFilters()">Apply Filters</button>
-  </section>
+  </aside>
 
+  <main class="main-content">
+    <section class="hostel-grid" id="hostel-grid">
+    </section>
 
-  <section class="hostel-grid" id="hostel-grid">
-  </section>
-
-  <footer>
-    <br>
-    <a href="/">← Back to Home</a>
-    <br><br>
-    © 2025 Koodaram
-  </footer>
+    <footer>
+      <a href="/">← Back to Home</a>
+      <br><br>
+      © 2025 Koodaram
+    </footer>
+  </main>
+</div>
 
 <script>
   const GITHUB_USER = "Koodaram-Inc";
