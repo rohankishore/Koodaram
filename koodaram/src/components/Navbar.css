@@ -1,0 +1,117 @@
+.navbar {
+    background-color: var(--bg-color);
+    padding: 1rem 2rem;
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 0.3s ease;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.navbar .logo {
+    font-size: 1.6rem;
+    font-weight: 800;
+    text-decoration: none;
+    background: linear-gradient(90deg, var(--primary-gold), var(--secondary-gold));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.navbar nav {
+    display: flex;
+    gap: 2rem;
+}
+
+.navbar nav a {
+    color: var(--text-color-light);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.2s ease;
+    font-size: 1.05rem;
+}
+
+.navbar nav a:hover {
+    color: var(--primary-gold);
+}
+
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.nav-cta-button {
+    display: inline-block;
+    background: linear-gradient(90deg, var(--secondary-gold), var(--primary-gold));
+    color: #1A1A1A;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(255, 215, 0, 0.2);
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+}
+
+.nav-cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+}
+
+.hamburger {
+    display: none;
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+    z-index: 1001;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hamburger span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: var(--text-color);
+    transition: all 0.3s ease-in-out;
+    border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+    .navbar nav {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--card-bg-color);
+        padding: 1rem 0;
+        box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+    }
+
+    .navbar nav.active { 
+        display: flex; 
+    }
+
+    .navbar nav a {
+        padding: 1rem 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .hamburger { 
+        display: flex; 
+    }
+}
