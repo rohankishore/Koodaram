@@ -55,13 +55,12 @@
     padding: 5rem 2rem;
     position: relative;
     z-index: 10;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
 }
 
 .faq-section h2 {
     color: #ffffff;
-}
-
-.how-it-works-section h2 {
     font-size: 2.5rem;
     margin-bottom: 3rem;
 }
@@ -109,12 +108,6 @@
 .step-card p {
     color: #ffffff;
     line-height: 1.6;
-}
-
-.faq-section {
-    padding: 5rem 2rem;
-    position: relative;
-    z-index: 1;
 }
 
 .faq-accordion {
