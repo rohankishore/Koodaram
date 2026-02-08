@@ -1,5 +1,6 @@
-import{ useState, useEffect } from 'react';
+import{ useState, useEffect, useRef } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
+import { motion, useMotionValue, useSpring } from 'motion/react';
 import Stack from '../component/Stack';
 import './Browse.css';
 
@@ -89,6 +90,53 @@ function Browse() {
       <div className="rating-stars" title={`${rating}/5`}>
         {full.repeat(value)}{empty.repeat(5 - value)}
       </div>
+    );
+  };
+
+  const HostelCard = ({ hostel, children }) => {
+    const ref = useRef(null);
+    const rotateX = useSpring(useMotionValue(0), { damping: 30, stiffness: 100, mass: 2 });
+    const rotateY = useSpring(useMotionValue(0), { damping: 30, stiffness: 100, mass: 2 });
+    const scale = useSpring(1, { damping: 30, stiffness: 100, mass: 2 });
+
+    function handleMouse(e) {
+      if (!ref.current) return;
+      const rect = ref.current.getBoundingClientRect();
+      const offsetX = e.clientX - rect.left - rect.width / 2;
+      const offsetY = e.clientY - rect.top - rect.height / 2;
+      const rotationX = (offsetY / (rect.height / 2)) * -8;
+      const rotationY = (offsetX / (rect.width / 2)) * 8;
+      rotateX.set(rotationX);
+      rotateY.set(rotationY);
+    }
+
+    function handleMouseEnter() {
+      scale.set(1.02);
+    }
+
+    function handleMouseLeave() {
+      scale.set(1);
+      rotateX.set(0);
+      rotateY.set(0);
+    }
+
+    return (
+      <motion.div
+        ref={ref}
+        className="hostel-card"
+        style={{
+          rotateX,
+          rotateY,
+          scale,
+          transformStyle: 'preserve-3d',
+          perspective: 1000
+        }}
+        onMouseMove={handleMouse}
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
+        {children}
+      </motion.div>
     );
   };
 
@@ -214,7 +262,7 @@ function Browse() {
               ));
 
               return (
-                <div key={hostel.id} className="hostel-card">
+                <HostelCard key={hostel.id} hostel={hostel}>
                   <div className="hostel-card-image-wrapper">
                     <Stack 
                       cards={imageCards}
@@ -247,7 +295,7 @@ function Browse() {
                       View Details →
                     </Link>
                   </div>
-                </div>
+                </HostelCard>
               );
             })
           )}
