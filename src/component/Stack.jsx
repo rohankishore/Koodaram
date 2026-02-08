@@ -46,9 +46,9 @@ export default function Stack({
   cards = [],
   animationConfig = { stiffness: 260, damping: 20 },
   sendToBackOnClick = false,
-  autoplay = false,
+  autoplay = true,
   autoplayDelay = 3000,
-  pauseOnHover = false,
+  pauseOnHover = true,
   mobileClickOnly = false,
   mobileBreakpoint = 768
 }) {

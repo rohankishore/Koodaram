@@ -75,6 +75,16 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  background-color: #1a1a1a;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.logo-text {
+  color: white;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.5px;
 }
 
 .logo {
