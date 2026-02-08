@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
-import Galaxy from '../component/Galaxy';
+import Grainient from '../component/Grainient';
 import './Home.css';
 
 function Home() {
@@ -43,23 +43,8 @@ function Home() {
 
   return (
     <>
-      <Galaxy 
-        focal={[0.5, 0.5]}
-        rotation={[1.0, 0.0]}
-        starSpeed={0.5}
-        density={1.2}
-        hueShift={180}
-        speed={1.0}
-        mouseInteraction={true}
-        glowIntensity={0.4}
-        saturation={0.3}
-        mouseRepulsion={true}
-        repulsionStrength={2}
-        twinkleIntensity={0.4}
-        rotationSpeed={0.05}
-        transparent={true}
-      />
       <div className="hero">
+        <Grainient className="hero-grainient" />
         <h1>Kerala's #1 Open Hostel Finder</h1>
         <p>A completely free and open-source platform for finding and verifying hostels near your campus. No accounts, no paywalls, no corporate control.</p>
         <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap' }}>

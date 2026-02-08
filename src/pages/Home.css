@@ -3,36 +3,19 @@
     overflow: hidden;
     padding: 8rem 2rem 6rem;
     text-align: center;
-    background: rgba(0, 0, 0, 0.3);
+    background: transparent;
     border-radius: 16px;
-    box-shadow: inset 0 0 120px rgba(255, 215, 0, 0.2);
-    backdrop-filter: blur(10px);
     z-index: 1;
 }
 
-.hero::before,
-.hero::after {
-    content: "";
+.hero-grainient {
     position: absolute;
-    width: 200%;
-    height: 200%;
-    pointer-events: none;
-}
-
-.hero::before {
     top: 0;
-    left: 50%;
-    background: radial-gradient(circle, rgba(255, 215, 0, 0.05) 0%, transparent 70%);
-    transform: translateX(-50%);
-    animation: floatParticles 10s linear infinite;
-}
-
-.hero::after {
-    top: -50%;
-    left: -50%;
-    background: radial-gradient(circle at 30% 30%, rgba(255, 191, 0, 0.03), transparent 70%),
-                radial-gradient(circle at 70% 70%, rgba(255, 191, 0, 0.03), transparent 70%);
-    animation: waveMove 20s linear infinite;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    border-radius: 16px;
 }
 
 .hero h1 {
@@ -46,7 +29,7 @@
     -webkit-text-fill-color: transparent;
     animation: gradientShift 6s ease infinite;
     position: relative;
-    z-index: 1;
+    z-index: 2;
 }
 
 .hero p {
@@ -55,7 +38,12 @@
     margin: auto;
     color: var(--text-color-light);
     position: relative;
-    z-index: 1;
+    z-index: 2;
+}
+
+.hero > div:not(.hero-grainient) {
+    position: relative;
+    z-index: 2;
 }
 
 .how-it-works-section {
