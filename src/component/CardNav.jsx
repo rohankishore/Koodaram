@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 // use your own icon import if react-icons is not available
 import { GoArrowUpRight } from 'react-icons/go';
@@ -13,7 +14,9 @@ const CardNav = ({
   baseColor = '#fff',
   menuColor,
   buttonBgColor,
-  buttonTextColor
+  buttonTextColor,
+  ctaLabel = 'Get Started',
+  ctaHref = '#'
 }) => {
   const [isHamburgerOpen, setIsHamburgerOpen] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
@@ -153,13 +156,13 @@ const CardNav = ({
             <img src={logo} alt={logoAlt} className="logo" />
           </div>
 
-          <button
-            type="button"
+          <Link
+            to={ctaHref}
             className="card-nav-cta-button"
             style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
           >
-            Get Started
-          </button>
+            {ctaLabel}
+          </Link>
         </div>
 
         <div className="card-nav-content" aria-hidden={!isExpanded}>
@@ -172,12 +175,25 @@ const CardNav = ({
             >
               <div className="nav-card-label">{item.label}</div>
               <div className="nav-card-links">
-                {item.links?.map((lnk, i) => (
-                  <a key={`${lnk.label}-${i}`} className="nav-card-link" href={lnk.href} aria-label={lnk.ariaLabel}>
-                    <GoArrowUpRight className="nav-card-link-icon" aria-hidden="true" />
-                    {lnk.label}
-                  </a>
-                ))}
+                {item.links?.map((lnk, i) => {
+                  const isExternal = lnk.href.startsWith('http');
+                  const LinkComponent = isExternal ? 'a' : Link;
+                  const linkProps = isExternal 
+                    ? { href: lnk.href, target: '_blank', rel: 'noopener noreferrer' }
+                    : { to: lnk.href };
+                  
+                  return (
+                    <LinkComponent 
+                      key={`${lnk.label}-${i}`} 
+                      className="nav-card-link" 
+                      aria-label={lnk.ariaLabel}
+                      {...linkProps}
+                    >
+                      <GoArrowUpRight className="nav-card-link-icon" aria-hidden="true" />
+                      {lnk.label}
+                    </LinkComponent>
+                  );
+                })}
               </div>
             </div>
           ))}

@@ -61,6 +61,8 @@
 .how-it-works-section {
     padding: 5rem 2rem;
     text-align: center;
+    position: relative;
+    z-index: 1;
 }
 
 .how-it-works-section h2 {
@@ -78,13 +80,14 @@
 }
 
 .step-card {
-    background: var(--card-bg-color);
+    background: rgba(30, 30, 30, 0.8);
     padding: 2rem;
     border-radius: 12px;
     width: 280px;
     text-align: center;
     border: 1px solid var(--border-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    backdrop-filter: blur(10px);
 }
 
 .step-card:hover {
@@ -111,6 +114,8 @@
 
 .faq-section {
     padding: 5rem 2rem;
+    position: relative;
+    z-index: 1;
 }
 
 .faq-accordion {
@@ -119,11 +124,12 @@
 }
 
 .faq-accordion-item {
-    background-color: var(--card-bg-color);
+    background-color: rgba(30, 30, 30, 0.8);
     margin-bottom: 1rem;
     border-radius: 8px;
     border: 1px solid var(--border-color);
     overflow: hidden;
+    backdrop-filter: blur(10px);
 }
 
 .faq-accordion-question {
@@ -177,8 +183,11 @@
     text-align: center;
     margin-top: 4rem;
     padding: 3rem 1rem;
-    background-color: var(--card-bg-color);
+    background-color: rgba(30, 30, 30, 0.8);
     color: #888;
+    position: relative;
+    z-index: 1;
+    backdrop-filter: blur(10px);
 }
 
 .home-footer a {

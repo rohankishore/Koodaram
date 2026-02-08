@@ -91,7 +91,9 @@
   font-weight: 500;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  display: flex;
   align-items: center;
+  text-decoration: none;
 }
 
 .card-nav-cta-button:hover {
@@ -148,6 +150,7 @@
   font-size: 16px;
   cursor: pointer;
   text-decoration: none;
+  color: inherit;
   transition: opacity 0.3s ease;
   display: inline-flex;
   align-items: center;

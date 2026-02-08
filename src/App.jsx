@@ -50,6 +50,8 @@ function App() {
           menuColor="#000"
           buttonBgColor="#e94560"
           buttonTextColor="#fff"
+          ctaLabel="List Hostel"
+          ctaHref="/list-hostel"
         />
         <Routes>
           <Route path="/" element={<Home />} />
