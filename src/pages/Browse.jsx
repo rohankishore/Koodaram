@@ -201,20 +201,17 @@ function Browse() {
               const rating = parseFloat(hostel.rating) || 0;
               
               // Create cards array for Stack component from all images
-              const imageCards = (hostel.images || ["1.jpg"]).map((imageName, idx) => ({
-                id: idx + 1,
-                content: (
-                  <img 
-                    key={idx}
-                    src={`${RAW_BASE}/${hostel.folderName}/${imageName}`}
-                    alt={`${hostel.name} - Image ${idx + 1}`}
-                    className="card-image"
-                    onError={(e) => {
-                      e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext fill="%23999" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="20"%3ENo Image%3C/text%3E%3C/svg%3E';
-                    }}
-                  />
-                )
-              }));
+              const imageCards = (hostel.images || ["1.jpg"]).map((imageName, idx) => (
+                <img 
+                  key={idx}
+                  src={`${RAW_BASE}/${hostel.folderName}/${imageName}`}
+                  alt={`${hostel.name} - Image ${idx + 1}`}
+                  className="card-image"
+                  onError={(e) => {
+                    e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext fill="%23999" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="20"%3ENo Image%3C/text%3E%3C/svg%3E';
+                  }}
+                />
+              ));
 
               return (
                 <div key={hostel.id} className="hostel-card">
