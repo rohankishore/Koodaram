@@ -247,29 +247,20 @@ function Browse() {
               const gender = hostel.gender?.toLowerCase() || "unisex";
               const rating = parseFloat(hostel.rating) || 0;
               
-              // Create cards array for Stack component from all images
-              const imageCards = (hostel.images || ["1.jpg"]).map((imageName, idx) => (
-                <img 
-                  key={idx}
-                  src={`${RAW_BASE}/${hostel.folderName}/${imageName}`}
-                  alt={`${hostel.name} - Image ${idx + 1}`}
-                  className="card-image"
-                  onError={(e) => {
-                    e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext fill="%23999" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="20"%3ENo Image%3C/text%3E%3C/svg%3E';
-                  }}
-                />
-              ));
-
               return (
                 <SpotlightCard key={hostel.id} className="hostel-card" spotlightColor="rgba(255, 215, 0, 0.15)">
                   <div className="hostel-card-image-wrapper">
-                    <Stack 
-                      cards={imageCards}
-                      randomRotation={true}
-                      sensitivity={150}
-                      sendToBackOnClick={true}
-                      mobileClickOnly={true}
-                    />
+                    {(hostel.images || ["1.jpg"]).map((imageName, idx) => (
+                      <img
+                        key={idx}
+                        src={`${RAW_BASE}/${hostel.folderName}/${imageName}`}
+                        alt={`${hostel.name} - Image ${idx + 1}`}
+                        className="card-image"
+                        onError={(e) => {
+                          e.target.src = 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext fill="%23999" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="20"%3ENo Image%3C/text%3E%3C/svg%3E';
+                        }}
+                      />
+                    ))}
                   </div>
                   <div className="hostel-card-content">
                     <h3>{hostel.name}</h3>
