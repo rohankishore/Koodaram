@@ -60,7 +60,13 @@ function HostelDetail() {
         <p><strong>🎓 College:</strong> {hostel.college}</p>
         <p><strong>🛏️ Room Type:</strong> {hostel.roomType}</p>
         <p><strong>💰 Price:</strong> ₹{hostel.price}/month</p>
-        <p><strong>🧩 Amenities:</strong> {hostel.amenities?.join(", ")}</p>
+        <p><strong>🛹 Amenities:</strong> {hostel.amenities?.join(", ")}</p>
+        {hostel.curfew && (
+          <p><strong>Curfew:</strong> {hostel.curfew}</p>
+        )}
+        {hostel.bathroom && (
+          <p><strong>Bathroom:</strong> {hostel.bathroom}</p>
+        )}
       </div>
       
       <div className="gallery">

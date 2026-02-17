@@ -21,7 +21,9 @@ function Browse() {
     college: searchParams.get('college') || '',
     gender: searchParams.get('gender') || '',
     price: searchParams.get('price') || '',
-    rating: searchParams.get('rating') || '0-5'
+    rating: searchParams.get('rating') || '0-5',
+    curfew: searchParams.get('curfew') || '',
+    bathroom: searchParams.get('bathroom') || ''
   });
 
   useEffect(() => {
@@ -75,8 +77,10 @@ function Browse() {
     if (filters.gender) params.gender = filters.gender;
     if (filters.price) params.price = filters.price;
     params.rating = filters.rating;
+    if (filters.curfew) params.curfew = filters.curfew;
+    if (filters.bathroom) params.bathroom = filters.bathroom;
     setSearchParams(params);
-    setShowFilters(false); // Close filters on mobile after applying
+    setShowFilters(false);
   };
 
   const handleCollegeChange = (value) => {
@@ -106,12 +110,12 @@ function Browse() {
       hostel.gender?.toLowerCase() === filters.gender.toLowerCase();
     const matchesPrice = !filters.price || 
       parseInt(hostel.price) <= parseInt(filters.price);
-    
     const [ratingMin, ratingMax] = filters.rating.split('-').map(Number);
     const rating = parseFloat(hostel.rating) || 0;
     const matchesRating = rating >= ratingMin && rating <= ratingMax;
-
-    return matchesLocation && matchesCollege && matchesGender && matchesPrice && matchesRating;
+    const matchesCurfew = !filters.curfew || (hostel.curfew && hostel.curfew.toLowerCase() === filters.curfew.toLowerCase());
+    const matchesBathroom = !filters.bathroom || (hostel.bathroom && hostel.bathroom.toLowerCase() === filters.bathroom.toLowerCase());
+    return matchesLocation && matchesCollege && matchesGender && matchesPrice && matchesRating && matchesCurfew && matchesBathroom;
   });
 
   return (
@@ -205,6 +209,30 @@ function Browse() {
           </select>
         </div>
 
+        <div className="filter-group">
+          <label htmlFor="curfew">Curfew</label>
+          <select
+            id="curfew"
+            value={filters.curfew}
+            onChange={e => handleFilterChange('curfew', e.target.value)}
+          >
+            <option value="">All</option>
+            <option value="yes">Yes</option>
+            <option value="no">No</option>
+          </select>
+        </div>
+        <div className="filter-group">
+          <label htmlFor="bathroom">Bathroom</label>
+          <select
+            id="bathroom"
+            value={filters.bathroom}
+            onChange={e => handleFilterChange('bathroom', e.target.value)}
+          >
+            <option value="">All</option>
+            <option value="common">Common</option>
+            <option value="attached">Attached</option>
+          </select>
+        </div>
         <button className="cta-button" onClick={applyFilters}>Apply Filters</button>
       </aside>
 
@@ -257,6 +285,12 @@ function Browse() {
                       {(hostel.amenities || []).map((amenity, idx) => (
                         <span key={idx}>{amenity}</span>
                       ))}
+                      {hostel.curfew && (
+                        <span>Curfew: {hostel.curfew}</span>
+                      )}
+                      {hostel.bathroom && (
+                        <span>Bathroom: {hostel.bathroom}</span>
+                      )}
                     </div>
                     <p style={{ fontSize: '1.4rem', fontWeight: '700', color: 'var(--accent)', marginTop: '0.8rem' }}>
                       ₹{hostel.price}
