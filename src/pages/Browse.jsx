@@ -239,7 +239,7 @@ function Browse() {
       <main className="main-content">
         <section className="hostel-grid">
           {loading ? (
-            <div className="loading">Loading hostels...</div>
+            <div className="loading">Loading hostels... This might take a few seconds...</div>
           ) : filteredHostels.length === 0 ? (
             <div className="no-results">No hostels found matching your criteria</div>
           ) : (
