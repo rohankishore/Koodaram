@@ -12,7 +12,10 @@ function Navbar() {
   return (
     <header className="navbar">
       <div className="nav-container">
-        <Link to="/" className="logo">🏠 Koodaram</Link>
+        <Link to="/" className="logo" style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
+          <img src={require('../../assets/logo.png')} alt="Koodaram Logo" style={{ height: '32px', width: '32px', objectFit: 'contain', marginRight: '0.5em' }} />
+          Koodaram
+        </Link>
         <nav id="main-nav" className={isMenuOpen ? 'active' : ''}>
           <Link to="/">Home</Link>
           <Link to="/browse">Browse Hostels</Link>
