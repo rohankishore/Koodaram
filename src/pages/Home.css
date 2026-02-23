@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'TacticSans';
+  src: url('../../assets/fonts/TacticSans-Reg.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .page-dither {
     position: fixed;
     top: 0;
@@ -21,6 +28,7 @@
     margin-bottom: 1rem;
     color: #ffffff;
     position: relative;
+    font-family: 'TacticSans', sans-serif;
 }
 
 .hero p {
