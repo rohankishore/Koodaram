@@ -49,7 +49,7 @@ function Home() {
         <Dither />
       </div>
       <div className="hero">
-        <h1>Kerala's #1 Open Hostel Finder</h1>
+        <h1>Kerala's <span className="number-one">#1</span> Open Hostel Finder</h1>
         <p>A completely free and open-source platform for finding and verifying hostels near your campus. No accounts, no paywalls, no corporate control.</p>
         <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', position: 'relative', zIndex: 10 }}>
           <Link to="/browse" className="cta-button">🔍 Find Your Hostel</Link>
