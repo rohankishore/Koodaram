@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'TacticSans';
+  src: url('../../assets/fonts/TacticSans-Reg.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .navbar {
     background-color: #1a1a1a;
     padding: 1rem 2rem;
@@ -21,6 +28,7 @@
     font-weight: 800;
     text-decoration: none;
     color: white;
+    font-family: 'TacticSans', sans-serif;
 }
 
 .navbar nav {
