@@ -244,8 +244,9 @@
   background: linear-gradient(180deg, #232323 0%, #bfa100 100%);
   color: #fff;
   padding: 3rem 0 2rem;
-  margin-top: auto;
+  margin-top: 4rem;
   border-top: none;
+  box-shadow: none;
 }
 
 .footer-content {
