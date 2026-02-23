@@ -358,7 +358,7 @@
 .loader {
   width: 50px;
   aspect-ratio: 1;
-  color: #000;
+  color: var(--accent);
   border: 2px solid;
   box-sizing: border-box;
   --c:radial-gradient(farthest-side,#0000 calc(100% - 3px),currentColor calc(100% - 2px) 98%,#0000);

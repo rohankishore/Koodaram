@@ -239,8 +239,7 @@ function Browse() {
         <section className="hostel-grid">
           {loading ? (
             <div className="loading">
-              <div className="loader" style={{margin: '0 auto 1rem'}}></div>
-              Loading hostels... This might take a few seconds...
+              <div className="loader" style={{margin: '0 auto', color: '#fff'}}></div>
             </div>
           ) : filteredHostels.length === 0 ? (
             <div className="no-results">No hostels found matching your criteria</div>
