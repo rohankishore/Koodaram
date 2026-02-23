@@ -35,19 +35,19 @@ function Browse() {
       const res = await fetch(API_BASE);
       const folders = await res.json();
       
-      const hostelsData = [];
-      for (const folder of folders) {
+      // Parallel fetch for hostel data
+      const hostelPromises = folders.map(folder => {
         const jsonURL = `${RAW_BASE}/${folder.name}/data.json`;
-        try {
-          const res = await fetch(jsonURL);
-          const data = await res.json();
-          data.id = folder.name;
-          data.folderName = folder.name;
-          hostelsData.push(data);
-        } catch (err) {
-          console.warn("Could not load:", folder.name);
-        }
-      }
+        return fetch(jsonURL)
+          .then(res => res.json())
+          .then(data => {
+            data.id = folder.name;
+            data.folderName = folder.name;
+            return data;
+          })
+          .catch(() => null);
+      });
+      const hostelsData = (await Promise.all(hostelPromises)).filter(Boolean);
 
       // Sort: hostels with images first
       hostelsData.sort((a, b) => {
@@ -57,7 +57,6 @@ function Browse() {
         if (!aHasImages && bHasImages) return 1;
         return 0;
       });
-
       setHostels(hostelsData);
       setLoading(false);
     } catch (error) {
@@ -239,7 +238,10 @@ function Browse() {
       <main className="main-content">
         <section className="hostel-grid">
           {loading ? (
-            <div className="loading">Loading hostels... This might take a few seconds...</div>
+            <div className="loading">
+              <div className="loader" style={{margin: '0 auto 1rem'}}></div>
+              Loading hostels... This might take a few seconds...
+            </div>
           ) : filteredHostels.length === 0 ? (
             <div className="no-results">No hostels found matching your criteria</div>
           ) : (

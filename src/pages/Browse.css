@@ -354,6 +354,23 @@
   grid-column: 1 / -1;
 }
 
+/* Loader styles */
+.loader {
+  width: 50px;
+  aspect-ratio: 1;
+  color: #000;
+  border: 2px solid;
+  box-sizing: border-box;
+  --c:radial-gradient(farthest-side,#0000 calc(100% - 3px),currentColor calc(100% - 2px) 98%,#0000);
+  background: var(--c),var(--c);
+  background-size: 23px 23px;
+  background-position: 0 0,12px 12px;
+  animation: l4 1s infinite;
+}
+@keyframes l4{
+  100% {background-position: -23px 0px,12px 35px}
+}
+
 @media (max-width: 1024px) {
   .page-container {
     flex-direction: column;
