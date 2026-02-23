@@ -5,6 +5,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'Thomeo';
+  src: url('../../assets/fonts/Thomeo .ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .navbar {
     background-color: #1a1a1a;
     padding: 1rem 2rem;
@@ -28,7 +35,7 @@
     font-weight: 800;
     text-decoration: none;
     color: white;
-    font-family: 'TacticSans', sans-serif;
+    font-family: 'Thomeo', sans-serif;
 }
 
 .navbar nav {
