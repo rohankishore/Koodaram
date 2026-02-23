@@ -3,6 +3,7 @@ import { useState } from 'react';
 import Dither from '../component/Dither';
 import CardSwap, { Card } from '../component/CardSwap';
 import './Home.css';
+import { Analytics } from "@vercel/analytics/next";
 
 function Home() {
   const [activeQuestion, setActiveQuestion] = useState(null);
