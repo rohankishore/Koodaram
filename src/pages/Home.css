@@ -5,6 +5,13 @@
   font-style: normal;
 }
 
+@font-face {
+  font-family: 'BrotherHoops';
+  src: url('../../assets/fonts/The Brother Hoops.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
 .page-dither {
     position: fixed;
     top: 0;
@@ -42,6 +49,15 @@
 .hero .cta-button {
     position: relative;
     z-index: 10;
+}
+
+.hero .number-one {
+  font-family: 'BrotherHoops', cursive;
+  color: var(--accent);
+  font-size: 3.2rem;
+  font-weight: 900;
+  display: inline-block;
+  vertical-align: middle;
 }
 
 .how-it-works-section {
