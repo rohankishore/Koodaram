@@ -52,9 +52,9 @@
 }
 
 .hero .number-one {
-  font-family: 'BrotherHoops', cursive;
+  font-family: 'TacticSans', sans-serif;
   color: var(--accent);
-  font-size: 3.2rem;
+  font-size: 4rem;
   font-weight: 900;
   display: inline-block;
   vertical-align: middle;
