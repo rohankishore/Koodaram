@@ -101,7 +101,7 @@ function Home() {
 
       <footer className="home-footer">
         <p>
-          © 2025 Koodaram - <strong>Kerala's #1 Open Hostel Finder</strong>. A 100% open-source initiative. Made with 💖 by{' '}
+          © 2026 Koodaram - <strong>Kerala's #1 Open Hostel Finder</strong>. A 100% open-source initiative. Made with 💖 by{' '}
           <a href="https://github.com/rohankishore" target="_blank" rel="noopener noreferrer">Rohan Kishore</a> | {' '}
           <a href="https://github.com/Koodaram-Inc/koodaram-data" target="_blank" rel="noopener noreferrer">⭐ View on GitHub</a>
         </p>
