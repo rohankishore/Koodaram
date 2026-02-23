@@ -52,7 +52,7 @@ function Home() {
         <p>A completely free and open-source platform for finding and verifying hostels near your campus. No accounts, no paywalls, no corporate control.</p>
         <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', position: 'relative', zIndex: 10 }}>
           <Link to="/browse" className="cta-button">🔍 Find Your Hostel</Link>
-          <a href="https://github.com/Koodaram-Inc/koodaram-data" target="_blank" rel="noopener noreferrer" className="cta-button">🛠️ View on GitHub</a>
+
         </div>
       </div>
 
