@@ -1,12 +1,26 @@
 import { Link } from 'react-router-dom';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Dither from '../component/Dither';
 import CardSwap, { Card } from '../component/CardSwap';
 import './Home.css';
 import { Analytics } from "@vercel/analytics/react"
 
+// Import Browse for hostel/college counts
+import Browse from './Browse';
+
 function Home() {
   const [activeQuestion, setActiveQuestion] = useState(null);
+  const [hostelCount, setHostelCount] = useState(0);
+  const [collegeCount, setCollegeCount] = useState(0);
+
+  useEffect(() => {
+    // Fetch hostel count from Browse
+    fetch('https://api.github.com/repos/Koodaram-Inc/koodaram-data/contents/hostels')
+      .then(res => res.json())
+      .then(folders => setHostelCount(folders.length));
+    // College count (static, update as needed)
+    setCollegeCount(9); // Update if more colleges are added
+  }, []);
 
   const toggleQuestion = (index) => {
     setActiveQuestion(activeQuestion === index ? null : index);
@@ -51,6 +65,10 @@ function Home() {
       <div className="hero">
         <h1>Kerala's <span className="number-one">#1</span> Open Hostel Finder</h1>
         <p>A completely free and open-source platform for finding and verifying hostels near your campus. No accounts, no paywalls, no corporate control.</p>
+        <div className="hero-counts" style={{margin: '1.2rem auto 0', display: 'flex', justifyContent: 'center', gap: '1rem'}}>
+          <span className="hero-pill">{hostelCount} hostels listed</span>
+          <span className="hero-pill">{collegeCount} colleges covered</span>
+        </div>
         <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', position: 'relative', zIndex: 10 }}>
           <Link to="/browse" className="cta-button">🔍 Find Your Hostel</Link>
 
