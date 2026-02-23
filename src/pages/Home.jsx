@@ -118,12 +118,28 @@ function Home() {
         </div>
       </section>
 
-      <footer className="home-footer">
-        <p>
-          © 2026 Koodaram - <strong>Kerala's #1 Open Hostel Finder</strong>. A 100% open-source initiative. Made with 💖 by{' '}
-          <a href="https://github.com/rohankishore" target="_blank" rel="noopener noreferrer">Rohan Kishore</a> | {' '}
-          <a href="https://github.com/Koodaram-Inc/koodaram-data" target="_blank" rel="noopener noreferrer">⭐ View on GitHub</a>
-        </p>
+      <footer className="home-footer-gradient">
+        <div className="footer-content">
+          <div className="footer-left">
+            <h2 style={{ fontFamily: 'TacticSans, sans-serif', fontSize: '2.5rem', margin: 0 }}>KOODARAM</h2>
+            <ul className="footer-links">
+              <li><Link to="/">Home</Link></li>
+              <li><Link to="/about">About Us</Link></li>
+              <li><Link to="/browse">Browse Hostels</Link></li>
+              <li><Link to="/list-hostel">List Hostel</Link></li>
+              <li><Link to="/credits">Credits</Link></li>
+            </ul>
+            <div className="footer-social">
+              {/* Add social icons here if needed */}
+            </div>
+          </div>
+          <div className="footer-right">
+            <div style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '1rem' }}>Platform Organized by:</div>
+            <div style={{ fontSize: '2rem', fontWeight: 700, marginBottom: '0.5rem' }}>Koodaram Inc</div>
+            <div style={{ fontSize: '1rem', color: '#fff', marginBottom: '0.5rem' }}>Open Source Initiative</div>
+            <div style={{ fontSize: '1rem', color: '#fff' }}>© 2026 Koodaram</div>
+          </div>
+        </div>
       </footer>
     </>
   );
