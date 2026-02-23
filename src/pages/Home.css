@@ -329,3 +329,7 @@ body, #root {
   display: flex;
   flex-direction: column;
 }
+
+#root > * {
+  flex-shrink: 0;
+}
