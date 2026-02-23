@@ -85,9 +85,12 @@
 }
 
 .how-it-works-section h2 {
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     margin-bottom: 3rem;
     color: #ffffff;
+    font-family: 'BrotherHoops', cursive;
+    font-weight: 900;
+    letter-spacing: 0.5px;
 }
 
 .faq-section {
@@ -100,8 +103,11 @@
 
 .faq-section h2 {
     color: #ffffff;
-    font-size: 2.5rem;
+    font-size: 3.5rem;
     margin-bottom: 3rem;
+    font-family: 'BrotherHoops', cursive;
+    font-weight: 900;
+    letter-spacing: 0.5px;
 }
 
 .steps-container {
