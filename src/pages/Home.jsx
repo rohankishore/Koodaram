@@ -121,7 +121,12 @@ function Home() {
       </div>
 
       {/* After FAQ: remove dither, use seamless gradient bg and normal footer */}
-      <div style={{ background: 'linear-gradient(180deg, #232323 0%, #bfa100 100%)', position: 'relative', zIndex: 10 }}>
+      <div style={{ 
+        background: 'linear-gradient(180deg, #232323 0%, #232323 60%, #3a320f 85%, #a38a2e 100%)', 
+        position: 'relative', 
+        zIndex: 10, 
+        transition: 'background 0.5s' 
+      }}>
         {/* You can add more content here if needed */}
         <div style={{ height: '2rem' }} />
         {/* Normal Footer */}
