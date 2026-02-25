@@ -223,4 +223,13 @@
   .nav-card-link {
     font-size: 15px;
   }
+  button, .card-nav-cta-button, .nav-card-link, .hamburger-menu {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
+  
+  a:active, a:focus {
+    -webkit-tap-highlight-color: transparent;
+    outline: none;
+  }
 }
