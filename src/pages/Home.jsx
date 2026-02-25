@@ -59,8 +59,8 @@ function Home() {
 
   return (
     <>
-      {/* Dither background only for the top sections */}
-      <div className="page-dither">
+      {/* Dither background for the entire page */}
+      <div className="page-dither" style={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: 0, filter: 'blur(10px) saturate(1.2)' }}>
         <Dither />
       </div>
       <div style={{ position: 'relative', zIndex: 10 }}>
@@ -118,23 +118,29 @@ function Home() {
             ))}
           </div>
         </section>
-      </div>
 
-      {/* After FAQ: remove dither, use seamless gradient bg and normal footer */}
-      <div style={{ 
-        background: 'linear-gradient(180deg, #232323 0%, #232323 60%, #3a320f 85%, #a38a2e 100%)', 
-        position: 'relative', 
-        zIndex: 10, 
-        transition: 'background 0.5s' 
-      }}>
-        {/* You can add more content here if needed */}
-        <div style={{ height: '2rem' }} />
-        {/* Normal Footer */}
-        <footer className="home-footer">
-          <Link to="/">← Back to Home</Link>
-          <br /><br />
-          © 2026 Koodaram
-        </footer>
+        {/* Info section at the bottom instead of a footer */}
+        <section className="info-section" style={{
+          marginTop: '4rem',
+          padding: '3rem 1rem',
+          textAlign: 'center',
+          color: '#888',
+          background: 'rgba(30,30,30,0.7)',
+          borderRadius: '16px',
+          maxWidth: 900,
+          marginLeft: 'auto',
+          marginRight: 'auto',
+          boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
+          backdropFilter: 'blur(10px) saturate(1.2)'
+        }}>
+          <h2 style={{ fontFamily: 'TacticSans, sans-serif', fontSize: '2rem', margin: 0, color: '#fff' }}>KOODARAM</h2>
+          <div style={{ margin: '1.5rem 0' }}>
+            <Link to="/">Home</Link> | <Link to="/about">About Us</Link> | <Link to="/browse">Browse Hostels</Link> | <Link to="/list-hostel">List Hostel</Link> | <Link to="/credits">Credits</Link>
+          </div>
+          <div style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '1rem', color: '#fff' }}>Platform Organized by: Koodaram Inc</div>
+          <div style={{ fontSize: '1rem', color: '#fff', marginBottom: '0.5rem' }}>Open Source Initiative</div>
+          <div style={{ fontSize: '1rem', color: '#fff' }}>© 2026 Koodaram</div>
+        </section>
       </div>
     </>
   );
