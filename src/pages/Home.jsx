@@ -125,12 +125,6 @@ function Home() {
           padding: '3rem 1rem',
           textAlign: 'center',
           color: '#888',
-          background: 'rgba(30,30,30,0.7)',
-          borderRadius: '16px',
-          maxWidth: 900,
-          marginLeft: 'auto',
-          marginRight: 'auto',
-          boxShadow: '0 8px 32px rgba(0,0,0,0.15)',
           backdropFilter: 'blur(10px) saturate(1.2)'
         }}>
           <h2 style={{ fontFamily: 'TacticSans, sans-serif', fontSize: '2rem', margin: 0, color: '#fff' }}>KOODARAM</h2>
