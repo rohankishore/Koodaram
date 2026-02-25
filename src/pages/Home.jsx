@@ -128,8 +128,8 @@ function Home() {
           backdropFilter: 'blur(10px) saturate(1.2)'
         }}>
           <h2 style={{ fontFamily: 'Thomeo, sans-serif', fontSize: '4rem', margin: 0, color: '#fff' }}>KOODARAM</h2>
-          <div style={{ margin: '1.5rem 0' }}>
-            <Link to="/">Home</Link> | <Link to="/about">About Us</Link> | <Link to="/browse">Browse Hostels</Link> | <Link to="/list-hostel">List Hostel</Link> | <Link to="/credits">Credits</Link>
+          <div style={{ margin: '1.5rem 0', color: '#ffd600' }}>
+            <Link to="/" style={{color: '#ffd600'}}>Home</Link> | <Link to="/about" style={{color: '#ffd600'}}>About Us</Link> | <Link to="/browse" style={{color: '#ffd600'}}>Browse Hostels</Link> | <Link to="/list-hostel" style={{color: '#ffd600'}}>List Hostel</Link> | <Link to="/credits" style={{color: '#ffd600'}}>Credits</Link>
           </div>
           <div style={{ fontSize: '1rem', color: '#fff', marginBottom: '0.5rem' }}>Open Source Initiative</div>
           <div style={{ fontSize: '1rem', color: '#fff' }}>© 2026 Koodaram</div>
