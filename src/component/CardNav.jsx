@@ -1,4 +1,5 @@
 import { useLayoutEffect, useRef, useState } from 'react';
+import logoImg from '../../assets/logo.png';
 import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 // use your own icon import if react-icons is not available
@@ -153,8 +154,8 @@ const CardNav = ({
           </div>
 
           <div className="logo-container">
-            <Link to="/" className="logo-link">
-              <span className="logo-text">Koodaram</span>
+            <Link to="/" className="logo-link" style={{ display: 'flex', alignItems: 'center' }}>
+              <img src={logoImg} alt="Koodaram Logo" style={{ height: '2.2rem', width: 'auto', display: 'block' }} />
             </Link>
           </div>
 
