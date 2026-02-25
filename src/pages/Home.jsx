@@ -120,8 +120,8 @@ function Home() {
         </section>
       </div>
 
-      {/* After FAQ: remove dither, use solid bg and normal footer */}
-      <div style={{ background: '#232323', position: 'relative', zIndex: 10 }}>
+      {/* After FAQ: remove dither, use seamless gradient bg and normal footer */}
+      <div style={{ background: 'linear-gradient(180deg, #232323 0%, #bfa100 100%)', position: 'relative', zIndex: 10 }}>
         {/* You can add more content here if needed */}
         <div style={{ height: '2rem' }} />
         {/* Normal Footer */}
