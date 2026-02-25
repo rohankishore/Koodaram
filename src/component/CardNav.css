@@ -20,6 +20,7 @@
   position: relative;
   overflow: hidden;
   will-change: height;
+  animation: shine-border 2.5s linear infinite;
 }
 
 .card-nav-top {
