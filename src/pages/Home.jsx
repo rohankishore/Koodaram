@@ -127,13 +127,15 @@ function Home() {
           color: '#888',
           backdropFilter: 'blur(10px) saturate(1.2)'
         }}>
-          <h2 style={{ fontFamily: 'TacticSans, sans-serif', fontSize: '2rem', margin: 0, color: '#fff' }}>KOODARAM</h2>
+          <h2 style={{ fontFamily: 'Thomeo, sans-serif', fontSize: '4rem', margin: 0, color: '#fff' }}>KOODARAM</h2>
           <div style={{ margin: '1.5rem 0' }}>
             <Link to="/">Home</Link> | <Link to="/about">About Us</Link> | <Link to="/browse">Browse Hostels</Link> | <Link to="/list-hostel">List Hostel</Link> | <Link to="/credits">Credits</Link>
           </div>
-          <div style={{ fontSize: '1.1rem', fontWeight: 600, marginBottom: '1rem', color: '#fff' }}>Platform Organized by: Koodaram Inc</div>
           <div style={{ fontSize: '1rem', color: '#fff', marginBottom: '0.5rem' }}>Open Source Initiative</div>
           <div style={{ fontSize: '1rem', color: '#fff' }}>© 2026 Koodaram</div>
+          <div style={{ fontSize: '1rem', color: '#fff', marginTop: '1.5rem' }}>
+            Made with <span style={{color: 'red', fontSize: '1.2em', verticalAlign: 'middle'}}>♥</span> by <a href="https://github.com/rohankishore" target="_blank" rel="noopener noreferrer" style={{color: '#ffd600', textDecoration: 'underline'}}>Rohan Kishore</a>
+          </div>
         </section>
       </div>
     </>
