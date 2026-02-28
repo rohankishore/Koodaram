@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { gsap } from 'gsap';
 // use your own icon import if react-icons is not available
 import { GoArrowUpRight } from 'react-icons/go';
+import { FaInstagram } from 'react-icons/fa';
 import './CardNav.css';
 
 const CardNav = ({
@@ -159,13 +160,17 @@ const CardNav = ({
             </Link>
           </div>
 
-          <Link
-            to={ctaHref}
+          <a
+            href="https://instagram.com/koodaram.app"
             className="card-nav-cta-button"
-            style={{ backgroundColor: buttonBgColor, color: buttonTextColor }}
+            style={{ backgroundColor: '#E4405F', color: '#fff', display: 'flex', alignItems: 'center', gap: '0.5em', fontWeight: 'bold' }}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Instagram"
           >
-            {ctaLabel}
-          </Link>
+            <FaInstagram size={22} style={{ verticalAlign: 'middle' }} />
+            <span style={{ display: 'none' }}>Instagram</span>
+          </a>
         </div>
 
         <div className="card-nav-content" aria-hidden={!isExpanded}>
