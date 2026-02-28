@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Analytics } from '@vercel/analytics/react';
 import CardNav from './component/CardNav';
 import Home from './pages/Home';
 import Browse from './pages/Browse';
@@ -60,6 +61,7 @@ function App() {
           <Route path="/list-hostel" element={<ListHostel />} />
           <Route path="/about" element={<About />} />
         </Routes>
+        <Analytics />
       </div>
     </Router>
   );
