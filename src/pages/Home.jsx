@@ -14,11 +14,9 @@ function Home() {
   const [collegeCount, setCollegeCount] = useState(0);
 
   useEffect(() => {
-    // Fetch hostel count from Browse
     fetch('https://api.github.com/repos/Koodaram-Inc/koodaram-data/contents/hostels')
       .then(res => res.json())
       .then(folders => setHostelCount(folders.length));
-    // College count (static, update as needed)
     setCollegeCount(9); // Update if more colleges are added
   }, []);
 
@@ -59,7 +57,6 @@ function Home() {
 
   return (
     <>
-      {/* Dither background for the entire page */}
       <div className="page-dither" style={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: 0, filter: 'blur(10px) saturate(1.2)' }}>
         <Dither />
       </div>
@@ -119,7 +116,6 @@ function Home() {
           </div>
         </section>
 
-        {/* Info section at the bottom instead of a footer */}
         <section className="info-section" style={{
           marginTop: '4rem',
           padding: '3rem 1rem',
