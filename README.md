@@ -1,3 +1,16 @@
+# Koodaram
+
+Koodaram is an open-source platform for discovering and sharing hostel and college information. No login or sign-up required—just browse and contribute freely!
+
+- **Website:** [koodaram.in](https://koodaram.in)
+- **Data Repository:** [github.com/koodaram/data](https://github.com/koodaram/data)
+- **Demo:** [koodaram.vercel.app](https://koodaram.vercel.app)
+
+Contributions are welcome! See the data repo for how to add or update listings.
+
+---
+
+**Open Source. No accounts. No tracking. Just information.**
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
