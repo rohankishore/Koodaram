@@ -34,8 +34,8 @@ function Privacy() {
         <p>You can't share what you don't have. 🧠</p>
         <p>We're not selling your data to advertisers, data brokers, or that one uncle who keeps asking about "business opportunities." The only third parties involved are:</p>
         <ul>
-          <li><strong>Vercel:</strong> Hosts our website (they're privacy-friendly)</li>
-          <li><strong>GitHub:</strong> Stores our code (also privacy-friendly)</li>
+          <li><strong><a href="https://vercel.com/legal/privacy-policy">Vercel:</a></strong> Hosts our website (they're privacy-friendly)</li>
+          <li><strong><a href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub:</a></strong> Stores our code (also privacy-friendly)</li>
           <li><strong>Your ISP:</strong> (but that's beyond our control!)</li>
         </ul>
 
