@@ -119,7 +119,7 @@ function HostelDetail() {
       {hostel.gmap && (
         <div className="map-container">
           <iframe 
-            src={hostel.gmap}
+            src={getMapEmbedUrl(hostel.gmap)}
             allowFullScreen="" 
             loading="lazy" 
             referrerPolicy="no-referrer-when-downgrade"
