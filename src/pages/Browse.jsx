@@ -158,7 +158,7 @@ function Browse() {
               onChange={(e) => handleCollegeChange(e.target.value)}
             >
               <option value="">All</option>
-              <option value="cet">College of Engineering Trivandrum</option>
+              <option value="College of Engineering Trivandrum">College of Engineering Trivandrum</option>
               <option value="cusat">CUSAT</option>
               <option value="cucek">CUCEK</option>
               <option value="SCT Trivandrum">SCT Trivandrum</option>
