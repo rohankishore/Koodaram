@@ -6,6 +6,7 @@ import Browse from './pages/Browse';
 import HostelDetail from './pages/HostelDetail';
 import ListHostel from './pages/ListHostel';
 import About from './pages/About';
+import Terms from './pages/Terms';
 import './App.css';
 
 function App() {
@@ -60,6 +61,7 @@ function App() {
           <Route path="/hostel/:id" element={<HostelDetail />} />
           <Route path="/list-hostel" element={<ListHostel />} />
           <Route path="/about" element={<About />} />
+          <Route path="/terms" element={<Terms />} />
         </Routes>
         <Analytics />
       </div>
