@@ -16,6 +16,25 @@ function HostelDetail() {
     loadHostelData();
   }, [id]);
 
+  const getMapEmbedUrl = (gmapUrl) => {
+    if (!gmapUrl) return null;
+    
+    try {
+      // Extract coordinates from pb parameter
+      const pbMatch = gmapUrl.match(/!2d([\d.]+)!3d([\d.]+)/);
+      if (pbMatch) {
+        const lng = pbMatch[1];
+        const lat = pbMatch[2];
+        return `https://maps.google.com/maps?q=${lat},${lng}&output=embed`;
+      }
+      
+      // If pb extraction fails, return original URL as fallback
+      return gmapUrl;
+    } catch (e) {
+      return gmapUrl;
+    }
+  };
+
   const loadHostelData = async () => {
     if (!id) {
       setError("Hostel not specified.");
