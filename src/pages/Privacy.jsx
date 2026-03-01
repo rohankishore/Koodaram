@@ -15,7 +15,7 @@ function Privacy() {
         </div>
 
         <h2>🤷 What Data Do We Collect?</h2>
-        <p><strong>None. Nada. Zilch. Zero. അൊന്നും.</strong></p>
+        <p><strong>None. Nada. Zilch. Zero. പൂജ്യം.</strong></p>
         <p>Okay fine, technically your web browser might send us some info when you visit (like your IP address), but we don't store it, analyze it, or do anything creepy with it. It just... exists for a moment and then disappears into the digital void.</p>
 
         <h2>🍪 Cookies?</h2>
