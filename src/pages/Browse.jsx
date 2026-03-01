@@ -302,6 +302,11 @@ function Browse() {
                         ₹{hostel.price}
                         <span style={{ fontSize: '0.85rem', fontWeight: '400', color: '#999' }}>/month</span>
                       </p>
+                      {hostel.advance && (
+                        <p style={{ fontSize: '0.9rem', color: '#888', marginTop: '0.4rem', marginBottom: '0.8rem' }}>
+                          Advance: ₹{hostel.advance}
+                        </p>
+                      )}
                       <Link to={`/hostel/${hostel.folderName}`} className="view-button">
                         View Details →
                       </Link>
