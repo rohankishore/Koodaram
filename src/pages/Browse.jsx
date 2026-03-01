@@ -116,6 +116,12 @@ function Browse() {
     const matchesCurfew = !filters.curfew || (hostel.curfew && hostel.curfew.toLowerCase() === filters.curfew.toLowerCase());
     const matchesBathroom = !filters.bathroom || (hostel.bathroom && hostel.bathroom.toLowerCase() === filters.bathroom.toLowerCase());
     return matchesLocation && matchesCollege && matchesGender && matchesPrice && matchesRating && matchesCurfew && matchesBathroom;
+  }).sort((a, b) => {
+    const aHasImages = a.images && a.images.length > 0;
+    const bHasImages = b.images && b.images.length > 0;
+    if (aHasImages && !bHasImages) return -1;
+    if (!aHasImages && bHasImages) return 1;
+    return 0;
   });
 
   return (
