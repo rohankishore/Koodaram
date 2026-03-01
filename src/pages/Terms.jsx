@@ -57,7 +57,7 @@ function Terms() {
         </ul>
 
         <h2>8. Data & Privacy</h2>
-        <p>Any personal information you provide is used to improve our service and communicate with you. We do not sell your data to third parties. For full details, please refer to our Privacy Policy.</p>
+        <p>Any personal information you provide is used to improve our service and communicate with you. We do not sell your data to third parties. For full details, please refer to our <Link to="/privacy">Privacy Policy</Link>.</p>
 
         <h2>9. Limitation of Liability</h2>
         <p><strong>TO THE MAXIMUM EXTENT PERMITTED BY LAW, KOODARAM SHALL NOT BE LIABLE FOR ANY INDIRECT, INCIDENTAL, SPECIAL, CONSEQUENTIAL, OR PUNITIVE DAMAGES ARISING FROM YOUR USE OF OR INABILITY TO USE THIS PLATFORM, EVEN IF KOODARAM HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES.</strong></p>

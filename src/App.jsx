@@ -7,6 +7,7 @@ import HostelDetail from './pages/HostelDetail';
 import ListHostel from './pages/ListHostel';
 import About from './pages/About';
 import Terms from './pages/Terms';
+import Privacy from './pages/Privacy';
 import './App.css';
 
 function App() {
@@ -62,6 +63,7 @@ function App() {
           <Route path="/list-hostel" element={<ListHostel />} />
           <Route path="/about" element={<About />} />
           <Route path="/terms" element={<Terms />} />
+          <Route path="/privacy" element={<Privacy />} />
         </Routes>
         <Analytics />
       </div>
