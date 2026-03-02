@@ -37,7 +37,6 @@ function Browse() {
       const res = await fetch(API_BASE);
       const folders = await res.json();
       
-      // Parallel fetch for hostel data
       const hostelPromises = folders.map(folder => {
         const jsonURL = `${RAW_BASE}/${folder.name}/data.json`;
         return fetch(jsonURL)
@@ -51,12 +50,24 @@ function Browse() {
       });
       const hostelsData = (await Promise.all(hostelPromises)).filter(Boolean);
 
-      // Sort: hostels with images first
+      await Promise.all(
+        hostelsData.map(async (hostel) => {
+          if (!hostel.images || hostel.images.length === 0) {
+            hostel._hasRealImages = false;
+            return;
+          }
+          try {
+            const r = await fetch(`${RAW_BASE}/${hostel.folderName}/${hostel.images[0]}`, { method: 'HEAD' });
+            hostel._hasRealImages = r.ok;
+          } catch {
+            hostel._hasRealImages = false;
+          }
+        })
+      );
+
       hostelsData.sort((a, b) => {
-        const aHasImages = a.images && a.images.length > 0;
-        const bHasImages = b.images && b.images.length > 0;
-        if (aHasImages && !bHasImages) return -1;
-        if (!aHasImages && bHasImages) return 1;
+        if (a._hasRealImages && !b._hasRealImages) return -1;
+        if (!a._hasRealImages && b._hasRealImages) return 1;
         return 0;
       });
       setHostels(hostelsData);
@@ -69,7 +80,6 @@ function Browse() {
 
   const handleFilterChange = (key, value) => {
     setFilters(prev => ({ ...prev, [key]: value }));
-    // Scroll to top of results so image-first ordering is visible
     if (key !== 'location') {
       setTimeout(() => {
         hostelGridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -124,10 +134,8 @@ function Browse() {
     const matchesBathroom = !filters.bathroom || (hostel.bathroom && hostel.bathroom.toLowerCase() === filters.bathroom.toLowerCase());
     return matchesLocation && matchesCollege && matchesGender && matchesPrice && matchesRating && matchesCurfew && matchesBathroom;
   }).sort((a, b) => {
-    const aHasImages = a.images && a.images.length > 0;
-    const bHasImages = b.images && b.images.length > 0;
-    if (aHasImages && !bHasImages) return -1;
-    if (!aHasImages && bHasImages) return 1;
+    if (a._hasRealImages && !b._hasRealImages) return -1;
+    if (!a._hasRealImages && b._hasRealImages) return 1;
     return 0;
   });
 
