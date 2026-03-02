@@ -500,7 +500,7 @@
 
   .page-container {
     margin: 0.75rem auto;
-    padding: 0 0.85rem 0;
+    padding: 0 0.65rem 0;
     gap: 1rem;
     border-radius: 18px;
   }
@@ -523,18 +523,18 @@
   }
 
   .main-content {
-    padding: 1rem 0.85rem 1.25rem;
+    padding: 0.9rem 0.7rem 1.1rem;
     border-radius: 18px;
   }
 
   .hostel-card-content {
-    padding: 1.05rem;
+    padding: 0.95rem;
   }
 
   .hostel-card-image-wrapper,
   .hostel-card-image-wrapper .card-image,
   .hostel-card img {
-    height: 190px;
+    height: 180px;
   }
 
   .hostel-card h3 {
@@ -584,17 +584,17 @@
   }
 
   .page-container {
-    padding: 0 0.55rem 0;
+    padding: 0 0.4rem 0;
   }
 
   .main-content {
-    padding: 0.8rem 0.7rem 1rem;
+    padding: 0.7rem 0.6rem 0.95rem;
   }
 
   .hostel-card-image-wrapper,
   .hostel-card-image-wrapper .card-image,
   .hostel-card img {
-    height: 175px;
+    height: 165px;
   }
 
   .hostel-card h3 {
