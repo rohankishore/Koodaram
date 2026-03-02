@@ -17,7 +17,6 @@ function Browse() {
   const [hostels, setHostels] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
-  const [imageLoadStatus, setImageLoadStatus] = useState({});
   const [filters, setFilters] = useState({
     location: searchParams.get('location') || '',
     college: searchParams.get('college') || '',
@@ -118,9 +117,8 @@ function Browse() {
     const matchesBathroom = !filters.bathroom || (hostel.bathroom && hostel.bathroom.toLowerCase() === filters.bathroom.toLowerCase());
     return matchesLocation && matchesCollege && matchesGender && matchesPrice && matchesRating && matchesCurfew && matchesBathroom;
   }).sort((a, b) => {
-    // Check if images actually loaded successfully
-    const aHasImages = imageLoadStatus[a.id] === true;
-    const bHasImages = imageLoadStatus[b.id] === true;
+    const aHasImages = a.images && a.images.length > 0;
+    const bHasImages = b.images && b.images.length > 0;
     if (aHasImages && !bHasImages) return -1;
     if (!aHasImages && bHasImages) return 1;
     return 0;
@@ -263,15 +261,7 @@ function Browse() {
                           src={`${RAW_BASE}/${hostel.folderName}/${imageName}`}
                           alt={`${hostel.name} - Image ${idx + 1}`}
                           className="card-image"
-                          onLoad={() => {
-                            if (idx === 0) {
-                              setImageLoadStatus(prev => ({ ...prev, [hostel.id]: true }));
-                            }
-                          }}
                           onError={(e) => {
-                            if (idx === 0) {
-                              setImageLoadStatus(prev => ({ ...prev, [hostel.id]: false }));
-                            }
                             e.target.src = 'data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"300\"%3E%3Crect fill=\"%23333\" width=\"400\" height=\"300\"/%3E%3Ctext fill=\"%23999\" x=\"50%25\" y=\"50%25\" dominant-baseline=\"middle\" text-anchor=\"middle\" font-size=\"20\"%3ENo Image%3C/text%3E%3C/svg%3E';
                           }}
                         />
