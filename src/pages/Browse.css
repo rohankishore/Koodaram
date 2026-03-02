@@ -71,7 +71,6 @@
   position: relative;
   z-index: 10;
   background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.12);
 }
@@ -135,7 +134,6 @@
   flex: 1;
   min-width: 0;
   background: rgba(0, 0, 0, 0.3);
-  backdrop-filter: blur(10px);
   border-radius: 24px;
   box-shadow: 0 8px 32px rgba(0,0,0,0.12);
   padding: 2rem 1.5rem;
@@ -154,7 +152,6 @@
   overflow: hidden;
   transition: all 0.3s ease;
   position: relative;
-  backdrop-filter: blur(10px);
   border: 1px solid var(--border-color);
   box-shadow: 0 2px 10px rgba(255, 215, 0, 0.12);
 }

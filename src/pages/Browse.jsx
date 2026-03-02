@@ -316,7 +316,7 @@ function Browse() {
               })
             )}
           </section>
-          <footer style={{ textAlign: 'center', padding: '3rem 0 2rem', marginTop: '4rem', borderTop: '1px solid rgba(255, 215, 0, 0.1)', color: '#999' }}>
+          <footer className="browse-footer">
             <Link to="/" style={{ color: 'var(--primary-gold)', textDecoration: 'none', fontWeight: '600' }}>← Back to Home</Link>
             <br /><br />
             © 2025 Koodaram
