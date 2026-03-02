@@ -377,6 +377,14 @@
   grid-column: 1 / -1;
 }
 
+.browse-footer {
+  text-align: center;
+  padding: 3rem 0 2rem;
+  margin-top: 4rem;
+  border-top: 1px solid rgba(255, 215, 0, 0.1);
+  color: #999;
+}
+
 /* Loader styles */
 .loader {
   width: 50px;
@@ -430,7 +438,8 @@
     align-items: center;
     gap: 0.5rem;
     position: fixed;
-    top: 6.5rem;
+    top: auto;
+    bottom: 1rem;
     right: 1rem;
     z-index: 100;
     background: linear-gradient(135deg, var(--accent), var(--primary));
@@ -476,8 +485,8 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 85%;
-    max-width: 320px;
+    width: min(88vw, 340px);
+    max-width: 340px;
     height: 100vh;
     z-index: 200;
     transform: translateX(-100%);
@@ -492,24 +501,105 @@
   }
 
   .page-container {
-    margin: 1rem auto;
-    padding-top: 4rem;
+    margin: 0.75rem auto;
+    padding: 3.75rem 0.85rem 0;
+    gap: 1rem;
+    border-radius: 18px;
   }
 
   .filters {
-    padding: 1.5rem;
+    padding: 1rem 1rem 1.25rem;
+  }
+
+  .filters-header {
+    position: sticky;
+    top: -1rem;
+    background: inherit;
+    padding: 1rem 0 0.75rem;
+    z-index: 1;
   }
 
   .hostel-grid {
     grid-template-columns: 1fr;
-    gap: 2rem;
+    gap: 1.25rem;
+  }
+
+  .main-content {
+    padding: 1rem 0.85rem 1.25rem;
+    border-radius: 18px;
+  }
+
+  .hostel-card-content {
+    padding: 1.05rem;
+  }
+
+  .hostel-card-image-wrapper,
+  .hostel-card-image-wrapper .card-image,
+  .hostel-card img {
+    height: 190px;
   }
 
   .hostel-card h3 {
     font-size: 1.2rem;
   }
 
+  .filters label {
+    font-size: 0.78rem;
+  }
+
+  .filters input,
+  .filters select {
+    font-size: 16px;
+    padding: 0.7rem 0.8rem;
+  }
+
+  .amenities span {
+    font-size: 0.68rem;
+    padding: 0.35rem 0.65rem;
+  }
+
+  .hostel-card .view-button {
+    width: 100%;
+    margin-top: 0.9rem;
+    padding: 0.7rem 1rem;
+  }
+
+  .loading,
+  .no-results {
+    padding: 2.5rem 1rem;
+    font-size: 1rem;
+  }
+
+  .browse-footer {
+    padding: 2rem 0 1.25rem;
+    margin-top: 2rem;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .mobile-filter-toggle {
+    right: 0.75rem;
+    bottom: 0.75rem;
+    padding: 0.65rem 1rem;
+    font-size: 0.85rem;
+  }
+
+  .page-container {
+    padding: 3.5rem 0.55rem 0;
+  }
+
+  .main-content {
+    padding: 0.8rem 0.7rem 1rem;
+  }
+
+  .hostel-card-image-wrapper,
+  .hostel-card-image-wrapper .card-image,
   .hostel-card img {
-    height: 200px;
+    height: 175px;
+  }
+
+  .hostel-card h3 {
+    font-size: 1.1rem;
   }
 }
