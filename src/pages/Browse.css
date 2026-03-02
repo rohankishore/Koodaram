@@ -500,7 +500,7 @@
 
   .page-container {
     margin: 0.75rem auto;
-    padding: 3.75rem 0.85rem 0;
+    padding: 0 0.85rem 0;
     gap: 1rem;
     border-radius: 18px;
   }
@@ -584,7 +584,7 @@
   }
 
   .page-container {
-    padding: 3.5rem 0.55rem 0;
+    padding: 0 0.55rem 0;
   }
 
   .main-content {
