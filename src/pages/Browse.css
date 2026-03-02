@@ -13,6 +13,18 @@
   --text-muted: #c5c5c5;
 }
 
+.page-dither {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 0;
+  filter: blur(10px) saturate(1.2);
+  transform: scale(1.03);
+  pointer-events: none;
+}
+
 .mobile-filter-toggle {
   display: none;
 }
