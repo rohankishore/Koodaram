@@ -1,4 +1,4 @@
-import{ useState, useEffect } from 'react';
+import{ useState, useEffect, useRef } from 'react';
 import Dither from '../component/Dither';
 import { Link, useSearchParams } from 'react-router-dom';
 import { HiAdjustmentsHorizontal } from 'react-icons/hi2';
@@ -14,6 +14,7 @@ const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/
 
 function Browse() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const hostelGridRef = useRef(null);
   const [hostels, setHostels] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
@@ -68,6 +69,12 @@ function Browse() {
 
   const handleFilterChange = (key, value) => {
     setFilters(prev => ({ ...prev, [key]: value }));
+    // Scroll to top of results so image-first ordering is visible
+    if (key !== 'location') {
+      setTimeout(() => {
+        hostelGridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 50);
+    }
   };
 
   const applyFilters = () => {
@@ -241,7 +248,7 @@ function Browse() {
           <button className="cta-button" onClick={applyFilters}>Apply Filters</button>
         </aside>
         <main className="main-content">
-          <section className="hostel-grid">
+          <section className="hostel-grid" ref={hostelGridRef}>
             {loading ? (
               <div className="loading">
                 <div className="loader" style={{margin: '0 auto', color: '#fff'}}></div>
