@@ -45,6 +45,7 @@ function Home() {
       answer: "Each hostel card glows a different color based on its student rating. Green means above 4 stars (excellent), yellow means 3–4 stars (good), orange means 2–3 stars (average), and red means below 2 stars (poor). Yellow also appears when a hostel has no ratings yet."
     },
     {
+      
       question: "Is Koodaram fully open source?",
       answer: (
         <>
