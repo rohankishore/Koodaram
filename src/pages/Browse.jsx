@@ -104,6 +104,13 @@ function Browse() {
     handleFilterChange('college', value);
   };
 
+  const getRatingBorderClass = (rating) => {
+    if (rating > 4) return 'rating-border-green';
+    if (rating >= 3) return 'rating-border-yellow';
+    if (rating >= 2) return 'rating-border-orange';
+    return 'rating-border-red';
+  };
+
   const renderStars = (rating) => {
     const full = "★";
     const empty = "☆";
@@ -264,7 +271,7 @@ function Browse() {
                 const gender = hostel.gender?.toLowerCase() || "unisex";
                 const rating = parseFloat(hostel.rating) || 0;
                 return (
-                  <SpotlightCard key={hostel.id} className="hostel-card" spotlightColor="rgba(255, 215, 0, 0.15)">
+                  <SpotlightCard key={hostel.id} className={`hostel-card ${getRatingBorderClass(rating)}`} spotlightColor="rgba(255, 215, 0, 0.15)">
                     <div className="hostel-card-image-wrapper">
                       {(hostel.images || ["1.jpg"]).map((imageName, idx) => (
                         <img
