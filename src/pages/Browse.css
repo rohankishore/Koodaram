@@ -157,23 +157,23 @@
 }
 
 .hostel-card.rating-border-green {
-  border-color: #4caf50;
-  box-shadow: 0 2px 12px rgba(76, 175, 80, 0.25);
+  border: 2px solid #4caf50;
+  box-shadow: 0 2px 16px rgba(76, 175, 80, 0.45), 0 0 8px rgba(76, 175, 80, 0.2);
 }
 
 .hostel-card.rating-border-yellow {
-  border-color: #ffc107;
-  box-shadow: 0 2px 12px rgba(255, 193, 7, 0.25);
+  border: 2px solid #ffc107;
+  box-shadow: 0 2px 16px rgba(255, 193, 7, 0.45), 0 0 8px rgba(255, 193, 7, 0.2);
 }
 
 .hostel-card.rating-border-orange {
-  border-color: #ff9800;
-  box-shadow: 0 2px 12px rgba(255, 152, 0, 0.25);
+  border: 2px solid #ff9800;
+  box-shadow: 0 2px 16px rgba(255, 152, 0, 0.45), 0 0 8px rgba(255, 152, 0, 0.2);
 }
 
 .hostel-card.rating-border-red {
-  border-color: #f44336;
-  box-shadow: 0 2px 12px rgba(244, 67, 54, 0.25);
+  border: 2px solid #f44336;
+  box-shadow: 0 2px 16px rgba(244, 67, 54, 0.45), 0 0 8px rgba(244, 67, 54, 0.2);
 }
 
 .hostel-card::before {
