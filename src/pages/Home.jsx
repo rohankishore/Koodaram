@@ -5,7 +5,6 @@ import CardSwap, { Card } from '../component/CardSwap';
 import './Home.css';
 import { Analytics } from "@vercel/analytics/react"
 
-// Import Browse for hostel/college counts
 import Browse from './Browse';
 
 function Home() {
@@ -17,7 +16,7 @@ function Home() {
     fetch('https://api.github.com/repos/Koodaram-Inc/koodaram-data/contents/hostels')
       .then(res => res.json())
       .then(folders => setHostelCount(folders.length));
-    setCollegeCount(9); // Update if more colleges are added
+    setCollegeCount(9);
   }, []);
 
   const toggleQuestion = (index) => {
@@ -40,6 +39,10 @@ function Home() {
     {
       question: "How do I contribute?",
       answer: "You can contribute by listing a new hostel, adding reviews and ratings to help verify information for other students."
+    },
+    {
+      question: "What do the card border colors mean?",
+      answer: "Each hostel card glows a different color based on its student rating. Green means above 4 stars (excellent), yellow means 3–4 stars (good), orange means 2–3 stars (average), and red means below 2 stars (poor). Yellow also appears when a hostel has no ratings yet."
     },
     {
       question: "Is Koodaram fully open source?",
@@ -90,6 +93,33 @@ function Home() {
               <div className="step-number">3</div>
               <h3>Completely Free</h3>
               <p>Browse hostels, view photos, and contact owners — all without paying a rupee or creating an account.</p>
+            </div>
+          </div>
+        </section>
+
+        <section className="rating-guide-section">
+          <h2 className="rating-guide-heading">Read the Cards at a Glance</h2>
+          <p className="rating-guide-sub">Every hostel card is color-coded by its student rating. No need to squint at numbers.</p>
+          <div className="rating-guide-grid">
+            <div className="rating-guide-item">
+              <div className="rating-swatch swatch-green"></div>
+              <div className="rating-guide-label">Above 4 ★</div>
+              <div className="rating-guide-desc">Excellent</div>
+            </div>
+            <div className="rating-guide-item">
+              <div className="rating-swatch swatch-yellow"></div>
+              <div className="rating-guide-label">3 – 4 ★ / No ratings</div>
+              <div className="rating-guide-desc">Good</div>
+            </div>
+            <div className="rating-guide-item">
+              <div className="rating-swatch swatch-orange"></div>
+              <div className="rating-guide-label">2 – 3 ★</div>
+              <div className="rating-guide-desc">Average</div>
+            </div>
+            <div className="rating-guide-item">
+              <div className="rating-swatch swatch-red"></div>
+              <div className="rating-guide-label">Below 2 ★</div>
+              <div className="rating-guide-desc">Poor</div>
             </div>
           </div>
         </section>

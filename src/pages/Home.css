@@ -93,6 +93,88 @@
     letter-spacing: 0.5px;
 }
 
+.rating-guide-section {
+  padding: 5rem 2rem;
+  text-align: center;
+  position: relative;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(10px);
+}
+
+.rating-guide-heading {
+  font-size: 3.5rem;
+  font-weight: 900;
+  font-family: 'BrotherHoops', cursive;
+  color: #ffffff;
+  margin-bottom: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+.rating-guide-sub {
+  color: #aaa;
+  font-size: 1.1rem;
+  margin-bottom: 3rem;
+}
+
+.rating-guide-grid {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.rating-guide-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.rating-swatch {
+  width: 64px;
+  height: 64px;
+  border-radius: 14px;
+  border: 2.5px solid transparent;
+}
+
+.swatch-green {
+  background: rgba(76, 175, 80, 0.15);
+  border-color: #4caf50;
+  box-shadow: 0 4px 18px rgba(76, 175, 80, 0.5), 0 0 8px rgba(76, 175, 80, 0.25);
+}
+
+.swatch-yellow {
+  background: rgba(255, 193, 7, 0.15);
+  border-color: #ffc107;
+  box-shadow: 0 4px 18px rgba(255, 193, 7, 0.5), 0 0 8px rgba(255, 193, 7, 0.25);
+}
+
+.swatch-orange {
+  background: rgba(255, 152, 0, 0.15);
+  border-color: #ff9800;
+  box-shadow: 0 4px 18px rgba(255, 152, 0, 0.5), 0 0 8px rgba(255, 152, 0, 0.25);
+}
+
+.swatch-red {
+  background: rgba(244, 67, 54, 0.15);
+  border-color: #f44336;
+  box-shadow: 0 4px 18px rgba(244, 67, 54, 0.5), 0 0 8px rgba(244, 67, 54, 0.25);
+}
+
+.rating-guide-label {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.rating-guide-desc {
+  font-size: 0.85rem;
+  color: #888;
+}
+
 .faq-section {
     padding: 5rem 2rem;
     position: relative;
