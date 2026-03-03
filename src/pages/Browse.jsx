@@ -101,9 +101,6 @@ function Browse() {
   };
 
   const handleCollegeChange = (value) => {
-    if (value === 'Model Engineering College') {
-      window.open('https://hostelfinderbyflink.netlify.app', '_blank');
-    }
     handleFilterChange('college', value);
   };
 
@@ -186,7 +183,6 @@ function Browse() {
               <option value="GEC Kozhikode">GEC Kozhikode</option>
               <option value="GEC Palakkad">GEC Palakkad</option>
               <option value="GEC Thrissur">GEC Thrissur</option>
-              <option value="Model Engineering College">Model Engineering College</option>
               <option value="NSS College Palakkad">NSS College Palakkad</option>
               <option value="RIT Kottayam">RIT Kottayam</option>
             </select>
