@@ -6,7 +6,7 @@ function ListHostel() {
     <div className="list-hostel-page">
       <header className="list-header">
         <h1>Add Your Hostel</h1>
-        <p>Koodaram is Kerala's #1 Open Hostel Finder. Every listing is open source, transparent, and free forever — no accounts needed.</p>
+        <p>Koodaram is Kerala's #1 Open Hostel Finder. Every listing is open source, transparent, and free forever. No accounts needed.</p>
       </header>
 
       <section className="content">
