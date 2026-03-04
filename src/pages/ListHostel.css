@@ -136,7 +136,6 @@
 .discord-button:hover {
   transform: translateY(-2px);
   box-shadow: 0 0 30px rgba(255, 215, 0, 0.4);
-  color: #000;
 }
 
 .list-footer {
