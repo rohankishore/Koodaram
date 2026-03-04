@@ -25,15 +25,15 @@ function ListHostel() {
         </ul>
 
         <h2>Want to Add Your Hostel?</h2>
-        <p>Be part of the open-source movement. If your hostel isn't listed yet, you can add it right now — either through our upcoming form or by contacting us directly.</p>
+        <p>Be part of the open-source movement. If your hostel isn't listed yet, you can add it right now through our form below!</p>
 
         <a 
-          href="https://wa.me/918089990317" 
+          href="https://docs.google.com/forms/d/e/1FAIpQLScQNgpr6HKupIdnz6eqnq6E2mXRr0Y-Zxj1V1rauKr8Tg1zZw/viewform?usp=publish-editor" 
           target="_blank" 
           rel="noopener noreferrer" 
           className="discord-button"
         >
-          💬 List Your Hostel on Koodaram
+          📝 List Your Hostel on Koodaram
         </a>
       </section>
 
