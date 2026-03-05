@@ -108,7 +108,7 @@ function Browse() {
     if (!rating || rating === 0) return 'rating-border-yellow';
     if (rating > 4) return 'rating-border-green';
     if (rating >= 3) return 'rating-border-yellow';
-    if (rating >= 2) return 'rating-border-orange';
+    if (rating >= 2) return 'rating-border-red';
     return 'rating-border-red';
   };
 
