@@ -82,6 +82,9 @@ function HostelDetail() {
         {hostel.advance && (
           <p style={{ color: '#999' }}><strong>Advance:</strong> ₹{hostel.advance}</p>
         )}
+        {hostel.contact?.phone && (
+          <p><strong>📞 Contact:</strong> {hostel.contact.phone}</p>
+        )}
         <p><strong>🛹 Amenities:</strong> {hostel.amenities?.join(", ")}</p>
         {hostel.curfew && (
           <p><strong>Curfew:</strong> {hostel.curfew}</p>
