@@ -117,10 +117,12 @@ function HostelDetail() {
         )}
       </div>
 
-      <div className="contact-buttons">
-        <a href={`tel:${hostel.contact?.phone}`}>📞 Call</a>
-        <a href={`https://wa.me/91${hostel.contact?.phone}`}>💬 WhatsApp</a>
-      </div>
+      {hostel.contact?.phone && (
+        <div className="contact-buttons">
+          <a href={`tel:${hostel.contact.phone}`} target="_blank" rel="noopener noreferrer">📞 Call</a>
+          <a href={`https://wa.me/${hostel.contact.phone.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+        </div>
+      )}
 
       {hostel.gmap && (
         <div className="map-container">
