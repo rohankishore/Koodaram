@@ -23,6 +23,12 @@ function Navbar() {
           <Link to="/about">About</Link>
         </nav>
         <div className="nav-right">
+          <Link to="/list-hostel" className="nav-cta-button">
+            📝 Register Now
+          </Link>
+          <Link to="/registration-instructions" className="nav-cta-button nav-secondary">
+            📖 Registration Instructions
+          </Link>
           <a 
             href="https://github.com/Koodaram-Inc/koodaram-data" 
             target="_blank" 
