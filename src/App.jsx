@@ -8,6 +8,8 @@ import ListHostel from './pages/ListHostel';
 import About from './pages/About';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
+import Datasheet from './pages/Datasheet';
+import Footer from './components/Footer';
 import './App.css';
 
 function App() {
@@ -64,8 +66,10 @@ function App() {
           <Route path="/about" element={<About />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
+        <Route path="/datasheet" element={<Datasheet />} />
         </Routes>
         <Analytics />
+        <Footer />
       </div>
     </Router>
   );
