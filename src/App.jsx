@@ -8,7 +8,6 @@ import ListHostel from './pages/ListHostel';
 import About from './pages/About';
 import Terms from './pages/Terms';
 import Privacy from './pages/Privacy';
-import RegistrationInstructions from './pages/RegistrationInstructions';
 import './App.css';
 
 function App() {
@@ -62,7 +61,6 @@ function App() {
           <Route path="/browse" element={<Browse />} />
           <Route path="/hostel/:id" element={<HostelDetail />} />
           <Route path="/list-hostel" element={<ListHostel />} />
-          <Route path="/registration-instructions" element={<RegistrationInstructions />} />
           <Route path="/about" element={<About />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
