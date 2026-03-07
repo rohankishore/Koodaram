@@ -16,13 +16,61 @@
   letter-spacing: 1px;
 }
 
-.datasheet-block {
+
+.datasheet-summary {
   background: #f7fafc;
   border-radius: 8px;
-  padding: 24px 16px;
-  font-size: 1.05rem;
-  overflow-x: auto;
+  padding: 20px 18px 10px 18px;
+  margin-bottom: 32px;
   color: #222;
+  font-size: 1.08rem;
+}
+.datasheet-summary ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+.datasheet-summary li {
+  margin-bottom: 6px;
+}
+.datasheet-export {
+  font-size: 0.98rem;
+  color: #4a5568;
+  margin-top: 10px;
+}
+.datasheet-export span {
   font-family: 'Fira Mono', 'Consolas', monospace;
-  line-height: 1.6;
+  font-size: 0.97rem;
+  color: #888;
+}
+
+.datasheet-table-wrapper {
+  overflow-x: auto;
+  margin-top: 18px;
+}
+.datasheet-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #f7fafc;
+  border-radius: 8px;
+  overflow: hidden;
+  font-size: 1.04rem;
+}
+.datasheet-table th, .datasheet-table td {
+  border: 1px solid #e2e8f0;
+  padding: 10px 14px;
+  text-align: left;
+}
+.datasheet-table th {
+  background: #edf2f7;
+  color: #2d3748;
+  font-weight: bold;
+}
+.datasheet-table tr:nth-child(even) {
+  background: #f1f5f9;
+}
+.datasheet-table tr.datasheet-total td {
+  background: #ffe082;
+  color: #222;
+  font-weight: bold;
 }
