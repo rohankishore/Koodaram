@@ -28,7 +28,7 @@ const Datasheet = () => (
         <tbody>
           <tr><td>CUCEK</td><td>25</td><td>17</td><td>42</td></tr>
           <tr><td>CUSAT</td><td>7</td><td>5</td><td>12</td></tr>
-          <tr><td>College of Engineering Trivandrum</td><td>12</td><td>9</td><td>21</td></tr>
+          <tr><td>College of Engineering Trivandrum</td><td>13</td><td>9</td><td>22</td></tr>
           <tr><td>GEC Kozhikode</td><td>0</td><td>0</td><td>1</td></tr>
           <tr><td>GEC Palakkad</td><td>0</td><td>7</td><td>7</td></tr>
           <tr><td>GEC Thrissur</td><td>9</td><td>8</td><td>17</td></tr>
