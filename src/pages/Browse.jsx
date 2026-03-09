@@ -1,6 +1,6 @@
 import{ useState, useEffect, useRef } from 'react';
 import Dither from '../component/Dither';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useSearchParams, useParams, useNavigate } from 'react-router-dom';
 import { HiAdjustmentsHorizontal } from 'react-icons/hi2';
 import { IoClose } from 'react-icons/io5';
 import Stack from '../component/Stack';
@@ -12,15 +12,16 @@ const REPO = "koodaram-data";
 const API_BASE = `https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/hostels`;
 const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
 
-function Browse() {
   const [searchParams, setSearchParams] = useSearchParams();
+  const { college: collegeParam } = useParams();
+  const navigate = useNavigate();
   const hostelGridRef = useRef(null);
   const [hostels, setHostels] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState({
     location: searchParams.get('location') || '',
-    college: searchParams.get('college') || '',
+    college: collegeParam || searchParams.get('college') || '',
     gender: searchParams.get('gender') || '',
     price: searchParams.get('price') || '',
     rating: searchParams.get('rating') || '0-5',
@@ -101,7 +102,15 @@ function Browse() {
   };
 
   const handleCollegeChange = (value) => {
-    handleFilterChange('college', value);
+    setFilters(prev => ({ ...prev, college: value }));
+    if (value) {
+      navigate(`/browse/${encodeURIComponent(value)}`);
+    } else {
+      navigate('/browse');
+    }
+    setTimeout(() => {
+      hostelGridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 50);
   };
 
   const getRatingBorderClass = (rating) => {

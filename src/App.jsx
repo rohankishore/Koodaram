@@ -60,7 +60,7 @@ function App() {
         />
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/browse" element={<Browse />} />
+          <Route path="/browse/:college?" element={<Browse />} />
           <Route path="/hostel/:id" element={<HostelDetail />} />
           <Route path="/list-hostel" element={<ListHostel />} />
           <Route path="/about" element={<About />} />
