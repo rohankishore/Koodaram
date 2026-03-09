@@ -1,9 +1,8 @@
-import{ useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Dither from '../component/Dither';
 import { Link, useSearchParams, useParams, useNavigate } from 'react-router-dom';
 import { HiAdjustmentsHorizontal } from 'react-icons/hi2';
 import { IoClose } from 'react-icons/io5';
-import Stack from '../component/Stack';
 import SpotlightCard from '../component/SpotlightCard';
 import './Browse.css';
 
@@ -12,13 +11,17 @@ const REPO = "koodaram-data";
 const API_BASE = `https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/hostels`;
 const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
 
+function Browse() {
+
   const [searchParams, setSearchParams] = useSearchParams();
   const { college: collegeParam } = useParams();
   const navigate = useNavigate();
   const hostelGridRef = useRef(null);
+
   const [hostels, setHostels] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
+
   const [filters, setFilters] = useState({
     location: searchParams.get('location') || '',
     college: collegeParam || searchParams.get('college') || '',
@@ -37,7 +40,7 @@ const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/
     try {
       const res = await fetch(API_BASE);
       const folders = await res.json();
-      
+
       const hostelPromises = folders.map(folder => {
         const jsonURL = `${RAW_BASE}/${folder.name}/data.json`;
         return fetch(jsonURL)
@@ -49,6 +52,7 @@ const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/
           })
           .catch(() => null);
       });
+
       const hostelsData = (await Promise.all(hostelPromises)).filter(Boolean);
 
       await Promise.all(
@@ -71,8 +75,10 @@ const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/
         if (!a._hasRealImages && b._hasRealImages) return 1;
         return 0;
       });
+
       setHostels(hostelsData);
       setLoading(false);
+
     } catch (error) {
       console.error("Error loading hostels:", error);
       setLoading(false);
@@ -81,6 +87,7 @@ const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/
 
   const handleFilterChange = (key, value) => {
     setFilters(prev => ({ ...prev, [key]: value }));
+
     if (key !== 'location') {
       setTimeout(() => {
         hostelGridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -90,6 +97,7 @@ const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/
 
   const applyFilters = () => {
     const params = {};
+
     if (filters.location) params.location = filters.location;
     if (filters.college) params.college = filters.college;
     if (filters.gender) params.gender = filters.gender;
@@ -97,17 +105,20 @@ const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/
     params.rating = filters.rating;
     if (filters.curfew) params.curfew = filters.curfew;
     if (filters.bathroom) params.bathroom = filters.bathroom;
+
     setSearchParams(params);
     setShowFilters(false);
   };
 
   const handleCollegeChange = (value) => {
     setFilters(prev => ({ ...prev, college: value }));
+
     if (value) {
       navigate(`/browse/${encodeURIComponent(value)}`);
     } else {
       navigate('/browse');
     }
+
     setTimeout(() => {
       hostelGridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }, 50);
@@ -125,6 +136,7 @@ const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/
     const full = "★";
     const empty = "☆";
     const value = Math.round(rating);
+
     return (
       <div className="rating-stars" title={`${rating}/5`}>
         {full.repeat(value)}{empty.repeat(5 - value)}
@@ -133,20 +145,47 @@ const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/
   };
 
   const filteredHostels = hostels.filter(hostel => {
-    const matchesLocation = !filters.location || 
+
+    const matchesLocation =
+      !filters.location ||
       hostel.location?.toLowerCase().includes(filters.location.toLowerCase());
-    const matchesCollege = !filters.college || 
+
+    const matchesCollege =
+      !filters.college ||
       hostel.college?.toLowerCase().includes(filters.college.toLowerCase());
-    const matchesGender = !filters.gender || 
+
+    const matchesGender =
+      !filters.gender ||
       hostel.gender?.toLowerCase() === filters.gender.toLowerCase();
-    const matchesPrice = !filters.price || 
+
+    const matchesPrice =
+      !filters.price ||
       parseInt(hostel.price) <= parseInt(filters.price);
+
     const [ratingMin, ratingMax] = filters.rating.split('-').map(Number);
     const rating = parseFloat(hostel.rating) || 0;
-    const matchesRating = rating >= ratingMin && rating <= ratingMax;
-    const matchesCurfew = !filters.curfew || (hostel.curfew && hostel.curfew.toLowerCase() === filters.curfew.toLowerCase());
-    const matchesBathroom = !filters.bathroom || (hostel.bathroom && hostel.bathroom.toLowerCase() === filters.bathroom.toLowerCase());
-    return matchesLocation && matchesCollege && matchesGender && matchesPrice && matchesRating && matchesCurfew && matchesBathroom;
+
+    const matchesRating =
+      rating >= ratingMin && rating <= ratingMax;
+
+    const matchesCurfew =
+      !filters.curfew ||
+      (hostel.curfew && hostel.curfew.toLowerCase() === filters.curfew.toLowerCase());
+
+    const matchesBathroom =
+      !filters.bathroom ||
+      (hostel.bathroom && hostel.bathroom.toLowerCase() === filters.bathroom.toLowerCase());
+
+    return (
+      matchesLocation &&
+      matchesCollege &&
+      matchesGender &&
+      matchesPrice &&
+      matchesRating &&
+      matchesCurfew &&
+      matchesBathroom
+    );
+
   }).sort((a, b) => {
     if (a._hasRealImages && !b._hasRealImages) return -1;
     if (!a._hasRealImages && b._hasRealImages) return 1;
@@ -154,43 +193,62 @@ const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/
   });
 
   return (
-    <div style={{position: 'relative', minHeight: '100vh', overflow: 'hidden'}}>
+    <div style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
+
       <div className="page-dither">
         <Dither />
       </div>
-      <div className="page-container" style={{position: 'relative', zIndex: 10}}>
-        {showFilters && <div className="filter-overlay" onClick={() => setShowFilters(false)} />}
+
+      <div className="page-container" style={{ position: 'relative', zIndex: 10 }}>
+
+        {showFilters && (
+          <div
+            className="filter-overlay"
+            onClick={() => setShowFilters(false)}
+          />
+        )}
+
         {!showFilters && (
-          <button className="mobile-filter-toggle" onClick={() => setShowFilters(true)}>
+          <button
+            className="mobile-filter-toggle"
+            onClick={() => setShowFilters(true)}
+          >
             <HiAdjustmentsHorizontal size={24} />
             <span>Filters</span>
           </button>
         )}
+
         <aside className={`filters ${showFilters ? 'filters-open' : ''}`}>
-          {/* ...existing code for filters... */}
+
           <div className="filters-header">
             <h2>Filters</h2>
-            <button className="close-filters" onClick={() => setShowFilters(false)}>
+            <button
+              className="close-filters"
+              onClick={() => setShowFilters(false)}
+            >
               <IoClose size={24} />
             </button>
           </div>
-          {/* ...existing filter groups and controls... */}
+
           <div className="filter-group">
-            <label htmlFor="location">Location</label>
-            <input 
-              type="text" 
-              id="location" 
+            <label>Location</label>
+            <input
+              type="text"
               placeholder="Enter city or area"
               value={filters.location}
-              onChange={(e) => handleFilterChange('location', e.target.value)}
+              onChange={(e) =>
+                handleFilterChange('location', e.target.value)
+              }
             />
           </div>
+
           <div className="filter-group">
-            <label htmlFor="college">College</label>
-            <select 
-              id="college"
+            <label>College</label>
+            <select
               value={filters.college}
-              onChange={(e) => handleCollegeChange(e.target.value)}
+              onChange={(e) =>
+                handleCollegeChange(e.target.value)
+              }
             >
               <option value="">All</option>
               <option value="College of Engineering Trivandrum">College of Engineering Trivandrum</option>
@@ -204,12 +262,14 @@ const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/
               <option value="RIT Kottayam">RIT Kottayam</option>
             </select>
           </div>
+
           <div className="filter-group">
-            <label htmlFor="gender">Gender</label>
-            <select 
-              id="gender"
+            <label>Gender</label>
+            <select
               value={filters.gender}
-              onChange={(e) => handleFilterChange('gender', e.target.value)}
+              onChange={(e) =>
+                handleFilterChange('gender', e.target.value)
+              }
             >
               <option value="">All</option>
               <option value="male">Male Only</option>
@@ -217,22 +277,26 @@ const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/
               <option value="unisex">Unisex</option>
             </select>
           </div>
+
           <div className="filter-group">
-            <label htmlFor="price">Max Price</label>
-            <input 
-              type="number" 
-              id="price" 
+            <label>Max Price</label>
+            <input
+              type="number"
               placeholder="e.g. 5000"
               value={filters.price}
-              onChange={(e) => handleFilterChange('price', e.target.value)}
+              onChange={(e) =>
+                handleFilterChange('price', e.target.value)
+              }
             />
           </div>
+
           <div className="filter-group">
-            <label htmlFor="ratingRange">Rating</label>
-            <select 
-              id="ratingRange"
+            <label>Rating</label>
+            <select
               value={filters.rating}
-              onChange={(e) => handleFilterChange('rating', e.target.value)}
+              onChange={(e) =>
+                handleFilterChange('rating', e.target.value)
+              }
             >
               <option value="0-5">All</option>
               <option value="5-5">5 only</option>
@@ -242,105 +306,206 @@ const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/
               <option value="1-2">1–2</option>
             </select>
           </div>
+
           <div className="filter-group">
-            <label htmlFor="curfew">Curfew</label>
+            <label>Curfew</label>
             <select
-              id="curfew"
               value={filters.curfew}
-              onChange={e => handleFilterChange('curfew', e.target.value)}
+              onChange={(e) =>
+                handleFilterChange('curfew', e.target.value)
+              }
             >
               <option value="">All</option>
               <option value="yes">Yes</option>
               <option value="no">No</option>
             </select>
           </div>
+
           <div className="filter-group">
-            <label htmlFor="bathroom">Bathroom</label>
+            <label>Bathroom</label>
             <select
-              id="bathroom"
               value={filters.bathroom}
-              onChange={e => handleFilterChange('bathroom', e.target.value)}
+              onChange={(e) =>
+                handleFilterChange('bathroom', e.target.value)
+              }
             >
               <option value="">All</option>
               <option value="common">Common</option>
               <option value="attached">Attached</option>
             </select>
           </div>
-          <button className="cta-button" onClick={applyFilters}>Apply Filters</button>
+
+          <button
+            className="cta-button"
+            onClick={applyFilters}
+          >
+            Apply Filters
+          </button>
+
         </aside>
+
         <main className="main-content">
-          <section className="hostel-grid" ref={hostelGridRef}>
+
+          <section
+            className="hostel-grid"
+            ref={hostelGridRef}
+          >
+
             {loading ? (
               <div className="loading">
-                <div className="loader" style={{margin: '0 auto', color: '#fff'}}></div>
+                <div
+                  className="loader"
+                  style={{ margin: '0 auto', color: '#fff' }}
+                />
               </div>
+
             ) : filteredHostels.length === 0 ? (
-              <div className="no-results">No hostels found matching your criteria</div>
+
+              <div className="no-results">
+                No hostels found matching your criteria
+              </div>
+
             ) : (
+
               filteredHostels.map(hostel => {
+
                 const gender = hostel.gender?.toLowerCase() || "unisex";
                 const rating = parseFloat(hostel.rating) || 0;
+
                 return (
-                  <SpotlightCard key={hostel.id} className={`hostel-card ${getRatingBorderClass(rating)}`} spotlightColor="rgba(255, 215, 0, 0.15)">
+
+                  <SpotlightCard
+                    key={hostel.id}
+                    className={`hostel-card ${getRatingBorderClass(rating)}`}
+                    spotlightColor="rgba(255, 215, 0, 0.15)"
+                  >
+
                     <div className="hostel-card-image-wrapper">
+
                       {(hostel.images || ["1.jpg"]).map((imageName, idx) => (
+
                         <img
                           key={idx}
                           src={`${RAW_BASE}/${hostel.folderName}/${imageName}`}
                           alt={`${hostel.name} - Image ${idx + 1}`}
                           className="card-image"
                           onError={(e) => {
-                            e.target.src = 'data:image/svg+xml,%3Csvg xmlns=\"http://www.w3.org/2000/svg\" width=\"400\" height=\"300\"%3E%3Crect fill=\"%23333\" width=\"400\" height=\"300\"/%3E%3Ctext fill=\"%23999\" x=\"50%25\" y=\"50%25\" dominant-baseline=\"middle\" text-anchor=\"middle\" font-size=\"20\"%3ENo Image%3C/text%3E%3C/svg%3E';
+                            e.target.src =
+                              'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext fill="%23999" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="20"%3ENo Image%3C/text%3E%3C/svg%3E';
                           }}
                         />
+
                       ))}
+
                     </div>
+
                     <div className="hostel-card-content">
+
                       <h3>{hostel.name}</h3>
+
                       <div className="hostel-card-meta">
                         {renderStars(rating)}
+
                         <span className={`gender ${gender}`}>
                           {gender.charAt(0).toUpperCase() + gender.slice(1)}
                         </span>
                       </div>
-                      <p style={{ color: '#c5c5c5', marginBottom: '0.4rem' }}>📍 {hostel.location}</p>
-                      <p style={{ color: '#c5c5c5', marginBottom: '0.6rem' }}>🛏️ {hostel.roomType}</p>
+
+                      <p style={{ color: '#c5c5c5', marginBottom: '0.4rem' }}>
+                        📍 {hostel.location}
+                      </p>
+
+                      <p style={{ color: '#c5c5c5', marginBottom: '0.6rem' }}>
+                        🛏️ {hostel.roomType}
+                      </p>
+
                       <div className="amenities">
                         {(hostel.amenities || []).map((amenity, idx) => (
                           <span key={idx}>{amenity}</span>
                         ))}
+
                         {hostel.curfew && (
                           <span>Curfew: {hostel.curfew}</span>
                         )}
+
                         {hostel.bathroom && (
                           <span>Bathroom: {hostel.bathroom}</span>
                         )}
                       </div>
-                      <p style={{ fontSize: '1.4rem', fontWeight: '700', color: 'var(--accent)', marginTop: '0.8rem' }}>
+
+                      <p
+                        style={{
+                          fontSize: '1.4rem',
+                          fontWeight: '700',
+                          color: 'var(--accent)',
+                          marginTop: '0.8rem'
+                        }}
+                      >
                         ₹{hostel.price}
-                        <span style={{ fontSize: '0.85rem', fontWeight: '400', color: '#999' }}>/month</span>
+                        <span
+                          style={{
+                            fontSize: '0.85rem',
+                            fontWeight: '400',
+                            color: '#999'
+                          }}
+                        >
+                          /month
+                        </span>
                       </p>
+
                       {hostel.advance && (
-                        <p style={{ fontSize: '0.9rem', color: '#888', marginTop: '0.4rem', marginBottom: '0.8rem' }}>
+                        <p
+                          style={{
+                            fontSize: '0.9rem',
+                            color: '#888',
+                            marginTop: '0.4rem',
+                            marginBottom: '0.8rem'
+                          }}
+                        >
                           Advance: ₹{hostel.advance}
                         </p>
                       )}
-                      <Link to={`/hostel/${hostel.folderName}`} className="view-button">
+
+                      <Link
+                        to={`/hostel/${hostel.folderName}`}
+                        className="view-button"
+                      >
                         View Details →
                       </Link>
+
                     </div>
+
                   </SpotlightCard>
+
                 );
               })
             )}
+
           </section>
+
           <footer className="browse-footer">
-            <Link to="/" style={{ color: 'var(--primary-gold)', textDecoration: 'none', fontWeight: '600' }}>← Back to Home</Link>
+
+            <Link
+              to="/"
+              style={{
+                color: 'var(--primary-gold)',
+                textDecoration: 'none',
+                fontWeight: '600'
+              }}
+            >
+              ← Back to Home
+            </Link>
+
             <br /><br />
+
             © 2025 Koodaram
+
           </footer>
+
         </main>
+
       </div>
+
     </div>
   );
 }
