@@ -21,25 +21,27 @@ function App() {
       links: [
         { label: 'Browse Hostels', href: '/browse', ariaLabel: 'Browse hostels' },
         { label: 'List Your Hostel', href: '/list-hostel', ariaLabel: 'List your hostel' },
-        { label: 'About Us', href: '/about', ariaLabel: 'About Koodaram' }
+        { label: 'Datasheet', href: '/datasheet', ariaLabel: 'View hostel statistics' },
+        { label: 'About', href: '/about', ariaLabel: 'About Koodaram' }
       ]
     },
     {
-      label: 'Resources',
+      label: 'Legal',
       bgColor: '#16213e',
       textColor: '#fff',
       links: [
-        { label: 'GitHub', href: 'https://github.com/Koodaram-Inc/koodaram-data', ariaLabel: 'View on GitHub' },
-        { label: 'Open Source Data', href: 'https://github.com/Koodaram-Inc/koodaram-data', ariaLabel: 'Access open source data' }
+        { label: 'Privacy Policy', href: '/privacy', ariaLabel: 'Privacy Policy' },
+        { label: 'Terms & Conditions', href: '/terms', ariaLabel: 'Terms and Conditions' }
       ]
     },
     {
-      label: 'Connect',
+      label: 'Community',
       bgColor: '#0f3460',
       textColor: '#fff',
       links: [
-        { label: 'Home', href: '/', ariaLabel: 'Go to home page' },
-        { label: 'Support', href: '/about', ariaLabel: 'Get support' }
+        { label: 'GitHub', href: 'https://github.com/Koodaram-Inc/koodaram-data', ariaLabel: 'View on GitHub' },
+        { label: 'Instagram', href: 'https://instagram.com/koodaram.app', ariaLabel: 'Instagram' },
+        { label: 'Contact', href: '/about', ariaLabel: 'Contact and Support' },
       ]
     }
   ];
