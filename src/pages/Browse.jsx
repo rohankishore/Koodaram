@@ -23,28 +23,43 @@ const SLUG_TO_COLLEGE = Object.fromEntries(Object.entries(COLLEGE_SLUGS).map(([k
 function filtersToSlug(filters) {
   // Order: college-gender-price-rating-curfew-bathroom-location
   const parts = [];
-  parts.push(COLLEGE_SLUGS[filters.college] || 'any');
-  parts.push(filters.gender || 'any');
-  parts.push(filters.price || 'any');
-  parts.push(filters.rating || 'any');
-  parts.push(filters.curfew || 'any');
-  parts.push(filters.bathroom || 'any');
-  // Location is last, encode spaces as _
-  parts.push(filters.location ? filters.location.replace(/\s+/g, '_') : 'any');
+  if (COLLEGE_SLUGS[filters.college]) parts.push(COLLEGE_SLUGS[filters.college]);
+  if (filters.gender) parts.push(filters.gender);
+  if (filters.price) parts.push(filters.price);
+  if (filters.rating && filters.rating !== '0-5') parts.push(filters.rating);
+  if (filters.curfew) parts.push(filters.curfew);
+  if (filters.bathroom) parts.push(filters.bathroom);
+  if (filters.location) parts.push(filters.location.replace(/\s+/g, '_'));
   return parts.join('-');
 }
 
 function slugToFilters(slug) {
-  const [collegeSlug, gender, price, rating, curfew, bathroom, location] = (slug || '').split('-');
-  return {
-    college: SLUG_TO_COLLEGE[collegeSlug] || '',
-    gender: gender === 'any' ? '' : (gender || ''),
-    price: price === 'any' ? '' : (price || ''),
-    rating: rating === 'any' ? '0-5' : (rating || '0-5'),
-    curfew: curfew === 'any' ? '' : (curfew || ''),
-    bathroom: bathroom === 'any' ? '' : (bathroom || ''),
-    location: location && location !== 'any' ? location.replace(/_/g, ' ') : '',
-  };
+  const parts = (slug || '').split('-');
+  let idx = 0;
+  let college = '', gender = '', price = '', rating = '0-5', curfew = '', bathroom = '', location = '';
+  if (SLUG_TO_COLLEGE[parts[idx]]) {
+    college = SLUG_TO_COLLEGE[parts[idx]];
+    idx++;
+  }
+  if (parts[idx] && ['male','female','unisex'].includes(parts[idx])) {
+    gender = parts[idx]; idx++;
+  }
+  if (parts[idx] && /^\d+$/.test(parts[idx])) {
+    price = parts[idx]; idx++;
+  }
+  if (parts[idx] && /^\d-\d$|^\d-\d$|^\d-\d$|^\d-\d$|^\d-\d$|^\d-\d$/.test(parts[idx])) {
+    rating = parts[idx]; idx++;
+  }
+  if (parts[idx] && ['yes','no'].includes(parts[idx])) {
+    curfew = parts[idx]; idx++;
+  }
+  if (parts[idx] && ['common','attached'].includes(parts[idx])) {
+    bathroom = parts[idx]; idx++;
+  }
+  if (parts[idx]) {
+    location = parts.slice(idx).join('-').replace(/_/g, ' ');
+  }
+  return { college, gender, price, rating, curfew, bathroom, location };
 }
 
 const GITHUB_USER = "Koodaram-Inc";
