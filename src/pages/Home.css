@@ -1,27 +1,30 @@
 /* Marquee styles */
 .quote-marquee {
-  width: 100vw;
+  width: 100%;
   background: #ffe81f;
   color: #111;
   font-family: 'Playfair Display', serif;
-  font-size: 2.1rem;
+  font-size: 1.6rem;
   font-weight: 400;
   overflow: hidden;
-  padding: 0.5rem 0;
+  padding: 0.25rem 0;
   border-top: 2px solid #222;
   border-bottom: 2px solid #222;
   position: relative;
   z-index: 20;
   white-space: nowrap;
+  box-sizing: border-box;
 }
 .quote-marquee-inner {
   display: inline-block;
+  min-width: 100%;
   padding-left: 100vw;
   animation: marquee-scroll 32s linear infinite;
+  box-sizing: border-box;
 }
 .quote-marquee .diamond {
-  font-size: 2.1rem;
-  margin: 0 1.2rem;
+  font-size: 1.5rem;
+  margin: 0 0.8rem;
 }
 @keyframes marquee-scroll {
   0% { transform: translateX(0); }
