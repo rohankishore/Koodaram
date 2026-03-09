@@ -79,34 +79,54 @@ function Home() {
 
         {/* Marquee with quotes and diamonds */}
         <div className="quote-marquee">
-          <div className="quote-marquee-inner">
-            <span>open source</span>
-            <span className="diamond">✦</span>
-            <span>student verified</span>
-            <span className="diamond">✦</span>
-            <span>no paywalls</span>
-            <span className="diamond">✦</span>
-            <span>free forever</span>
-            <span className="diamond">✦</span>
-            <span>privacy first</span>
-            <span className="diamond">✦</span>
-            <span>community powered</span>
-            <span className="diamond">✦</span>
-            <span>open data</span>
-            <span className="diamond">✦</span>
-            <span>for students, by students</span>
-            <span className="diamond">✦</span>
-            <span>no ads</span>
-            <span className="diamond">✦</span>
-            <span>open source</span>
-            <span className="diamond">✦</span>
-            <span>student verified</span>
-            <span className="diamond">✦</span>
-            <span>no paywalls</span>
-            <span className="diamond">✦</span>
-            <span>free forever</span>
-            <span className="diamond">✦</span>
-            <span>privacy first</span>
+          <div className="quote-marquee-track">
+            <div className="quote-marquee-seq">
+              <span>open source</span>
+              <span className="diamond">✦</span>
+              <span>student verified</span>
+              <span className="diamond">✦</span>
+              <span>no paywalls</span>
+              <span className="diamond">✦</span>
+              <span>free forever</span>
+              <span className="diamond">✦</span>
+              <span>privacy first</span>
+              <span className="diamond">✦</span>
+              <span>community powered</span>
+              <span className="diamond">✦</span>
+              <span>open data</span>
+              <span className="diamond">✦</span>
+              <span>for students, by students</span>
+              <span className="diamond">✦</span>
+              <span>no ads</span>
+              <span className="diamond">✦</span>
+              <span>no login required</span>
+              <span className="diamond">✦</span>
+              <span>zero data collected</span>
+              <span className="diamond">✦</span>
+            </div>
+            <div className="quote-marquee-seq">
+              <span>open source</span>
+              <span className="diamond">✦</span>
+              <span>student verified</span>
+              <span className="diamond">✦</span>
+              <span>no paywalls</span>
+              <span className="diamond">✦</span>
+              <span>free forever</span>
+              <span className="diamond">✦</span>
+              <span>privacy first</span>
+              <span className="diamond">✦</span>
+              <span>community powered</span>
+              <span className="diamond">✦</span>
+              <span>open data</span>
+              <span className="diamond">✦</span>
+              <span>for students, by students</span>
+              <span className="diamond">✦</span>
+              <span>no ads</span>
+              <span className="diamond">✦</span>
+              <span>no login required</span>
+              <span className="diamond">✦</span>
+              <span>zero data collected</span>
+            </div>
           </div>
         </div>
 

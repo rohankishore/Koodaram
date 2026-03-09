@@ -1,7 +1,8 @@
 /* Marquee styles */
+/* Continuous Marquee */
 .quote-marquee {
   width: 100%;
-  background: #ffe81f;
+  background: #ffd500;
   color: #111;
   font-family: 'Playfair Display', serif;
   font-size: 1.85rem;
@@ -12,19 +13,30 @@
   border-bottom: 2px solid #222;
   position: relative;
   z-index: 20;
-  white-space: nowrap;
   box-sizing: border-box;
 }
-.quote-marquee-inner {
-  display: inline-block;
-  min-width: 100%;
-  padding-left: 100vw;
-  animation: marquee-scroll 32s linear infinite;
-  box-sizing: border-box;
+.quote-marquee-track {
+  display: flex;
+  width: max-content;
+  min-width: 100vw;
+  animation: marquee-continuous 32s linear infinite;
+  will-change: transform;
+}
+.quote-marquee-seq {
+  display: flex;
+  white-space: nowrap;
 }
 .quote-marquee .diamond {
   font-size: 1.7rem;
   margin: 0 0.9rem;
+}
+@keyframes marquee-continuous {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
 @keyframes marquee-scroll {
   0% { transform: translateX(0); }
