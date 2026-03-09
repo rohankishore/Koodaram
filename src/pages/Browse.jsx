@@ -6,30 +6,74 @@ import { IoClose } from 'react-icons/io5';
 import SpotlightCard from '../component/SpotlightCard';
 import './Browse.css';
 
+// Slug mappings for colleges and filters
+const COLLEGE_SLUGS = {
+  'College of Engineering Trivandrum': 'cet',
+  'cusat': 'cusat',
+  'cucek': 'cucek',
+  'SCT Trivandrum': 'sct',
+  'GEC Kozhikode': 'gec-kkd',
+  'GEC Palakkad': 'gec-pkd',
+  'GEC Thrissur': 'gec-tsr',
+  'NSS College Palakkad': 'nss',
+  'RIT Kottayam': 'rit',
+};
+const SLUG_TO_COLLEGE = Object.fromEntries(Object.entries(COLLEGE_SLUGS).map(([k, v]) => [v, k]));
+
+function filtersToSlug(filters) {
+  // Order: college-gender-price-rating-curfew-bathroom-location
+  const parts = [];
+  parts.push(COLLEGE_SLUGS[filters.college] || 'any');
+  parts.push(filters.gender || 'any');
+  parts.push(filters.price || 'any');
+  parts.push(filters.rating || 'any');
+  parts.push(filters.curfew || 'any');
+  parts.push(filters.bathroom || 'any');
+  // Location is last, encode spaces as _
+  parts.push(filters.location ? filters.location.replace(/\s+/g, '_') : 'any');
+  return parts.join('-');
+}
+
+function slugToFilters(slug) {
+  const [collegeSlug, gender, price, rating, curfew, bathroom, location] = (slug || '').split('-');
+  return {
+    college: SLUG_TO_COLLEGE[collegeSlug] || '',
+    gender: gender === 'any' ? '' : (gender || ''),
+    price: price === 'any' ? '' : (price || ''),
+    rating: rating === 'any' ? '0-5' : (rating || '0-5'),
+    curfew: curfew === 'any' ? '' : (curfew || ''),
+    bathroom: bathroom === 'any' ? '' : (bathroom || ''),
+    location: location && location !== 'any' ? location.replace(/_/g, ' ') : '',
+  };
+}
+
 const GITHUB_USER = "Koodaram-Inc";
 const REPO = "koodaram-data";
 const API_BASE = `https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/hostels`;
 const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
 
-function Browse() {
 
+function Browse() {
   const [searchParams, setSearchParams] = useSearchParams();
-  const { college: collegeParam } = useParams();
+  const { slug } = useParams();
   const navigate = useNavigate();
   const hostelGridRef = useRef(null);
-
   const [hostels, setHostels] = useState([]);
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
 
-  const [filters, setFilters] = useState({
-    location: searchParams.get('location') || '',
-    college: collegeParam || searchParams.get('college') || '',
-    gender: searchParams.get('gender') || '',
-    price: searchParams.get('price') || '',
-    rating: searchParams.get('rating') || '0-5',
-    curfew: searchParams.get('curfew') || '',
-    bathroom: searchParams.get('bathroom') || ''
+  // On mount, parse slug to filters
+  const [filters, setFilters] = useState(() => {
+    if (slug) return slugToFilters(slug);
+    return {
+      location: '',
+      college: '',
+      gender: '',
+      price: '',
+      rating: '0-5',
+      curfew: '',
+      bathroom: ''
+    };
   });
 
   useEffect(() => {
@@ -85,14 +129,19 @@ function Browse() {
     }
   };
 
-  const handleFilterChange = (key, value) => {
-    setFilters(prev => ({ ...prev, [key]: value }));
 
-    if (key !== 'location') {
+  // Update URL on any filter change
+  const handleFilterChange = (key, value) => {
+    setFilters(prev => {
+      const updated = { ...prev, [key]: value };
+      // Only update URL if not initial mount
+      const slug = filtersToSlug(updated);
+      navigate(`/browse/${slug}`);
       setTimeout(() => {
         hostelGridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 50);
-    }
+      return updated;
+    });
   };
 
   const applyFilters = () => {
@@ -110,19 +159,8 @@ function Browse() {
     setShowFilters(false);
   };
 
-  const handleCollegeChange = (value) => {
-    setFilters(prev => ({ ...prev, college: value }));
-
-    if (value) {
-      navigate(`/browse/${encodeURIComponent(value)}`);
-    } else {
-      navigate('/browse');
-    }
-
-    setTimeout(() => {
-      hostelGridRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 50);
-  };
+  // College change just calls handleFilterChange
+  const handleCollegeChange = (value) => handleFilterChange('college', value);
 
   const getRatingBorderClass = (rating) => {
     if (!rating || rating === 0) return 'rating-border-yellow';
