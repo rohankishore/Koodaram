@@ -6,7 +6,6 @@ import { IoClose } from 'react-icons/io5';
 import SpotlightCard from '../component/SpotlightCard';
 import './Browse.css';
 
-// Slug mappings for colleges and filters
 const COLLEGE_SLUGS = {
   'College of Engineering Trivandrum': 'cet',
   'cusat': 'cusat',
@@ -19,9 +18,7 @@ const COLLEGE_SLUGS = {
   'RIT Kottayam': 'rit',
 };
 const SLUG_TO_COLLEGE = Object.fromEntries(Object.entries(COLLEGE_SLUGS).map(([k, v]) => [v, k]));
-
 function filtersToSlug(filters) {
-  // Order: college-gender-price-rating-curfew-bathroom-location
   const parts = [];
   if (COLLEGE_SLUGS[filters.college]) parts.push(COLLEGE_SLUGS[filters.college]);
   if (filters.gender) parts.push(filters.gender);
@@ -32,7 +29,6 @@ function filtersToSlug(filters) {
   if (filters.location) parts.push(filters.location.replace(/\s+/g, '_'));
   return parts.join('-');
 }
-
 function slugToFilters(slug) {
   const parts = (slug || '').split('-');
   let idx = 0;
