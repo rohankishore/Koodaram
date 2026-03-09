@@ -1,3 +1,32 @@
+/* Marquee styles */
+.quote-marquee {
+  width: 100vw;
+  background: #ffe81f;
+  color: #111;
+  font-family: 'Playfair Display', serif;
+  font-size: 2.1rem;
+  font-weight: 400;
+  overflow: hidden;
+  padding: 0.5rem 0;
+  border-top: 2px solid #222;
+  border-bottom: 2px solid #222;
+  position: relative;
+  z-index: 20;
+  white-space: nowrap;
+}
+.quote-marquee-inner {
+  display: inline-block;
+  padding-left: 100vw;
+  animation: marquee-scroll 32s linear infinite;
+}
+.quote-marquee .diamond {
+  font-size: 2.1rem;
+  margin: 0 1.2rem;
+}
+@keyframes marquee-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
 @font-face {
   font-family: 'TacticSans';
   src: url('../../assets/fonts/TacticSans-Reg.otf') format('opentype');
