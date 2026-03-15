@@ -67,6 +67,18 @@ function HostelDetail() {
     return <div className="container"><p>Hostel not found</p></div>;
   }
 
+  const resolvedPhone = [
+    hostel.contact?.phone,
+    hostel.phone,
+    hostel.contactPhone,
+    hostel.contact_number,
+    hostel.ownerPhone,
+    hostel.owner?.phone,
+  ].find((value) => typeof value === 'string' && value.trim().length > 0) || '';
+
+  const phoneForTel = resolvedPhone.replace(/\s+/g, '');
+  const whatsappNumber = (hostel.contact?.whatsapp || hostel.whatsapp || resolvedPhone).replace(/\D/g, '');
+
   const imagesHTML = hostel.images && hostel.images.length > 0 
     ? hostel.images 
     : [];
@@ -82,8 +94,8 @@ function HostelDetail() {
         {hostel.advance && (
           <p style={{ color: '#999' }}><strong>Advance:</strong> ₹{hostel.advance}</p>
         )}
-        {hostel.contact?.phone && (
-          <p><strong>📞 Contact:</strong> {hostel.contact.phone}</p>
+        {resolvedPhone && (
+          <p><strong>📞 Contact:</strong> {resolvedPhone}</p>
         )}
         <p><strong>🛹 Amenities:</strong> {hostel.amenities?.join(", ")}</p>
         {hostel.curfew && (
@@ -117,10 +129,12 @@ function HostelDetail() {
         )}
       </div>
 
-      {hostel.contact?.phone && (
+      {resolvedPhone && (
         <div className="contact-buttons">
-          <a href={`tel:${hostel.contact.phone}`} target="_blank" rel="noopener noreferrer">📞 Call</a>
-          <a href={`https://wa.me/${hostel.contact.phone.replace(/\D/g, '')}`} target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+          <a href={`tel:${phoneForTel}`}>📞 Call</a>
+          {whatsappNumber && (
+            <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+          )}
         </div>
       )}
 
