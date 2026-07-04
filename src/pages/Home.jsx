@@ -99,7 +99,7 @@ function Home() {
 
   return (
     <>
-      <GradualBlur preset="page-footer" strength={4} zIndex={999} />
+      <GradualBlur preset="page-footer" height="4rem" strength={4} zIndex={999} />
       <div className="page-dither" style={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: 0, filter: 'blur(10px) saturate(1.2)' }}>
         <Dither />
       </div>
