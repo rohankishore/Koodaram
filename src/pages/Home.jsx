@@ -48,7 +48,7 @@ function ShiftingFont() {
 function Home() {
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [hostelCount, setHostelCount] = useState(0);
-  const [collegeCount, setCollegeCount] = useState(9);
+  const collegeCount = 9;
 
   useEffect(() => {
     fetch('https://api.github.com/repos/Koodaram-Inc/koodaram-data/contents/hostels')
