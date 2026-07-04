@@ -7,6 +7,7 @@ import { Analytics } from "@vercel/analytics/react"
 import GradualBlur from '../component/GradualBlur';
 
 import Browse from './Browse';
+import SwipeMatcher from '../component/SwipeMatcher';
 
 const FONTS = [
   'TacticSans, sans-serif',
@@ -49,6 +50,7 @@ function ShiftingFont() {
 function Home() {
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [hostelCount, setHostelCount] = useState(0);
+  const [showSwipeMatcher, setShowSwipeMatcher] = useState(false);
   const collegeCount = 9;
 
   useEffect(() => {
@@ -111,8 +113,9 @@ function Home() {
             <span className="hero-pill">{hostelCount} hostels listed</span>
             <span className="hero-pill">{collegeCount} colleges covered</span>
           </div>
-          <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', position: 'relative', zIndex: 10 }}>
-            <Link to="/browse" className="cta-button">🔍 Find Your Hostel</Link>
+          <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', position: 'relative', zIndex: 10 }}>
+            <Link to="/browse" className="cta-button" style={{ marginTop: 0 }}>🔍 Find Your Hostel</Link>
+            <button className="cta-button secondary-cta" style={{ marginTop: 0 }} onClick={() => setShowSwipeMatcher(true)}>🔥 Warden Matcher</button>
           </div>
         </div>
 
@@ -269,6 +272,7 @@ function Home() {
           </div>
         </section>
       </div>
+      {showSwipeMatcher && <SwipeMatcher onClose={() => setShowSwipeMatcher(false)} />}
     </>
   );
 }
