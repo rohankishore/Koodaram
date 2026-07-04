@@ -4,6 +4,7 @@ import Dither from '../component/Dither';
 import CardSwap, { Card } from '../component/CardSwap';
 import './Home.css';
 import { Analytics } from "@vercel/analytics/react"
+import GradualBlur from '../component/GradualBlur';
 
 import Browse from './Browse';
 
@@ -98,6 +99,7 @@ function Home() {
 
   return (
     <>
+      <GradualBlur preset="page-header" strength={4} zIndex={999} />
       <div className="page-dither" style={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: 0, filter: 'blur(10px) saturate(1.2)' }}>
         <Dither />
       </div>
@@ -171,19 +173,28 @@ function Home() {
           <h2>How It Works</h2>
           <div className="steps-container">
             <div className="step-card">
-              <div className="step-number">1</div>
-              <h3>100% Open Source</h3>
-              <p>All hostel data is hosted on GitHub and freely accessible. No accounts needed, no data locked behind paywalls.</p>
+              <GradualBlur preset="bottom" height="100%" strength={3} zIndex={1} opacity={0.7} />
+              <div style={{ position: 'relative', zIndex: 2 }}>
+                <div className="step-number">1</div>
+                <h3>100% Open Source</h3>
+                <p>All hostel data is hosted on GitHub and freely accessible. No accounts needed, no data locked behind paywalls.</p>
+              </div>
             </div>
             <div className="step-card">
-              <div className="step-number">2</div>
-              <h3>Student Verified</h3>
-              <p>Real students submit and verify hostel information, ensuring data is up-to-date and trustworthy.</p>
+              <GradualBlur preset="bottom" height="100%" strength={3} zIndex={1} opacity={0.7} />
+              <div style={{ position: 'relative', zIndex: 2 }}>
+                <div className="step-number">2</div>
+                <h3>Student Verified</h3>
+                <p>Real students submit and verify hostel information, ensuring data is up-to-date and trustworthy.</p>
+              </div>
             </div>
             <div className="step-card">
-              <div className="step-number">3</div>
-              <h3>Completely Free</h3>
-              <p>Browse hostels, view photos, and contact owners — all without paying a rupee or creating an account.</p>
+              <GradualBlur preset="bottom" height="100%" strength={3} zIndex={1} opacity={0.7} />
+              <div style={{ position: 'relative', zIndex: 2 }}>
+                <div className="step-number">3</div>
+                <h3>Completely Free</h3>
+                <p>Browse hostels, view photos, and contact owners — all without paying a rupee or creating an account.</p>
+              </div>
             </div>
           </div>
         </section>
@@ -223,14 +234,17 @@ function Home() {
                 key={index} 
                 className={`faq-accordion-item ${activeQuestion === index ? 'active' : ''}`}
               >
-                <div 
-                  className="faq-accordion-question" 
-                  onClick={() => toggleQuestion(index)}
-                >
-                  {faq.question}
-                </div>
-                <div className="faq-accordion-answer">
-                  <p>{faq.answer}</p>
+                <GradualBlur preset="bottom" height="100%" strength={2} zIndex={1} opacity={0.6} />
+                <div style={{ position: 'relative', zIndex: 2 }}>
+                  <div 
+                    className="faq-accordion-question" 
+                    onClick={() => toggleQuestion(index)}
+                  >
+                    {faq.question}
+                  </div>
+                  <div className="faq-accordion-answer">
+                    <p>{faq.answer}</p>
+                  </div>
                 </div>
               </div>
             ))}

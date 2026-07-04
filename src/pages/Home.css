@@ -249,15 +249,15 @@
 }
 
 .step-card {
-    background: rgba(30, 30, 30, 0.8);
+    background: rgba(30, 30, 30, 0.45);
     padding: 2rem;
     border-radius: 12px;
     width: 280px;
     text-align: center;
     border: 1px solid var(--border-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    backdrop-filter: blur(10px);
     position: relative;
+    overflow: hidden;
     z-index: 10;
 }
 
@@ -290,12 +290,11 @@
 }
 
 .faq-accordion-item {
-    background-color: rgba(30, 30, 30, 0.8);
+    background-color: rgba(30, 30, 30, 0.45);
     margin-bottom: 1rem;
     border-radius: 8px;
     border: 1px solid var(--border-color);
     overflow: hidden;
-    backdrop-filter: blur(10px);
     position: relative;
     z-index: 10;
 }
