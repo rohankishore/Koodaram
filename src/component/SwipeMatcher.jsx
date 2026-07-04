@@ -10,15 +10,15 @@ const API_BASE = `https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/h
 const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
 
 const COLLEGES = [
-  { name: 'CET Trivandrum', query: 'cet', emoji: '🏛️' },
-  { name: 'CUSAT Kochi', query: 'cusat', emoji: '🐬' },
-  { name: 'CUCEK Kuttanad', query: 'cucek', emoji: '🌾' },
-  { name: 'SCT Trivandrum', query: 'sct', emoji: '⚙️' },
-  { name: 'GEC Kozhikode', query: 'gec-kkd', emoji: '🌊' },
-  { name: 'GEC Palakkad', query: 'gec-pkd', emoji: '🏔️' },
-  { name: 'GEC Thrissur', query: 'gec-tsr', emoji: '🎪' },
-  { name: 'NSS College Palakkad', query: 'nss', emoji: '🌴' },
-  { name: 'RIT Kottayam', query: 'rit', emoji: '🛶' },
+  { name: 'CET Trivandrum', query: 'cet', emoji: '🏛️', logo: '/assets/images/colleges/cet.png' },
+  { name: 'CUSAT Kochi', query: 'cusat', emoji: '🐬', logo: '/assets/images/colleges/cusat.png' },
+  { name: 'CUCEK Kuttanad', query: 'cucek', emoji: '🌾', logo: '/assets/images/colleges/cucek.png' },
+  { name: 'SCT Trivandrum', query: 'sct', emoji: '⚙️', logo: '/assets/images/colleges/sctce.png' },
+  { name: 'GEC Kozhikode', query: 'gec-kkd', emoji: '🌊', logo: '/assets/images/colleges/geckz.png' },
+  { name: 'GEC Palakkad', query: 'gec-pkd', emoji: '🏔️', logo: '/assets/images/colleges/gecpkd.png' },
+  { name: 'GEC Thrissur', query: 'gec-tsr', emoji: '🎪', logo: '/assets/images/colleges/gect.png' },
+  { name: 'NSS College Palakkad', query: 'nss', emoji: '🌴', logo: '/assets/images/colleges/nsspkd.png' },
+  { name: 'RIT Kottayam', query: 'rit', emoji: '🛶', logo: '/assets/images/colleges/rit.png' },
 ];
 
 const GENDERS = [
@@ -52,6 +52,49 @@ const matchesCollegeFilter = (hostelCollege, query) => {
   }
   
   return false;
+};
+
+// Play a small synthesized haptic sound using Web Audio API
+const playSound = (type) => {
+  try {
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+    if (!AudioContextClass) return;
+    const ctx = new AudioContextClass();
+    
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    
+    osc.connect(gain);
+    gain.connect(ctx.destination);
+    
+    const now = ctx.currentTime;
+    
+    if (type === 'match') {
+      // Pleasant high-pitch match chime
+      osc.type = 'triangle';
+      osc.frequency.setValueAtTime(587.33, now); // D5
+      osc.frequency.exponentialRampToValueAtTime(880.00, now + 0.1); // A5
+      
+      gain.gain.setValueAtTime(0.12, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+      
+      osc.start(now);
+      osc.stop(now + 0.15);
+    } else {
+      // Low-pitch tactile skip blip
+      osc.type = 'sine';
+      osc.frequency.setValueAtTime(150.00, now);
+      osc.frequency.exponentialRampToValueAtTime(80.00, now + 0.08);
+      
+      gain.gain.setValueAtTime(0.08, now);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+      
+      osc.start(now);
+      osc.stop(now + 0.08);
+    }
+  } catch (e) {
+    // Ignore context blocks
+  }
 };
 
 // Swiping card component using framer-motion
@@ -194,10 +237,12 @@ export default function SwipeMatcher({ onClose }) {
   }, []);
 
   const handleSwipeLeft = () => {
+    playSound('skip');
     setCurrentIndex(prev => prev + 1);
   };
 
   const handleSwipeRight = (hostel) => {
+    playSound('match');
     setMatches(prev => {
       // Avoid duplicate matches
       if (prev.some(m => m.slug === hostel.slug)) return prev;
@@ -263,7 +308,18 @@ export default function SwipeMatcher({ onClose }) {
                     setCurrentIndex(0);
                   }}
                 >
-                  <span className="icon">{col.emoji}</span>
+                  {col.logo ? (
+                    <img 
+                      src={col.logo} 
+                      alt={col.name} 
+                      className="college-logo-img"
+                      onError={(e) => {
+                        e.target.style.display = 'none';
+                        e.target.parentNode.querySelector('.icon').style.display = 'block';
+                      }}
+                    />
+                  ) : null}
+                  <span className="icon" style={{ display: col.logo ? 'none' : 'block' }}>{col.emoji}</span>
                   <span>{col.name}</span>
                 </div>
               ))}
@@ -388,7 +444,15 @@ export default function SwipeMatcher({ onClose }) {
               <div className={`swipe-sidebar ${activeMobileTab !== 'matches' ? 'mobile-hidden' : ''}`}>
                 <h3>
                   <span>Matched Wishlist</span>
-                  <span className="swipe-sidebar-count">{matches.length}</span>
+                  <motion.span 
+                    key={matches.length}
+                    className="swipe-sidebar-count"
+                    initial={{ scale: 0.6, rotate: -15, backgroundColor: '#4caf50' }}
+                    animate={{ scale: 1, rotate: 0, backgroundColor: 'rgba(255, 215, 0, 0.15)' }}
+                    transition={{ type: 'spring', stiffness: 500, damping: 15 }}
+                  >
+                    {matches.length}
+                  </motion.span>
                 </h3>
 
                 {matches.length === 0 ? (
