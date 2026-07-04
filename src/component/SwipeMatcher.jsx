@@ -21,6 +21,12 @@ const COLLEGES = [
   { name: 'RIT Kottayam', query: 'rit', emoji: '🛶' },
 ];
 
+const GENDERS = [
+  { name: 'Boys', value: 'male', emoji: '🙋‍♂️' },
+  { name: 'Girls', value: 'female', emoji: '🙋‍♀️' },
+  { name: 'Show All', value: 'all', emoji: '🚻' }
+];
+
 const matchesCollegeFilter = (hostelCollege, query) => {
   if (!hostelCollege || !query) return false;
   const hc = hostelCollege.toLowerCase();
@@ -143,6 +149,7 @@ export default function SwipeMatcher({ onClose }) {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCollege, setSelectedCollege] = useState(null);
+  const [selectedGender, setSelectedGender] = useState(null);
   const [activeMobileTab, setActiveMobileTab] = useState('swipe'); // 'swipe' or 'matches'
 
   useEffect(() => {
@@ -205,9 +212,26 @@ export default function SwipeMatcher({ onClose }) {
     setHostels(shuffled);
   };
 
-  const filteredHostels = selectedCollege === 'All' 
-    ? hostels 
-    : hostels.filter(h => matchesCollegeFilter(h.college, selectedCollege));
+  const handleResetFilters = () => {
+    setSelectedCollege(null);
+    setSelectedGender(null);
+    setCurrentIndex(0);
+  };
+
+  const filteredHostels = hostels.filter(h => {
+    // 1. College Match
+    const matchesCollege = selectedCollege === 'All' 
+      ? true 
+      : matchesCollegeFilter(h.college, selectedCollege);
+
+    // 2. Gender Match
+    const hostelGender = h.gender?.toLowerCase();
+    const matchesGender = selectedGender === 'all'
+      ? true
+      : (hostelGender === selectedGender || hostelGender === 'unisex');
+
+    return matchesCollege && matchesGender;
+  });
 
   const activeHostel = currentIndex < filteredHostels.length ? filteredHostels[currentIndex] : null;
 
@@ -224,7 +248,7 @@ export default function SwipeMatcher({ onClose }) {
             <span>Preloading Hostels...</span>
           </div>
         ) : !selectedCollege ? (
-          /* College Selector Screen */
+          /* Step 1: College Selector Screen */
           <div className="college-selector-screen">
             <h2>🎓 Pick Your College</h2>
             <p>Select your campus to show nearby hostels, or explore everything!</p>
@@ -257,6 +281,37 @@ export default function SwipeMatcher({ onClose }) {
               </button>
             </div>
           </div>
+        ) : !selectedGender ? (
+          /* Step 2: Gender Selector Screen */
+          <div className="college-selector-screen">
+            <h2>🙋‍♂️ Select Your Category</h2>
+            <p>Help us find the right hostels for you</p>
+            
+            <div className="college-grid" style={{ maxWidth: '500px' }}>
+              {GENDERS.map((g) => (
+                <div 
+                  key={g.value} 
+                  className="college-card"
+                  onClick={() => {
+                    setSelectedGender(g.value);
+                    setCurrentIndex(0);
+                  }}
+                >
+                  <span className="icon">{g.emoji}</span>
+                  <span>{g.name}</span>
+                </div>
+              ))}
+            </div>
+
+            <div className="college-selector-footer" style={{ marginTop: '1rem' }}>
+              <button 
+                className="swipe-all-btn"
+                onClick={() => setSelectedCollege(null)}
+              >
+                ⬅️ Back to College Selection
+              </button>
+            </div>
+          </div>
         ) : (
           /* Swiper Workspace & Sidebar wrapper */
           <>
@@ -280,12 +335,12 @@ export default function SwipeMatcher({ onClose }) {
               {/* Swiper Workspace */}
               <div className={`swipe-workspace ${activeMobileTab !== 'swipe' ? 'mobile-hidden' : ''}`}>
                 <div className="swipe-workspace-header">
-                  <h2>🔥 Warden Matcher</h2>
+                  <h2>🔥 Hostel Matcher</h2>
                   <p>
-                    Showing hostels near <strong>{selectedCollege === 'All' ? 'all campuses' : selectedCollege.toUpperCase()}</strong>
+                    Showing <strong>{selectedGender === 'all' ? 'all' : selectedGender === 'male' ? 'boys' : 'girls'}</strong> hostels near <strong>{selectedCollege === 'All' ? 'all campuses' : selectedCollege.toUpperCase()}</strong>
                   </p>
-                  <button className="change-college-btn" onClick={() => setSelectedCollege(null)}>
-                    🎓 Change College
+                  <button className="change-college-btn" onClick={handleResetFilters}>
+                    🎓 Reset Filters
                   </button>
                 </div>
 
@@ -302,7 +357,7 @@ export default function SwipeMatcher({ onClose }) {
                   ) : (
                     <div className="swipe-stack-empty">
                       <h4>🎉 That's all for now!</h4>
-                      <p>You've swiped through all hostels near this campus.</p>
+                      <p>You've swiped through all matching hostels near this campus.</p>
                       <button className="swipe-reset-btn" onClick={handleReset}>
                         🔄 Swipe Again
                       </button>
