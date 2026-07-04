@@ -102,6 +102,9 @@
   font-weight: 900;
   display: inline-block;
   vertical-align: middle;
+  width: 1.6em;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .hero-pill {

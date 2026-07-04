@@ -7,6 +7,44 @@ import { Analytics } from "@vercel/analytics/react"
 
 import Browse from './Browse';
 
+const FONTS = [
+  'TacticSans, sans-serif',
+  'BrotherHoops, cursive',
+  'Thomeo, sans-serif',
+  'Impact, Charcoal, sans-serif',
+  'Courier New, Courier, monospace',
+  'Georgia, Times, serif',
+  'Comic Sans MS, cursive',
+  'Arial Black, Gadget, sans-serif',
+  'Times New Roman, Times, serif',
+  'Lucida Console, Monaco, monospace'
+];
+
+function ShiftingFont() {
+  const [fontIndex, setFontIndex] = useState(0);
+
+  useEffect(() => {
+    let timeoutId;
+    
+    const tick = () => {
+      setFontIndex((prev) => (prev + 1) % FONTS.length);
+      // Random delay between 100ms and 250ms for a glitchy font-shift effect
+      const delay = Math.random() * 150 + 100;
+      timeoutId = setTimeout(tick, delay);
+    };
+    
+    timeoutId = setTimeout(tick, 100);
+    
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  return (
+    <span className="number-one" style={{ fontFamily: FONTS[fontIndex] }}>
+      #1
+    </span>
+  );
+}
+
 function Home() {
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [hostelCount, setHostelCount] = useState(0);
@@ -66,7 +104,7 @@ function Home() {
       </div>
       <div style={{ position: 'relative', zIndex: 10 }}>
         <div className="hero">
-          <h1>Kerala's <span className="number-one">#1</span> Open Hostel Finder</h1>
+          <h1>Kerala's <ShiftingFont /> Open Hostel Finder</h1>
           <p>A completely free and open-source platform for finding and verifying hostels near your campus. No accounts, no paywalls, no corporate control.</p>
           <div className="hero-counts" style={{margin: '1.2rem auto 0', display: 'flex', justifyContent: 'center', gap: '1rem'}}>
             <span className="hero-pill">{hostelCount} hostels listed</span>
