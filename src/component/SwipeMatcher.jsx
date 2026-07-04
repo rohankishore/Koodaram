@@ -391,7 +391,7 @@ export default function SwipeMatcher({ onClose }) {
               {/* Swiper Workspace */}
               <div className={`swipe-workspace ${activeMobileTab !== 'swipe' ? 'mobile-hidden' : ''}`}>
                 <div className="swipe-workspace-header">
-                  <h2>🔥 Hostel Matcher</h2>
+                  <h2>🔥 Hostel Match</h2>
                   <p>
                     Showing <strong>{selectedGender === 'all' ? 'all' : selectedGender === 'male' ? 'boys' : 'girls'}</strong> hostels near <strong>{selectedCollege === 'All' ? 'all campuses' : selectedCollege.toUpperCase()}</strong>
                   </p>

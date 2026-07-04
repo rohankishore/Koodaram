@@ -115,7 +115,7 @@ function Home() {
           </div>
           <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', position: 'relative', zIndex: 10 }}>
             <Link to="/browse" className="cta-button" style={{ marginTop: 0 }}>🔍 Find Your Hostel</Link>
-            <button className="cta-button secondary-cta" style={{ marginTop: 0 }} onClick={() => setShowSwipeMatcher(true)}>🔥 Hostel Matcher</button>
+            <button className="cta-button secondary-cta" style={{ marginTop: 0 }} onClick={() => setShowSwipeMatcher(true)}>🔥 Hostel Match</button>
           </div>
         </div>
 
