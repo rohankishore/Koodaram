@@ -143,6 +143,7 @@ export default function SwipeMatcher({ onClose }) {
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
   const [selectedCollege, setSelectedCollege] = useState(null);
+  const [activeMobileTab, setActiveMobileTab] = useState('swipe'); // 'swipe' or 'matches'
 
   useEffect(() => {
     // Prevent scrolling behind modal
@@ -257,105 +258,126 @@ export default function SwipeMatcher({ onClose }) {
             </div>
           </div>
         ) : (
-          /* Swiper Workspace */
-          <div className="swipe-workspace">
-            <div className="swipe-workspace-header">
-              <h2>🔥 Warden Matcher</h2>
-              <p>
-                Showing hostels near <strong>{selectedCollege === 'All' ? 'all campuses' : selectedCollege.toUpperCase()}</strong>
-              </p>
-              <button className="change-college-btn" onClick={() => setSelectedCollege(null)}>
-                🎓 Change College
+          /* Swiper Workspace & Sidebar wrapper */
+          <>
+            {/* Mobile Tab Switcher */}
+            <div className="swipe-mobile-tabs">
+              <button 
+                className={activeMobileTab === 'swipe' ? 'active' : ''} 
+                onClick={() => setActiveMobileTab('swipe')}
+              >
+                🔥 Swipe
+              </button>
+              <button 
+                className={activeMobileTab === 'matches' ? 'active' : ''} 
+                onClick={() => setActiveMobileTab('matches')}
+              >
+                💚 Matches ({matches.length})
               </button>
             </div>
 
-            <div className="swipe-stack-wrapper">
-              {activeHostel ? (
-                <AnimatePresence mode="popLayout">
-                  <SwipeCard
-                    key={activeHostel.slug}
-                    hostel={activeHostel}
-                    onSwipeLeft={handleSwipeLeft}
-                    onSwipeRight={() => handleSwipeRight(activeHostel)}
-                  />
-                </AnimatePresence>
-              ) : (
-                <div className="swipe-stack-empty">
-                  <h4>🎉 That's all for now!</h4>
-                  <p>You've swiped through all hostels near this campus.</p>
-                  <button className="swipe-reset-btn" onClick={handleReset}>
-                    🔄 Swipe Again
+            <div className="swipe-matcher-content-row">
+              {/* Swiper Workspace */}
+              <div className={`swipe-workspace ${activeMobileTab !== 'swipe' ? 'mobile-hidden' : ''}`}>
+                <div className="swipe-workspace-header">
+                  <h2>🔥 Warden Matcher</h2>
+                  <p>
+                    Showing hostels near <strong>{selectedCollege === 'All' ? 'all campuses' : selectedCollege.toUpperCase()}</strong>
+                  </p>
+                  <button className="change-college-btn" onClick={() => setSelectedCollege(null)}>
+                    🎓 Change College
                   </button>
                 </div>
-              )}
-            </div>
 
-            {/* Swipe Buttons */}
-            <div className="swipe-controls">
-              <button
-                className="swipe-btn swipe-btn-skip"
-                onClick={handleSwipeLeft}
-                disabled={!activeHostel}
-              >
-                ❌
-              </button>
-              <button
-                className="swipe-btn swipe-btn-match"
-                onClick={() => activeHostel && handleSwipeRight(activeHostel)}
-                disabled={!activeHostel}
-              >
-                💚
-              </button>
-            </div>
-          </div>
-        )}
-
-        {/* Match Sidebar List */}
-        <div className="swipe-sidebar">
-          <h3>
-            <span>Matched Wishlist</span>
-            <span className="swipe-sidebar-count">{matches.length}</span>
-          </h3>
-
-          {matches.length === 0 ? (
-            <div className="swipe-no-matches">
-              <span className="icon">💬</span>
-              <span>Your matches will appear here. Start swiping!</span>
-            </div>
-          ) : (
-            <div className="swipe-match-list">
-              {matches.map((match) => {
-                const thumb = match.images && match.images.length > 0
-                  ? `${RAW_BASE}/${match.slug}/${match.images[0]}`
-                  : null;
-
-                return (
-                  <div key={match.slug} className="swipe-match-item">
-                    <div className="swipe-match-thumb">
-                      {thumb ? (
-                        <img src={thumb} alt={match.name} />
-                      ) : (
-                        <span>🏠</span>
-                      )}
+                <div className="swipe-stack-wrapper">
+                  {activeHostel ? (
+                    <AnimatePresence mode="popLayout">
+                      <SwipeCard
+                        key={activeHostel.slug}
+                        hostel={activeHostel}
+                        onSwipeLeft={handleSwipeLeft}
+                        onSwipeRight={() => handleSwipeRight(activeHostel)}
+                      />
+                    </AnimatePresence>
+                  ) : (
+                    <div className="swipe-stack-empty">
+                      <h4>🎉 That's all for now!</h4>
+                      <p>You've swiped through all hostels near this campus.</p>
+                      <button className="swipe-reset-btn" onClick={handleReset}>
+                        🔄 Swipe Again
+                      </button>
                     </div>
-                    <div className="swipe-match-info">
-                      <h4>{match.name}</h4>
-                      <p>₹{match.price}/mo • {match.college}</p>
-                    </div>
-                    <a
-                      className="swipe-match-view-btn"
-                      href={`/hostel/${match.slug}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      View
-                    </a>
+                  )}
+                </div>
+
+                {/* Swipe Buttons */}
+                <div className="swipe-controls">
+                  <button
+                    className="swipe-btn swipe-btn-skip"
+                    onClick={handleSwipeLeft}
+                    disabled={!activeHostel}
+                  >
+                    ❌
+                  </button>
+                  <button
+                    className="swipe-btn swipe-btn-match"
+                    onClick={() => activeHostel && handleSwipeRight(activeHostel)}
+                    disabled={!activeHostel}
+                  >
+                    💚
+                  </button>
+                </div>
+              </div>
+
+              {/* Match Sidebar List */}
+              <div className={`swipe-sidebar ${activeMobileTab !== 'matches' ? 'mobile-hidden' : ''}`}>
+                <h3>
+                  <span>Matched Wishlist</span>
+                  <span className="swipe-sidebar-count">{matches.length}</span>
+                </h3>
+
+                {matches.length === 0 ? (
+                  <div className="swipe-no-matches">
+                    <span className="icon">💬</span>
+                    <span>Your matches will appear here. Start swiping!</span>
                   </div>
-                );
-              })}
+                ) : (
+                  <div className="swipe-match-list">
+                    {matches.map((match) => {
+                      const thumb = match.images && match.images.length > 0
+                        ? `${RAW_BASE}/${match.slug}/${match.images[0]}`
+                        : null;
+
+                      return (
+                        <div key={match.slug} className="swipe-match-item">
+                          <div className="swipe-match-thumb">
+                            {thumb ? (
+                              <img src={thumb} alt={match.name} />
+                            ) : (
+                              <span>🏠</span>
+                            )}
+                          </div>
+                          <div className="swipe-match-info">
+                            <h4>{match.name}</h4>
+                            <p>₹{match.price}/mo • {match.college}</p>
+                          </div>
+                          <a
+                            className="swipe-match-view-btn"
+                            href={`/hostel/${match.slug}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            View
+                          </a>
+                        </div>
+                      );
+                    })}
+                  </div>
+                )}
+              </div>
             </div>
-          )}
-        </div>
+          </>
+        )}
       </div>
     </div>
   );
