@@ -500,3 +500,120 @@
   0% { transform: rotate(0deg); }
   100% { transform: rotate(360deg); }
 }
+
+/* College Selector Screen */
+.college-selector-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+  height: 100%;
+  padding: 2.5rem 1.5rem;
+  overflow-y: auto;
+}
+
+.college-selector-screen h2 {
+  font-family: 'BrotherHoops', cursive;
+  font-size: 2.2rem;
+  color: var(--primary-gold, #ffd700);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.college-selector-screen p {
+  color: #aaa;
+  font-size: 0.95rem;
+  margin-bottom: 1.8rem;
+  text-align: center;
+}
+
+.college-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1rem;
+  width: 100%;
+  max-width: 700px;
+  margin-bottom: 1.5rem;
+}
+
+.college-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.2rem 1rem;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 100px;
+}
+
+.college-card:hover {
+  background: rgba(255, 215, 0, 0.08);
+  border-color: var(--primary-gold, #ffd700);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 15px rgba(255, 215, 0, 0.15);
+}
+
+.college-card .icon {
+  font-size: 1.8rem;
+}
+
+.college-card span {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  line-height: 1.3;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+.college-selector-footer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+.swipe-all-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #ccc;
+  border-radius: 30px;
+  padding: 0.5rem 1.5rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 0.85rem;
+}
+
+.swipe-all-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+/* Header button to change college filter */
+.change-college-btn {
+  background: rgba(255, 215, 0, 0.07);
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  color: var(--primary-gold, #ffd700);
+  border-radius: 8px;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  cursor: pointer;
+  margin-top: 0.3rem;
+  transition: all 0.2s ease;
+  display: inline-block;
+}
+
+.change-college-btn:hover {
+  background: var(--primary-gold, #ffd700);
+  color: #000;
+}

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { motion, useMotionValue, useTransform, AnimatePresence } from 'motion/react';
 import { IoClose } from 'react-icons/io5';
@@ -7,6 +8,45 @@ const GITHUB_USER = "Koodaram-Inc";
 const REPO = "koodaram-data";
 const API_BASE = `https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/hostels`;
 const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
+
+const COLLEGES = [
+  { name: 'CET Trivandrum', query: 'cet', emoji: '🏛️' },
+  { name: 'CUSAT Kochi', query: 'cusat', emoji: '🐬' },
+  { name: 'CUCEK Kuttanad', query: 'cucek', emoji: '🌾' },
+  { name: 'SCT Trivandrum', query: 'sct', emoji: '⚙️' },
+  { name: 'GEC Kozhikode', query: 'gec-kkd', emoji: '🌊' },
+  { name: 'GEC Palakkad', query: 'gec-pkd', emoji: '🏔️' },
+  { name: 'GEC Thrissur', query: 'gec-tsr', emoji: '🎪' },
+  { name: 'NSS College Palakkad', query: 'nss', emoji: '🌴' },
+  { name: 'RIT Kottayam', query: 'rit', emoji: '🛶' },
+];
+
+const matchesCollegeFilter = (hostelCollege, query) => {
+  if (!hostelCollege || !query) return false;
+  const hc = hostelCollege.toLowerCase();
+  const q = query.toLowerCase();
+  
+  if (hc.includes(q) || q.includes(hc)) return true;
+  
+  // Custom aliases mapping
+  const aliases = {
+    'cet': ['college of engineering trivandrum', 'cet'],
+    'cusat': ['cochin university of science and technology', 'cusat'],
+    'cucek': ['cochin university college of engineering kuttanad', 'cucek'],
+    'sct': ['sct college of engineering', 'sct trivandrum', 'sct'],
+    'gec-kkd': ['government engineering college kozhikode', 'gec kozhikode', 'gec kkd'],
+    'gec-pkd': ['government engineering college palakkad', 'gec palakkad', 'gec pkd'],
+    'gec-tsr': ['government engineering college thrissur', 'gec thrissur', 'gec tsr'],
+    'nss': ['nss college of engineering', 'nss college palakkad', 'nss'],
+    'rit': ['rajiv gandhi institute of technology', 'rit kottayam', 'rit']
+  };
+
+  if (aliases[q]) {
+    return aliases[q].some(alias => hc.includes(alias) || alias.includes(hc));
+  }
+  
+  return false;
+};
 
 // Swiping card component using framer-motion
 function SwipeCard({ hostel, onSwipeLeft, onSwipeRight }) {
@@ -102,45 +142,48 @@ export default function SwipeMatcher({ onClose }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [matches, setMatches] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [selectedCollege, setSelectedCollege] = useState(null);
 
   useEffect(() => {
     // Prevent scrolling behind modal
     document.body.style.overflow = 'hidden';
+
+    const loadHostels = async () => {
+      try {
+        const res = await fetch(API_BASE);
+        const folders = await res.json();
+
+        const hostelPromises = folders.map(folder => {
+          const jsonURL = `${RAW_BASE}/${folder.name}/data.json`;
+          return fetch(jsonURL)
+            .then(res => res.json())
+            .then(data => ({
+              ...data,
+              slug: folder.name
+            }))
+            .catch(() => null);
+        });
+
+        const results = await Promise.all(hostelPromises);
+        const validHostels = results.filter(h => h !== null);
+        
+        // Shuffle the hostels so every swiping session feels unique
+        const shuffled = [...validHostels].sort(() => Math.random() - 0.5);
+        
+        setHostels(shuffled);
+        setLoading(false);
+      } catch (e) {
+        console.error(e);
+        setLoading(false);
+      }
+    };
+
     loadHostels();
+    
     return () => {
       document.body.style.overflow = 'unset';
     };
   }, []);
-
-  const loadHostels = async () => {
-    try {
-      const res = await fetch(API_BASE);
-      const folders = await res.json();
-
-      const hostelPromises = folders.map(folder => {
-        const jsonURL = `${RAW_BASE}/${folder.name}/data.json`;
-        return fetch(jsonURL)
-          .then(res => res.json())
-          .then(data => ({
-            ...data,
-            slug: folder.name
-          }))
-          .catch(() => null);
-      });
-
-      const results = await Promise.all(hostelPromises);
-      const validHostels = results.filter(h => h !== null);
-      
-      // Shuffle the hostels so every swiping session feels unique
-      const shuffled = [...validHostels].sort(() => Math.random() - 0.5);
-      
-      setHostels(shuffled);
-      setLoading(false);
-    } catch (e) {
-      console.error(e);
-      setLoading(false);
-    }
-  };
 
   const handleSwipeLeft = () => {
     setCurrentIndex(prev => prev + 1);
@@ -161,7 +204,11 @@ export default function SwipeMatcher({ onClose }) {
     setHostels(shuffled);
   };
 
-  const activeHostel = currentIndex < hostels.length ? hostels[currentIndex] : null;
+  const filteredHostels = selectedCollege === 'All' 
+    ? hostels 
+    : hostels.filter(h => matchesCollegeFilter(h.college, selectedCollege));
+
+  const activeHostel = currentIndex < filteredHostels.length ? filteredHostels[currentIndex] : null;
 
   return (
     <div className="swipe-matcher-overlay">
@@ -170,57 +217,98 @@ export default function SwipeMatcher({ onClose }) {
           <IoClose />
         </button>
 
-        {/* Swiper Workspace */}
-        <div className="swipe-workspace">
-          <div className="swipe-workspace-header">
-            <h2>🔥 Warden Matcher</h2>
-            <p>Swipe right to shortlist, left to skip</p>
+        {loading ? (
+          <div className="swipe-loading" style={{ width: '100%', height: '100%' }}>
+            <div className="swipe-spinner" />
+            <span>Preloading Hostels...</span>
           </div>
+        ) : !selectedCollege ? (
+          /* College Selector Screen */
+          <div className="college-selector-screen">
+            <h2>🎓 Pick Your College</h2>
+            <p>Select your campus to show nearby hostels, or explore everything!</p>
+            
+            <div className="college-grid">
+              {COLLEGES.map((col) => (
+                <div 
+                  key={col.query} 
+                  className="college-card"
+                  onClick={() => {
+                    setSelectedCollege(col.query);
+                    setCurrentIndex(0);
+                  }}
+                >
+                  <span className="icon">{col.emoji}</span>
+                  <span>{col.name}</span>
+                </div>
+              ))}
+            </div>
 
-          <div className="swipe-stack-wrapper">
-            {loading ? (
-              <div className="swipe-loading">
-                <div className="swipe-spinner" />
-                <span>Fetching Hostels...</span>
-              </div>
-            ) : activeHostel ? (
-              <AnimatePresence mode="popLayout">
-                <SwipeCard
-                  key={activeHostel.slug}
-                  hostel={activeHostel}
-                  onSwipeLeft={handleSwipeLeft}
-                  onSwipeRight={() => handleSwipeRight(activeHostel)}
-                />
-              </AnimatePresence>
-            ) : (
-              <div className="swipe-stack-empty">
-                <h4>🎉 That's all for now!</h4>
-                <p>You've swiped through all available hostels.</p>
-                <button className="swipe-reset-btn" onClick={handleReset}>
-                  🔄 Swipe Again
-                </button>
-              </div>
-            )}
+            <div className="college-selector-footer">
+              <button 
+                className="swipe-all-btn"
+                onClick={() => {
+                  setSelectedCollege('All');
+                  setCurrentIndex(0);
+                }}
+              >
+                🌐 Swipe All Hostels (No Filter)
+              </button>
+            </div>
           </div>
+        ) : (
+          /* Swiper Workspace */
+          <div className="swipe-workspace">
+            <div className="swipe-workspace-header">
+              <h2>🔥 Warden Matcher</h2>
+              <p>
+                Showing hostels near <strong>{selectedCollege === 'All' ? 'all campuses' : selectedCollege.toUpperCase()}</strong>
+              </p>
+              <button className="change-college-btn" onClick={() => setSelectedCollege(null)}>
+                🎓 Change College
+              </button>
+            </div>
 
-          {/* Swipe Buttons */}
-          <div className="swipe-controls">
-            <button
-              className="swipe-btn swipe-btn-skip"
-              onClick={handleSwipeLeft}
-              disabled={loading || !activeHostel}
-            >
-              ❌
-            </button>
-            <button
-              className="swipe-btn swipe-btn-match"
-              onClick={() => activeHostel && handleSwipeRight(activeHostel)}
-              disabled={loading || !activeHostel}
-            >
-              💚
-            </button>
+            <div className="swipe-stack-wrapper">
+              {activeHostel ? (
+                <AnimatePresence mode="popLayout">
+                  <SwipeCard
+                    key={activeHostel.slug}
+                    hostel={activeHostel}
+                    onSwipeLeft={handleSwipeLeft}
+                    onSwipeRight={() => handleSwipeRight(activeHostel)}
+                  />
+                </AnimatePresence>
+              ) : (
+                <div className="swipe-stack-empty">
+                  <h4>🎉 That's all for now!</h4>
+                  <p>You've swiped through all hostels near this campus.</p>
+                  <button className="swipe-reset-btn" onClick={handleReset}>
+                    🔄 Swipe Again
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {/* Swipe Buttons */}
+            <div className="swipe-controls">
+              <button
+                className="swipe-btn swipe-btn-skip"
+                onClick={handleSwipeLeft}
+                disabled={!activeHostel}
+              >
+                ❌
+              </button>
+              <button
+                className="swipe-btn swipe-btn-match"
+                onClick={() => activeHostel && handleSwipeRight(activeHostel)}
+                disabled={!activeHostel}
+              >
+                💚
+              </button>
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Match Sidebar List */}
         <div className="swipe-sidebar">
