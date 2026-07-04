@@ -95,6 +95,22 @@
     z-index: 10;
 }
 
+.hero .secondary-cta {
+  background: rgba(30, 30, 30, 0.5);
+  color: var(--primary-gold);
+  border: 2px solid var(--primary-gold);
+  box-shadow: 0 4px 20px rgba(255, 215, 0, 0.1);
+  backdrop-filter: blur(5px);
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease, color 0.3s ease;
+}
+
+.hero .secondary-cta:hover {
+  background: var(--primary-gold);
+  color: #1A1A1A;
+  box-shadow: 0 6px 25px rgba(255, 215, 0, 0.4);
+}
+
 .hero .number-one {
   font-family: 'TacticSans', sans-serif;
   color: var(--accent);
@@ -102,6 +118,9 @@
   font-weight: 900;
   display: inline-block;
   vertical-align: middle;
+  width: 1.6em;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .hero-pill {
@@ -246,15 +265,15 @@
 }
 
 .step-card {
-    background: rgba(30, 30, 30, 0.8);
+    background: rgba(30, 30, 30, 0.45);
     padding: 2rem;
     border-radius: 12px;
     width: 280px;
     text-align: center;
     border: 1px solid var(--border-color);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    backdrop-filter: blur(10px);
     position: relative;
+    overflow: hidden;
     z-index: 10;
 }
 
@@ -287,12 +306,11 @@
 }
 
 .faq-accordion-item {
-    background-color: rgba(30, 30, 30, 0.8);
+    background-color: rgba(30, 30, 30, 0.45);
     margin-bottom: 1rem;
     border-radius: 8px;
     border: 1px solid var(--border-color);
     overflow: hidden;
-    backdrop-filter: blur(10px);
     position: relative;
     z-index: 10;
 }

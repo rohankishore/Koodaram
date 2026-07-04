@@ -4,19 +4,59 @@ import Dither from '../component/Dither';
 import CardSwap, { Card } from '../component/CardSwap';
 import './Home.css';
 import { Analytics } from "@vercel/analytics/react"
+import GradualBlur from '../component/GradualBlur';
 
 import Browse from './Browse';
+import SwipeMatcher from '../component/SwipeMatcher';
+
+const FONTS = [
+  'TacticSans, sans-serif',
+  'BrotherHoops, cursive',
+  'Thomeo, sans-serif',
+  'Impact, Charcoal, sans-serif',
+  'Courier New, Courier, monospace',
+  'Georgia, Times, serif',
+  'Comic Sans MS, cursive',
+  'Arial Black, Gadget, sans-serif',
+  'Times New Roman, Times, serif',
+  'Lucida Console, Monaco, monospace'
+];
+
+function ShiftingFont() {
+  const [fontIndex, setFontIndex] = useState(0);
+
+  useEffect(() => {
+    let timeoutId;
+    
+    const tick = () => {
+      setFontIndex((prev) => (prev + 1) % FONTS.length);
+      // Random delay between 100ms and 250ms for a glitchy font-shift effect
+      const delay = Math.random() * 150 + 100;
+      timeoutId = setTimeout(tick, delay);
+    };
+    
+    timeoutId = setTimeout(tick, 100);
+    
+    return () => clearTimeout(timeoutId);
+  }, []);
+
+  return (
+    <span className="number-one" style={{ fontFamily: FONTS[fontIndex] }}>
+      #1
+    </span>
+  );
+}
 
 function Home() {
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [hostelCount, setHostelCount] = useState(0);
-  const [collegeCount, setCollegeCount] = useState(0);
+  const [showSwipeMatcher, setShowSwipeMatcher] = useState(false);
+  const collegeCount = 9;
 
   useEffect(() => {
     fetch('https://api.github.com/repos/Koodaram-Inc/koodaram-data/contents/hostels')
       .then(res => res.json())
       .then(folders => setHostelCount(folders.length));
-    setCollegeCount(9);
   }, []);
 
   const toggleQuestion = (index) => {
@@ -61,19 +101,21 @@ function Home() {
 
   return (
     <>
+      <GradualBlur preset="page-footer" height="4rem" strength={4} zIndex={999} />
       <div className="page-dither" style={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: 0, filter: 'blur(10px) saturate(1.2)' }}>
         <Dither />
       </div>
       <div style={{ position: 'relative', zIndex: 10 }}>
         <div className="hero">
-          <h1>Kerala's <span className="number-one">#1</span> Open Hostel Finder</h1>
+          <h1>Kerala's <ShiftingFont /> Open Hostel Finder</h1>
           <p>A completely free and open-source platform for finding and verifying hostels near your campus. No accounts, no paywalls, no corporate control.</p>
           <div className="hero-counts" style={{margin: '1.2rem auto 0', display: 'flex', justifyContent: 'center', gap: '1rem'}}>
             <span className="hero-pill">{hostelCount} hostels listed</span>
             <span className="hero-pill">{collegeCount} colleges covered</span>
           </div>
-          <div style={{ marginTop: '1rem', display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', position: 'relative', zIndex: 10 }}>
-            <Link to="/browse" className="cta-button">🔍 Find Your Hostel</Link>
+          <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', position: 'relative', zIndex: 10 }}>
+            <Link to="/browse" className="cta-button" style={{ marginTop: 0 }}>🔍 Find Your Hostel</Link>
+            <button className="cta-button secondary-cta" style={{ marginTop: 0 }} onClick={() => setShowSwipeMatcher(true)}>🔥 Hostel Matcher</button>
           </div>
         </div>
 
@@ -134,19 +176,28 @@ function Home() {
           <h2>How It Works</h2>
           <div className="steps-container">
             <div className="step-card">
-              <div className="step-number">1</div>
-              <h3>100% Open Source</h3>
-              <p>All hostel data is hosted on GitHub and freely accessible. No accounts needed, no data locked behind paywalls.</p>
+              <GradualBlur preset="bottom" height="100%" strength={3} zIndex={1} opacity={0.7} />
+              <div style={{ position: 'relative', zIndex: 2 }}>
+                <div className="step-number">1</div>
+                <h3>100% Open Source</h3>
+                <p>All hostel data is hosted on GitHub and freely accessible. No accounts needed, no data locked behind paywalls.</p>
+              </div>
             </div>
             <div className="step-card">
-              <div className="step-number">2</div>
-              <h3>Student Verified</h3>
-              <p>Real students submit and verify hostel information, ensuring data is up-to-date and trustworthy.</p>
+              <GradualBlur preset="bottom" height="100%" strength={3} zIndex={1} opacity={0.7} />
+              <div style={{ position: 'relative', zIndex: 2 }}>
+                <div className="step-number">2</div>
+                <h3>Student Verified</h3>
+                <p>Real students submit and verify hostel information, ensuring data is up-to-date and trustworthy.</p>
+              </div>
             </div>
             <div className="step-card">
-              <div className="step-number">3</div>
-              <h3>Completely Free</h3>
-              <p>Browse hostels, view photos, and contact owners — all without paying a rupee or creating an account.</p>
+              <GradualBlur preset="bottom" height="100%" strength={3} zIndex={1} opacity={0.7} />
+              <div style={{ position: 'relative', zIndex: 2 }}>
+                <div className="step-number">3</div>
+                <h3>Completely Free</h3>
+                <p>Browse hostels, view photos, and contact owners — all without paying a rupee or creating an account.</p>
+              </div>
             </div>
           </div>
         </section>
@@ -186,14 +237,17 @@ function Home() {
                 key={index} 
                 className={`faq-accordion-item ${activeQuestion === index ? 'active' : ''}`}
               >
-                <div 
-                  className="faq-accordion-question" 
-                  onClick={() => toggleQuestion(index)}
-                >
-                  {faq.question}
-                </div>
-                <div className="faq-accordion-answer">
-                  <p>{faq.answer}</p>
+                <GradualBlur preset="bottom" height="100%" strength={2} zIndex={1} opacity={0.6} />
+                <div style={{ position: 'relative', zIndex: 2 }}>
+                  <div 
+                    className="faq-accordion-question" 
+                    onClick={() => toggleQuestion(index)}
+                  >
+                    {faq.question}
+                  </div>
+                  <div className="faq-accordion-answer">
+                    <p>{faq.answer}</p>
+                  </div>
                 </div>
               </div>
             ))}
@@ -218,6 +272,7 @@ function Home() {
           </div>
         </section>
       </div>
+      {showSwipeMatcher && <SwipeMatcher onClose={() => setShowSwipeMatcher(false)} />}
     </>
   );
 }
