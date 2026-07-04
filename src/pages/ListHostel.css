@@ -11,7 +11,7 @@
 
 .list-hostel-page {
   min-height: calc(100vh - 80px);
-  background: radial-gradient(circle at top, #1a1a1a, #0f0f0f 60%);
+  background: transparent;
   color: var(--text-light);
   display: flex;
   flex-direction: column;
@@ -138,22 +138,7 @@
   color: #000;
 }
 
-.list-footer {
-  font-size: 0.9rem;
-  color: #777;
-  text-align: center;
-  margin-top: 3rem;
-  padding: 1rem;
-}
-
-.list-footer a {
-  color: var(--primary);
-  text-decoration: none;
-}
-
-.list-footer a:hover {
-  text-decoration: underline;
-}
+/* Legacy footer removed */
 
 @media (max-width: 600px) {
   .content {
