@@ -108,7 +108,7 @@ function HostelDetail() {
           <IoAlertCircle className="warning-banner-icon" />
           <div className="warning-banner-text">
             <strong>Advisory: Low Student Rating</strong>
-            <p>This hostel has received multiple critical student reports. Please exercise caution and conduct thorough checks before finalizing your admission.</p>
+            <p>This hostel has received multiple critical student reports. Please exercise caution and conduct thorough checks before finalizing your admission. It'll be a good idea to ask your seniors about this hostel for added details.</p>
           </div>
         </div>
       )}
