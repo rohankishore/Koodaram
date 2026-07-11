@@ -1,0 +1,24 @@
+{
+  "name": "Koodaram - Open Hostel Finder",
+  "short_name": "Koodaram",
+  "description": "Discover and share college hostels near your campus in Kerala. Completely open source and account-free.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#1a1a1a",
+  "theme_color": "#e94560",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/logo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
