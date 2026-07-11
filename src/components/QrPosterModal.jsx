@@ -76,6 +76,14 @@ function QrPosterModal({ hostel, onClose }) {
   const handleDownload = async () => {
     setDownloading(true);
     try {
+      // Pre-load Koodaram logo image
+      const logo = new Image();
+      logo.src = logoImg;
+      await new Promise((resolve) => {
+        logo.onload = resolve;
+        logo.onerror = resolve;
+      });
+
       const canvas = document.createElement('canvas');
       canvas.width = 1200;
       canvas.height = 1920;
@@ -112,13 +120,28 @@ function QrPosterModal({ hostel, onClose }) {
       }
 
       // 3. Draw Brand Header
-      ctx.fillStyle = theme.textColor;
-      ctx.textAlign = 'center';
-      
-      // Draw Koodaram logo / icon
+      const headerText = 'KOODARAM';
       ctx.font = `bold 82px ${font.family}`;
-      ctx.fillText('🏠 KOODARAM', canvas.width / 2, 200);
+      const textWidth = ctx.measureText(headerText).width;
+      
+      if (logo.complete && logo.naturalWidth > 0) {
+        const logoHeaderSize = 90;
+        const totalHeaderWidth = logoHeaderSize + 25 + textWidth;
+        const startX = (canvas.width - totalHeaderWidth) / 2;
+        
+        ctx.textAlign = 'left';
+        // Draw logo
+        ctx.drawImage(logo, startX, 115, logoHeaderSize, logoHeaderSize);
+        // Draw text
+        ctx.fillStyle = theme.textColor;
+        ctx.fillText(headerText, startX + logoHeaderSize + 25, 190);
+      } else {
+        ctx.textAlign = 'center';
+        ctx.fillStyle = theme.textColor;
+        ctx.fillText(headerText, canvas.width / 2, 195);
+      }
 
+      ctx.textAlign = 'center';
       ctx.font = `36px ${font.family}`;
       ctx.fillStyle = theme.subColor;
       ctx.fillText("Kerala's Open Hostel Finder", canvas.width / 2, 260);
@@ -206,13 +229,6 @@ function QrPosterModal({ hostel, onClose }) {
       ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
 
       // Draw custom logo in center of QR Code
-      const logo = new Image();
-      logo.src = logoImg;
-      await new Promise((resolve) => {
-        logo.onload = resolve;
-        logo.onerror = resolve; // Continue even if logo fails
-      });
-
       if (logo.complete && logo.naturalWidth > 0) {
         const logoSize = qrSize * 0.18; // 18% of QR size
         const logoX = qrX + (qrSize - logoSize) / 2;
@@ -425,7 +441,10 @@ function QrPosterModal({ hostel, onClose }) {
               }}
             >
               <div className="preview-brand">
-                <span className="brand-logo">🏠 KOODARAM</span>
+                <div className="brand-logo-container">
+                  <img src={logoImg} alt="Koodaram Logo" className="brand-logo-img" />
+                  <span className="brand-logo">KOODARAM</span>
+                </div>
                 <span className="brand-sub" style={{ color: theme.subColor }}>Kerala's Open Hostel Finder</span>
               </div>
 

@@ -315,6 +315,19 @@
   text-align: center;
 }
 
+.brand-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.brand-logo-img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
 .brand-logo {
   font-weight: 700;
   font-size: 1.5rem;
