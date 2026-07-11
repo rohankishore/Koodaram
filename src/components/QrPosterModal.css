@@ -20,8 +20,8 @@
   border: 1px solid #ffffff10;
   border-radius: 16px;
   width: 100%;
-  max-width: 960px;
-  max-height: 90vh;
+  max-width: 1024px;
+  max-height: 92vh;
   position: relative;
   overflow-y: auto;
   box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
@@ -63,12 +63,12 @@
 
 .qr-modal-content {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
+  grid-template-columns: 1.1fr 0.9fr;
+  gap: 2.5rem;
   padding: 2.5rem;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 868px) {
   .qr-modal-content {
     grid-template-columns: 1fr;
     padding: 2rem 1.5rem;
@@ -79,7 +79,7 @@
 .qr-settings-panel {
   display: flex;
   flex-direction: column;
-  gap: 1.5rem;
+  gap: 1.4rem;
   color: #ffffff;
 }
 
@@ -105,20 +105,26 @@
 }
 
 .qr-control-group label {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #a1a1aa;
 }
 
+.qr-control-group-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
 .qr-theme-options {
   display: flex;
   gap: 0.75rem;
-  flex-wrap: wrap;
 }
 
 .qr-theme-btn {
+  flex: 1;
   padding: 0.6rem 1.2rem;
   border-radius: 8px;
   background-color: #1f1f23;
@@ -138,7 +144,89 @@
   background-color: #27272a;
 }
 
-.qr-control-group input,
+/* Color Options styling */
+.qr-color-options {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.qr-color-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.qr-color-btn:hover {
+  transform: scale(1.1);
+}
+
+.qr-color-btn.active {
+  border-color: #ffffff;
+  transform: scale(1.1);
+}
+
+.qr-color-picker-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: transparent;
+  border: none;
+  width: 34px;
+  height: 34px;
+  cursor: pointer;
+  padding: 0;
+}
+
+.qr-color-picker-input::-webkit-color-swatch {
+  border-radius: 50%;
+  border: 2px solid #ffffff30;
+}
+
+/* Selection and Checkboxes styles */
+.qr-select-control {
+  background-color: #121214;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  padding: 0.65rem 0.75rem;
+  color: #ffffff;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.qr-select-control:focus {
+  outline: none;
+  border-color: var(--theme-color, #e94560);
+}
+
+.qr-toggles-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+
+.qr-toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  color: #e4e4e7;
+  cursor: pointer;
+  user-select: none;
+}
+
+.qr-toggle-label input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: #e94560;
+  cursor: pointer;
+}
+
+.qr-control-group input[type="text"],
 .qr-control-group textarea {
   background-color: #121214;
   border: 1px solid #27272a;
@@ -150,15 +238,13 @@
   transition: all 0.2s ease;
 }
 
-.qr-control-group input:focus,
+.qr-control-group input[type="text"]:focus,
 .qr-control-group textarea:focus {
   outline: none;
   border-color: #e94560;
-  box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.2);
 }
 
 .qr-download-btn {
-  background-color: #e94560;
   color: #ffffff;
   border: none;
   border-radius: 8px;
@@ -167,7 +253,7 @@
   font-size: 1rem;
   cursor: pointer;
   transition: all 0.2s ease;
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -175,7 +261,7 @@
 }
 
 .qr-download-btn:hover:not(:disabled) {
-  background-color: #d63350;
+  filter: brightness(1.1);
   transform: translateY(-1px);
 }
 
@@ -189,6 +275,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  align-items: center;
 }
 
 .qr-preview-panel label {
@@ -197,17 +284,20 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   color: #a1a1aa;
+  width: 100%;
 }
 
 .qr-poster-preview {
   aspect-ratio: 9/16;
+  width: 100%;
+  max-width: 380px;
   border-radius: 12px;
   border: 6px solid #e94560;
-  padding: 2rem 1.5rem;
+  padding: 2.2rem 1.6rem;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
   transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   user-select: none;
 }
@@ -220,7 +310,6 @@
 }
 
 .brand-logo {
-  font-family: 'Outfit', 'Inter', sans-serif;
   font-weight: 700;
   font-size: 1.5rem;
   letter-spacing: -0.02em;
@@ -236,11 +325,7 @@
 .preview-divider {
   height: 1px;
   background-color: rgba(255, 255, 255, 0.1);
-  margin: 1rem 0;
-}
-
-.theme-retro_dither .preview-divider {
-  background-color: rgba(0, 0, 0, 0.1);
+  margin: 0.8rem 0;
 }
 
 .theme-minimal_light .preview-divider {
@@ -257,12 +342,11 @@
 }
 
 .preview-headline {
-  font-family: 'Outfit', 'Inter', sans-serif;
   font-size: 1.5rem;
   font-weight: 700;
   text-align: center;
   margin: 0;
-  line-height: 1.2;
+  line-height: 1.25;
 }
 
 .preview-hostel-box {
@@ -274,7 +358,6 @@
 }
 
 .preview-hostel-name {
-  font-family: 'Outfit', 'Inter', sans-serif;
   font-size: 1.1rem;
   font-weight: 700;
   margin: 0 0 0.5rem 0;
@@ -291,20 +374,45 @@
   margin: 0;
 }
 
+/* QR Code Wrapper with Absolute Center Logo */
 .preview-qr-wrapper {
-  background-color: #ffffff;
   padding: 0.75rem;
   border-radius: 8px;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  position: relative;
 }
 
 .preview-qr-img {
-  width: 130px;
-  height: 130px;
+  width: 140px;
+  height: 140px;
   display: block;
+}
+
+/* Absolute Overlay for Koodaram logo in QR center */
+.qr-overlay-logo-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 32px;
+  height: 32px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+  padding: 4px;
+}
+
+.qr-overlay-logo {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 4px;
 }
 
 .preview-cta {
@@ -316,24 +424,7 @@
 }
 
 .preview-footer {
-  font-family: 'Outfit', 'Inter', sans-serif;
   font-weight: 700;
   font-size: 1.1rem;
   text-align: center;
-}
-
-/* Theme variations */
-.theme-retro_dither {
-  border-color: #18181b;
-  box-shadow: 4px 4px 0 #18181b;
-}
-
-.theme-retro_dither .preview-hostel-box {
-  background-color: #ffffff;
-  border-color: #18181b;
-  border-width: 2px;
-}
-
-.theme-minimal_light {
-  border-color: #000000;
 }
