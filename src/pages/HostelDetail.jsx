@@ -1,6 +1,18 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import QrPosterModal from '../components/QrPosterModal';
+import { 
+  IoCall, 
+  IoLogoWhatsapp, 
+  IoQrCode, 
+  IoLocationSharp, 
+  IoSchool, 
+  IoBed, 
+  IoWallet, 
+  IoShieldCheckmark, 
+  IoTime, 
+  IoSparkles 
+} from 'react-icons/io5';
 import './HostelDetail.css';
 
 const GITHUB_USER = "Koodaram-Inc";
@@ -89,22 +101,22 @@ function HostelDetail() {
     <div className="container" id="hostel-view">
       <h1>{hostel.name}</h1>
       <div className="info">
-        <p><strong>📍 Location:</strong> {hostel.location}</p>
-        <p><strong>🎓 College:</strong> {hostel.college}</p>
-        <p><strong>🛏️ Room Type:</strong> {hostel.roomType}</p>
-        <p><strong>💰 Price:</strong> ₹{hostel.price}/month</p>
+        <p className="detail-item"><IoLocationSharp className="detail-icon" /> <strong>Location:</strong> {hostel.location}</p>
+        <p className="detail-item"><IoSchool className="detail-icon" /> <strong>College:</strong> {hostel.college}</p>
+        <p className="detail-item"><IoBed className="detail-icon" /> <strong>Room Type:</strong> {hostel.roomType}</p>
+        <p className="detail-item"><IoWallet className="detail-icon" /> <strong>Price:</strong> ₹{hostel.price}/month</p>
         {hostel.advance && (
-          <p style={{ color: '#999' }}><strong>Advance:</strong> ₹{hostel.advance}</p>
+          <p className="detail-item" style={{ color: '#999' }}><IoWallet className="detail-icon" style={{ opacity: 0.5 }} /> <strong>Advance:</strong> ₹{hostel.advance}</p>
         )}
         {resolvedPhone && (
-          <p><strong>📞 Contact:</strong> {resolvedPhone}</p>
+          <p className="detail-item"><IoCall className="detail-icon" /> <strong>Contact:</strong> {resolvedPhone}</p>
         )}
-        <p><strong>🛹 Amenities:</strong> {hostel.amenities?.join(", ")}</p>
+        <p className="detail-item"><IoSparkles className="detail-icon" /> <strong>Amenities:</strong> {hostel.amenities?.join(", ")}</p>
         {hostel.curfew && (
-          <p><strong>Curfew:</strong> {hostel.curfew}</p>
+          <p className="detail-item"><IoTime className="detail-icon" /> <strong>Curfew:</strong> {hostel.curfew}</p>
         )}
         {hostel.bathroom && (
-          <p><strong>Bathroom:</strong> {hostel.bathroom}</p>
+          <p className="detail-item"><IoShieldCheckmark className="detail-icon" /> <strong>Bathroom:</strong> {hostel.bathroom}</p>
         )}
       </div>
       
@@ -133,13 +145,13 @@ function HostelDetail() {
 
       <div className="contact-buttons">
         {resolvedPhone && (
-          <a href={`tel:${phoneForTel}`}>📞 Call</a>
+          <a href={`tel:${phoneForTel}`} className="icon-btn-flex"><IoCall size={18} /> Call</a>
         )}
         {resolvedPhone && whatsappNumber && (
-          <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+          <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer" className="icon-btn-flex"><IoLogoWhatsapp size={18} /> WhatsApp</a>
         )}
-        <button onClick={() => setShowQrModal(true)} className="qr-poster-trigger-btn">
-          📢 Get QR Poster
+        <button onClick={() => setShowQrModal(true)} className="qr-poster-trigger-btn icon-btn-flex">
+          <IoQrCode size={18} /> Get QR Poster
         </button>
       </div>
 
