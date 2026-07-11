@@ -62,7 +62,10 @@ body {
 }
 
 .cta-button {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
     margin-top: 2.5rem;
     background: linear-gradient(90deg, var(--secondary-gold), var(--primary-gold));
     color: #1A1A1A;

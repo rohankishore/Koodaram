@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Dither from '../component/Dither';
 import CardSwap, { Card } from '../component/CardSwap';
+import { IoSearch, IoFlame } from 'react-icons/io5';
 import './Home.css';
 import { Analytics } from "@vercel/analytics/react"
 import GradualBlur from '../component/GradualBlur';
@@ -114,8 +115,8 @@ function Home() {
             <span className="hero-pill">{collegeCount} colleges covered</span>
           </div>
           <div style={{ marginTop: '1.5rem', display: 'flex', justifyContent: 'center', gap: '1rem', flexWrap: 'wrap', position: 'relative', zIndex: 10 }}>
-            <Link to="/browse" className="cta-button" style={{ marginTop: 0 }}>🔍 Find Your Hostel</Link>
-            <button className="cta-button secondary-cta" style={{ marginTop: 0 }} onClick={() => setShowSwipeMatcher(true)}>🔥 Hostel Match</button>
+            <Link to="/browse" className="cta-button" style={{ marginTop: 0 }}><IoSearch size={18} /> Find Your Hostel</Link>
+            <button className="cta-button secondary-cta" style={{ marginTop: 0 }} onClick={() => setShowSwipeMatcher(true)}><IoFlame size={18} /> Hostel Match</button>
           </div>
         </div>
 
