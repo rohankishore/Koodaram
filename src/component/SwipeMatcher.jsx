@@ -60,37 +60,33 @@ const playSound = (type) => {
     const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     if (!AudioContextClass) return;
     const ctx = new AudioContextClass();
-    
-    const osc = ctx.createOscillator();
-    const gain = ctx.createGain();
-    
-    osc.connect(gain);
-    gain.connect(ctx.destination);
-    
     const now = ctx.currentTime;
-    
-    if (type === 'match') {
-      // Pleasant high-pitch match chime
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(587.33, now); // D5
-      osc.frequency.exponentialRampToValueAtTime(880.00, now + 0.1); // A5
+
+    const playClick = (freq, duration, delay = 0) => {
+      const osc = ctx.createOscillator();
+      const gain = ctx.createGain();
       
-      gain.gain.setValueAtTime(0.12, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.15);
+      osc.connect(gain);
+      gain.connect(ctx.destination);
       
-      osc.start(now);
-      osc.stop(now + 0.15);
-    } else {
-      // Low-pitch tactile skip blip
       osc.type = 'sine';
-      osc.frequency.setValueAtTime(150.00, now);
-      osc.frequency.exponentialRampToValueAtTime(80.00, now + 0.08);
+      osc.frequency.setValueAtTime(freq, now + delay);
       
-      gain.gain.setValueAtTime(0.08, now);
-      gain.gain.exponentialRampToValueAtTime(0.001, now + 0.08);
+      // Extremely quick exponential decay for a crisp physical tap sound
+      gain.gain.setValueAtTime(0.12, now + delay);
+      gain.gain.exponentialRampToValueAtTime(0.001, now + delay + duration);
       
-      osc.start(now);
-      osc.stop(now + 0.08);
+      osc.start(now + delay);
+      osc.stop(now + delay + duration);
+    };
+
+    if (type === 'match') {
+      // Apple-like "Success" double-tap: two quick crisp ticks (subtle/low-pitch)
+      playClick(160, 0.02, 0);       // First tick (160Hz, 20ms)
+      playClick(220, 0.025, 0.045);  // Second tick (220Hz, 25ms, delayed by 45ms)
+    } else {
+      // Apple-like "Light Tap" tick: single extremely short low-pitch thud/click
+      playClick(100, 0.015, 0);      // Single tick (100Hz, 15ms)
     }
   } catch (e) {
     // Ignore context blocks
