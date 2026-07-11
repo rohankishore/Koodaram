@@ -11,7 +11,8 @@ import {
   IoWallet, 
   IoShieldCheckmark, 
   IoTime, 
-  IoSparkles 
+  IoSparkles,
+  IoAlertCircle
 } from 'react-icons/io5';
 import './HostelDetail.css';
 
@@ -93,6 +94,7 @@ function HostelDetail() {
   const phoneForTel = resolvedPhone.replace(/\s+/g, '');
   const whatsappNumber = (hostel.contact?.whatsapp || hostel.whatsapp || resolvedPhone).replace(/\D/g, '');
 
+  const rating = parseFloat(hostel.rating) || 0;
   const imagesHTML = hostel.images && hostel.images.length > 0 
     ? hostel.images 
     : [];
@@ -100,6 +102,17 @@ function HostelDetail() {
   return (
     <div className="container" id="hostel-view">
       <h1>{hostel.name}</h1>
+
+      {rating > 0 && rating < 3 && (
+        <div className="warning-banner">
+          <IoAlertCircle className="warning-banner-icon" />
+          <div className="warning-banner-text">
+            <strong>Advisory: Low Student Rating</strong>
+            <p>This hostel has received multiple critical student reports. Please exercise caution and conduct thorough checks before finalizing your admission.</p>
+          </div>
+        </div>
+      )}
+
       <div className="info">
         <p className="detail-item"><IoLocationSharp className="detail-icon" /> <strong>Location:</strong> {hostel.location}</p>
         <p className="detail-item"><IoSchool className="detail-icon" /> <strong>College:</strong> {hostel.college}</p>

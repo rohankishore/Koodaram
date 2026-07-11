@@ -184,3 +184,37 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* Low Rating Warning Banner styles */
+.warning-banner {
+  background-color: rgba(233, 69, 96, 0.12);
+  border-left: 4px solid #e94560;
+  padding: 0.9rem 1.2rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin: 1.25rem 0 1.5rem 0;
+  box-shadow: 0 4px 12px rgba(233, 69, 96, 0.15);
+}
+
+.warning-banner-icon {
+  color: #e94560;
+  font-size: 1.45rem;
+  flex-shrink: 0;
+  margin-top: 0.1rem;
+}
+
+.warning-banner-text strong {
+  display: block;
+  color: #e94560;
+  font-size: 0.95rem;
+  margin-bottom: 0.25rem;
+}
+
+.warning-banner-text p {
+  margin: 0;
+  color: var(--text-light, #e0e0e0);
+  font-size: 0.88rem;
+  line-height: 1.45;
+}
