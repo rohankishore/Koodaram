@@ -1,0 +1,339 @@
+/* QR Poster Generator Modal Styling */
+
+.qr-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1.5rem;
+}
+
+.qr-modal-container {
+  background-color: #1a1a1e;
+  border: 1px solid #ffffff10;
+  border-radius: 16px;
+  width: 100%;
+  max-width: 960px;
+  max-height: 90vh;
+  position: relative;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+  animation: qrModalEntry 0.3s ease-out;
+}
+
+@keyframes qrModalEntry {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+.qr-close-btn {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  background: transparent;
+  border: none;
+  color: #a1a1aa;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 10;
+}
+
+.qr-close-btn:hover {
+  background-color: #ffffff10;
+  color: #ffffff;
+}
+
+.qr-modal-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  padding: 2.5rem;
+}
+
+@media (max-width: 768px) {
+  .qr-modal-content {
+    grid-template-columns: 1fr;
+    padding: 2rem 1.5rem;
+  }
+}
+
+/* Settings Panel */
+.qr-settings-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  color: #ffffff;
+}
+
+.qr-settings-panel h2 {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-size: 1.75rem;
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.qr-settings-panel p {
+  color: #a1a1aa;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.qr-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.qr-control-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #a1a1aa;
+}
+
+.qr-theme-options {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.qr-theme-btn {
+  padding: 0.6rem 1.2rem;
+  border-radius: 8px;
+  background-color: #1f1f23;
+  color: #e4e4e7;
+  font-weight: 500;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid transparent;
+}
+
+.qr-theme-btn:hover {
+  background-color: #27272a;
+}
+
+.qr-theme-btn.active {
+  background-color: #27272a;
+}
+
+.qr-control-group input,
+.qr-control-group textarea {
+  background-color: #121214;
+  border: 1px solid #27272a;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  transition: all 0.2s ease;
+}
+
+.qr-control-group input:focus,
+.qr-control-group textarea:focus {
+  outline: none;
+  border-color: #e94560;
+  box-shadow: 0 0 0 2px rgba(233, 69, 96, 0.2);
+}
+
+.qr-download-btn {
+  background-color: #e94560;
+  color: #ffffff;
+  border: none;
+  border-radius: 8px;
+  padding: 1rem;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.qr-download-btn:hover:not(:disabled) {
+  background-color: #d63350;
+  transform: translateY(-1px);
+}
+
+.qr-download-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Live Preview Panel */
+.qr-preview-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.qr-preview-panel label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #a1a1aa;
+}
+
+.qr-poster-preview {
+  aspect-ratio: 9/16;
+  border-radius: 12px;
+  border: 6px solid #e94560;
+  padding: 2rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+}
+
+.preview-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.brand-logo {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1.5rem;
+  letter-spacing: -0.02em;
+}
+
+.brand-sub {
+  font-size: 0.75rem;
+  margin-top: 0.25rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.preview-divider {
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.1);
+  margin: 1rem 0;
+}
+
+.theme-retro_dither .preview-divider {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.theme-minimal_light .preview-divider {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+
+.preview-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  gap: 1.25rem;
+}
+
+.preview-headline {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+  margin: 0;
+  line-height: 1.2;
+}
+
+.preview-hostel-box {
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 1rem;
+  text-align: left;
+}
+
+.preview-hostel-name {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+}
+
+.preview-hostel-details {
+  font-size: 0.8rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.preview-hostel-details p {
+  margin: 0;
+}
+
+.preview-qr-wrapper {
+  background-color: #ffffff;
+  padding: 0.75rem;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.preview-qr-img {
+  width: 130px;
+  height: 130px;
+  display: block;
+}
+
+.preview-cta {
+  font-size: 0.8rem;
+  text-align: center;
+  margin: 0;
+  line-height: 1.4;
+  max-width: 90%;
+}
+
+.preview-footer {
+  font-family: 'Outfit', 'Inter', sans-serif;
+  font-weight: 700;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+/* Theme variations */
+.theme-retro_dither {
+  border-color: #18181b;
+  box-shadow: 4px 4px 0 #18181b;
+}
+
+.theme-retro_dither .preview-hostel-box {
+  background-color: #ffffff;
+  border-color: #18181b;
+  border-width: 2px;
+}
+
+.theme-minimal_light {
+  border-color: #000000;
+}

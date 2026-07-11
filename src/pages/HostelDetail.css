@@ -99,6 +99,26 @@
   box-shadow: 0 0 16px var(--hover-glow);
 }
 
+.qr-poster-trigger-btn {
+  display: inline-block;
+  padding: 0.8rem 1.2rem;
+  border-radius: 6px;
+  background: #e94560;
+  color: #ffffff;
+  text-align: center;
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: 0 0 10px rgba(233, 69, 96, 0.3);
+}
+
+.qr-poster-trigger-btn:hover {
+  background: #ff5e7e;
+  box-shadow: 0 0 16px rgba(233, 69, 96, 0.6);
+}
+
 .map-container {
   margin-top: 1.8rem;
   border-radius: 10px;

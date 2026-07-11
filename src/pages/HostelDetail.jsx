@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
+import QrPosterModal from '../components/QrPosterModal';
 import './HostelDetail.css';
 
 const GITHUB_USER = "Koodaram-Inc";
@@ -10,6 +11,7 @@ function HostelDetail() {
   const [hostel, setHostel] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [showQrModal, setShowQrModal] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
@@ -129,14 +131,17 @@ function HostelDetail() {
         )}
       </div>
 
-      {resolvedPhone && (
-        <div className="contact-buttons">
+      <div className="contact-buttons">
+        {resolvedPhone && (
           <a href={`tel:${phoneForTel}`}>📞 Call</a>
-          {whatsappNumber && (
-            <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
-          )}
-        </div>
-      )}
+        )}
+        {resolvedPhone && whatsappNumber && (
+          <a href={`https://wa.me/${whatsappNumber}`} target="_blank" rel="noopener noreferrer">💬 WhatsApp</a>
+        )}
+        <button onClick={() => setShowQrModal(true)} className="qr-poster-trigger-btn">
+          📢 Get QR Poster
+        </button>
+      </div>
 
       {hostel.gmap && (
         <div className="map-container">
@@ -155,6 +160,10 @@ function HostelDetail() {
           <Link to="/browse" id="backToListingsLink">← Back to Listings</Link>
         </p>
       </footer>
+
+      {showQrModal && (
+        <QrPosterModal hostel={hostel} onClose={() => setShowQrModal(false)} />
+      )}
     </div>
   );
 }
