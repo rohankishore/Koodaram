@@ -55,10 +55,10 @@ function QrPosterModal({ hostel, onClose }) {
   const [borderStyle, setBorderStyle] = useState('neon');
   
   // Custom detail toggles
-  const [showCollege, setShowCollege] = useState(true);
-  const [showLocation, setShowLocation] = useState(true);
-  const [showPrice, setShowPrice] = useState(true);
-  const [showAmenities, setShowAmenities] = useState(true);
+  const [showCollege, setShowCollege] = useState(false);
+  const [showLocation, setShowLocation] = useState(false);
+  const [showPrice, setShowPrice] = useState(false);
+  const [showAmenities, setShowAmenities] = useState(false);
 
   const [downloading, setDownloading] = useState(false);
   const previewRef = useRef(null);
@@ -254,7 +254,7 @@ function QrPosterModal({ hostel, onClose }) {
       // 9. Draw Vercel/Website link
       ctx.fillStyle = accentColor;
       ctx.font = `bold 42px ${font.family}`;
-      ctx.fillText('koodaram.in', canvas.width / 2, canvas.height - 120);
+      ctx.fillText('koodaram.vercel.app', canvas.width / 2, canvas.height - 120);
 
       // Trigger Download
       const link = document.createElement('a');
@@ -464,7 +464,7 @@ function QrPosterModal({ hostel, onClose }) {
               </div>
 
               <div className="preview-footer" style={{ color: accentColor }}>
-                koodaram.in
+                koodaram.vercel.app
               </div>
             </div>
           </div>
