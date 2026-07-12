@@ -2,7 +2,19 @@ import { useState, useEffect, useRef } from 'react';
 import Dither from '../component/Dither';
 import { Link, useSearchParams, useParams, useNavigate } from 'react-router-dom';
 import { HiAdjustmentsHorizontal } from 'react-icons/hi2';
-import { IoClose } from 'react-icons/io5';
+import { 
+  IoClose, 
+  IoLocationSharp, 
+  IoWifi, 
+  IoRestaurant, 
+  IoVideocam, 
+  IoWater, 
+  IoSnow, 
+  IoCar, 
+  IoSparkles, 
+  IoShieldCheckmark,
+  IoArrowForward
+} from 'react-icons/io5';
 import SpotlightCard from '../component/SpotlightCard';
 import './Browse.css';
 
@@ -63,6 +75,41 @@ const REPO = "koodaram-data";
 const API_BASE = `https://api.github.com/repos/${GITHUB_USER}/${REPO}/contents/hostels`;
 const RAW_BASE = `https://raw.githubusercontent.com/${GITHUB_USER}/${REPO}/main/hostels`;
 
+
+const getAmenityIcon = (amenity) => {
+  const norm = amenity.toLowerCase();
+  if (norm.includes('wifi') || norm.includes('wi-fi')) return <IoWifi />;
+  if (norm.includes('food') || norm.includes('mess') || norm.includes('lunch') || norm.includes('dinner') || norm.includes('homely')) return <IoRestaurant />;
+  if (norm.includes('cctv') || norm.includes('security')) return <IoVideocam />;
+  if (norm.includes('water')) return <IoWater />;
+  if (norm.includes('bathroom') || norm.includes('toilet') || norm.includes('attached')) return <IoShieldCheckmark />;
+  if (norm.includes('ac') || norm.includes('cooler') || norm.includes('air cond')) return <IoSnow />;
+  if (norm.includes('parking') || norm.includes('garage')) return <IoCar />;
+  return <IoSparkles />;
+};
+
+const renderAmenityTags = (amenities) => {
+  const visible = amenities.slice(0, 4);
+  const extra = amenities.length - 4;
+  
+  return (
+    <div className="card-amenities-row">
+      {visible.map((amenity, idx) => (
+        <div key={idx} className="card-amenity-tag">
+          <span className="card-amenity-icon-circle">
+            {getAmenityIcon(amenity)}
+          </span>
+          <span className="card-amenity-text">{amenity}</span>
+        </div>
+      ))}
+      {extra > 0 && (
+        <div className="card-amenity-tag-extra">
+          +{extra}
+        </div>
+      )}
+    </div>
+  );
+};
 
 function Browse() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -426,13 +473,15 @@ function Browse() {
                   <SpotlightCard
                     key={hostel.id}
                     className={`hostel-card ${getRatingBorderClass(rating)}`}
-                    spotlightColor="rgba(255, 215, 0, 0.15)"
+                    spotlightColor="rgba(255, 215, 0, 0.12)"
                   >
 
                     <div className="hostel-card-image-wrapper">
+                      <div className="card-rating-badge">
+                        <span className="rating-val">★ {rating > 0 ? rating.toFixed(1) : 'N/A'}</span>
+                      </div>
 
-                      {(hostel.images || ["1.jpg"]).map((imageName, idx) => (
-
+                      {(hostel.images || ["1.jpg"]).slice(0, 1).map((imageName, idx) => (
                         <img
                           key={idx}
                           src={`${RAW_BASE}/${hostel.folderName}/${imageName}`}
@@ -443,85 +492,54 @@ function Browse() {
                               'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="400" height="300"%3E%3Crect fill="%23333" width="400" height="300"/%3E%3Ctext fill="%23999" x="50%25" y="50%25" dominant-baseline="middle" text-anchor="middle" font-size="20"%3ENo Image%3C/text%3E%3C/svg%3E';
                           }}
                         />
-
                       ))}
-
                     </div>
 
                     <div className="hostel-card-content">
-
                       <h3>{hostel.name}</h3>
 
-                      <div className="hostel-card-meta">
-                        {renderStars(rating)}
-
-                        <span className={`gender ${gender}`}>
-                          {gender.charAt(0).toUpperCase() + gender.slice(1)}
+                      <div className="gender-badge-row">
+                        <span className={`gender-badge ${gender}`}>
+                          {gender === 'female' ? 'FEMALE ONLY' : gender === 'male' ? 'MALE ONLY' : 'UNISEX'}
                         </span>
                       </div>
 
-                      <p style={{ color: '#c5c5c5', marginBottom: '0.4rem' }}>
-                        📍 {hostel.location}
-                      </p>
+                      <div className="card-location">
+                        <IoLocationSharp className="card-loc-icon" /> {hostel.location}
+                      </div>
 
-                      <p style={{ color: '#c5c5c5', marginBottom: '0.6rem' }}>
-                        🛏️ {hostel.roomType}
-                      </p>
+                      {renderAmenityTags(hostel.amenities || [])}
 
-                      <div className="amenities">
-                        {(hostel.amenities || []).map((amenity, idx) => (
-                          <span key={idx}>{amenity}</span>
-                        ))}
-
+                      <div className="card-key-badges">
                         {hostel.curfew && (
-                          <span>Curfew: {hostel.curfew}</span>
+                          <span className="key-badge curfew-badge">Curfew: <strong className="val-green">{hostel.curfew}</strong></span>
                         )}
-
                         {hostel.bathroom && (
-                          <span>Bathroom: {hostel.bathroom}</span>
+                          <span className="key-badge bathroom-badge">Bathroom: <strong className="val-gold">{hostel.bathroom}</strong></span>
                         )}
                       </div>
 
-                      <p
-                        style={{
-                          fontSize: '1.4rem',
-                          fontWeight: '700',
-                          color: 'var(--accent)',
-                          marginTop: '0.8rem'
-                        }}
-                      >
-                        ₹{hostel.price}
-                        <span
-                          style={{
-                            fontSize: '0.85rem',
-                            fontWeight: '400',
-                            color: '#999'
-                          }}
+                      <div className="card-divider"></div>
+
+                      <div className="card-footer-row">
+                        <div className="card-price-container">
+                          <p className="card-price-val">
+                            ₹{hostel.price}<span>/month</span>
+                          </p>
+                          {hostel.advance && (
+                            <p className="card-price-advance">
+                              Advance: ₹{hostel.advance}
+                            </p>
+                          )}
+                        </div>
+
+                        <Link
+                          to={`/hostel/${hostel.folderName}`}
+                          className="card-view-btn"
                         >
-                          /month
-                        </span>
-                      </p>
-
-                      {hostel.advance && (
-                        <p
-                          style={{
-                            fontSize: '0.9rem',
-                            color: '#888',
-                            marginTop: '0.4rem',
-                            marginBottom: '0.8rem'
-                          }}
-                        >
-                          Advance: ₹{hostel.advance}
-                        </p>
-                      )}
-
-                      <Link
-                        to={`/hostel/${hostel.folderName}`}
-                        className="view-button"
-                      >
-                        View Details →
-                      </Link>
-
+                          View Details <IoArrowForward className="btn-arrow" />
+                        </Link>
+                      </div>
                     </div>
 
                   </SpotlightCard>
