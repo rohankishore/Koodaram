@@ -289,7 +289,7 @@ function Browse() {
   });
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh', overflow: 'hidden' }}>
+    <div style={{ position: 'relative', minHeight: '100vh', overflowX: 'hidden' }}>
 
       <div className="page-dither">
         <Dither />
@@ -524,7 +524,7 @@ function Browse() {
                       <div className="card-footer-row">
                         <div className="card-price-container">
                           <p className="card-price-val">
-                            ₹{hostel.price}<span>/month</span>
+                            {hostel.price ? `₹${hostel.price}` : 'Price N/A'}{hostel.price && <span>/month</span>}
                           </p>
                           {hostel.advance && (
                             <p className="card-price-advance">

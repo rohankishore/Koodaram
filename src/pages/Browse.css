@@ -77,7 +77,9 @@
 
 .filters {
   position: sticky;
-  top: 90px;
+  top: 100px;
+  max-height: calc(100vh - 130px);
+  overflow-y: auto;
   background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
   padding: 2rem;
   border-radius: 16px;
@@ -86,6 +88,18 @@
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 
               0 0 0 1px rgba(255, 215, 0, 0.1),
               inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+/* Custom scrollbar for filters sidebar */
+.filters::-webkit-scrollbar {
+  width: 4px;
+}
+.filters::-webkit-scrollbar-track {
+  background: transparent;
+}
+.filters::-webkit-scrollbar-thumb {
+  background: rgba(255, 215, 0, 0.2);
+  border-radius: 4px;
 }
 
 .filters h2 {
@@ -569,20 +583,9 @@
 }
 
 @media (max-width: 1024px) {
-  .page-container {
-    flex-direction: column;
-    padding: 0 1.5rem;
-  }
-
-  .filters {
-    position: static;
-    width: 100%;
-    max-width: 100%;
-  }
-
   .hostel-grid {
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 2rem;
+    gap: 1.5rem;
   }
 }
 
@@ -687,7 +690,7 @@
 
   .hostel-grid {
     grid-template-columns: 1fr;
-    gap: 1.25rem;
+    gap: 1rem;
   }
 
   .main-content {
@@ -695,18 +698,191 @@
     border-radius: 18px;
   }
 
-  .hostel-card-content {
-    padding: 0.95rem;
+  .hostel-card {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    position: relative;
   }
 
-  .hostel-card-image-wrapper,
+  .hostel-card-image-wrapper {
+    width: 135px;
+    height: auto;
+    align-self: stretch;
+    flex-shrink: 0;
+    margin: 0;
+    border-radius: 16px 0 0 16px;
+    overflow: hidden;
+    position: relative;
+  }
+
   .hostel-card-image-wrapper .card-image,
   .hostel-card img {
-    height: 180px;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 16px 0 0 16px;
+    transition: none;
+  }
+
+  .hostel-card:hover img {
+    transform: none;
+  }
+
+  .hostel-card-content {
+    flex: 1;
+    padding: 0.85rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-width: 0;
   }
 
   .hostel-card h3 {
-    font-size: 1.2rem;
+    font-size: 1.05rem;
+    margin: 0 0 0.25rem 0;
+    font-weight: 700;
+  }
+
+  .card-rating-badge {
+    top: 6px;
+    left: 6px;
+    padding: 0.2rem 0.35rem;
+    border-radius: 6px;
+  }
+
+  .card-rating-badge .rating-val {
+    font-size: 0.8rem;
+  }
+
+  .hostel-card.rating-border-green .card-rating-badge {
+    border: 1.5px solid #4caf50;
+  }
+  .hostel-card.rating-border-green .card-rating-badge .rating-val {
+    color: #4caf50;
+  }
+  .hostel-card.rating-border-yellow .card-rating-badge {
+    border: 1.5px solid #ffc107;
+  }
+  .hostel-card.rating-border-yellow .card-rating-badge .rating-val {
+    color: #ffc107;
+  }
+  .hostel-card.rating-border-orange .card-rating-badge {
+    border: 1.5px solid #ff9800;
+  }
+  .hostel-card.rating-border-orange .card-rating-badge .rating-val {
+    color: #ff9800;
+  }
+  .hostel-card.rating-border-red .card-rating-badge {
+    border: 1.5px solid #f44336;
+  }
+  .hostel-card.rating-border-red .card-rating-badge .rating-val {
+    color: #f44336;
+  }
+
+  .card-location {
+    font-size: 0.72rem;
+    margin-bottom: 0.4rem;
+    gap: 0.2rem;
+    line-height: 1.3;
+  }
+
+  .card-loc-icon {
+    font-size: 0.85rem;
+  }
+
+  .card-amenity-text {
+    display: inline;
+    font-size: 0.7rem;
+    color: #a1a1aa;
+  }
+
+  .card-amenity-tag {
+    padding: 0;
+    background: transparent;
+    border: none;
+  }
+
+  .card-amenities-row {
+    gap: 0.4rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .card-amenity-icon-circle {
+    width: 14px;
+    height: 14px;
+    background: transparent;
+    border: none;
+    color: #ffbf00;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.75rem;
+  }
+
+  .card-key-badges {
+    gap: 0.3rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .key-badge {
+    padding: 0.15rem 0.35rem;
+    font-size: 0.65rem;
+    border-radius: 4px;
+  }
+
+  .card-divider {
+    display: none;
+  }
+
+  .card-footer-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-top: auto;
+  }
+
+  .card-price-container {
+    align-items: flex-start;
+  }
+
+  .card-price-val {
+    font-size: 1.25rem;
+  }
+
+  .card-price-val span {
+    font-size: 0.72rem;
+  }
+
+  .card-price-advance {
+    font-size: 0.7rem;
+    margin-top: 0.1rem;
+  }
+
+  .card-view-btn {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 10;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    padding: 0;
+    margin: 0;
+    font-size: 0 !important;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .card-view-btn .btn-arrow {
+    position: absolute;
+    bottom: 0.85rem;
+    right: 0.85rem;
+    font-size: 1.35rem !important;
+    color: var(--primary-gold) !important;
   }
 
   .filters label {
@@ -722,12 +898,6 @@
   .amenities span {
     font-size: 0.68rem;
     padding: 0.35rem 0.65rem;
-  }
-
-  .hostel-card .view-button {
-    width: 100%;
-    margin-top: 0.9rem;
-    padding: 0.7rem 1rem;
   }
 
   .loading,
@@ -759,13 +929,19 @@
     padding: 0.7rem 0.6rem 0.95rem;
   }
 
-  .hostel-card-image-wrapper,
-  .hostel-card-image-wrapper .card-image,
-  .hostel-card img {
-    height: 165px;
+  .hostel-card-image-wrapper {
+    width: 110px;
+    height: auto;
+    align-self: stretch;
+    margin: 0;
+    border-radius: 16px 0 0 16px;
   }
 
   .hostel-card h3 {
-    font-size: 1.1rem;
+    font-size: 0.95rem;
+  }
+
+  .hostel-card-content {
+    padding: 0.65rem;
   }
 }
