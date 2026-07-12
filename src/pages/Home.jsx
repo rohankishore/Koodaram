@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import Dither from '../component/Dither';
 import CardSwap, { Card } from '../component/CardSwap';
-import { IoSearch, IoFlame } from 'react-icons/io5';
+import { IoSearch, IoFlame, IoLogoGithub, IoPeopleSharp, IoPricetag } from 'react-icons/io5';
 import './Home.css';
 import { Analytics } from "@vercel/analytics/react"
 import GradualBlur from '../component/GradualBlur';
@@ -102,7 +102,6 @@ function Home() {
 
   return (
     <>
-      <GradualBlur preset="page-footer" height="4rem" strength={4} zIndex={999} />
       <div className="page-dither" style={{ minHeight: '100vh', width: '100vw', position: 'fixed', top: 0, left: 0, zIndex: 0, filter: 'blur(10px) saturate(1.2)' }}>
         <Dither />
       </div>
@@ -174,30 +173,72 @@ function Home() {
         </div>
 
         <section className="how-it-works-section">
-          <h2>How It Works</h2>
+          <div className="how-it-works-badge-container">
+            <span className="how-it-works-badge">HOW IT WORKS</span>
+          </div>
+          <h2 className="how-it-works-heading">
+            Simple. Transparent. <span className="highlight">Student First.</span>
+          </h2>
+          <p className="how-it-works-sub">
+            Koodaram is built by students, for students.<br />
+            Here’s how we make hostel hunting easy, honest, and hassle-free.
+          </p>
+
           <div className="steps-container">
-            <div className="step-card">
-              <GradualBlur preset="bottom" height="100%" strength={3} zIndex={1} opacity={0.7} />
-              <div style={{ position: 'relative', zIndex: 2 }}>
-                <div className="step-number">1</div>
-                <h3>100% Open Source</h3>
-                <p>All hostel data is hosted on GitHub and freely accessible. No accounts needed, no data locked behind paywalls.</p>
+            {/* Card 01 - Open Source */}
+            <div className="step-card card-open-source">
+              <div className="step-card-header">
+                <span className="step-badge">01</span>
+                <span className="step-grip-dots">
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </span>
+              </div>
+              <div className="step-icon-wrapper">
+                <img src="/assets/images/icons/pwa_open_source.png" alt="Open Source" className="step-icon-img" />
+              </div>
+              <h3>100% Open Source</h3>
+              <div className="step-card-divider line-green"></div>
+              <p>All hostel data is open and hosted on GitHub. Anyone can access, contribute, or verify information.</p>
+              <div className="step-pill-badge pill-green">
+                <IoLogoGithub className="pill-icon" /> Open. Transparent. Trusted.
               </div>
             </div>
-            <div className="step-card">
-              <GradualBlur preset="bottom" height="100%" strength={3} zIndex={1} opacity={0.7} />
-              <div style={{ position: 'relative', zIndex: 2 }}>
-                <div className="step-number">2</div>
-                <h3>Student Verified</h3>
-                <p>Real students submit and verify hostel information, ensuring data is up-to-date and trustworthy.</p>
+
+            {/* Card 02 - Student Verified */}
+            <div className="step-card card-verified">
+              <div className="step-card-header">
+                <span className="step-badge">02</span>
+                <span className="step-grip-dots">
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </span>
+              </div>
+              <div className="step-icon-wrapper">
+                <img src="/assets/images/icons/pwa_verified.png" alt="Student Verified" className="step-icon-img" />
+              </div>
+              <h3>Student Verified</h3>
+              <div className="step-card-divider line-gold"></div>
+              <p>Real students add and verify hostel details, photos, and facilities to ensure everything is accurate and reliable.</p>
+              <div className="step-pill-badge pill-gold">
+                <IoPeopleSharp className="pill-icon" /> By students, for students.
               </div>
             </div>
-            <div className="step-card">
-              <GradualBlur preset="bottom" height="100%" strength={3} zIndex={1} opacity={0.7} />
-              <div style={{ position: 'relative', zIndex: 2 }}>
-                <div className="step-number">3</div>
-                <h3>Completely Free</h3>
-                <p>Browse hostels, view photos, and contact owners — all without paying a rupee or creating an account.</p>
+
+            {/* Card 03 - Completely Free */}
+            <div className="step-card card-free">
+              <div className="step-card-header">
+                <span className="step-badge">03</span>
+                <span className="step-grip-dots">
+                  <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </span>
+              </div>
+              <div className="step-icon-wrapper">
+                <img src="/assets/images/icons/pwa_free.png" alt="Completely Free" className="step-icon-img" />
+              </div>
+              <h3>Completely Free</h3>
+              <div className="step-card-divider line-purple"></div>
+              <p>No hidden charges. No subscriptions. Browse, contact, and stay — absolutely free forever.</p>
+              <div className="step-pill-badge pill-purple">
+                <IoPricetag className="pill-icon" /> Free forever. Always will be.
               </div>
             </div>
           </div>
