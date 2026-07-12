@@ -48,6 +48,82 @@ function ShiftingFont() {
   );
 }
 
+// Custom Minimal SVGs for the FAQ Section
+const QuestionBubbleIcon = () => (
+  <svg className="faq-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+    <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"></path>
+    <line x1="12" y1="17" x2="12.01" y2="17"></line>
+  </svg>
+);
+
+const ShieldIcon = () => (
+  <svg className="faq-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+  </svg>
+);
+
+const RupeeIcon = () => (
+  <svg className="faq-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M6 9h12M6 5h12M6 5c6 0 9 3 9 7s-3 7-9 7M9 12h9M9 12l9 7" />
+  </svg>
+);
+
+const CalendarIcon = () => (
+  <svg className="faq-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+    <line x1="16" y1="2" x2="16" y2="6"></line>
+    <line x1="8" y1="2" x2="8" y2="6"></line>
+    <line x1="3" y1="10" x2="21" y2="10"></line>
+  </svg>
+);
+
+const UsersIcon = () => (
+  <svg className="faq-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+    <circle cx="9" cy="7" r="4"></circle>
+    <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+    <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+  </svg>
+);
+
+const BuildingIcon = () => (
+  <svg className="faq-item-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect x="4" y="2" width="16" height="20" rx="2" ry="2"></rect>
+    <line x1="9" y1="22" x2="9" y2="16"></line>
+    <line x1="15" y1="22" x2="15" y2="16"></line>
+    <line x1="9" y1="16" x2="15" y2="16"></line>
+    <path d="M8 6h2v2H8V6zm0 4h2v2H8v-2zm8-4h2v2h-2V6zm0 4h2v2h-2v-2z"></path>
+  </svg>
+);
+
+const LightbulbIcon = () => (
+  <svg className="faq-footer-bulb" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5 5 0 0 0 8 8c0 1 .4 2.5 1.5 3.5.7.8 1.3 1.5 1.5 2.5"></path>
+    <line x1="9" y1="18" x2="15" y2="18"></line>
+    <line x1="10" y1="22" x2="14" y2="22"></line>
+  </svg>
+);
+
+const renderFaqIcon = (type) => {
+  switch (type) {
+    case 'help':
+      return <QuestionBubbleIcon />;
+    case 'shield':
+      return <ShieldIcon />;
+    case 'rupee':
+      return <RupeeIcon />;
+    case 'calendar':
+      return <CalendarIcon />;
+    case 'users':
+      return <UsersIcon />;
+    case 'building':
+      return <BuildingIcon />;
+    default:
+      return <QuestionBubbleIcon />;
+  }
+};
+
 function Home() {
   const [activeQuestion, setActiveQuestion] = useState(null);
   const [hostelCount, setHostelCount] = useState(0);
@@ -66,37 +142,40 @@ function Home() {
 
   const faqData = [
     {
-      question: "Is Koodaram free to use?",
-      answer: "Yes! Koodaram is completely free (free as in freedom) for students. You can browse hostels, view photos, and contact owners without paying anything."
+      question: "What is Koodaram?",
+      answer: "Koodaram is a platform that helps students discover and compare verified hostels near their college. We make finding the right place to stay simple, safe, and reliable.",
+      iconType: "help",
+      theme: "yellow"
     },
     {
-      question: "Do I need an account to use Koodaram?",
-      answer: "No! Koodaram is completely open — no accounts, no sign-ups, no tracking. Just browse, search, and find your hostel."
+      question: "How are hostels verified?",
+      answer: "Our model is built on student verification. While we don't check every hostel personally, information is submitted and validated by a network of students who keep the listings up-to-date.",
+      iconType: "shield",
+      theme: "green"
     },
     {
-      question: "How do you ensure data is accurate?",
-      answer: "Our model is built on student verification. While we don't check every hostel personally, information is submitted and validated by a network of students who keep the listings up-to-date."
+      question: "Does Koodaram charge any fees?",
+      answer: "No! Koodaram is completely free (free as in freedom) for students. We do not charge any commission, listing fees, or booking fees.",
+      iconType: "rupee",
+      theme: "purple"
     },
     {
-      question: "How do I contribute?",
-      answer: "You can contribute by listing a new hostel, adding reviews and ratings to help verify information for other students."
+      question: "Can I visit the hostel before booking?",
+      answer: "Yes! Since you contact the owners directly, you can coordinate a visit to the hostel to check the facilities before making any payment.",
+      iconType: "calendar",
+      theme: "blue"
     },
     {
-      question: "What do the card border colors mean?",
-      answer: "Each hostel card glows a different color based on its student rating. Green means above 4 stars (excellent), yellow means 3–4 stars (good), orange means 2–3 stars (average), and red means below 2 stars (poor). Yellow also appears when a hostel has no ratings yet."
+      question: "Is Koodaram only for my college?",
+      answer: "No, Koodaram is expanding to cover hostels near all major colleges across Kerala. You can search by your college name to see available listings.",
+      iconType: "users",
+      theme: "pink"
     },
     {
-      
-      question: "Is Koodaram fully open source?",
-      answer: (
-        <>
-          Yes! All hostel data is open source and available on{' '}
-          <a href="https://github.com/Koodaram-Inc/koodaram-data" target="_blank" rel="noopener noreferrer">
-            GitHub
-          </a>
-          . Anyone can view, verify, or contribute to the hostel listings. The platform code is also open — we believe in total transparency.
-        </>
-      )
+      question: "How can I list my hostel on Koodaram?",
+      answer: "You can list your hostel by clicking the 'List Your Hostel' button on our platform. Since we are open-source, all listings are stored transparently on GitHub.",
+      iconType: "building",
+      theme: "orange"
     }
   ];
 
@@ -272,27 +351,100 @@ function Home() {
         </section>
 
         <section className="faq-section">
-          <h2>Frequently Asked Questions</h2>
+          <div className="faq-badge-container">
+            <div className="faq-badge">
+              <QuestionBubbleIcon />
+              <span>FAQ</span>
+            </div>
+          </div>
+          <h2 className="faq-title">
+            Got Questions? We've Got{" "}
+            <span className="faq-highlight">
+              Answers.
+              <svg className="brush-stroke" viewBox="0 0 100 20" preserveAspectRatio="none">
+                <path d="M2,15 Q50,5 98,15 Q50,11 2,15" fill="none" stroke="#ffd600" strokeWidth="3" strokeLinecap="round" />
+              </svg>
+            </span>
+          </h2>
+          <p className="faq-subheading">
+            Everything you need to know about Koodaram.
+          </p>
+          
+          <div className="faq-divider">
+            <div className="faq-divider-line"></div>
+            <svg className="faq-divider-home" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="#ffd600" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+              <polyline points="9 22 9 12 15 12 15 22"></polyline>
+            </svg>
+            <div className="faq-divider-line"></div>
+          </div>
+
           <div className="faq-accordion">
-            {faqData.map((faq, index) => (
-              <div 
-                key={index} 
-                className={`faq-accordion-item ${activeQuestion === index ? 'active' : ''}`}
-              >
-                <GradualBlur preset="bottom" height="100%" strength={2} zIndex={1} opacity={0.6} />
-                <div style={{ position: 'relative', zIndex: 2 }}>
-                  <div 
-                    className="faq-accordion-question" 
-                    onClick={() => toggleQuestion(index)}
-                  >
-                    {faq.question}
+            {faqData.map((faq, index) => {
+              const isActive = activeQuestion === index;
+              return (
+                <div 
+                  key={index} 
+                  className={`faq-accordion-item ${isActive ? 'active' : ''} faq-theme-${faq.theme}`}
+                >
+                  <div className="faq-accordion-header" onClick={() => toggleQuestion(index)}>
+                    <div className="faq-question-left">
+                      <div className="faq-icon-box">
+                        {renderFaqIcon(faq.iconType)}
+                      </div>
+                      <span className="faq-question-text">{faq.question}</span>
+                    </div>
+                    
+                    <div className="faq-btn-right">
+                      {isActive ? (
+                        <>
+                          <div className="faq-vertical-divider"></div>
+                          <div className="faq-toggle-btn active">
+                            <span className="faq-toggle-icon">−</span>
+                          </div>
+                        </>
+                      ) : (
+                        <div className="faq-toggle-btn">
+                          <span className="faq-toggle-icon">+</span>
+                        </div>
+                      )}
+                    </div>
                   </div>
                   <div className="faq-accordion-answer">
-                    <p>{faq.answer}</p>
+                    <div className="faq-answer-inner">
+                      <p>{faq.answer}</p>
+                    </div>
                   </div>
                 </div>
+              );
+            })}
+          </div>
+
+          <div className="faq-footer-card">
+            <div className="faq-footer-left">
+              <div className="faq-footer-bulb-box">
+                <LightbulbIcon />
               </div>
-            ))}
+              <div className="faq-footer-text">
+                <h3>Still have questions?</h3>
+                <p>We're here to help you!</p>
+              </div>
+            </div>
+            <div className="faq-footer-divider"></div>
+            <div className="faq-footer-right">
+              <a 
+                href="mailto:support@koodaram.org" 
+                className="faq-contact-btn"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg className="faq-contact-icon" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                </svg>
+                <span>Contact Support</span>
+                <span className="faq-contact-arrow">↗</span>
+              </a>
+            </div>
           </div>
         </section>
 
