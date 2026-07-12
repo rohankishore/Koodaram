@@ -5,6 +5,8 @@ import { HiAdjustmentsHorizontal } from 'react-icons/hi2';
 import { 
   IoClose, 
   IoLocationSharp, 
+  IoSearch,
+  IoBed,
   IoWifi, 
   IoRestaurant, 
   IoVideocam, 
@@ -120,6 +122,22 @@ function Browse() {
   const [loading, setLoading] = useState(true);
   const [showFilters, setShowFilters] = useState(false);
 
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [showDropdown, setShowDropdown] = useState(false);
+  const [selectedAmenities, setSelectedAmenities] = useState([]);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleOutsideClick = (e) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+        setShowDropdown(false);
+      }
+    };
+    document.addEventListener('mousedown', handleOutsideClick);
+    return () => document.removeEventListener('mousedown', handleOutsideClick);
+  }, []);
+
   // On mount, parse slug to filters
   const [filters, setFilters] = useState(() => {
     if (slug) return slugToFilters(slug);
@@ -220,6 +238,90 @@ function Browse() {
   // College change just calls handleFilterChange
   const handleCollegeChange = (value) => handleFilterChange('college', value);
 
+  const handleSearchInput = (value) => {
+    setSearchQuery(value);
+    if (!value.trim()) {
+      setSearchResults([]);
+      setShowDropdown(false);
+      return;
+    }
+
+    const norm = value.toLowerCase();
+    const matched = [];
+    const seen = new Set();
+
+    // 1. Match Hostel Names
+    hostels.forEach(h => {
+      if (h.name && h.name.toLowerCase().includes(norm)) {
+        const itemKey = `hostel-${h.id}`;
+        if (!seen.has(itemKey)) {
+          seen.add(itemKey);
+          matched.push({
+            type: 'Hostel',
+            label: h.name,
+            sublabel: h.college || h.location || '',
+            value: h.slug || h.folderName || h.id,
+            action: 'navigate',
+            icon: '🏠'
+          });
+        }
+      }
+    });
+
+    // 2. Match Locations (unique area names)
+    hostels.forEach(h => {
+      if (h.location && h.location.toLowerCase().includes(norm)) {
+        const parts = h.location.split(',');
+        const area = parts[0].trim();
+        const itemKey = `location-${area.toLowerCase()}`;
+        if (area && !seen.has(itemKey)) {
+          seen.add(itemKey);
+          matched.push({
+            type: 'Location',
+            label: area,
+            sublabel: 'Filter by Location',
+            value: area,
+            action: 'filter_location',
+            icon: '📍'
+          });
+        }
+      }
+    });
+
+    // 3. Match Amenities
+    hostels.forEach(h => {
+      h.amenities?.forEach(am => {
+        if (am.toLowerCase().includes(norm)) {
+          const normAm = am.trim();
+          let displayAm = normAm;
+          if (normAm.toLowerCase().includes('wifi') || normAm.toLowerCase().includes('wi-fi')) displayAm = 'WiFi';
+          else if (normAm.toLowerCase().includes('food') || normAm.toLowerCase().includes('mess') || normAm.toLowerCase().includes('meals')) displayAm = 'Food';
+          else if (normAm.toLowerCase().includes('laundry') || normAm.toLowerCase().includes('washing')) displayAm = 'Laundry';
+          else if (normAm.toLowerCase().includes('parking')) displayAm = 'Parking';
+          else if (normAm.toLowerCase().includes('cctv') || normAm.toLowerCase().includes('security') || normAm.toLowerCase().includes('camera')) displayAm = 'CCTV';
+          else if (normAm.toLowerCase().includes('study')) displayAm = 'Study Room';
+          else if (normAm.toLowerCase().includes('bathroom') || normAm.toLowerCase().includes('toilet')) displayAm = 'Attached Bathroom';
+
+          const itemKey = `amenity-${displayAm.toLowerCase()}`;
+          if (!seen.has(itemKey)) {
+            seen.add(itemKey);
+            matched.push({
+              type: 'Amenity',
+              label: displayAm,
+              sublabel: 'Filter by Amenity',
+              value: displayAm,
+              action: 'filter_amenity',
+              icon: '✨'
+            });
+          }
+        }
+      });
+    });
+
+    setSearchResults(matched.slice(0, 7));
+    setShowDropdown(true);
+  };
+
   const getRatingBorderClass = (rating) => {
     if (!rating || rating === 0) return 'rating-border-yellow';
     if (rating > 4) return 'rating-border-green';
@@ -272,6 +374,12 @@ function Browse() {
       !filters.bathroom ||
       (hostel.bathroom && hostel.bathroom.toLowerCase() === filters.bathroom.toLowerCase());
 
+    const matchesAmenities =
+      selectedAmenities.length === 0 ||
+      selectedAmenities.every(selectedAm =>
+        hostel.amenities?.some(a => a.toLowerCase().includes(selectedAm.toLowerCase()))
+      );
+
     return (
       matchesLocation &&
       matchesCollege &&
@@ -279,7 +387,8 @@ function Browse() {
       matchesPrice &&
       matchesRating &&
       matchesCurfew &&
-      matchesBathroom
+      matchesBathroom &&
+      matchesAmenities
     );
 
   }).sort((a, b) => {
@@ -289,7 +398,7 @@ function Browse() {
   });
 
   return (
-    <div style={{ position: 'relative', minHeight: '100vh', overflowX: 'hidden' }}>
+    <div style={{ position: 'relative', minHeight: '100vh' }}>
 
 
 
@@ -439,6 +548,91 @@ function Browse() {
         </aside>
 
         <main className="main-content">
+
+          <div className="search-bar-wrapper" ref={dropdownRef}>
+            <div className="search-input-container">
+              <IoSearch className="search-icon" />
+              <input
+                type="text"
+                className="global-search-input"
+                placeholder="Search hostels by name, area, facility (e.g. WiFi)..."
+                value={searchQuery}
+                onChange={(e) => handleSearchInput(e.target.value)}
+                onFocus={() => searchQuery.trim() && setShowDropdown(true)}
+              />
+              {searchQuery && (
+                <button className="clear-search-btn" onClick={() => {
+                  setSearchQuery('');
+                  setSearchResults([]);
+                  setShowDropdown(false);
+                }}>
+                  <IoClose size={18} />
+                </button>
+              )}
+            </div>
+
+            {showDropdown && searchResults.length > 0 && (
+              <div className="search-dropdown-menu">
+                {searchResults.map((result, idx) => (
+                  <div
+                    key={idx}
+                    className="search-dropdown-item"
+                    onClick={() => {
+                      if (result.action === 'navigate') {
+                        window.open(`/hostel/${result.value}`, '_blank');
+                      } else if (result.action === 'filter_location') {
+                        handleFilterChange('location', result.value);
+                      } else if (result.action === 'filter_amenity') {
+                        setSelectedAmenities(prev => prev.includes(result.value) ? prev : [...prev, result.value]);
+                      }
+                      setSearchQuery('');
+                      setShowDropdown(false);
+                    }}
+                  >
+                    <div className="result-icon-box">
+                      {result.type === 'Hostel' && <IoBed className="result-icon icon-hostel" />}
+                      {result.type === 'Location' && <IoLocationSharp className="result-icon icon-location" />}
+                      {result.type === 'Amenity' && (
+                        <span className="result-icon icon-amenity">
+                          {getAmenityIcon(result.label)}
+                        </span>
+                      )}
+                    </div>
+                    <div className="result-text-box">
+                      <span className="result-label">{result.label}</span>
+                      <span className="result-sublabel">{result.sublabel}</span>
+                    </div>
+                    <span className={`result-type-badge type-${result.type.toLowerCase()}`}>
+                      {result.type}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
+          {(selectedAmenities.length > 0 || filters.location || filters.college) && (
+            <div className="active-filters-row">
+              {filters.location && (
+                <span className="active-filter-tag">
+                  📍 Location: {filters.location}
+                  <button className="clear-tag-btn" onClick={() => handleFilterChange('location', '')}>&times;</button>
+                </span>
+              )}
+              {filters.college && (
+                <span className="active-filter-tag">
+                  🎓 College: {filters.college}
+                  <button className="clear-tag-btn" onClick={() => handleFilterChange('college', '')}>&times;</button>
+                </span>
+              )}
+              {selectedAmenities.map((am) => (
+                <span key={am} className="active-filter-tag">
+                  ✨ Amenity: {am}
+                  <button className="clear-tag-btn" onClick={() => setSelectedAmenities(prev => prev.filter(x => x !== am))}>&times;</button>
+                </span>
+              ))}
+            </div>
+          )}
 
           <section
             className="hostel-grid"

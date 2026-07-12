@@ -68,48 +68,34 @@
 .filters {
   position: sticky;
   top: 100px;
-  max-height: calc(100vh - 130px);
-  overflow-y: auto;
-  background: linear-gradient(135deg, #2a2a2a 0%, #1f1f1f 100%);
-  padding: 2rem;
+  background: #111419;
+  padding: 1.25rem;
   border-radius: 16px;
   width: 280px;
   flex-shrink: 0;
   box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4), 
-              0 0 0 1px rgba(255, 215, 0, 0.1),
-              inset 0 1px 0 rgba(255, 255, 255, 0.05);
-}
-
-/* Custom scrollbar for filters sidebar */
-.filters::-webkit-scrollbar {
-  width: 4px;
-}
-.filters::-webkit-scrollbar-track {
-  background: transparent;
-}
-.filters::-webkit-scrollbar-thumb {
-  background: rgba(255, 215, 0, 0.2);
-  border-radius: 4px;
+              0 0 0 1px rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .filters h2 {
-  font-size: 1.3rem;
+  font-size: 1.2rem;
   font-weight: 700;
-  color: var(--accent);
-  margin-bottom: 1.5rem;
-  padding-bottom: 1rem;
-  border-bottom: 2px solid rgba(255, 215, 0, 0.2);
+  color: var(--accent, #ffd700);
+  margin-bottom: 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255, 215, 0, 0.2);
 }
 
 .filters .filter-group {
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.8rem;
 }
 
 .filters label {
   display: block;
-  font-size: 0.85rem;
-  margin-bottom: 0.5rem;
-  color: var(--text-light);
+  font-size: 0.78rem;
+  margin-bottom: 0.35rem;
+  color: var(--text-light, #c5c5c5);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
@@ -118,19 +104,19 @@
 .filters input,
 .filters select {
   width: 100%;
-  padding: 0.7rem 0.9rem;
-  background: var(--input-bg);
-  border: 1px solid var(--border-color);
+  padding: 0.55rem 0.75rem;
+  background: #0d0f12;
+  border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 8px;
-  color: var(--text-light);
-  font-size: 0.9rem;
-  transition: all 0.3s ease;
+  color: #e0e0e0;
+  font-size: 0.85rem;
+  transition: all 0.2s ease;
 }
 
 .filters input:focus,
 .filters select:focus {
   outline: none;
-  border-color: var(--accent);
+  border-color: var(--accent, #ffd700);
   box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
 }
 
@@ -935,3 +921,226 @@
     padding: 0.65rem;
   }
 }
+
+/* Desktop Hiding for filter CTA button */
+.filters .cta-button {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .filters .cta-button {
+    display: block;
+    width: 100%;
+    margin-top: 1.5rem;
+  }
+}
+
+/* Global Search Bar Styles */
+.search-bar-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.5rem;
+  z-index: 15;
+}
+
+.search-input-container {
+  display: flex;
+  align-items: center;
+  background: #111419;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+  padding: 0.25rem 1rem;
+  transition: all 0.2s ease;
+}
+
+.search-input-container:focus-within {
+  border-color: var(--primary-gold, #ffd700);
+  box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
+  background: #161a20;
+}
+
+.search-icon {
+  color: #a0aec0;
+  font-size: 1.25rem;
+  margin-right: 0.75rem;
+}
+
+.global-search-input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #ffffff;
+  font-size: 0.95rem;
+  padding: 0.65rem 0;
+  width: 100%;
+}
+
+.global-search-input::placeholder {
+  color: #718096;
+}
+
+.clear-search-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #a0aec0;
+  padding: 0.2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s;
+}
+
+.clear-search-btn:hover {
+  color: #ffffff;
+}
+
+/* Search Dropdown Menu */
+.search-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: #111419;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+.search-dropdown-item {
+  display: flex;
+  align-items: center;
+  padding: 0.85rem 1.25rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+.search-dropdown-item:last-child {
+  border-bottom: none;
+}
+
+.search-dropdown-item:hover {
+  background: rgba(255, 215, 0, 0.05);
+}
+
+.result-icon-box {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 1rem;
+  flex-shrink: 0;
+}
+
+.result-icon-box svg {
+  font-size: 1.1rem;
+}
+
+.result-icon-box .icon-hostel {
+  color: #3b82f6;
+}
+
+.result-icon-box .icon-location {
+  color: #ef4444;
+}
+
+.result-icon-box .icon-amenity {
+  color: var(--primary-gold, #ffd700);
+}
+
+.result-text-box {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-width: 0;
+}
+
+.result-label {
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #ffffff;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.result-sublabel {
+  font-size: 0.75rem;
+  color: #718096;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 0.1rem;
+}
+
+.result-type-badge {
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.type-hostel {
+  background: rgba(59, 130, 246, 0.1);
+  color: #3b82f6;
+}
+
+.type-location {
+  background: rgba(239, 68, 68, 0.1);
+  color: #ef4444;
+}
+
+.type-amenity {
+  background: rgba(255, 215, 0, 0.1);
+  color: var(--primary-gold, #ffd700);
+}
+
+/* Active filters tags row */
+.active-filters-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 1.5rem;
+}
+
+.active-filter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(255, 215, 0, 0.06);
+  border: 1px solid rgba(255, 215, 0, 0.25);
+  color: var(--primary-gold, #ffd700);
+  padding: 0.3rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.clear-tag-btn {
+  background: transparent;
+  border: none;
+  color: var(--primary-gold, #ffd700);
+  cursor: pointer;
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin-left: 0.2rem;
+  transition: opacity 0.2s;
+}
+
+.clear-tag-btn:hover {
+  opacity: 0.7;
+}
+
