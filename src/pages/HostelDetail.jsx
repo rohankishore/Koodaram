@@ -14,8 +14,6 @@ import {
   IoSparkles,
   IoAlertCircle,
   IoArrowBack,
-  IoHeart,
-  IoHeartOutline,
   IoWifi,
   IoRestaurant,
   IoCar,
@@ -128,29 +126,11 @@ function HostelDetail() {
   const [error, setError] = useState(null);
   const [showQrModal, setShowQrModal] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-  const [isFavorite, setIsFavorite] = useState(false);
   const { id } = useParams();
 
   useEffect(() => {
     loadHostelData();
-    if (id) {
-      const favs = JSON.parse(localStorage.getItem('koodaram_favorites') || '{}');
-      setIsFavorite(!!favs[id]);
-    }
   }, [id]);
-
-  const toggleFavorite = () => {
-    if (!id) return;
-    const favs = JSON.parse(localStorage.getItem('koodaram_favorites') || '{}');
-    if (favs[id]) {
-      delete favs[id];
-      setIsFavorite(false);
-    } else {
-      favs[id] = true;
-      setIsFavorite(true);
-    }
-    localStorage.setItem('koodaram_favorites', JSON.stringify(favs));
-  };
 
   const getMapEmbedUrl = (gmapUrl) => {
     if (!gmapUrl) return null;
@@ -188,6 +168,12 @@ function HostelDetail() {
     }
   };
 
+  const getRatingClass = (ratingVal) => {
+    if (ratingVal > 4) return 'rating-high';
+    if (ratingVal >= 3) return 'rating-mid';
+    return 'rating-low';
+  };
+
   if (loading) {
     return <div className="container hostel-detail-container"><p>Loading...</p></div>;
   }
@@ -218,9 +204,6 @@ function HostelDetail() {
     : [];
 
   const name = hostel.name || "";
-  const endsWithHostel = name.toLowerCase().endsWith("hostel");
-  const displayNameBase = endsWithHostel ? name.slice(0, -6).trim() : name;
-  const displayNameSuffix = endsWithHostel ? "Hostel" : "";
 
   const hasWiFi = hostel.amenities?.some(a => a.toLowerCase().includes('wifi') || a.toLowerCase().includes('wi-fi'));
   const hasLaundry = hostel.amenities?.some(a => a.toLowerCase().includes('laundry') || a.toLowerCase().includes('washing'));
@@ -232,25 +215,24 @@ function HostelDetail() {
       {/* Main details and gallery grid layout */}
       <div className="hostel-main-layout">
         
-        {/* Left Column: Information */}
-        <div className="hostel-text-section">
+        {/* Flat Section 1: Header Left */}
+        <div className="hostel-header-left">
           <Link to="/browse" className="back-to-search-btn">
             <IoArrowBack /> Back to search
           </Link>
 
           <h1 className="hostel-name-title">
-            <span className="name-base">{displayNameBase}</span>
-            {displayNameSuffix && <span className="name-suffix"> {displayNameSuffix}</span>}
+            {name}
           </h1>
 
           <div className="hostel-badge-row">
             {rating > 0 && (
-              <span className="detail-badge rating-badge">
+              <span className={`detail-badge rating-badge ${getRatingClass(rating)}`}>
                 ★ {rating.toFixed(1)}
               </span>
             )}
             {hostel.gender && (
-              <span className="detail-badge gender-badge">
+              <span className={`detail-badge gender-badge ${hostel.gender.toLowerCase()}`}>
                 {hostel.gender.toUpperCase()} ONLY
               </span>
             )}
@@ -258,7 +240,57 @@ function HostelDetail() {
               <IoShieldCheckmark className="badge-check-icon" /> Student Verified
             </span>
           </div>
+        </div>
 
+        {/* Flat Section 2: Header Right (Gallery Main Photo) */}
+        <div className="hostel-header-right">
+          <div className="main-photo-wrapper">
+            {imagesHTML.length > 0 ? (
+              <>
+                <img 
+                  src={`${RAW_BASE}/${id}/${imagesHTML[activeImageIndex]}`} 
+                  alt={`${hostel.name} active`}
+                  className="active-photo"
+                />
+                
+                {/* Photo ratio counter (e.g. 1/5) */}
+                <div className="photo-ratio-badge">
+                  {activeImageIndex + 1}/{imagesHTML.length}
+                </div>
+              </>
+            ) : (
+              <div className="no-photo-box">
+                <p>No images available</p>
+              </div>
+            )}
+          </div>
+        </div>
+
+        {/* Flat Section 3: Gallery Thumbs */}
+        <div className="hostel-gallery-thumbs">
+          {imagesHTML.length > 1 && (
+            <div className="photo-thumbs-row">
+              {imagesHTML.map((img, idx) => (
+                <button
+                  key={idx}
+                  className={`thumb-photo-btn ${idx === activeImageIndex ? 'active-thumb' : ''}`}
+                  onClick={() => setActiveImageIndex(idx)}
+                >
+                  <img 
+                    src={`${RAW_BASE}/${id}/${img}`} 
+                    alt={`${hostel.name} thumbnail ${idx + 1}`}
+                    onError={(e) => {
+                      e.target.style.display = 'none';
+                    }}
+                  />
+                </button>
+              ))}
+            </div>
+          )}
+        </div>
+
+        {/* Flat Section 4: Details Card */}
+        <div className="hostel-details-card">
           <div className="hostel-specs-table">
             <div className="spec-row">
               <div className="spec-label">
@@ -327,31 +359,6 @@ function HostelDetail() {
               </div>
             )}
 
-            {hostel.amenities && hostel.amenities.length > 0 && (
-              <div className="spec-row">
-                <div className="spec-label">
-                  <IoSparkles className="spec-icon" /> Amenities
-                </div>
-                <div className="spec-value spec-value-amenities">
-                  {hostel.amenities.slice(0, 5).map((a, idx) => (
-                    <span key={idx} className="spec-amenity-pill">{a}</span>
-                  ))}
-                  {hostel.amenities.length > 5 && (
-                    <span className="spec-amenity-pill-more">+{hostel.amenities.length - 5} more</span>
-                  )}
-                </div>
-              </div>
-            )}
-
-            {hostel.curfew && (
-              <div className="spec-row">
-                <div className="spec-label">
-                  <IoTime className="spec-icon" /> Curfew
-                </div>
-                <div className="spec-value">{hostel.curfew}</div>
-              </div>
-            )}
-
             {hostel.bathroom && (
               <div className="spec-row">
                 <div className="spec-label">
@@ -360,57 +367,28 @@ function HostelDetail() {
                 <div className="spec-value">{hostel.bathroom}</div>
               </div>
             )}
-          </div>
-        </div>
 
-        {/* Right Column: Gallery */}
-        <div className="hostel-gallery-section">
-          <div className="main-photo-wrapper">
-            {imagesHTML.length > 0 ? (
-              <>
-                <img 
-                  src={`${RAW_BASE}/${id}/${imagesHTML[activeImageIndex]}`} 
-                  alt={`${hostel.name} active`}
-                  className="active-photo"
-                />
-                <button 
-                  className={`heart-fav-btn ${isFavorite ? 'fav-active' : ''}`}
-                  onClick={toggleFavorite}
-                  title={isFavorite ? "Remove from wishlist" : "Add to wishlist"}
-                >
-                  {isFavorite ? (
-                    <IoHeart size={20} className="heart-icon-svg filled" />
-                  ) : (
-                    <IoHeartOutline size={20} className="heart-icon-svg" />
+            {hostel.amenities && hostel.amenities.length > 0 && (
+              <div className="spec-row">
+                <div className="spec-label">
+                  <IoSparkles className="spec-icon" /> Amenities
+                </div>
+                <div className="spec-value spec-value-amenities">
+                  {hostel.amenities.slice(0, 5).map((amenityStr, idx) => {
+                    const detail = getAmenityDetail(amenityStr);
+                    return (
+                      <span key={idx} className="spec-amenity-pill">
+                        {detail.icon} {detail.label}
+                      </span>
+                    );
+                  })}
+                  {hostel.amenities.length > 5 && (
+                    <span className="spec-amenity-pill-more">+{hostel.amenities.length - 5} more</span>
                   )}
-                </button>
-              </>
-            ) : (
-              <div className="no-photo-box">
-                <p>No images available</p>
+                </div>
               </div>
             )}
           </div>
-
-          {imagesHTML.length > 1 && (
-            <div className="photo-thumbs-row">
-              {imagesHTML.map((img, idx) => (
-                <button
-                  key={idx}
-                  className={`thumb-photo-btn ${idx === activeImageIndex ? 'active-thumb' : ''}`}
-                  onClick={() => setActiveImageIndex(idx)}
-                >
-                  <img 
-                    src={`${RAW_BASE}/${id}/${img}`} 
-                    alt={`${hostel.name} thumbnail ${idx + 1}`}
-                    onError={(e) => {
-                      e.target.style.display = 'none';
-                    }}
-                  />
-                </button>
-              ))}
-            </div>
-          )}
         </div>
       </div>
 

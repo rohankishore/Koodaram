@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import Dither from '../component/Dither';
+
 import { Link, useSearchParams, useParams, useNavigate } from 'react-router-dom';
 import { HiAdjustmentsHorizontal } from 'react-icons/hi2';
 import { 
@@ -291,9 +291,7 @@ function Browse() {
   return (
     <div style={{ position: 'relative', minHeight: '100vh', overflowX: 'hidden' }}>
 
-      <div className="page-dither">
-        <Dither />
-      </div>
+
 
       <div className="page-container" style={{ position: 'relative', zIndex: 10 }}>
 
