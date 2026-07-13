@@ -17,6 +17,7 @@
     "motion": "^12.33.0",
     "ogl": "^1.0.11",
     "postprocessing": "^6.38.2",
+    "qrcode": "^1.5.4",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-icons": "^5.5.0",

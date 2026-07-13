@@ -1,19 +1,21 @@
-import React, { useState, useRef } from 'react';
-import { IoClose } from 'react-icons/io5';
+import React, { useState, useEffect, useRef } from 'react';
+import QRCode from 'qrcode';
+import { IoClose, IoSchoolOutline, IoLocationOutline, IoWalletOutline } from 'react-icons/io5';
 import logoImg from '../../assets/logo.png';
 import './QrPosterModal.css';
 
 const PRESET_COLORS = [
-  { name: 'Koodaram Red', hex: '#e94560' },
-  { name: 'CET Gold', hex: '#ffbf00' },
-  { name: 'CUSAT Blue', hex: '#0f3460' },
-  { name: 'Emerald', hex: '#10b981' },
-  { name: 'Classic Black', hex: '#000000' },
-  { name: 'Neon Purple', hex: '#a855f7' }
+  { name: 'Koodaram Gold', hex: '#ffd600' },
+  { name: 'Coral Pink', hex: '#e94560' },
+  { name: 'Emerald Green', hex: '#4ade80' },
+  { name: 'Neon Purple', hex: '#a855f7' },
+  { name: 'Sky Blue', hex: '#3b82f6' }
 ];
 
 const FONTS = {
   modern: { id: 'modern', name: 'Modern Sans', family: '"Outfit", "Inter", sans-serif' },
+  brand_display: { id: 'brand_display', name: 'Brand Heavy (Thomeo)', family: '"Thomeo", "Inter", sans-serif' },
+  brand_hand: { id: 'brand_hand', name: 'Brand Script (BrotherHoops)', family: '"BrotherHoops", cursive' },
   classic: { id: 'classic', name: 'Classic Serif', family: '"Georgia", "Times", serif' },
   technical: { id: 'technical', name: 'Technical Mono', family: '"Courier New", Monaco, monospace' }
 };
@@ -50,25 +52,41 @@ function QrPosterModal({ hostel, onClose }) {
   const [selectedTheme, setSelectedTheme] = useState('vibrant_dark');
   const [headline, setHeadline] = useState('Find Us on Koodaram');
   const [subHeadline, setSubHeadline] = useState('Scan to view details, reviews, and verify info');
-  const [accentColor, setAccentColor] = useState('#e94560');
-  const [selectedFont, setSelectedFont] = useState('modern');
+  const [accentColor, setAccentColor] = useState('#ffd600');
+  const [selectedFont, setSelectedFont] = useState('brand_display');
   const [borderStyle, setBorderStyle] = useState('neon');
   
   // Custom detail toggles
-  const [showCollege, setShowCollege] = useState(false);
-  const [showLocation, setShowLocation] = useState(false);
-  const [showPrice, setShowPrice] = useState(false);
-  const [showAmenities, setShowAmenities] = useState(false);
+  const [showCollege, setShowCollege] = useState(true);
+  const [showLocation, setShowLocation] = useState(true);
+  const [showPrice, setShowPrice] = useState(true);
+  const [showAmenities, setShowAmenities] = useState(true);
 
   const [downloading, setDownloading] = useState(false);
+  const [qrDataUrl, setQrDataUrl] = useState('');
   const previewRef = useRef(null);
 
-  const hostelUrl = `${window.location.origin}/hostel/${hostel.id || hostel.name.toLowerCase().replace(/\s+/g, '-')}`;
-  
-  // High error correction (ecc=H) allows us to put a logo in the center of the QR
-  const qrColorClean = (selectedTheme === 'minimal_light' && accentColor === '#ffffff' ? '000000' : accentColor.replace('#', ''));
-  const qrBgClean = (selectedTheme === 'minimal_light' ? 'ffffff' : '0f0f16');
-  const qrCodeApiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=500x500&ecc=H&data=${encodeURIComponent(hostelUrl)}&color=${qrColorClean}&bgcolor=${qrBgClean}`;
+  const hostelUrl = `${window.location.origin}/hostel/${hostel.id || hostel.folderName || hostel.name.toLowerCase().replace(/\s+/g, '-')}`;
+
+  useEffect(() => {
+    const generateLocalQR = async () => {
+      try {
+        const url = await QRCode.toDataURL(hostelUrl, {
+          errorCorrectionLevel: 'H',
+          margin: 1,
+          width: 500,
+          color: {
+            dark: selectedTheme === 'minimal_light' && accentColor === '#ffffff' ? '#000000' : accentColor,
+            light: selectedTheme === 'minimal_light' ? '#ffffff' : '#0f0f16'
+          }
+        });
+        setQrDataUrl(url);
+      } catch (err) {
+        console.error('Failed to generate QR:', err);
+      }
+    };
+    generateLocalQR();
+  }, [hostelUrl, accentColor, selectedTheme]);
 
   const theme = THEMES[selectedTheme];
   const font = FONTS[selectedFont];
@@ -146,12 +164,31 @@ function QrPosterModal({ hostel, onClose }) {
       ctx.fillStyle = theme.subColor;
       ctx.fillText("Kerala's Open Hostel Finder", canvas.width / 2, 260);
 
+      // Draw Promo Badge
+      const badgeY = 320;
+      ctx.fillStyle = selectedTheme === 'vibrant_dark' ? 'rgba(255, 214, 0, 0.05)' : 'rgba(255, 214, 0, 0.1)';
+      ctx.strokeStyle = '#ffd600';
+      ctx.lineWidth = 2;
+      const bText = "ZERO BROKERAGE • DIRECT TO OWNERS";
+      ctx.font = `bold 28px ${FONTS.modern.family}`;
+      const bTextWidth = ctx.measureText(bText).width;
+      const bPaddingX = 40;
+      const bPaddingY = 16;
+      
+      // Rounded rect for badge
+      ctx.beginPath();
+      ctx.roundRect((canvas.width - bTextWidth - bPaddingX * 2) / 2, badgeY - bPaddingY, bTextWidth + bPaddingX * 2, bPaddingY * 2 + 10, 20);
+      ctx.fill();
+      ctx.stroke();
+      ctx.fillStyle = '#ffd600';
+      ctx.fillText(bText, canvas.width / 2, badgeY + 14);
+
       // 4. Draw Divider
       ctx.strokeStyle = selectedTheme === 'vibrant_dark' ? '#ffffff10' : '#00000010';
       ctx.lineWidth = 2;
       ctx.beginPath();
-      ctx.moveTo(150, 310);
-      ctx.lineTo(canvas.width - 150, 310);
+      ctx.moveTo(150, 390);
+      ctx.lineTo(canvas.width - 150, 390);
       ctx.stroke();
 
       // 5. Draw Headline
@@ -161,7 +198,7 @@ function QrPosterModal({ hostel, onClose }) {
       // Wrap headline text
       const words = headline.split(' ');
       let line = '';
-      let y = 430;
+      let y = 490;
       const lineHeight = 95;
       for (let n = 0; n < words.length; n++) {
         let testLine = line + words[n] + ' ';
@@ -179,13 +216,13 @@ function QrPosterModal({ hostel, onClose }) {
 
       // 6. Draw Hostel Details Box
       const detailsToDraw = [];
-      if (showCollege) detailsToDraw.push({ label: 'College', value: hostel.college });
-      if (showLocation) detailsToDraw.push({ label: 'Location', value: hostel.location });
-      if (showPrice) detailsToDraw.push({ label: 'Price', value: `₹${hostel.price}/month` + (hostel.advance ? ` (Advance: ₹${hostel.advance})` : '') });
-      if (showAmenities && hostel.amenities?.length) detailsToDraw.push({ label: 'Amenities', value: hostel.amenities.slice(0, 4).join(', ') });
+      if (showCollege && hostel.college) detailsToDraw.push({ label: 'College', value: hostel.college });
+      if (showLocation && hostel.location) detailsToDraw.push({ label: 'Address', value: hostel.location });
+      if (showPrice && hostel.price) detailsToDraw.push({ label: 'Rent', value: `₹${hostel.price}/month` + (hostel.advance ? ` (Adv: ₹${hostel.advance})` : '') });
+      if (showAmenities && hostel.amenities?.length) detailsToDraw.push({ label: 'Amenities', value: hostel.amenities.slice(0, 4) });
 
       const boxY = y + 80;
-      const boxHeight = detailsToDraw.length > 0 ? 120 + detailsToDraw.length * 80 : 0;
+      const boxHeight = detailsToDraw.length > 0 ? 140 + detailsToDraw.length * 85 : 0;
       const boxWidth = canvas.width - 300;
       const boxX = (canvas.width - boxWidth) / 2;
 
@@ -193,30 +230,110 @@ function QrPosterModal({ hostel, onClose }) {
         ctx.fillStyle = theme.boxBg;
         ctx.strokeStyle = theme.boxBorder;
         ctx.lineWidth = 4;
-        ctx.fillRect(boxX, boxY, boxWidth, boxHeight);
-        ctx.strokeRect(boxX, boxY, boxWidth, boxHeight);
+        ctx.beginPath();
+        ctx.roundRect(boxX, boxY, boxWidth, boxHeight, 16);
+        ctx.fill();
+        ctx.stroke();
 
-        // Draw details content
+        // Draw hostel name
         ctx.textAlign = 'left';
         ctx.fillStyle = theme.textColor;
-        ctx.font = `bold 54px ${font.family}`;
-        ctx.fillText(hostel.name, boxX + 60, boxY + 80);
+        ctx.font = `bold 58px ${font.family}`;
+        ctx.fillText(hostel.name, boxX + 60, boxY + 90);
 
-        ctx.font = `38px ${font.family}`;
-        ctx.fillStyle = theme.subColor;
         detailsToDraw.forEach((item, index) => {
-          ctx.fillText(`• ${item.label}: ${item.value || 'N/A'}`, boxX + 60, boxY + 160 + index * 75);
+          const itemY = boxY + 180 + index * 85;
+          const iconX = boxX + 75;
+          
+          ctx.font = `38px ${font.family}`;
+
+          if (item.label === 'College') {
+            // Draw graduation cap icon
+            ctx.save();
+            ctx.fillStyle = '#ffd600';
+            ctx.strokeStyle = '#ffd600';
+            ctx.lineWidth = 4;
+            ctx.beginPath();
+            ctx.moveTo(iconX, itemY - 15);
+            ctx.lineTo(iconX + 16, itemY - 25);
+            ctx.lineTo(iconX + 32, itemY - 15);
+            ctx.lineTo(iconX + 16, itemY - 5);
+            ctx.closePath();
+            ctx.fill();
+            ctx.beginPath();
+            ctx.arc(iconX + 16, itemY - 8, 8, 0, Math.PI);
+            ctx.stroke();
+            ctx.restore();
+            
+            ctx.fillStyle = theme.textColor;
+            ctx.fillText(item.value || 'N/A', iconX + 60, itemY - 5);
+          } 
+          else if (item.label === 'Address') {
+            // Draw location pin
+            ctx.save();
+            ctx.fillStyle = '#ffd600';
+            ctx.strokeStyle = '#ffd600';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.arc(iconX + 16, itemY - 18, 10, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.beginPath();
+            ctx.moveTo(iconX + 6, itemY - 14);
+            ctx.lineTo(iconX + 16, itemY - 2);
+            ctx.lineTo(iconX + 26, itemY - 14);
+            ctx.stroke();
+            ctx.restore();
+            
+            ctx.fillStyle = theme.textColor;
+            ctx.fillText(item.value || 'N/A', iconX + 60, itemY - 5);
+          } 
+          else if (item.label === 'Rent') {
+            // Draw Wallet
+            ctx.save();
+            ctx.fillStyle = '#ffd600';
+            ctx.beginPath();
+            ctx.roundRect(iconX, itemY - 25, 32, 24, 4);
+            ctx.fill();
+            ctx.fillStyle = selectedTheme === 'minimal_light' ? '#ffffff' : '#0f0f16';
+            ctx.fillRect(iconX + 22, itemY - 20, 8, 8);
+            ctx.restore();
+            
+            ctx.fillStyle = theme.textColor;
+            ctx.fillText(item.value || 'N/A', iconX + 60, itemY - 5);
+          } 
+          else if (item.label === 'Amenities') {
+            // Draw amenities badges
+            let badgeX = iconX;
+            ctx.font = `bold 28px ${FONTS.modern.family}`;
+            item.value.forEach(am => {
+              const amText = am.trim();
+              const amWidth = ctx.measureText(amText).width;
+              const padX = 20;
+              
+              ctx.fillStyle = selectedTheme === 'vibrant_dark' ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.03)';
+              ctx.strokeStyle = selectedTheme === 'vibrant_dark' ? 'rgba(255, 255, 255, 0.15)' : 'rgba(0, 0, 0, 0.1)';
+              ctx.lineWidth = 2;
+              
+              ctx.beginPath();
+              ctx.roundRect(badgeX, itemY - 32, amWidth + padX * 2, 44, 8);
+              ctx.fill();
+              ctx.stroke();
+              
+              ctx.fillStyle = theme.textColor;
+              ctx.fillText(amText, badgeX + padX, itemY - 1);
+              
+              badgeX += amWidth + padX * 2 + 15;
+            });
+          }
         });
       }
 
       // 7. Load and Draw QR Code
       const qrImg = new Image();
-      qrImg.crossOrigin = 'anonymous';
-      
       await new Promise((resolve, reject) => {
         qrImg.onload = resolve;
         qrImg.onerror = reject;
-        qrImg.src = qrCodeApiUrl;
+        qrImg.src = qrDataUrl;
       });
 
       const qrSize = 500;
@@ -462,16 +579,42 @@ function QrPosterModal({ hostel, onClose }) {
                   }}>
                     <h4 className="preview-hostel-name">{hostel.name}</h4>
                     <div className="preview-hostel-details" style={{ color: theme.subColor }}>
-                      {showCollege && <p>🎓 {hostel.college || 'N/A'}</p>}
-                      {showLocation && <p>📍 {hostel.location || 'N/A'}</p>}
-                      {showPrice && <p>💰 ₹{hostel.price}/month {hostel.advance ? `(Adv: ₹${hostel.advance})` : ''}</p>}
-                      {showAmenities && hostel.amenities?.length > 0 && <p>🛹 {hostel.amenities.slice(0, 4).join(', ')}</p>}
+                      {showCollege && hostel.college && (
+                        <div className="preview-detail-row">
+                          <IoSchoolOutline size={18} className="preview-row-icon" />
+                          <span>{hostel.college}</span>
+                        </div>
+                      )}
+                      {showLocation && hostel.location && (
+                        <div className="preview-detail-row">
+                          <IoLocationOutline size={18} className="preview-row-icon" />
+                          <span className="preview-address">{hostel.location}</span>
+                        </div>
+                      )}
+                      {showPrice && hostel.price && (
+                        <div className="preview-detail-row">
+                          <IoWalletOutline size={18} className="preview-row-icon" />
+                          <span>₹{hostel.price}/month {hostel.advance ? `(Adv: ₹${hostel.advance})` : ''}</span>
+                        </div>
+                      )}
+                      {showAmenities && hostel.amenities?.length > 0 && (
+                        <div className="preview-amenities-container">
+                          {hostel.amenities.slice(0, 4).map((am, idx) => (
+                            <span key={idx} className="preview-amenity-pill" style={{ 
+                              borderColor: theme.boxBorder,
+                              backgroundColor: selectedTheme === 'vibrant_dark' ? 'rgba(255, 255, 255, 0.04)' : 'rgba(0, 0, 0, 0.02)'
+                            }}>
+                              {am}
+                            </span>
+                          ))}
+                        </div>
+                      )}
                     </div>
                   </div>
                 )}
 
                 <div className="preview-qr-wrapper" style={{ backgroundColor: selectedTheme === 'minimal_light' ? '#ffffff' : '#0f0f16' }}>
-                  <img src={qrCodeApiUrl} alt="Hostel QR Code" className="preview-qr-img" />
+                  <img src={qrDataUrl} alt="Hostel QR Code" className="preview-qr-img" />
                   <div className="qr-overlay-logo-container">
                     <img src={logoImg} alt="Koodaram" className="qr-overlay-logo" />
                   </div>
