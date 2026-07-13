@@ -20,7 +20,7 @@ function App() {
       textColor: '#fff',
       links: [
         { label: 'Browse Hostels', href: '/browse', ariaLabel: 'Browse hostels' },
-        { label: 'List Your Hostel', href: '/list-hostel', ariaLabel: 'List your hostel' },
+        { label: 'Hostel Owners', href: '/list-hostel', ariaLabel: 'List your hostel' },
         { label: 'Datasheet', href: '/datasheet', ariaLabel: 'View hostel statistics' },
         { label: 'About', href: '/about', ariaLabel: 'About Koodaram' }
       ]
