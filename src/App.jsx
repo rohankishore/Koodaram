@@ -17,7 +17,7 @@ function App() {
   const navItems = [
     {
       label: 'Explore',
-      bgColor: '#1a1a2e',
+      bgColor: '#1a1a1a',
       textColor: '#fff',
       links: [
         { label: 'Browse Hostels', href: '/browse', ariaLabel: 'Browse hostels' },
@@ -28,7 +28,7 @@ function App() {
     },
     {
       label: 'Legal',
-      bgColor: '#16213e',
+      bgColor: '#1a1a1a',
       textColor: '#fff',
       links: [
         { label: 'Privacy Policy', href: '/privacy', ariaLabel: 'Privacy Policy' },
@@ -37,7 +37,7 @@ function App() {
     },
     {
       label: 'Community',
-      bgColor: '#0f3460',
+      bgColor: '#1a1a1a',
       textColor: '#fff',
       links: [
         { label: 'GitHub', href: 'https://github.com/Koodaram-Inc/koodaram-data', ariaLabel: 'View on GitHub' },
@@ -56,8 +56,8 @@ function App() {
           items={navItems}
           baseColor="#1a1a1a"
           menuColor="#fff"
-          buttonBgColor="#e94560"
-          buttonTextColor="#fff"
+          buttonBgColor="#ffd600"
+          buttonTextColor="#0d0f12"
           ctaLabel="List Hostel"
           ctaHref="/list-hostel"
         />
