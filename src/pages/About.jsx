@@ -1,5 +1,12 @@
 import { Link } from 'react-router-dom';
 import Dither from '../component/Dither';
+import { 
+  IoCashOutline, 
+  IoCheckmarkCircleOutline, 
+  IoCodeSlashOutline, 
+  IoLogoGithub,
+  IoSearchOutline
+} from 'react-icons/io5';
 import './About.css';
 
 function About() {
@@ -11,15 +18,67 @@ function About() {
       
       <div style={{ position: 'relative', zIndex: 10 }}>
         <div className="about-page">
-          <div className="about-content">
-            <h1>About Koodaram</h1>
-            <p>Koodaram is Kerala's first 100% open-source hostel network, built for and by students. Hostel data is never locked behind paywalls, logins, or private companies.</p>
-            <p>Our mission is to make hostel accommodation near college campuses easy, free, and transparent for every student.</p>
-            <div className="cta-section">
-              <a href="https://github.com/Koodaram-Inc/koodaram-data" target="_blank" rel="noopener noreferrer" className="cta-button" style={{ marginTop: 0 }}>⭐ View on GitHub</a>
-              <Link to="/list-hostel" className="cta-button" style={{ marginTop: 0 }}>📝 List Your Hostel</Link>
+          <header className="about-header">
+            <div className="about-badge-container">
+              <span className="about-badge">ABOUT KOODARAM</span>
             </div>
-          </div>
+            <h1>Kerala's First Open Hostel Finder</h1>
+            <p className="about-subheading">For Students. By Students. Zero Brokerage.</p>
+            <p className="about-header-desc">
+              Koodaram is a community-driven open-source project designed to solve college accommodation struggles. 
+              We believe hostel listings should be free, transparent, and owned by the community.
+            </p>
+          </header>
+
+          <section className="about-grid">
+            <div className="about-card">
+              <div className="about-icon-wrapper">
+                <IoCashOutline size={26} />
+              </div>
+              <h3>Zero Brokerage</h3>
+              <p>Tired of agents charging hefty commission fees? Koodaram has <strong>₹0 fees</strong>. Owners list and students browse completely for free, coordinating directly with each other.</p>
+            </div>
+
+            <div className="about-card">
+              <div className="about-icon-wrapper">
+                <IoCheckmarkCircleOutline size={26} />
+              </div>
+              <h3>Student Verified</h3>
+              <p>No fake listings or photoshopped reviews. Our listings are crowdsourced and validated by college students, keeping data clean, up-to-date, and accurate.</p>
+            </div>
+
+            <div className="about-card">
+              <div className="about-icon-wrapper">
+                <IoCodeSlashOutline size={26} />
+              </div>
+              <h3>100% Open Source</h3>
+              <p>Every line of frontend code and all hostel database JSON files are publicly hosted on GitHub. No private company owns or monitors your search history.</p>
+            </div>
+          </section>
+
+          <section className="about-cta-section">
+            <div className="about-cta-glow">
+              <h2>Join the open source movement</h2>
+              <p>Contribute listings, verify hostels near your campus, or view the platform code on GitHub.</p>
+              
+              <div className="about-buttons-container">
+                <a 
+                  href="https://github.com/Koodaram-Inc/koodaram-data" 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="about-primary-btn"
+                >
+                  <IoLogoGithub size={18} />
+                  <span>View on GitHub</span>
+                </a>
+                
+                <Link to="/browse" className="about-secondary-btn">
+                  <IoSearchOutline size={18} />
+                  <span>Browse Hostels</span>
+                </Link>
+              </div>
+            </div>
+          </section>
         </div>
 
         {/* Global Styled Footer */}
