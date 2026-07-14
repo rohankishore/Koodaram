@@ -25,6 +25,7 @@ const COLLEGE_SLUGS = {
   'cusat': 'cusat',
   'cucek': 'cucek',
   'SCT Trivandrum': 'sct',
+  'University College of Engineering Karyavattom': 'ucek',
   'GEC Kozhikode': 'gec-kkd',
   'GEC Palakkad': 'gec-pkd',
   'GEC Thrissur': 'gec-tsr',
