@@ -81,6 +81,10 @@ function matchesCollegeFilter(hostelCollege, collegeFilter) {
 
   const hostelValue = hostelCollege.toLowerCase();
   const filterValue = collegeFilter.toLowerCase();
+
+  if (filterValue === 'ucek' && hostelValue.includes('cucek')) return false;
+  if (filterValue === 'cucek' && !hostelValue.includes('cucek') && hostelValue.includes('ucek')) return false;
+
   const aliases = COLLEGE_MATCH_ALIASES[filterValue] || [filterValue];
 
   return aliases.some(alias => hostelValue.includes(alias) || alias.includes(hostelValue));

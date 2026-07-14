@@ -33,6 +33,9 @@ const matchesCollegeFilter = (hostelCollege, query) => {
   const hc = hostelCollege.toLowerCase();
   const q = query.toLowerCase();
   
+  if (q === 'ucek' && hc.includes('cucek')) return false;
+  if (q === 'cucek' && !hc.includes('cucek') && hc.includes('ucek')) return false;
+  
   if (hc.includes(q) || q.includes(hc)) return true;
   
   // Custom aliases mapping
