@@ -25,7 +25,7 @@ const COLLEGE_SLUGS = {
   'cusat': 'cusat',
   'cucek': 'cucek',
   'SCT Trivandrum': 'sct',
-  'University College of Engineering Karyavattom': 'ucek',
+  'UCEK': 'ucek',
   'GEC Kozhikode': 'gec-kkd',
   'GEC Palakkad': 'gec-pkd',
   'GEC Thrissur': 'gec-tsr',
@@ -33,6 +33,9 @@ const COLLEGE_SLUGS = {
   'RIT Kottayam': 'rit',
 };
 const SLUG_TO_COLLEGE = Object.fromEntries(Object.entries(COLLEGE_SLUGS).map(([k, v]) => [v, k]));
+const COLLEGE_MATCH_ALIASES = {
+  ucek: ['ucek', 'university college of engineering kariavattom', 'kariavattom'],
+};
 function filtersToSlug(filters) {
   const parts = [];
   if (COLLEGE_SLUGS[filters.college]) parts.push(COLLEGE_SLUGS[filters.college]);
@@ -71,6 +74,16 @@ function slugToFilters(slug) {
     location = parts.slice(idx).join('-').replace(/_/g, ' ');
   }
   return { college, gender, price, rating, curfew, bathroom, location };
+}
+
+function matchesCollegeFilter(hostelCollege, collegeFilter) {
+  if (!hostelCollege || !collegeFilter) return false;
+
+  const hostelValue = hostelCollege.toLowerCase();
+  const filterValue = collegeFilter.toLowerCase();
+  const aliases = COLLEGE_MATCH_ALIASES[filterValue] || [filterValue];
+
+  return aliases.some(alias => hostelValue.includes(alias) || alias.includes(hostelValue));
 }
 
 const GITHUB_USER = "Koodaram-Inc";
@@ -351,7 +364,7 @@ function Browse() {
 
     const matchesCollege =
       !filters.college ||
-      hostel.college?.toLowerCase().includes(filters.college.toLowerCase());
+      matchesCollegeFilter(hostel.college, filters.college);
 
     const matchesGender =
       !filters.gender ||
@@ -459,6 +472,7 @@ function Browse() {
               <option value="cusat">CUSAT</option>
               <option value="cucek">CUCEK</option>
               <option value="SCT Trivandrum">SCT Trivandrum</option>
+              <option value="UCEK">UCEK</option>
               <option value="GEC Kozhikode">GEC Kozhikode</option>
               <option value="GEC Palakkad">GEC Palakkad</option>
               <option value="GEC Thrissur">GEC Thrissur</option>
