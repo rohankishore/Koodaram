@@ -55,6 +55,22 @@ function Credits() {
               <h3>GEC Thrissur PTA</h3>
               <p>Credits to <a href="https://gectcr.ac.in/wp-content/uploads/2022/08/PTA_Approved_Hostels.pdf" target="_blank" rel="noopener noreferrer">GEC TCR PTA</a> official database for approved hostel structures.</p>
             </div>
+
+            <div className="collab-card">
+              <div className="collab-icon-wrapper">
+                <IoHeartOutline size={24} />
+              </div>
+              <h3>United ECE UCEK</h3>
+              <p>Special thanks for providing brochures and flyers compiled with verified hostel information near the UCEK campus.</p>
+            </div>
+
+            <div className="collab-card">
+              <div className="collab-icon-wrapper">
+                <IoHeartOutline size={24} />
+              </div>
+              <h3>SFI CET & KSU CET</h3>
+              <p>Lots and lots of thanks for providing hostel information near the CET campus.</p>
+            </div>
           </section>
 
           <section className="legal-section">
