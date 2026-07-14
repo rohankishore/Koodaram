@@ -40,7 +40,7 @@ const matchesCollegeFilter = (hostelCollege, query) => {
     'cet': ['college of engineering trivandrum', 'cet'],
     'cusat': ['cochin university of science and technology', 'cusat'],
     'cucek': ['cochin university college of engineering kuttanad', 'cucek'],
-    'ucek': ['university college of engineering kariavattom', 'ucek', 'kariavattom'],
+    'ucek': ['university college of engineering kariavattom', 'ucek', 'kariavattom', 'university college of engineering karyavattom', 'karyavattom'],
     'sct': ['sct college of engineering', 'sct trivandrum', 'sct'],
     'gec-kkd': ['government engineering college kozhikode', 'gec kozhikode', 'gec kkd'],
     'gec-pkd': ['government engineering college palakkad', 'gec palakkad', 'gec pkd'],

@@ -79,7 +79,7 @@ const Datasheet = () => {
     if (upperCol.includes('CUCEK')) college = 'CUCEK';
     else if (upperCol.includes('CUSAT')) college = 'CUSAT';
     else if (upperCol.includes('TRIVANDRUM') && (upperCol.includes('CET') || upperCol.includes('ENGINEERING'))) college = 'College of Engineering Trivandrum';
-    else if (upperCol.includes('UCEK') || upperCol.includes('KARIAVATTOM')) college = 'UCEK';
+    else if (upperCol.includes('UCEK') || upperCol.includes('KARIAVATTOM') || upperCol.includes('KARYAVATTOM')) college = 'UCEK';
     else if (upperCol.includes('SCT')) college = 'SCT Trivandrum';
     else if (upperCol.includes('RIT') || upperCol.includes('KOTTAYAM')) college = 'RIT Kottayam';
     else if (upperCol.includes('THRISSUR') && upperCol.includes('GEC')) college = 'GEC Thrissur';

@@ -34,7 +34,7 @@ const COLLEGE_SLUGS = {
 };
 const SLUG_TO_COLLEGE = Object.fromEntries(Object.entries(COLLEGE_SLUGS).map(([k, v]) => [v, k]));
 const COLLEGE_MATCH_ALIASES = {
-  ucek: ['ucek', 'university college of engineering kariavattom', 'kariavattom'],
+  ucek: ['ucek', 'university college of engineering kariavattom', 'kariavattom', 'university college of engineering karyavattom', 'karyavattom'],
 };
 function filtersToSlug(filters) {
   const parts = [];
